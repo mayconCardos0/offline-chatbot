@@ -1,0 +1,45 @@
+# Environment
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environment
+.venv/
+venv/
+env/
+
+# Models — large binary files, download locally
+models/*.gguf
+models/*.bin
+models/*.safetensors
+models/.cache/
+models/.locks/
+models/fastembed_cache/
+models/models--*/
+models/CACHEDIR.TAG
+
+# Data — index and conversations are generated at runtime
+data/index/
+data/conversations.json
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
