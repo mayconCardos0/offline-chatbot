@@ -39,6 +39,13 @@ data/documents/
 # Logs
 *.log
 
+# CI/Testing
+.coverage
+coverage.xml
+htmlcov/
+.pytest_cache/
+bandit-report.json
+
 # OS
 .DS_Store
 Thumbs.db
