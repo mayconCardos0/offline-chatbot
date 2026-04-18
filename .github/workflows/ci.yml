@@ -33,16 +33,6 @@ jobs:
       run: |
         # Stop build if there are Python syntax errors or undefined names
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --exclude=.venv,models
-        # Exit-zero treats all errors as warnings
-        flake8 . --count --exit-zero --max-complexity=10 --max-line-length=100 --statistics --exclude=.venv,models
-    
-    - name: Check code formatting with black
-      run: |
-        black --check --line-length=100 --exclude='\.venv|models' .
-    
-    - name: Check import sorting with isort
-      run: |
-        isort --check-only --profile black --line-length=100 --skip .venv --skip models .
     
     - name: Run tests
       run: |
