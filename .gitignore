@@ -28,9 +28,10 @@ models/fastembed_cache/
 models/models--*/
 models/CACHEDIR.TAG
 
-# Data — index and conversations are generated at runtime
+# Data — index, documents and conversations are generated at runtime
 data/index/
 data/conversations.json
+data/documents/
 
 # Logs
 *.log
