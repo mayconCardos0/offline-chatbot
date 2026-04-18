@@ -22,9 +22,12 @@ env/
 models/*.gguf
 models/*.bin
 models/*.safetensors
+models/*.onnx
+models/*.onnx.json
 models/.cache/
 models/.locks/
 models/fastembed_cache/
+models/embedding_cache/
 models/models--*/
 models/CACHEDIR.TAG
 

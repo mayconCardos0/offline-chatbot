@@ -1,6 +1,6 @@
 """
-Centralized configuration for the Offline Chatbot.
-All values are read from environment variables (and an optional .env file).
+Configuração centralizada do Offline Chatbot.
+Todos os valores são lidos de variáveis de ambiente (e arquivo .env opcional).
 """
 import logging
 import os
@@ -17,23 +17,32 @@ except ImportError:
 
 @dataclass
 class Settings:
-    # --- Server ---
+    # --- Servidor ---
     port: int = field(default_factory=lambda: int(os.environ.get("PORT", "8000")))
 
     # --- LLM ---
     model_path: str = field(
         default_factory=lambda: os.environ.get("MODEL_PATH", "models/Qwen3-0.6B-Q8_0.gguf")
     )
-    n_ctx: int = field(default_factory=lambda: int(os.environ.get("N_CTX", "4096")))
-    n_threads: int = field(default_factory=lambda: int(os.environ.get("N_THREADS", "4")))
+    n_ctx: int      = field(default_factory=lambda: int(os.environ.get("N_CTX", "4096")))
+    n_threads: int  = field(default_factory=lambda: int(os.environ.get("N_THREADS", "4")))
     n_gpu_layers: int = field(default_factory=lambda: int(os.environ.get("N_GPU_LAYERS", "0")))
 
     # --- Embeddings ---
+    # Padrão: modelo multilíngue leve, bom para PT-BR (~120 MB)
     embed_model_name: str = field(
-        default_factory=lambda: os.environ.get("EMBED_MODEL_NAME", "all-MiniLM-L6-v2")
+        default_factory=lambda: os.environ.get(
+            "EMBED_MODEL_NAME", "paraphrase-multilingual-MiniLM-L12-v2"
+        )
     )
     embed_cache_dir: str = field(
         default_factory=lambda: os.environ.get("EMBED_CACHE_DIR", "models")
+    )
+    embed_batch_size: int = field(
+        default_factory=lambda: int(os.environ.get("EMBED_BATCH_SIZE", "32"))
+    )
+    embed_disk_cache: bool = field(
+        default_factory=lambda: os.environ.get("EMBED_DISK_CACHE", "true").lower() == "true"
     )
 
     # --- RAG ---
@@ -43,13 +52,35 @@ class Settings:
     index_dir: str = field(
         default_factory=lambda: os.environ.get("INDEX_DIR", "data/index")
     )
-    top_k: int = field(default_factory=lambda: int(os.environ.get("TOP_K", "4")))
+    top_k: int = field(default_factory=lambda: int(os.environ.get("TOP_K", "5")))
+
+    # Quantos candidatos buscar antes do reranking (top_k × multiplier)
+    candidate_multiplier: int = field(
+        default_factory=lambda: int(os.environ.get("CANDIDATE_MULTIPLIER", "4"))
+    )
+    # Score mínimo para incluir chunk no contexto (0.0–1.0)
+    min_score: float = field(
+        default_factory=lambda: float(os.environ.get("MIN_SCORE", "0.25"))
+    )
+    # Peso do score léxico BM25 na fusão (0.0 = só semântico)
+    lexical_weight: float = field(
+        default_factory=lambda: float(os.environ.get("LEXICAL_WEIGHT", "0.30"))
+    )
 
     # --- Chunking ---
-    chunk_size: int = field(default_factory=lambda: int(os.environ.get("CHUNK_SIZE", "500")))
-    chunk_overlap: int = field(default_factory=lambda: int(os.environ.get("CHUNK_OVERLAP", "100")))
+    chunk_size: int = field(default_factory=lambda: int(os.environ.get("CHUNK_SIZE", "512")))
+    # overlap em número de SENTENÇAS (não caracteres)
+    chunk_overlap: int = field(default_factory=lambda: int(os.environ.get("CHUNK_OVERLAP", "1")))
 
-    # --- Conversations ---
+    # --- Pipeline ---
+    max_context_chars: int = field(
+        default_factory=lambda: int(os.environ.get("MAX_CONTEXT_CHARS", "2000"))
+    )
+    max_history_turns: int = field(
+        default_factory=lambda: int(os.environ.get("MAX_HISTORY_TURNS", "6"))
+    )
+
+    # --- Conversas ---
     conversations_file: str = field(
         default_factory=lambda: os.environ.get("CONVERSATIONS_FILE", "data/conversations.json")
     )
@@ -59,12 +90,10 @@ class Settings:
 
 
 def get_settings() -> Settings:
-    """Return a Settings instance populated from the current environment."""
     return Settings()
 
 
 def setup_logging(log_level: str = "INFO") -> None:
-    """Configure root logger. Call once at app startup."""
     level = getattr(logging, log_level.upper(), logging.INFO)
     logging.basicConfig(
         level=level,

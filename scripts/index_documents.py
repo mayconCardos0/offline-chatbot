@@ -1,7 +1,7 @@
 """
-CLI script to load, chunk, embed, and index documents into the FAISS vector store.
+CLI para carregar, chunkar, embedar e indexar documentos no FAISS.
 
-Usage:
+Uso:
     python scripts/index_documents.py [--docs-dir PATH]
 """
 import argparse
@@ -9,7 +9,6 @@ import logging
 import sys
 from pathlib import Path
 
-# Allow imports from the project root (offline-chatbot/)
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from core.config import get_settings, setup_logging
@@ -20,12 +19,8 @@ from rag.vectorstore import VectorStore
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Index documents into the FAISS vector store.")
-    parser.add_argument(
-        "--docs-dir",
-        default=None,
-        help="Override the configured documents directory for this run.",
-    )
+    parser = argparse.ArgumentParser(description="Indexa documentos no FAISS vector store.")
+    parser.add_argument("--docs-dir", default=None, help="Diretório de documentos (override do .env).")
     args = parser.parse_args()
 
     settings = get_settings()
@@ -34,40 +29,55 @@ def main() -> None:
 
     docs_dir = args.docs_dir if args.docs_dir is not None else settings.docs_dir
 
-    # --- Load ---
-    logger.info("Loading documents from '%s'", docs_dir)
+    # --- Carrega ---
+    logger.info("Carregando documentos de '%s'", docs_dir)
     documents = load_documents(docs_dir)
 
     if not documents:
-        print(f"WARNING: No supported documents found in '{docs_dir}'. Nothing to index.")
+        print(f"AVISO: Nenhum documento suportado encontrado em '{docs_dir}'. Nada a indexar.")
         sys.exit(0)
 
-    # --- Chunk ---
+    # --- Chunkeia ---
     all_chunks: list[dict] = []
     for doc in documents:
-        chunks = chunk_document(doc, chunk_size=settings.chunk_size, overlap=settings.chunk_overlap)
+        chunks = chunk_document(
+            doc,
+            chunk_size=settings.chunk_size,
+            overlap=settings.chunk_overlap,
+        )
         all_chunks.extend(chunks)
+        logger.debug("'%s': %d chunks.", Path(doc["source"]).name, len(chunks))
 
-    logger.info("Created %d chunks from %d document(s).", len(all_chunks), len(documents))
+    logger.info("%d chunks criados a partir de %d documento(s).", len(all_chunks), len(documents))
 
-    # --- Embed ---
-    logger.info("Loading embedding model '%s'", settings.embed_model_name)
+    # --- Embeda ---
+    logger.info("Carregando modelo de embedding '%s'", settings.embed_model_name)
     embed_model = EmbeddingModel(
         model_name=settings.embed_model_name,
         cache_dir=settings.embed_cache_dir,
+        batch_size=settings.embed_batch_size,
+        use_disk_cache=settings.embed_disk_cache,
     )
 
     texts = [chunk["text"] for chunk in all_chunks]
+    logger.info("Gerando embeddings para %d chunks…", len(texts))
     embeddings = embed_model.embed(texts)
-    embedding_dim = len(embeddings[0])
 
-    # --- Save ---
-    store = VectorStore(index_dir=settings.index_dir, embedding_dim=embedding_dim)
+    # --- Salva ---
+    store = VectorStore(
+        index_dir=settings.index_dir,
+        embedding_dim=embed_model.dimension,
+    )
     store.add(all_chunks, embeddings)
     store.save()
 
     index_path = Path(settings.index_dir).resolve()
-    print(f"Indexed {len(documents)} document(s), {len(all_chunks)} chunk(s) -> {index_path}")
+    print(
+        f"Indexados {len(documents)} documento(s), "
+        f"{len(all_chunks)} chunks → {index_path}"
+    )
+    print(f"Modelo de embedding: {settings.embed_model_name}")
+    print(f"Tipo de índice: HNSW (busca aproximada, baixa latência)")
 
 
 if __name__ == "__main__":

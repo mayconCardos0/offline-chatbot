@@ -46,17 +46,20 @@ offline-chatbot/
 ## Setup
 
 ```bash
-# 1. Install dependencies
+
+# 1. Create a virual env
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+# 2. Install dependencies
 pip install -r requirements.txt
 
-# 2. Copy and edit the environment file
+# 3. Copy and edit the environment file
 cp .env.example .env
 # Edit .env — at minimum set MODEL_PATH to your GGUF file
 
-# 3. Add documents to index
+# 4. Add documents to index
 cp your-docs/*.pdf data/documents/
 
-# 4. Build the vector index
+# 5. Build the vector index
 python scripts/index_documents.py
 
 # 5. Start the API server

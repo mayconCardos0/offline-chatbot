@@ -1,67 +1,135 @@
 """
-Sentence-aware text chunking with configurable size and overlap.
+Chunking semântico para documentos em português (BR).
+
+Estratégia:
+  1. Divide o texto em parágrafos reais (linhas em branco).
+  2. Dentro de cada parágrafo, respeita limites de sentença usando pontuação PT-BR.
+  3. Mescla parágrafos pequenos com o seguinte para evitar chunks minúsculos.
+  4. Aplica overlap em nível de sentença (não de caracter) para preservar contexto.
+  5. Limpa artefatos comuns de PDF (hifenação, cabeçalhos/rodapés numéricos).
 """
 import logging
+import re
+import unicodedata
 
 logger = logging.getLogger(__name__)
 
-SENTENCE_ENDINGS = {".", "!", "?"}
+# Pontuação de fim de sentença em português
+_SENT_END = re.compile(r'(?<=[.!?…])\s+(?=[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\"\'])')
+
+# Artefatos de PDF: número de página isolado, hifenação no fim de linha
+_PAGE_NUMBER   = re.compile(r'^\s*\d{1,4}\s*$', re.MULTILINE)
+_HYPHEN_BREAK  = re.compile(r'(\w)-\n(\w)')
+_MULTI_SPACE   = re.compile(r'[ \t]{2,}')
+_MULTI_NEWLINE = re.compile(r'\n{3,}')
 
 
-def _find_sentence_boundary(text: str, end: int) -> int:
-    """Search backwards from `end` for a sentence boundary within the last 20% of the window.
+# ---------------------------------------------------------------------------
+# Limpeza de texto extraído de PDF
+# ---------------------------------------------------------------------------
 
-    Returns the index just after the boundary character, or `end` if none found.
-    """
-    window = int(end * 0.20)
-    search_start = end - window
+def clean_pdf_text(text: str) -> str:
+    """Remove artefatos comuns de PDFs em português."""
+    # Normaliza unicode (remove acentuação duplicada etc.)
+    text = unicodedata.normalize("NFC", text)
+    # Remove números de página isolados
+    text = _PAGE_NUMBER.sub('\n', text)
+    # Junta palavras hifenadas que quebraram na linha
+    text = _HYPHEN_BREAK.sub(r'\1\2', text)
+    # Normaliza espaços
+    text = _MULTI_SPACE.sub(' ', text)
+    # Máximo duas quebras de linha consecutivas
+    text = _MULTI_NEWLINE.sub('\n\n', text)
+    return text.strip()
 
-    for i in range(end - 1, search_start - 1, -1):
-        if text[i] in SENTENCE_ENDINGS:
-            return i + 1  # cut after the punctuation
 
-    return end  # fall back to hard cut
+# ---------------------------------------------------------------------------
+# Segmentação em sentenças (sem dependência externa)
+# ---------------------------------------------------------------------------
+
+def split_sentences(text: str) -> list[str]:
+    """Divide um parágrafo em sentenças respeitando pontuação PT-BR."""
+    parts = _SENT_END.split(text)
+    return [p.strip() for p in parts if p.strip()]
 
 
-def chunk_document(doc: dict, chunk_size: int = 500, overlap: int = 100) -> list[dict]:
-    """Split a document into sentence-aware overlapping chunks.
+# ---------------------------------------------------------------------------
+# Chunking principal
+# ---------------------------------------------------------------------------
+
+def chunk_document(doc: dict, chunk_size: int = 512, overlap: int = 1) -> list[dict]:
+    """Divide um documento em chunks semânticos com overlap em nível de sentença.
 
     Args:
-        doc: Dict with 'text' and 'source' keys.
-        chunk_size: Maximum characters per chunk.
-        overlap: Number of characters to overlap between consecutive chunks.
+        doc:        Dict com chaves 'text' e 'source'.
+        chunk_size: Tamanho máximo do chunk em caracteres.
+        overlap:    Número de **sentenças** a repetir entre chunks consecutivos
+                    (padrão 1 sentença de sobreposição).
 
     Returns:
-        List of dicts with 'text' and 'source' keys.
+        Lista de dicts {'text': str, 'source': str}.
     """
-    text: str = doc["text"]
-    source: str = doc["source"]
+    raw_text: str = doc["text"]
+    source: str   = doc["source"]
 
-    if not text:
+    if not raw_text:
         return []
 
-    # Short-text edge case: return as single chunk
+    text = clean_pdf_text(raw_text)
+
     if len(text) <= chunk_size:
         return [{"text": text, "source": source}]
 
+    # 1. Divide em parágrafos
+    paragraphs = [p.strip() for p in re.split(r'\n\n+', text) if p.strip()]
+
+    # 2. Divide cada parágrafo em sentenças
+    all_sentences: list[str] = []
+    for para in paragraphs:
+        sents = split_sentences(para)
+        all_sentences.extend(sents)
+        # Marca fim de parágrafo para o montador não misturar contextos distintos
+        # (usa sentinela vazia — filtrada depois)
+        all_sentences.append("")
+
+    # 3. Monta chunks respeitando chunk_size
     chunks: list[dict] = []
-    start = 0
+    current_sents: list[str] = []
+    current_len = 0
 
-    while start < len(text):
-        end = start + chunk_size
+    def _flush(sents: list[str]) -> None:
+        text_chunk = " ".join(s for s in sents if s).strip()
+        if text_chunk:
+            chunks.append({"text": text_chunk, "source": source})
 
-        if end >= len(text):
-            # Last chunk — take whatever remains
-            chunks.append({"text": text[start:], "source": source})
-            break
+    for sent in all_sentences:
+        if not sent:
+            # Fim de parágrafo: fecha chunk se estiver razoavelmente cheio
+            if current_len >= chunk_size // 2:
+                _flush(current_sents)
+                # Mantém overlap de sentenças não-vazias
+                non_empty = [s for s in current_sents if s]
+                current_sents = non_empty[-overlap:] if overlap else []
+                current_len   = sum(len(s) for s in current_sents)
+            continue
 
-        # Try to break at a sentence boundary
-        cut = _find_sentence_boundary(text, end)
-        chunks.append({"text": text[start:cut], "source": source})
+        sent_len = len(sent)
 
-        # Advance start, stepping back by overlap
-        start = cut - overlap
-        if start <= 0:
-            start = cut  # safety: avoid infinite loop on very small texts
+        if current_len + sent_len > chunk_size and current_sents:
+            _flush(current_sents)
+            non_empty = [s for s in current_sents if s]
+            current_sents = non_empty[-overlap:] if overlap else []
+            current_len   = sum(len(s) for s in current_sents)
 
+        current_sents.append(sent)
+        current_len += sent_len
+
+    # Último chunk
+    if current_sents:
+        _flush(current_sents)
+
+    logger.debug(
+        "chunk_document: %d sentenças → %d chunks (source=%s)",
+        len(all_sentences), len(chunks), source
+    )
     return chunks
