@@ -1,12 +1,23 @@
 """
 Local LLM wrapper using llama-cpp-python.
-Loads a GGUF model and provides a chat completion interface.
+
+Melhorias em relação à versão anterior:
+  - Temperatura padrão reduzida de 0.7 → 0.1 (determinismo para conteúdo factual).
+  - repeat_penalty=1.1 para evitar loops de repetição em modelos GGUF pequenos.
+  - top_p ajustado para 0.95 (compensa a temperatura baixa sem perder fluência).
+  - Parâmetros de geração expostos no método chat() para override por chamador.
 """
 import logging
 import os
 from typing import Iterator
 
 logger = logging.getLogger(__name__)
+
+# Parâmetros de geração padrão otimizados para RAG factual em PT-BR
+_DEFAULT_TEMPERATURE    = 0.1   # Baixo = respostas determinísticas e ancoradas no contexto
+_DEFAULT_TOP_P          = 0.95  # Um pouco mais amplo para compensar temperatura baixa
+_DEFAULT_REPEAT_PENALTY = 1.1   # Evita loops de repetição comuns em modelos GGUF pequenos
+_DEFAULT_MAX_TOKENS     = 2048
 
 
 class LocalModel:
@@ -25,7 +36,7 @@ class LocalModel:
             )
 
         logger.info("Loading GGUF model from %s", model_path)
-        from llama_cpp import Llama  # imported here so missing dep gives a clear error
+        from llama_cpp import Llama
 
         self._llm = Llama(
             model_path=model_path,
@@ -39,9 +50,9 @@ class LocalModel:
     @staticmethod
     def _normalize_messages(messages: list[dict]) -> list[dict]:
         """
-        Some models (e.g. Gemma) don't support a 'system' role.
-        If the first message is a system prompt, prepend its content to the
-        first user message instead so the context is never lost.
+        Alguns modelos (ex: Gemma) não suportam role 'system'.
+        Se a primeira mensagem for um system prompt, injeta seu conteúdo
+        na primeira mensagem de usuário para não perder o contexto.
         """
         if not messages or messages[0]["role"] != "system":
             return messages
@@ -49,7 +60,6 @@ class LocalModel:
         system_content = messages[0]["content"]
         rest = list(messages[1:])
 
-        # Find the first user message to inject the system content into
         for i, msg in enumerate(rest):
             if msg["role"] == "user":
                 rest[i] = {
@@ -58,43 +68,51 @@ class LocalModel:
                 }
                 return rest
 
-        # No user message found — just drop the system turn
         return rest
 
     def chat(
         self,
         messages: list[dict],
         stream: bool = False,
+        temperature: float = _DEFAULT_TEMPERATURE,
+        top_p: float = _DEFAULT_TOP_P,
+        repeat_penalty: float = _DEFAULT_REPEAT_PENALTY,
+        max_tokens: int = _DEFAULT_MAX_TOKENS,
     ) -> "str | Iterator[str]":
         """
-        Run a chat completion.
+        Executa uma chat completion.
 
         Args:
-            messages: List of {role, content} dicts (OpenAI-style).
-            stream:   If True, yield tokens incrementally; otherwise return full string.
+            messages:       Lista de {role, content} (estilo OpenAI).
+            stream:         Se True, retorna iterator de tokens.
+            temperature:    Controla aleatoriedade (0.1 = determinístico).
+                            Mantenha baixo para respostas factuais RAG.
+            top_p:          Nucleus sampling threshold.
+            repeat_penalty: Penalidade para tokens repetidos (≥1.0).
+            max_tokens:     Máximo de tokens gerados.
 
         Returns:
-            Full response string when stream=False, or a token iterator when stream=True.
+            String completa (stream=False) ou iterator de tokens (stream=True).
         """
-        # Try with the messages as-is first; fall back to folding the system
-        # prompt into the first user message for models that reject 'system'.
+        gen_kwargs = dict(
+            max_tokens=max_tokens,
+            temperature=temperature,
+            top_p=top_p,
+            repeat_penalty=repeat_penalty,
+            stream=stream,
+        )
+
         try:
             response = self._llm.create_chat_completion(
                 messages=messages,
-                max_tokens=2048,
-                temperature=0.7,
-                top_p=0.8,
-                stream=stream,
+                **gen_kwargs,
             )
         except ValueError:
             logger.debug("Model rejected system role — retrying with folded system prompt.")
             normalized = self._normalize_messages(messages)
-            response = self._llm.create_chat_completion(
+            response   = self._llm.create_chat_completion(
                 messages=normalized,
-                max_tokens=2048,
-                temperature=0.7,
-                top_p=0.8,
-                stream=stream,
+                **gen_kwargs,
             )
 
         if stream:

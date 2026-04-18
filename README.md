@@ -49,6 +49,7 @@ offline-chatbot/
 
 # 1. Create a virual env
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
+
 # 2. Install dependencies
 pip install -r requirements.txt
 
