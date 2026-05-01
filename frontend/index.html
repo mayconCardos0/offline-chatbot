@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Chatbot</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h2>💬 Chats</h2>
+            </div>
+
+            <button class="btn-new-chat" id="btnNewChatSidebar">
+                ➕ Novo Chat
+            </button>
+
+            <div class="sidebar-divider"></div>
+
+            <div class="conversations-list" id="conversationsList">
+                <div class="placeholder">Nenhum chat ainda</div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Header -->
+            <div class="header">
+                <div class="header-left">
+                    <button class="btn-menu" id="btnToggleSidebar" title="Menu">☰</button>
+                    <h1>💬 Chat</h1>
+                </div>
+                <div class="header-right">
+                    <span class="session-id" id="sessionId">Sessão: -</span>
+                    <button class="btn-icon" id="btnNewChat" title="Nova conversa">
+                        🔄
+                    </button>
+                </div>
+            </div>
+
+            <div class="status" id="status">
+                <span class="status-indicator">●</span>
+                <span id="statusText">Pronto</span>
+            </div>
+
+            <!-- Chat Area -->
+            <div class="chat-container">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message-system">
+                        Bem-vindo! Escolha um chat ou comece uma nova conversa.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <div class="input-area">
+                <form id="messageForm" onsubmit="handleSendMessage(event)">
+                    <input 
+                        type="text" 
+                        id="messageInput" 
+                        placeholder="Digite sua mensagem..." 
+                        autocomplete="off"
+                        disabled
+                    >
+                    <button type="submit" id="btnSend" disabled>Enviar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="main.js"></script>
+</body>
+</html>
