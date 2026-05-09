@@ -234,7 +234,7 @@ def _build_chunks_from_sentences(
         if sent_tokens > config.max_tokens:
             if buffer:
                 _emit(buffer)
-                buffer = buffer[-config.overlap_sents:] if config.overlap_sents else []
+                buffer = buffer[-config.overlap_sents:] if config.overlap_sents > 0 else []
                 buffer_tokens = sum(count_tokens(s) for s in buffer)
             _emit([sent])
             buffer = []
@@ -246,7 +246,7 @@ def _build_chunks_from_sentences(
             # Só fecha se o buffer já tem tamanho mínimo; caso contrário continua
             if buffer_tokens >= config.min_tokens:
                 _emit(buffer)
-                buffer = buffer[-config.overlap_sents:] if config.overlap_sents else []
+                buffer = buffer[-config.overlap_sents:] if config.overlap_sents > 0 else []
                 buffer_tokens = sum(count_tokens(s) for s in buffer)
 
         buffer.append(sent)
@@ -310,8 +310,8 @@ def chunk_document(
     # Deriva configuração a partir dos parâmetros legados se não foi passado config
     if config is None:
         # chunk_size em chars → tokens (÷ 3 é conservador, preserva margem)
-        max_tok = max(100, chunk_size // 3)
-        min_tok = max(50, max_tok // 3)
+        max_tok = max(30, chunk_size // 3)
+        min_tok = max(10, max_tok // 4)
         config = ChunkConfig(
             min_tokens=min_tok,
             max_tokens=max_tok,
