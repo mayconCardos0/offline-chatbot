@@ -6,12 +6,13 @@ import json
 import os
 import sys
 import tempfile
-import pytest
 from pathlib import Path
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.loader import load_documents, _load_txt, _load_json
+from rag.loader import _load_json, _load_txt, load_documents
 
 # ---------------------------------------------------------------------------
 # Helpers

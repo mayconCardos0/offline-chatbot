@@ -6,18 +6,19 @@ import os
 import sys
 import tempfile
 import time
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
+from core.conversation import ConversationManager
 from rag.pipeline import (
-    RAGPipeline,
-    _NO_CONTEXT_RESPONSE,
     _MAX_CONTEXT_CHARS,
     _MAX_HISTORY_TURNS,
+    _NO_CONTEXT_RESPONSE,
+    RAGPipeline,
 )
-from core.conversation import ConversationManager
 
 # ---------------------------------------------------------------------------
 # Fixtures

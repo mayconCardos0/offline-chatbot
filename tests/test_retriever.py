@@ -5,18 +5,14 @@ and its helper functions.
 
 import os
 import sys
-import pytest
 from unittest.mock import MagicMock, patch
+
 import numpy as np
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.retriever import (
-    Retriever,
-    _tokenize,
-    _bm25_scores,
-    _normalize,
-)
+from rag.retriever import Retriever, _bm25_scores, _normalize, _tokenize
 
 # ---------------------------------------------------------------------------
 # _tokenize

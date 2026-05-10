@@ -4,8 +4,9 @@ Tests for llm/local_model.py — LocalModel wrapper (mocked llama_cpp).
 
 import os
 import sys
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
@@ -83,10 +84,9 @@ class TestLocalModelInit:
 class TestLocalModelChat:
     def _make_model(self, model_file, mock_llama):
         """Build LocalModel with the Llama class pre-patched."""
-        from llm.local_model import LocalModel
-
         # Inject Llama into the module so patching works at import time
         import llm.local_model as lm
+        from llm.local_model import LocalModel
 
         lm.Llama = mock_llama
         model = object.__new__(LocalModel)

@@ -19,6 +19,7 @@ for _p in (_root, _here):
 from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
+from routes import router
 
 from core.config import get_settings, setup_logging
 from core.conversation import ConversationManager
@@ -27,7 +28,6 @@ from rag.embeddings import EmbeddingModel
 from rag.pipeline import RAGPipeline
 from rag.retriever import Retriever
 from rag.vectorstore import VectorStore
-from routes import router
 
 logger = logging.getLogger(__name__)
 

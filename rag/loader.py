@@ -83,6 +83,7 @@ def _load_pdf_pages(path: Path) -> list[dict]:
       - Extração mais confiável para RAG
     """
     import fitz  # PyMuPDF
+
     from rag.chunking import clean_pdf_text
 
     pages: list[dict] = []
