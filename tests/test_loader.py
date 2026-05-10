@@ -1,21 +1,23 @@
 """
 Tests for rag/loader.py — load_documents with .txt, .md, .json, and PDF support.
 """
+
 import json
 import os
 import sys
 import tempfile
-import pytest
 from pathlib import Path
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.loader import load_documents, _load_txt, _load_json
-
+from rag.loader import _load_json, _load_txt, load_documents
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def write_file(directory, name, content, mode="w", encoding="utf-8"):
     path = os.path.join(directory, name)
@@ -27,6 +29,7 @@ def write_file(directory, name, content, mode="w", encoding="utf-8"):
 # ---------------------------------------------------------------------------
 # _load_txt
 # ---------------------------------------------------------------------------
+
 
 class TestLoadTxt:
     def test_reads_utf8_file(self, tmp_path):
@@ -51,6 +54,7 @@ class TestLoadTxt:
 # ---------------------------------------------------------------------------
 # _load_json
 # ---------------------------------------------------------------------------
+
 
 class TestLoadJson:
     def test_extracts_string_values(self, tmp_path):
@@ -82,6 +86,7 @@ class TestLoadJson:
 # load_documents
 # ---------------------------------------------------------------------------
 
+
 class TestLoadDocuments:
     def test_empty_directory_returns_empty(self, tmp_path):
         result = load_documents(str(tmp_path))
@@ -98,13 +103,17 @@ class TestLoadDocuments:
         assert "Plain text content." in result[0]["text"]
 
     def test_loads_md_files(self, tmp_path):
-        (tmp_path / "readme.md").write_text("# Title\n\nSome markdown.", encoding="utf-8")
+        (tmp_path / "readme.md").write_text(
+            "# Title\n\nSome markdown.", encoding="utf-8"
+        )
         result = load_documents(str(tmp_path))
         assert len(result) == 1
         assert "Some markdown." in result[0]["text"]
 
     def test_loads_json_files(self, tmp_path):
-        (tmp_path / "data.json").write_text(json.dumps({"info": "json content"}), encoding="utf-8")
+        (tmp_path / "data.json").write_text(
+            json.dumps({"info": "json content"}), encoding="utf-8"
+        )
         result = load_documents(str(tmp_path))
         assert len(result) == 1
         assert "json content" in result[0]["text"]

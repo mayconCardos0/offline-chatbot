@@ -1,22 +1,29 @@
 """
 Tests for rag/pipeline.py — RAGPipeline chat flow, prompt building, history trimming.
 """
+
 import os
 import sys
 import tempfile
 import time
-import pytest
 from unittest.mock import MagicMock, patch
+
+import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.pipeline import RAGPipeline, _NO_CONTEXT_RESPONSE, _MAX_CONTEXT_CHARS, _MAX_HISTORY_TURNS
 from core.conversation import ConversationManager
-
+from rag.pipeline import (
+    _MAX_CONTEXT_CHARS,
+    _MAX_HISTORY_TURNS,
+    _NO_CONTEXT_RESPONSE,
+    RAGPipeline,
+)
 
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 def tmp_conversations():
@@ -46,18 +53,24 @@ def _make_pipeline(retriever=None, llm=None, conv_manager=None, tmp_conversation
     if llm is None:
         mock_llm.chat.return_value = "Default LLM response."
 
-    return RAGPipeline(
-        retriever=mock_retriever,
-        llm=mock_llm,
-        conv_manager=conv_manager,
-        max_context_chars=_MAX_CONTEXT_CHARS,
-        max_history_turns=_MAX_HISTORY_TURNS,
-    ), mock_retriever, mock_llm, conv_manager
+    return (
+        RAGPipeline(
+            retriever=mock_retriever,
+            llm=mock_llm,
+            conv_manager=conv_manager,
+            max_context_chars=_MAX_CONTEXT_CHARS,
+            max_history_turns=_MAX_HISTORY_TURNS,
+        ),
+        mock_retriever,
+        mock_llm,
+        conv_manager,
+    )
 
 
 # ---------------------------------------------------------------------------
 # chat — basic flow
 # ---------------------------------------------------------------------------
+
 
 class TestPipelineChat:
     def test_returns_string(self):
@@ -77,10 +90,16 @@ class TestPipelineChat:
     def test_llm_called_with_chunks(self):
         pipeline, retriever, llm, _ = _make_pipeline()
         retriever.retrieve.return_value = [
-            {"text": "A fotossíntese ocorre nos cloroplastos das células vegetais.", "source": "doc.txt", "score": 0.85}
+            {
+                "text": "A fotossíntese ocorre nos cloroplastos das células vegetais.",
+                "source": "doc.txt",
+                "score": 0.85,
+            }
         ]
         llm.chat.return_value = "LLM answer here."
-        result = pipeline.chat("session-2", "Como ocorre a fotossíntese nos cloroplastos?")
+        result = pipeline.chat(
+            "session-2", "Como ocorre a fotossíntese nos cloroplastos?"
+        )
         assert llm.chat.called
         assert result == "LLM answer here."
 
@@ -122,13 +141,16 @@ class TestPipelineChat:
 # _build_system_prompt
 # ---------------------------------------------------------------------------
 
+
 class TestBuildSystemPrompt:
     def _pipeline(self):
         return _make_pipeline()[0]
 
     def test_contains_chunk_text(self):
         pipeline = self._pipeline()
-        chunks = [{"text": "Conteúdo relevante aqui.", "source": "doc.pdf", "score": 0.8}]
+        chunks = [
+            {"text": "Conteúdo relevante aqui.", "source": "doc.pdf", "score": 0.8}
+        ]
         prompt = pipeline._build_system_prompt(chunks)
         assert "Conteúdo relevante aqui." in prompt
 
@@ -160,6 +182,7 @@ class TestBuildSystemPrompt:
 # ---------------------------------------------------------------------------
 # _trim_history
 # ---------------------------------------------------------------------------
+
 
 class TestTrimHistory:
     def _pipeline(self, max_turns=3):

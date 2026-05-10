@@ -1,0 +1,284 @@
+name: CD — Deploy Production
+
+on:
+  # Only triggers on semantic version tags — never on direct push to main
+  push:
+    tags:
+      - "v[0-9]+.[0-9]+.[0-9]+"
+      - "v[0-9]+.[0-9]+.[0-9]+-rc[0-9]+"
+
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual deploy"
+        required: true
+      force:
+        description: "Skip test validation? (emergency only)"
+        type: boolean
+        default: false
+
+concurrency:
+  group: cd-production
+  cancel-in-progress: false
+
+jobs:
+  # ───────────────────────────────────────────────────────────────────────
+  # Extract and validate the version from the tag
+  # ───────────────────────────────────────────────────────────────────────
+  pre-deploy:
+    name: Validate version
+    runs-on: ubuntu-latest
+
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      is_rc: ${{ steps.version.outputs.is_rc }}
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Extract version
+        id: version
+        run: |
+          VERSION="${{ github.ref_name }}"
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          [[ "$VERSION" == *"-rc"* ]] \
+            && echo "is_rc=true" >> $GITHUB_OUTPUT \
+            || echo "is_rc=false" >> $GITHUB_OUTPUT
+          echo "Version: $VERSION"
+
+      - name: Verify tag belongs to main
+        run: |
+          TAG="${{ github.ref_name }}"
+          TAG_COMMIT=$(git rev-list -n 1 "$TAG")
+          if ! git branch -r --contains "$TAG_COMMIT" | grep -q "origin/main"; then
+            echo "ERROR: tag $TAG does not belong to the main branch"
+            if [ "${{ github.event.inputs.force }}" != "true" ]; then
+              exit 1
+            fi
+            echo "force=true — proceeding anyway"
+          fi
+          echo "Tag $TAG validated ✓"
+
+  # ───────────────────────────────────────────────────────────────────────
+  # Full test suite (runs on GitHub runners, not on the RPi)
+  # ───────────────────────────────────────────────────────────────────────
+  full-test-suite:
+    name: Full tests (80% coverage)
+    runs-on: ubuntu-latest
+    needs: pre-deploy
+    if: github.event.inputs.force != 'true'
+
+    strategy:
+      fail-fast: true
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.pre-deploy.outputs.version }}
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          grep -v "llama-cpp-python" requirements.txt | pip install -r /dev/stdin
+          pip install pytest pytest-cov pytest-asyncio httpx bandit
+
+      - name: Tests with minimum 80% coverage
+        run: |
+          pytest tests/ \
+            -v \
+            --tb=long \
+            --cov=. \
+            --cov-report=xml \
+            --cov-fail-under=80 \
+            --ignore=scripts \
+            -p no:warnings
+        env:
+          MODEL_PATH: models/fake.gguf
+          EMBED_CACHE_DIR: /tmp/models
+          DOCS_DIR: /tmp/docs
+          INDEX_DIR: /tmp/index
+
+      - name: Security scan (zero HIGH tolerance)
+        run: |
+          bandit -r . \
+            --exclude ./.venv,./models,./data \
+            -ll
+
+  # ───────────────────────────────────────────────────────────────────────
+  # Create GitHub Release
+  # ───────────────────────────────────────────────────────────────────────
+  create-release:
+    name: GitHub Release
+    runs-on: ubuntu-latest
+    needs: [pre-deploy, full-test-suite]
+    if: always() && (needs.full-test-suite.result == 'success' || github.event.inputs.force == 'true')
+
+    permissions:
+      contents: write
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Generate release notes
+        run: |
+          VERSION="${{ needs.pre-deploy.outputs.version }}"
+          PREV=$(git describe --tags --abbrev=0 "${VERSION}^" 2>/dev/null || echo "")
+          if [ -n "$PREV" ]; then
+            git log --oneline --no-merges "$PREV..$VERSION" \
+              --pretty=format:"- %s (%h)" > release_notes.txt
+          else
+            echo "Initial release" > release_notes.txt
+          fi
+
+      - name: Create release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ needs.pre-deploy.outputs.version }}
+          name: "Release ${{ needs.pre-deploy.outputs.version }}"
+          body_path: release_notes.txt
+          prerelease: ${{ needs.pre-deploy.outputs.is_rc }}
+          generate_release_notes: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ───────────────────────────────────────────────────────────────────────
+  # Deploy — runs DIRECTLY on the production Raspberry Pi
+  #
+  # How to register the runner on the production RPi (one-time setup):
+  #   1. GitHub → Settings → Actions → Runners → New self-hosted runner
+  #   2. Linux / ARM64
+  #   3. Run the commands shown on screen
+  #   4. sudo ./svc.sh install && sudo ./svc.sh start
+  #   5. Add the label "raspberry-prod" to the runner on GitHub
+  #
+  # What the deploy does:
+  #   - Checks out the code at the tag
+  #   - Updates Python dependencies in the local venv
+  #   - Validates that .env exists (configured manually on the RPi)
+  #   - Restarts the service
+  #   - Does NOT touch data/ — documents and index are local to each device
+  # ───────────────────────────────────────────────────────────────────────
+  deploy-production:
+    name: Deploy → Production (Raspberry Pi)
+    runs-on: [self-hosted, raspberry-prod]
+    needs: [pre-deploy, full-test-suite, create-release]
+    if: always() && (needs.full-test-suite.result == 'success' || github.event.inputs.force == 'true')
+    environment:
+      name: production
+      url: http://localhost:8000/health
+
+    steps:
+      - name: Checkout tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ needs.pre-deploy.outputs.version }}
+          clean: true
+
+      # ── Update dependencies ───────────────────────────────────────────
+      - name: Update dependencies
+        run: |
+          if [ ! -d .venv ]; then
+            python3 -m venv .venv
+            echo "Venv created"
+          fi
+          .venv/bin/pip install --upgrade pip --quiet
+          .venv/bin/pip install -r requirements.txt --quiet
+          echo "Dependencies updated ✓"
+
+      # ── Validate .env ─────────────────────────────────────────────────
+      - name: Check .env
+        run: |
+          if [ ! -f .env ]; then
+            echo "ERROR: .env not found."
+            echo "Create the file based on .env.example before the first deploy."
+            exit 1
+          fi
+          for var in MODEL_PATH EMBED_CACHE_DIR DOCS_DIR INDEX_DIR; do
+            grep -q "^${var}=" .env \
+              && echo "  ✓ $var" \
+              || (echo "  ✗ $var missing from .env" && exit 1)
+          done
+          echo ".env valid ✓"
+
+      # ── Record deployed version ───────────────────────────────────────
+      - name: Record deployed version
+        run: |
+          echo "${{ needs.pre-deploy.outputs.version }}" > .version
+          echo "Version ${{ needs.pre-deploy.outputs.version }} recorded ✓"
+
+      # ── Stop, deploy, restart ─────────────────────────────────────────
+      - name: Restart service
+        run: |
+          if systemctl is-enabled offline-chatbot 2>/dev/null; then
+            sudo systemctl restart offline-chatbot
+            echo "Service restarted via systemd ✓"
+          else
+            pkill -f "uvicorn api.main:app" || true
+            sleep 2
+            mkdir -p logs
+            nohup .venv/bin/uvicorn api.main:app \
+              --host 0.0.0.0 \
+              --port 8000 \
+              --workers 1 \
+              --log-level warning \
+              > logs/uvicorn.log 2>&1 &
+            echo "Service started via nohup ✓"
+          fi
+
+      # ── Health check ──────────────────────────────────────────────────
+      - name: Health check (wait up to 90s)
+        run: |
+          for i in $(seq 1 18); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              echo "Service responding on attempt $i ✓"
+              curl -s http://localhost:8000/health
+              exit 0
+            fi
+            echo "Attempt $i/18 — HTTP $STATUS — waiting 5s..."
+            sleep 5
+          done
+          echo "ERROR: service did not respond within 90s"
+          exit 1
+
+      # ── Smoke tests ───────────────────────────────────────────────────
+      - name: Smoke tests
+        run: |
+          for endpoint in /health /conversations; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:8000$endpoint")
+            [ "$STATUS" = "200" ] \
+              && echo "GET $endpoint → 200 ✓" \
+              || (echo "GET $endpoint → $STATUS ✗" && exit 1)
+          done
+
+      # ── Record result ─────────────────────────────────────────────────
+      - name: Record deploy
+        if: always()
+        run: |
+          mkdir -p logs
+          RESULT=${{ job.status }}
+          VERSION="${{ needs.pre-deploy.outputs.version }}"
+          echo "$(date -u +"%Y-%m-%dT%H:%M:%SZ") | prod | $VERSION | $RESULT" \
+            >> logs/deploys.log
+
+      # ── Stop service if something went wrong ──────────────────────────
+      - name: Stop service on failure
+        if: failure()
+        run: |
+          echo "Deploy failed — stopping service to avoid inconsistent version"
+          systemctl is-enabled offline-chatbot 2>/dev/null \
+            && sudo systemctl stop offline-chatbot \
+            || pkill -f "uvicorn api.main:app" || true
+          echo "Check .env, dependencies and logs/ before retrying"
+          echo "To rollback manually: git checkout <previous-tag> && pip install -r requirements.txt"
