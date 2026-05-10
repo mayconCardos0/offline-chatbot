@@ -22,6 +22,7 @@ Decisões técnicas:
   - Overlap em sentenças (não tokens) preserva a unidade semântica mínima.
   - chunk_id = sha1(source + posição) garante idempotência na re-indexação.
 """
+
 import hashlib
 import logging
 import re
@@ -36,27 +37,29 @@ logger = logging.getLogger(__name__)
 # ---------------------------------------------------------------------------
 
 # Hifenização no fim de linha: "atô-\nmicas" → "atômicas"
-_HYPHEN_BREAK = re.compile(r'(\w)-\s*\n\s*(\w)')
+_HYPHEN_BREAK = re.compile(r"(\w)-\s*\n\s*(\w)")
 
 # Quebra de linha dentro de parágrafo (não é separador de parágrafo)
 # Heurística: linha seguinte começa com minúscula ou número → mesma frase
-_SOFT_NEWLINE = re.compile(r'(?<=[^\n])\n(?=[a-záéíóúàâêôãõç0-9,;:\"\'])', re.IGNORECASE)
+_SOFT_NEWLINE = re.compile(
+    r"(?<=[^\n])\n(?=[a-záéíóúàâêôãõç0-9,;:\"\'])", re.IGNORECASE
+)
 
 # Número de página isolado (linha com só dígitos, opcional espaços)
-_PAGE_NUMBER = re.compile(r'^\s*\d{1,4}\s*$', re.MULTILINE)
+_PAGE_NUMBER = re.compile(r"^\s*\d{1,4}\s*$", re.MULTILINE)
 
 # Cabeçalhos / rodapés repetitivos (linha toda em maiúsculas, curta)
-_HEADER_LINE = re.compile(r'^[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\s]{5,60}$', re.MULTILINE)
+_HEADER_LINE = re.compile(r"^[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\s]{5,60}$", re.MULTILINE)
 
 # Espaços múltiplos (mantém quebras simples)
-_MULTI_SPACE = re.compile(r'[ \t]{2,}')
+_MULTI_SPACE = re.compile(r"[ \t]{2,}")
 
 # Três ou mais quebras de linha → duas (separa parágrafos)
-_MULTI_NEWLINE = re.compile(r'\n{3,}')
+_MULTI_NEWLINE = re.compile(r"\n{3,}")
 
 # Pontuação de fim de sentença em PT-BR
 # Lookbehind: após .!?…  Lookahead: maiúscula ou aspas
-_SENT_END = re.compile(r'(?<=[.!?…])\s+(?=[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\"\(])')
+_SENT_END = re.compile(r"(?<=[.!?…])\s+(?=[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\"\(])")
 
 # Fator de conversão palavras → tokens (BPE típico para PT-BR)
 # Medido empiricamente: textos PT-BR têm ~1.33 tokens/palavra em modelos Llama/Mistral
@@ -66,6 +69,7 @@ _TOKENS_PER_WORD = 1.33
 # ---------------------------------------------------------------------------
 # Configuração de chunking (imutável após criação)
 # ---------------------------------------------------------------------------
+
 
 @dataclass(frozen=True)
 class ChunkConfig:
@@ -77,15 +81,17 @@ class ChunkConfig:
         overlap_sents: Sentenças a repetir entre chunks consecutivos (overlap semântico).
         remove_headers: Remove linhas de cabeçalho/rodapé detectadas heuristicamente.
     """
-    min_tokens: int   = 150   # ~300 chars — evita chunks minúsculos
-    max_tokens: int   = 400   # ~800 chars — limite seguro para N_CTX=4096
-    overlap_sents: int = 1    # 1 sentença de sobreposição ≈ 10–20% de overlap
+
+    min_tokens: int = 150  # ~300 chars — evita chunks minúsculos
+    max_tokens: int = 400  # ~800 chars — limite seguro para N_CTX=4096
+    overlap_sents: int = 1  # 1 sentença de sobreposição ≈ 10–20% de overlap
     remove_headers: bool = True
 
 
 # ---------------------------------------------------------------------------
 # Contagem de tokens (sem dependências pesadas)
 # ---------------------------------------------------------------------------
+
 
 def count_tokens(text: str) -> int:
     """Estimativa de tokens para modelos BPE (Llama, Mistral, Qwen, Gemma).
@@ -106,6 +112,7 @@ def count_tokens(text: str) -> int:
 # ---------------------------------------------------------------------------
 # Limpeza de texto extraído de PDF
 # ---------------------------------------------------------------------------
+
 
 def clean_pdf_text(text: str, remove_headers: bool = True) -> str:
     """Remove e corrige artefatos comuns de PDFs em português.
@@ -130,22 +137,22 @@ def clean_pdf_text(text: str, remove_headers: bool = True) -> str:
 
     # 2. Corrige hifenização de quebra de linha PRIMEIRO
     #    "atô-\nmicas" → "atômicas"  |  "fre-\nquência" → "frequência"
-    text = _HYPHEN_BREAK.sub(r'\1\2', text)
+    text = _HYPHEN_BREAK.sub(r"\1\2", text)
 
     # 3. Remove quebras de linha suaves dentro de parágrafos
     #    "nor\nte" → "norte"  |  "proces\nso" → "processo"
-    text = _SOFT_NEWLINE.sub(' ', text)
+    text = _SOFT_NEWLINE.sub(" ", text)
 
     # 4. Remove números de página isolados
-    text = _PAGE_NUMBER.sub('', text)
+    text = _PAGE_NUMBER.sub("", text)
 
     # 5. Remove cabeçalhos/rodapés heurísticos (linhas ALL-CAPS curtas)
     if remove_headers:
-        text = _HEADER_LINE.sub('', text)
+        text = _HEADER_LINE.sub("", text)
 
     # 6. Normaliza espaços e quebras de linha redundantes
-    text = _MULTI_SPACE.sub(' ', text)
-    text = _MULTI_NEWLINE.sub('\n\n', text)
+    text = _MULTI_SPACE.sub(" ", text)
+    text = _MULTI_NEWLINE.sub("\n\n", text)
 
     return text.strip()
 
@@ -153,6 +160,7 @@ def clean_pdf_text(text: str, remove_headers: bool = True) -> str:
 # ---------------------------------------------------------------------------
 # Segmentação em sentenças
 # ---------------------------------------------------------------------------
+
 
 def split_sentences(paragraph: str) -> list[str]:
     """Divide um parágrafo em sentenças respeitando pontuação PT-BR.
@@ -168,6 +176,7 @@ def split_sentences(paragraph: str) -> list[str]:
 # Geração de chunk_id determinístico
 # ---------------------------------------------------------------------------
 
+
 def _make_chunk_id(source: str, index: int) -> str:
     """SHA-1 truncado garante idempotência na re-indexação.
 
@@ -180,6 +189,7 @@ def _make_chunk_id(source: str, index: int) -> str:
 # ---------------------------------------------------------------------------
 # Montador de chunks a partir de sentenças
 # ---------------------------------------------------------------------------
+
 
 def _build_chunks_from_sentences(
     sentences: list[str],
@@ -218,13 +228,15 @@ def _build_chunks_from_sentences(
         text = " ".join(s for s in sents if s).strip()
         if not text:
             return
-        chunks.append({
-            "text": text,
-            "source": source,
-            "page": page,
-            "section": section,
-            "chunk_id": _make_chunk_id(source, chunk_index),
-        })
+        chunks.append(
+            {
+                "text": text,
+                "source": source,
+                "page": page,
+                "section": section,
+                "chunk_id": _make_chunk_id(source, chunk_index),
+            }
+        )
         chunk_index += 1
 
     for sent in sentences:
@@ -234,7 +246,9 @@ def _build_chunks_from_sentences(
         if sent_tokens > config.max_tokens:
             if buffer:
                 _emit(buffer)
-                buffer = buffer[-config.overlap_sents:] if config.overlap_sents > 0 else []
+                buffer = (
+                    buffer[-config.overlap_sents :] if config.overlap_sents > 0 else []
+                )
                 buffer_tokens = sum(count_tokens(s) for s in buffer)
             _emit([sent])
             buffer = []
@@ -246,7 +260,9 @@ def _build_chunks_from_sentences(
             # Só fecha se o buffer já tem tamanho mínimo; caso contrário continua
             if buffer_tokens >= config.min_tokens:
                 _emit(buffer)
-                buffer = buffer[-config.overlap_sents:] if config.overlap_sents > 0 else []
+                buffer = (
+                    buffer[-config.overlap_sents :] if config.overlap_sents > 0 else []
+                )
                 buffer_tokens = sum(count_tokens(s) for s in buffer)
 
         buffer.append(sent)
@@ -268,6 +284,7 @@ def _build_chunks_from_sentences(
 # ---------------------------------------------------------------------------
 # API pública — chunk_document (compatível com a interface original)
 # ---------------------------------------------------------------------------
+
 
 def chunk_document(
     doc: dict,
@@ -299,8 +316,8 @@ def chunk_document(
         Lista de dicts {'text', 'source', 'page', 'section', 'chunk_id'}.
         Campos novos têm valor None quando não disponíveis, não quebram código antigo.
     """
-    raw_text: str  = doc.get("text", "")
-    source: str    = doc.get("source", "desconhecido")
+    raw_text: str = doc.get("text", "")
+    source: str = doc.get("source", "desconhecido")
     page: Optional[int] = doc.get("page")
     section: Optional[str] = doc.get("section")
 
@@ -328,16 +345,18 @@ def chunk_document(
     total_tokens = count_tokens(text)
     if total_tokens <= config.max_tokens:
         # Documento cabe inteiro em um chunk
-        return [{
-            "text": text,
-            "source": source,
-            "page": page,
-            "section": section,
-            "chunk_id": _make_chunk_id(source, 0),
-        }]
+        return [
+            {
+                "text": text,
+                "source": source,
+                "page": page,
+                "section": section,
+                "chunk_id": _make_chunk_id(source, 0),
+            }
+        ]
 
     # Divide em parágrafos reais (linhas em branco separam assuntos)
-    paragraphs = [p.strip() for p in re.split(r'\n\n+', text) if p.strip()]
+    paragraphs = [p.strip() for p in re.split(r"\n\n+", text) if p.strip()]
 
     all_chunks: list[dict] = []
     sent_offset = 0  # contador global de chunks no documento para chunk_id único
@@ -347,13 +366,15 @@ def chunk_document(
 
         if para_tokens <= config.max_tokens:
             # Parágrafo inteiro cabe em um chunk — não divide sentenças
-            all_chunks.append({
-                "text": para,
-                "source": source,
-                "page": page,
-                "section": section,
-                "chunk_id": _make_chunk_id(source, sent_offset),
-            })
+            all_chunks.append(
+                {
+                    "text": para,
+                    "source": source,
+                    "page": page,
+                    "section": section,
+                    "chunk_id": _make_chunk_id(source, sent_offset),
+                }
+            )
             sent_offset += 1
         else:
             # Parágrafo grande → divide em sentenças
@@ -369,7 +390,10 @@ def chunk_document(
 
     logger.debug(
         "chunk_document: %d parágrafos → %d chunks | %d tokens totais (source=%s)",
-        len(paragraphs), len(all_chunks), total_tokens, source
+        len(paragraphs),
+        len(all_chunks),
+        total_tokens,
+        source,
     )
     return all_chunks
 
@@ -377,6 +401,7 @@ def chunk_document(
 # ---------------------------------------------------------------------------
 # Pós-processamento: mescla chunks minúsculos consecutivos
 # ---------------------------------------------------------------------------
+
 
 def _merge_tiny_chunks(chunks: list[dict], config: ChunkConfig) -> list[dict]:
     """Mescla chunks consecutivos que ficaram abaixo de min_tokens.

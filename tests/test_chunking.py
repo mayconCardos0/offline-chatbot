@@ -1,6 +1,7 @@
 """
 Tests for rag/chunking.py — clean_pdf_text, split_sentences, chunk_document.
 """
+
 import pytest
 from unittest.mock import patch
 import sys
@@ -10,10 +11,10 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from rag.chunking import clean_pdf_text, split_sentences, chunk_document
 
-
 # ---------------------------------------------------------------------------
 # clean_pdf_text
 # ---------------------------------------------------------------------------
+
 
 class TestCleanPdfText:
     def test_removes_isolated_page_numbers(self):
@@ -55,6 +56,7 @@ class TestCleanPdfText:
 # split_sentences
 # ---------------------------------------------------------------------------
 
+
 class TestSplitSentences:
     def test_splits_on_period(self):
         text = "First sentence. Second sentence."
@@ -90,6 +92,7 @@ class TestSplitSentences:
 # ---------------------------------------------------------------------------
 # chunk_document
 # ---------------------------------------------------------------------------
+
 
 class TestChunkDocument:
     def _make_doc(self, text):

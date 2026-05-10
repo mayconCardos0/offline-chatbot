@@ -10,6 +10,7 @@ Melhorias em relação à versão original:
   - Deduplicação por hash de texto: evita chunks duplicados ao re-indexar.
   - API pública limpa (sem acesso a _index.ntotal externo).
 """
+
 import hashlib
 import json
 import logging
@@ -20,13 +21,13 @@ import numpy as np
 logger = logging.getLogger(__name__)
 
 _INDEX_FILE = "index.faiss"
-_META_FILE  = "metadata.json"
-_HASH_FILE  = "hashes.json"
+_META_FILE = "metadata.json"
+_HASH_FILE = "hashes.json"
 
 # Parâmetros HNSW
-_HNSW_M           = 32   # Conexões por nó — mais = melhor recall, mais RAM
+_HNSW_M = 32  # Conexões por nó — mais = melhor recall, mais RAM
 _HNSW_EF_CONSTRUCTION = 200  # Qualidade da construção
-_HNSW_EF_SEARCH   = 64   # Qualidade da busca (pode ajustar em runtime)
+_HNSW_EF_SEARCH = 64  # Qualidade da busca (pode ajustar em runtime)
 
 
 class VectorStore:
@@ -40,11 +41,11 @@ class VectorStore:
                 "faiss-cpu não está instalado. Execute: pip install faiss-cpu"
             ) from exc
 
-        self._faiss        = faiss
-        self._index_dir    = Path(index_dir)
+        self._faiss = faiss
+        self._index_dir = Path(index_dir)
         self._embedding_dim = embedding_dim
         self._metadata: list[dict] = []
-        self._hashes: set[str]     = set()
+        self._hashes: set[str] = set()
         self._index = self._build_empty_index()
 
         self.load()
@@ -72,8 +73,8 @@ class VectorStore:
         if not chunks:
             return
 
-        new_chunks: list[dict]       = []
-        new_vecs:   list[list[float]] = []
+        new_chunks: list[dict] = []
+        new_vecs: list[list[float]] = []
 
         for chunk, vec in zip(chunks, embeddings):
             h = _text_hash(chunk["text"])
@@ -93,7 +94,9 @@ class VectorStore:
 
         logger.debug(
             "Adicionados %d chunks (total: %d, ignorados: %d).",
-            len(new_chunks), len(self._metadata), len(chunks) - len(new_chunks)
+            len(new_chunks),
+            len(self._metadata),
+            len(chunks) - len(new_chunks),
         )
 
     def save(self) -> None:
@@ -107,20 +110,22 @@ class VectorStore:
             json.dumps(list(self._hashes)), encoding="utf-8"
         )
         logger.info(
-            "VectorStore salvo em '%s' (%d chunks).", self._index_dir, len(self._metadata)
+            "VectorStore salvo em '%s' (%d chunks).",
+            self._index_dir,
+            len(self._metadata),
         )
 
     def load(self) -> bool:
         """Carrega índice existente do disco, se disponível."""
         index_path = self._index_dir / _INDEX_FILE
-        meta_path  = self._index_dir / _META_FILE
-        hash_path  = self._index_dir / _HASH_FILE
+        meta_path = self._index_dir / _META_FILE
+        hash_path = self._index_dir / _HASH_FILE
 
         if not (index_path.exists() and meta_path.exists()):
             return False
 
         try:
-            self._index    = self._faiss.read_index(str(index_path))
+            self._index = self._faiss.read_index(str(index_path))
             self._metadata = json.loads(meta_path.read_text(encoding="utf-8"))
             if hash_path.exists():
                 self._hashes = set(json.loads(hash_path.read_text(encoding="utf-8")))
@@ -133,14 +138,17 @@ class VectorStore:
 
             logger.info(
                 "VectorStore carregado de '%s' (%d chunks).",
-                self._index_dir, len(self._metadata)
+                self._index_dir,
+                len(self._metadata),
             )
             return True
         except Exception as exc:
-            logger.error("Falha ao carregar VectorStore de '%s': %s", self._index_dir, exc)
-            self._index    = self._build_empty_index()
+            logger.error(
+                "Falha ao carregar VectorStore de '%s': %s", self._index_dir, exc
+            )
+            self._index = self._build_empty_index()
             self._metadata = []
-            self._hashes   = set()
+            self._hashes = set()
             return False
 
     def search(self, query_vec: list[float], k: int) -> list[dict]:
@@ -176,7 +184,9 @@ class VectorStore:
 
     def _build_empty_index(self):
         """Cria um índice HNSW-IP vazio."""
-        index = self._faiss.IndexHNSWFlat(self._embedding_dim, _HNSW_M, self._faiss.METRIC_INNER_PRODUCT)
+        index = self._faiss.IndexHNSWFlat(
+            self._embedding_dim, _HNSW_M, self._faiss.METRIC_INNER_PRODUCT
+        )
         index.hnsw.efConstruction = _HNSW_EF_CONSTRUCTION
         _set_ef_search(index, _HNSW_EF_SEARCH)
         return index
@@ -185,6 +195,7 @@ class VectorStore:
 # ---------------------------------------------------------------------------
 # Utilitários
 # ---------------------------------------------------------------------------
+
 
 def _text_hash(text: str) -> str:
     return hashlib.md5(text.encode("utf-8")).hexdigest()

@@ -8,6 +8,7 @@ Endpoints:
   DELETE /chat/{session_id}                 — delete a session (404 if not found)
   GET    /health                            — liveness check
 """
+
 import logging
 from typing import TYPE_CHECKING, List
 
@@ -25,6 +26,7 @@ router = APIRouter()
 # ---------------------------------------------------------------------------
 # Request / Response models
 # ---------------------------------------------------------------------------
+
 
 class ChatRequest(BaseModel):
     session_id: str
@@ -53,6 +55,7 @@ class ConversationDetail(BaseModel):
 # Helpers
 # ---------------------------------------------------------------------------
 
+
 def _get_pipeline(request: Request) -> "RAGPipeline":
     return request.app.state.pipeline
 
@@ -64,6 +67,7 @@ def _get_conv_manager(request: Request):
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
+
 
 @router.get("/conversations", response_model=List[ConversationPreview])
 async def list_conversations(request: Request) -> List[ConversationPreview]:
@@ -93,6 +97,7 @@ async def get_conversation(session_id: str, request: Request) -> ConversationDet
         messages=conversation["messages"],
         updated_at=conversation["updated_at"],
     )
+
 
 @router.post("/chat", response_model=ChatResponse)
 async def chat(body: ChatRequest, request: Request) -> ChatResponse:

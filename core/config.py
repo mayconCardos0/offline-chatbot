@@ -2,6 +2,7 @@
 Configuração centralizada do Offline Chatbot.
 Todos os valores são lidos de variáveis de ambiente (e arquivo .env opcional).
 """
+
 import logging
 import os
 from dataclasses import dataclass, field
@@ -9,6 +10,7 @@ from pathlib import Path
 
 try:
     from dotenv import load_dotenv
+
     _env_path = Path(__file__).parent.parent / ".env"
     load_dotenv(dotenv_path=_env_path)
 except ImportError:
@@ -22,11 +24,17 @@ class Settings:
 
     # --- LLM ---
     model_path: str = field(
-        default_factory=lambda: os.environ.get("MODEL_PATH", "models/Qwen3-0.6B-Q8_0.gguf")
+        default_factory=lambda: os.environ.get(
+            "MODEL_PATH", "models/Qwen3-0.6B-Q8_0.gguf"
+        )
     )
-    n_ctx: int      = field(default_factory=lambda: int(os.environ.get("N_CTX", "4096")))
-    n_threads: int  = field(default_factory=lambda: int(os.environ.get("N_THREADS", "4")))
-    n_gpu_layers: int = field(default_factory=lambda: int(os.environ.get("N_GPU_LAYERS", "0")))
+    n_ctx: int = field(default_factory=lambda: int(os.environ.get("N_CTX", "4096")))
+    n_threads: int = field(
+        default_factory=lambda: int(os.environ.get("N_THREADS", "4"))
+    )
+    n_gpu_layers: int = field(
+        default_factory=lambda: int(os.environ.get("N_GPU_LAYERS", "0"))
+    )
 
     # --- Embeddings ---
     # Padrão: modelo multilíngue leve, bom para PT-BR (~120 MB)
@@ -42,7 +50,8 @@ class Settings:
         default_factory=lambda: int(os.environ.get("EMBED_BATCH_SIZE", "32"))
     )
     embed_disk_cache: bool = field(
-        default_factory=lambda: os.environ.get("EMBED_DISK_CACHE", "true").lower() == "true"
+        default_factory=lambda: os.environ.get("EMBED_DISK_CACHE", "true").lower()
+        == "true"
     )
 
     # --- RAG ---
@@ -68,9 +77,13 @@ class Settings:
     )
 
     # --- Chunking ---
-    chunk_size: int = field(default_factory=lambda: int(os.environ.get("CHUNK_SIZE", "512")))
+    chunk_size: int = field(
+        default_factory=lambda: int(os.environ.get("CHUNK_SIZE", "512"))
+    )
     # overlap em número de SENTENÇAS (não caracteres)
-    chunk_overlap: int = field(default_factory=lambda: int(os.environ.get("CHUNK_OVERLAP", "1")))
+    chunk_overlap: int = field(
+        default_factory=lambda: int(os.environ.get("CHUNK_OVERLAP", "1"))
+    )
 
     # --- Pipeline ---
     max_context_chars: int = field(
@@ -82,7 +95,9 @@ class Settings:
 
     # --- Conversas ---
     conversations_file: str = field(
-        default_factory=lambda: os.environ.get("CONVERSATIONS_FILE", "data/conversations.json")
+        default_factory=lambda: os.environ.get(
+            "CONVERSATIONS_FILE", "data/conversations.json"
+        )
     )
 
     # --- Logging ---

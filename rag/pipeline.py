@@ -12,6 +12,7 @@ Melhorias nesta versão:
   - Prefixo de confiança proporcional ao score dos chunks.
   - Contexto ampliado (3500 chars) e histórico reduzido (4 turnos).
 """
+
 import logging
 import os
 import re
@@ -30,13 +31,70 @@ logger = logging.getLogger(__name__)
 # Stopwords leves para comparação de keywords (sem dependência externa)
 # ---------------------------------------------------------------------------
 _STOPWORDS = {
-    "a", "o", "e", "é", "de", "do", "da", "em", "no", "na", "por", "para",
-    "com", "um", "uma", "se", "que", "ao", "ou", "mas", "como", "não",
-    "foi", "são", "era", "tem", "ser", "ter", "isso", "esse", "esta",
-    "the", "of", "and", "in", "to", "is", "it", "for", "on", "are",
-    "me", "eu", "tu", "ele", "ela", "nos", "eles", "elas", "você", "vocês",
-    "qual", "quais", "quem", "quando", "onde", "como", "quanto",
-    "seu", "sua", "meu", "minha", "nosso", "nossa",
+    "a",
+    "o",
+    "e",
+    "é",
+    "de",
+    "do",
+    "da",
+    "em",
+    "no",
+    "na",
+    "por",
+    "para",
+    "com",
+    "um",
+    "uma",
+    "se",
+    "que",
+    "ao",
+    "ou",
+    "mas",
+    "como",
+    "não",
+    "foi",
+    "são",
+    "era",
+    "tem",
+    "ser",
+    "ter",
+    "isso",
+    "esse",
+    "esta",
+    "the",
+    "of",
+    "and",
+    "in",
+    "to",
+    "is",
+    "it",
+    "for",
+    "on",
+    "are",
+    "me",
+    "eu",
+    "tu",
+    "ele",
+    "ela",
+    "nos",
+    "eles",
+    "elas",
+    "você",
+    "vocês",
+    "qual",
+    "quais",
+    "quem",
+    "quando",
+    "onde",
+    "como",
+    "quanto",
+    "seu",
+    "sua",
+    "meu",
+    "minha",
+    "nosso",
+    "nossa",
 }
 
 # ---------------------------------------------------------------------------
@@ -89,7 +147,7 @@ _MEDIUM_CONFIDENCE_PREFIX = "Com base no material disponível:\n\n"
 
 _MAX_CONTEXT_CHARS = 3500
 _MAX_HISTORY_TURNS = 4
-_MIN_CHUNK_CHARS   = 80
+_MIN_CHUNK_CHARS = 80
 
 # Limiar mínimo de overlap de keywords entre query e chunks recuperados.
 # Se a sobreposição for menor, os chunks são considerados off-topic e o
@@ -99,7 +157,7 @@ _MIN_KEYWORD_OVERLAP = 0.25
 
 # Scores de confiança
 _MEDIUM_CONFIDENCE_THRESHOLD = 0.55
-_HIGH_CONFIDENCE_THRESHOLD   = 0.70
+_HIGH_CONFIDENCE_THRESHOLD = 0.70
 
 
 class RAGPipeline:
@@ -113,9 +171,9 @@ class RAGPipeline:
         max_context_chars: int = _MAX_CONTEXT_CHARS,
         max_history_turns: int = _MAX_HISTORY_TURNS,
     ) -> None:
-        self._retriever         = retriever
-        self._llm               = llm
-        self._conv_manager      = conv_manager
+        self._retriever = retriever
+        self._llm = llm
+        self._conv_manager = conv_manager
         self._max_context_chars = max_context_chars
         self._max_history_turns = max_history_turns
 
@@ -158,7 +216,7 @@ class RAGPipeline:
 
         # Monta mensagens para o LLM
         system_content = self._build_system_prompt(chunks)
-        history        = self._trim_history(conv["messages"])
+        history = self._trim_history(conv["messages"])
 
         # Guardrail duplicado: repete a instrução na mensagem do usuário
         # Necessário para modelos como Gemma que ignoram o system prompt
@@ -174,10 +232,14 @@ class RAGPipeline:
         elapsed = time.perf_counter() - t0
         logger.info(
             "LLM respondeu em %.2fs | chunks=%d | sessão='%s'",
-            elapsed, len(chunks), session_id,
+            elapsed,
+            len(chunks),
+            session_id,
         )
 
-        final_response = confidence_prefix + response_text if confidence_prefix else response_text
+        final_response = (
+            confidence_prefix + response_text if confidence_prefix else response_text
+        )
         return self._persist_and_return(conv, message, final_response)
 
     # ------------------------------------------------------------------
@@ -214,14 +276,17 @@ class RAGPipeline:
 
         logger.debug(
             "Relevância temática: query_kw=%s | matched=%s | overlap=%.2f (limiar=%.2f)",
-            query_keywords, matched, overlap, _MIN_KEYWORD_OVERLAP,
+            query_keywords,
+            matched,
+            overlap,
+            _MIN_KEYWORD_OVERLAP,
         )
 
         return overlap >= _MIN_KEYWORD_OVERLAP
 
     def _extract_keywords(self, text: str) -> set[str]:
         """Extrai keywords significativas (4+ chars, sem stopwords)."""
-        tokens = re.findall(r'\b\w+\b', text.lower())
+        tokens = re.findall(r"\b\w+\b", text.lower())
         return {t for t in tokens if len(t) >= 4 and t not in _STOPWORDS}
 
     # ------------------------------------------------------------------
@@ -230,9 +295,9 @@ class RAGPipeline:
 
     def _persist_and_return(self, conv: dict, message: str, response: str) -> str:
         """Persiste o par user/assistant no histórico e retorna a resposta."""
-        ts      = time.time()
+        ts = time.time()
         updated = list(conv["messages"])
-        updated.append({"role": "user",      "content": message,  "timestamp": ts})
+        updated.append({"role": "user", "content": message, "timestamp": ts})
         updated.append({"role": "assistant", "content": response, "timestamp": ts})
         self._conv_manager.update(conv["id"], updated)
         return response
@@ -259,10 +324,10 @@ class RAGPipeline:
 
         for chunk in usable:
             source = os.path.basename(chunk.get("source", "desconhecido"))
-            score  = chunk.get("score", 0.0)
+            score = chunk.get("score", 0.0)
             header = f"[fonte: {source} | relevância: {score:.2f}]"
-            body   = chunk["text"].strip()
-            entry  = f"{header}\n{body}"
+            body = chunk["text"].strip()
+            entry = f"{header}\n{body}"
 
             if total_chars + len(entry) > self._max_context_chars:
                 remaining = self._max_context_chars - total_chars
@@ -279,6 +344,6 @@ class RAGPipeline:
 
     def _trim_history(self, messages: list[dict]) -> list[dict]:
         """Mantém apenas os últimos N turnos de histórico."""
-        pairs    = [m for m in messages if m["role"] in ("user", "assistant")]
+        pairs = [m for m in messages if m["role"] in ("user", "assistant")]
         max_msgs = self._max_history_turns * 2
         return pairs[-max_msgs:]

@@ -1,6 +1,7 @@
 """
 Tests for core/conversation.py — ConversationManager CRUD and persistence.
 """
+
 import json
 import os
 import sys
@@ -12,10 +13,10 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from core.conversation import ConversationManager
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 @pytest.fixture
 def tmp_file():
@@ -35,6 +36,7 @@ def manager(tmp_file):
 # Initialization
 # ---------------------------------------------------------------------------
 
+
 class TestInit:
     def test_starts_empty_with_new_file(self, tmp_file):
         # Remove the file so it starts fresh
@@ -44,7 +46,9 @@ class TestInit:
         assert manager.list() == []
 
     def test_loads_existing_conversations(self, tmp_file):
-        existing = [{"id": "abc", "title": "Test", "messages": [], "updated_at": time.time()}]
+        existing = [
+            {"id": "abc", "title": "Test", "messages": [], "updated_at": time.time()}
+        ]
         with open(tmp_file, "w") as f:
             json.dump(existing, f)
         manager = ConversationManager(storage_path=tmp_file)
@@ -61,6 +65,7 @@ class TestInit:
 # ---------------------------------------------------------------------------
 # create
 # ---------------------------------------------------------------------------
+
 
 class TestCreate:
     def test_create_returns_dict_with_id(self, manager):
@@ -106,6 +111,7 @@ class TestCreate:
 # get
 # ---------------------------------------------------------------------------
 
+
 class TestGet:
     def test_get_existing_session(self, manager):
         conv = manager.create(session_id="get-test")
@@ -118,6 +124,7 @@ class TestGet:
 # ---------------------------------------------------------------------------
 # update
 # ---------------------------------------------------------------------------
+
 
 class TestUpdate:
     def test_update_replaces_messages(self, manager):
@@ -151,6 +158,7 @@ class TestUpdate:
 # delete
 # ---------------------------------------------------------------------------
 
+
 class TestDelete:
     def test_delete_existing_returns_true(self, manager):
         manager.create(session_id="del-test")
@@ -176,6 +184,7 @@ class TestDelete:
 # ---------------------------------------------------------------------------
 # list
 # ---------------------------------------------------------------------------
+
 
 class TestList:
     def test_list_empty(self, manager):

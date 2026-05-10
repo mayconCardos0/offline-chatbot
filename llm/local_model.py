@@ -7,6 +7,7 @@ Melhorias em relação à versão anterior:
   - top_p ajustado para 0.95 (compensa a temperatura baixa sem perder fluência).
   - Parâmetros de geração expostos no método chat() para override por chamador.
 """
+
 import logging
 import os
 from typing import Iterator
@@ -14,10 +15,12 @@ from typing import Iterator
 logger = logging.getLogger(__name__)
 
 # Parâmetros de geração padrão otimizados para RAG factual em PT-BR
-_DEFAULT_TEMPERATURE    = 0.1   # Baixo = respostas determinísticas e ancoradas no contexto
-_DEFAULT_TOP_P          = 0.95  # Um pouco mais amplo para compensar temperatura baixa
-_DEFAULT_REPEAT_PENALTY = 1.1   # Evita loops de repetição comuns em modelos GGUF pequenos
-_DEFAULT_MAX_TOKENS     = 2048
+_DEFAULT_TEMPERATURE = 0.1  # Baixo = respostas determinísticas e ancoradas no contexto
+_DEFAULT_TOP_P = 0.95  # Um pouco mais amplo para compensar temperatura baixa
+_DEFAULT_REPEAT_PENALTY = (
+    1.1  # Evita loops de repetição comuns em modelos GGUF pequenos
+)
+_DEFAULT_MAX_TOKENS = 2048
 
 
 class LocalModel:
@@ -31,9 +34,7 @@ class LocalModel:
         n_gpu_layers: int = 0,
     ) -> None:
         if not os.path.exists(model_path):
-            raise RuntimeError(
-                f"Model file not found at configured path: {model_path}"
-            )
+            raise RuntimeError(f"Model file not found at configured path: {model_path}")
 
         logger.info("Loading GGUF model from %s", model_path)
         from llama_cpp import Llama
@@ -108,9 +109,11 @@ class LocalModel:
                 **gen_kwargs,
             )
         except ValueError:
-            logger.debug("Model rejected system role — retrying with folded system prompt.")
+            logger.debug(
+                "Model rejected system role — retrying with folded system prompt."
+            )
             normalized = self._normalize_messages(messages)
-            response   = self._llm.create_chat_completion(
+            response = self._llm.create_chat_completion(
                 messages=normalized,
                 **gen_kwargs,
             )

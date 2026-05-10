@@ -1,6 +1,7 @@
 """
 Tests for llm/local_model.py — LocalModel wrapper (mocked llama_cpp).
 """
+
 import os
 import sys
 import pytest
@@ -27,6 +28,7 @@ def model_file(tmp_path):
 class TestNormalizeMessages:
     def _normalize(self, messages):
         from llm.local_model import LocalModel
+
         return LocalModel._normalize_messages(messages)
 
     def test_no_system_message_unchanged(self):
@@ -73,6 +75,7 @@ class TestNormalizeMessages:
 class TestLocalModelInit:
     def test_raises_if_model_file_missing(self):
         from llm.local_model import LocalModel
+
         with pytest.raises(RuntimeError, match="not found"):
             LocalModel(model_path="/nonexistent/model.gguf")
 
@@ -81,8 +84,10 @@ class TestLocalModelChat:
     def _make_model(self, model_file, mock_llama):
         """Build LocalModel with the Llama class pre-patched."""
         from llm.local_model import LocalModel
+
         # Inject Llama into the module so patching works at import time
         import llm.local_model as lm
+
         lm.Llama = mock_llama
         model = object.__new__(LocalModel)
         model._llm = mock_llama()
@@ -94,11 +99,13 @@ class TestLocalModelChat:
         mock_instance.create_chat_completion.return_value = _make_llm_response("Hello!")
 
         import llm.local_model as lm
+
         original = getattr(lm, "Llama", None)
         lm.Llama = mock_llama_cls
 
         try:
             from llm.local_model import LocalModel
+
             model = object.__new__(LocalModel)
             model._llm = mock_instance
             result = model.chat([{"role": "user", "content": "Hi"}])
@@ -110,9 +117,12 @@ class TestLocalModelChat:
     def test_chat_stream_yields_tokens(self, model_file):
         tokens = ["Hello", " ", "world"]
         mock_instance = MagicMock()
-        mock_instance.create_chat_completion.return_value = iter(_make_stream_chunks(tokens))
+        mock_instance.create_chat_completion.return_value = iter(
+            _make_stream_chunks(tokens)
+        )
 
         from llm.local_model import LocalModel
+
         model = object.__new__(LocalModel)
         model._llm = mock_instance
         result = list(model.chat([{"role": "user", "content": "Hi"}], stream=True))
@@ -125,6 +135,7 @@ class TestLocalModelChat:
             _make_llm_response("Fallback response"),
         ]
         from llm.local_model import LocalModel
+
         model = object.__new__(LocalModel)
         model._llm = mock_instance
         messages = [
@@ -137,6 +148,7 @@ class TestLocalModelChat:
 
     def test_iter_tokens_skips_empty(self):
         from llm.local_model import LocalModel
+
         chunks = [
             {"choices": [{"delta": {"content": "hello"}}]},
             {"choices": [{"delta": {}}]},  # no content key

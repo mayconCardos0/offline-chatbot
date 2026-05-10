@@ -2,6 +2,7 @@
 Tests for api/routes.py — FastAPI endpoints /chat, /health, DELETE /chat/{id}.
 Uses a lightweight test app with mocked pipeline and conversation manager.
 """
+
 import os
 import sys
 import pytest
@@ -14,10 +15,10 @@ from fastapi.testclient import TestClient
 
 from api.routes import router
 
-
 # ---------------------------------------------------------------------------
 # Fixtures
 # ---------------------------------------------------------------------------
+
 
 def _build_test_app(pipeline=None, conv_manager=None):
     """Create a minimal FastAPI app with mocked state."""
@@ -53,6 +54,7 @@ def client(client_and_mocks):
 # GET /health
 # ---------------------------------------------------------------------------
 
+
 class TestHealthEndpoint:
     def test_returns_200(self, client):
         resp = client.get("/health")
@@ -70,6 +72,7 @@ class TestHealthEndpoint:
 # ---------------------------------------------------------------------------
 # POST /chat
 # ---------------------------------------------------------------------------
+
 
 class TestChatEndpoint:
     def test_returns_200(self, client):
@@ -126,6 +129,7 @@ class TestChatEndpoint:
 # ---------------------------------------------------------------------------
 # DELETE /chat/{session_id}
 # ---------------------------------------------------------------------------
+
 
 class TestDeleteSessionEndpoint:
     def test_returns_200_when_session_exists(self, client_and_mocks):

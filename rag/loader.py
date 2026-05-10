@@ -20,6 +20,7 @@ Decisão técnica — por que retornar por página e não por documento inteiro?
   Compatibilidade: cada dict ainda tem 'text' e 'source', então o pipeline
   existente funciona sem alteração.
 """
+
 import json
 import logging
 from pathlib import Path
@@ -32,8 +33,9 @@ SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf", ".json"}
 # Heurística de detecção de título/seção:
 #   linha com até 80 chars, sem ponto final, que começa com maiúscula ou número
 import re
+
 _SECTION_PATTERN = re.compile(
-    r'^(?:\d+[\.\)]\s+)?[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ][^\n]{3,79}(?<![.!?,;:])$',
+    r"^(?:\d+[\.\)]\s+)?[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ][^\n]{3,79}(?<![.!?,;:])$",
     re.MULTILINE,
 )
 
@@ -41,6 +43,7 @@ _SECTION_PATTERN = re.compile(
 # ---------------------------------------------------------------------------
 # Loaders individuais
 # ---------------------------------------------------------------------------
+
 
 def _load_txt(path: Path) -> str:
     """Carrega arquivo de texto com detecção automática de encoding."""
@@ -107,12 +110,14 @@ def _load_pdf_pages(path: Path) -> list[dict]:
         # Detecta seção (mantido)
         section = _detect_section(cleaned)
 
-        pages.append({
-            "text": cleaned,
-            "source": str(path),
-            "page": page_num,
-            "section": section,
-        })
+        pages.append(
+            {
+                "text": cleaned,
+                "source": str(path),
+                "page": page_num,
+                "section": section,
+            }
+        )
 
     doc.close()
 
@@ -138,6 +143,7 @@ def _load_json(path: Path) -> str:
 # ---------------------------------------------------------------------------
 # API pública
 # ---------------------------------------------------------------------------
+
 
 def load_documents(docs_dir: str) -> list[dict]:
     """Carrega todos os documentos suportados de docs_dir.
@@ -177,12 +183,14 @@ def load_documents(docs_dir: str) -> list[dict]:
                 if not text.strip():
                     logger.warning("Documento vazio após extração: %s", entry)
                     continue
-                results.append({
-                    "text":    text,
-                    "source":  str(entry),
-                    "page":    None,
-                    "section": None,
-                })
+                results.append(
+                    {
+                        "text": text,
+                        "source": str(entry),
+                        "page": None,
+                        "section": None,
+                    }
+                )
                 logger.info("Carregado: %s (%d chars)", entry.name, len(text))
 
             elif ext == ".pdf":
@@ -195,7 +203,9 @@ def load_documents(docs_dir: str) -> list[dict]:
                 total_chars = sum(len(p["text"]) for p in pages)
                 logger.info(
                     "Carregado PDF: %s — %d páginas, %d chars totais",
-                    entry.name, len(pages), total_chars
+                    entry.name,
+                    len(pages),
+                    total_chars,
                 )
 
             elif ext == ".json":
@@ -203,12 +213,14 @@ def load_documents(docs_dir: str) -> list[dict]:
                 if not text.strip():
                     logger.warning("JSON sem strings extraíveis: %s", entry)
                     continue
-                results.append({
-                    "text":    text,
-                    "source":  str(entry),
-                    "page":    None,
-                    "section": None,
-                })
+                results.append(
+                    {
+                        "text": text,
+                        "source": str(entry),
+                        "page": None,
+                        "section": None,
+                    }
+                )
                 logger.info("Carregado JSON: %s (%d chars)", entry.name, len(text))
 
         except Exception as exc:

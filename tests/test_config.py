@@ -1,6 +1,7 @@
 """
 Tests for core/config.py — Settings dataclass and setup_logging.
 """
+
 import logging
 import os
 import sys

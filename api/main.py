@@ -4,6 +4,7 @@ FastAPI application entry point para o Offline Chatbot.
 Startup (lifespan) carrega todos os componentes pesados uma vez:
   LocalModel → EmbeddingModel → VectorStore → Retriever → RAGPipeline → ConversationManager
 """
+
 import logging
 import os
 import sys
@@ -40,7 +41,11 @@ async def lifespan(app: FastAPI):
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     def resolve(path: str) -> str:
-        return path if os.path.isabs(path) else os.path.normpath(os.path.join(base_dir, path))
+        return (
+            path
+            if os.path.isabs(path)
+            else os.path.normpath(os.path.join(base_dir, path))
+        )
 
     # --- LLM ---
     llm = LocalModel(
@@ -88,7 +93,7 @@ async def lifespan(app: FastAPI):
         max_history_turns=settings.max_history_turns,
     )
 
-    app.state.pipeline    = pipeline
+    app.state.pipeline = pipeline
     app.state.conv_manager = conv_manager
 
     logger.info("Todos os componentes carregados. API pronta.")
@@ -112,8 +117,12 @@ def create_app() -> FastAPI:
     )
 
     @app.exception_handler(Exception)
-    async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
-        logger.exception("Exceção não tratada em %s %s", request.method, request.url.path)
+    async def unhandled_exception_handler(
+        request: Request, exc: Exception
+    ) -> JSONResponse:
+        logger.exception(
+            "Exceção não tratada em %s %s", request.method, request.url.path
+        )
         return JSONResponse(status_code=500, content={"error": str(exc)})
 
     app.include_router(router)

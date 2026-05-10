@@ -4,6 +4,7 @@ Speed & accuracy benchmark — runs ALL GGUF models in models/ and compares resu
 Usage (from offline-chatbot/):
     python scripts/speed_test.py [--n-ctx N] [--threads N] [--gpu-layers N] [--models-dir PATH]
 """
+
 import argparse
 import sys
 import time
@@ -18,30 +19,85 @@ from core.config import get_settings, setup_logging
 # ---------------------------------------------------------------------------
 QA_PAIRS = [
     {"prompt": "Quanto é 15 + 27? Responda apenas com o número.", "expected": ["42"]},
-    {"prompt": "Quanto é 144 dividido por 12? Responda apenas com o número.", "expected": ["12"]},
-    {"prompt": "Qual é a raiz quadrada de 81? Responda apenas com o número.", "expected": ["9"]},
-    {"prompt": "Quantos números primos existem entre 1 e 10? Responda apenas com o número.", "expected": ["4"]},
+    {
+        "prompt": "Quanto é 144 dividido por 12? Responda apenas com o número.",
+        "expected": ["12"],
+    },
+    {
+        "prompt": "Qual é a raiz quadrada de 81? Responda apenas com o número.",
+        "expected": ["9"],
+    },
+    {
+        "prompt": "Quantos números primos existem entre 1 e 10? Responda apenas com o número.",
+        "expected": ["4"],
+    },
     {"prompt": "Quanto é 7 x 8? Responda apenas com o número.", "expected": ["56"]},
-    {"prompt": "Qual é a capital da França? Responda apenas com o nome da cidade.", "expected": ["Paris"]},
-    {"prompt": "Qual é a capital do Japão? Responda apenas com o nome da cidade.", "expected": ["Toquio", "Tóquio"]},
-    {"prompt": "Qual é o maior oceano da Terra? Responda apenas com o nome.", "expected": ["Pacifico", "Pacífico"]},
-    {"prompt": "Em qual continente fica o Egito? Responda apenas com o nome do continente.", "expected": ["Africa"]},
-    {"prompt": "Qual é o rio mais longo do mundo? Responda apenas com o nome.", "expected": ["Nilo", "Amazonas"]},
-    {"prompt": "Qual é o símbolo químico do ouro? Responda apenas com o símbolo.", "expected": ["Au"]},
-    {"prompt": "Qual é o símbolo químico da água? Responda apenas com a fórmula.", "expected": ["H2O"]},
-    {"prompt": "Quantos planetas existem no nosso sistema solar? Responda apenas com o número.", "expected": ["8"]},
-    {"prompt": "Qual é o ponto de ebulição da água em Celsius? Responda apenas com o número.", "expected": ["100"]},
-    {"prompt": "Qual gás as plantas absorvem da atmosfera? Responda apenas com o nome.", "expected": ["carbon dioxide", "CO2"]},
-    {"prompt": "Em que ano terminou a Segunda Guerra Mundial? Responda apenas com o ano.", "expected": ["1945"]},
-    {"prompt": "Quem escreveu Romeu e Julieta? Responda apenas com o nome.", "expected": ["Shakespeare", "William Shakespeare"]},
-    {"prompt": "Quantos lados tem um hexágono? Responda apenas com o número.", "expected": ["6"]},
-    {"prompt": "Qual é o ponto de congelamento da água em Fahrenheit? Responda apenas com o número.", "expected": ["32"]},
-    {"prompt": "Quantos dias há em um ano bissexto? Responda apenas com o número.", "expected": ["366"]},
+    {
+        "prompt": "Qual é a capital da França? Responda apenas com o nome da cidade.",
+        "expected": ["Paris"],
+    },
+    {
+        "prompt": "Qual é a capital do Japão? Responda apenas com o nome da cidade.",
+        "expected": ["Toquio", "Tóquio"],
+    },
+    {
+        "prompt": "Qual é o maior oceano da Terra? Responda apenas com o nome.",
+        "expected": ["Pacifico", "Pacífico"],
+    },
+    {
+        "prompt": "Em qual continente fica o Egito? Responda apenas com o nome do continente.",
+        "expected": ["Africa"],
+    },
+    {
+        "prompt": "Qual é o rio mais longo do mundo? Responda apenas com o nome.",
+        "expected": ["Nilo", "Amazonas"],
+    },
+    {
+        "prompt": "Qual é o símbolo químico do ouro? Responda apenas com o símbolo.",
+        "expected": ["Au"],
+    },
+    {
+        "prompt": "Qual é o símbolo químico da água? Responda apenas com a fórmula.",
+        "expected": ["H2O"],
+    },
+    {
+        "prompt": "Quantos planetas existem no nosso sistema solar? Responda apenas com o número.",
+        "expected": ["8"],
+    },
+    {
+        "prompt": "Qual é o ponto de ebulição da água em Celsius? Responda apenas com o número.",
+        "expected": ["100"],
+    },
+    {
+        "prompt": "Qual gás as plantas absorvem da atmosfera? Responda apenas com o nome.",
+        "expected": ["carbon dioxide", "CO2"],
+    },
+    {
+        "prompt": "Em que ano terminou a Segunda Guerra Mundial? Responda apenas com o ano.",
+        "expected": ["1945"],
+    },
+    {
+        "prompt": "Quem escreveu Romeu e Julieta? Responda apenas com o nome.",
+        "expected": ["Shakespeare", "William Shakespeare"],
+    },
+    {
+        "prompt": "Quantos lados tem um hexágono? Responda apenas com o número.",
+        "expected": ["6"],
+    },
+    {
+        "prompt": "Qual é o ponto de congelamento da água em Fahrenheit? Responda apenas com o número.",
+        "expected": ["32"],
+    },
+    {
+        "prompt": "Quantos dias há em um ano bissexto? Responda apenas com o número.",
+        "expected": ["366"],
+    },
 ]
 
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
+
 
 def check_accuracy(response: str, expected: list[str]) -> bool:
     subscript_map = str.maketrans("₀₁₂₃₄₅₆₇₈₉", "0123456789")
@@ -85,7 +141,9 @@ def run_single(llm, prompt: str) -> dict:
     }
 
 
-def benchmark_model(model_path: Path, n_ctx: int, threads: int, gpu_layers: int) -> dict | None:
+def benchmark_model(
+    model_path: Path, n_ctx: int, threads: int, gpu_layers: int
+) -> dict | None:
     """Load a model, run all QA pairs, return summary dict. Returns None on load failure."""
     from llama_cpp import Llama
 
@@ -139,17 +197,25 @@ def benchmark_model(model_path: Path, n_ctx: int, threads: int, gpu_layers: int)
         if ok:
             correct += 1
         else:
-            wrong.append({"q": qa["prompt"][:45], "expected": qa["expected"], "got": res["response"].strip()[:50]})
+            wrong.append(
+                {
+                    "q": qa["prompt"][:45],
+                    "expected": qa["expected"],
+                    "got": res["response"].strip()[:50],
+                }
+            )
 
         total_tps += res["tps"]
         total_ttft += res["ttft"]
         status = "✓" if ok else "✗"
-        print(f"  {i+1:<4} {res['ttft']*1000:<11.0f} {res['tps']:<9.1f} {status:<5} {res['response'].strip()[:50]}")
+        print(
+            f"  {i+1:<4} {res['ttft']*1000:<11.0f} {res['tps']:<9.1f} {status:<5} {res['response'].strip()[:50]}"
+        )
 
     n = len(QA_PAIRS)
-    avg_tps   = total_tps / n
-    avg_ttft  = total_ttft / n
-    accuracy  = correct / n * 100
+    avg_tps = total_tps / n
+    avg_ttft = total_ttft / n
+    accuracy = correct / n * 100
 
     if wrong:
         print(f"\n  Wrong answers ({len(wrong)}):")
@@ -170,9 +236,11 @@ def benchmark_model(model_path: Path, n_ctx: int, threads: int, gpu_layers: int)
         "accuracy": accuracy,
     }
 
+
 # ---------------------------------------------------------------------------
 # Comparison table
 # ---------------------------------------------------------------------------
+
 
 def print_comparison(results: list[dict]) -> None:
     if not results:
@@ -182,8 +250,8 @@ def print_comparison(results: list[dict]) -> None:
     # Sort by accuracy desc, then TPS desc
     ranked = sorted(results, key=lambda r: (r["accuracy"], r["avg_tps"]), reverse=True)
 
-    col_name  = max(len(r["name"]) for r in ranked)
-    col_name  = max(col_name, 10)
+    col_name = max(len(r["name"]) for r in ranked)
+    col_name = max(col_name, 10)
 
     header = (
         f"  {'Model':<{col_name}}  {'Load(s)':<9} {'TTFT(ms)':<10} "
@@ -214,22 +282,30 @@ def print_comparison(results: list[dict]) -> None:
     print(f"  Fastest load     : {best_load['name']}  ({best_load['load_s']:.1f}s)")
     print(f"{'#'*75}\n")
 
+
 # ---------------------------------------------------------------------------
 # Main
 # ---------------------------------------------------------------------------
+
 
 def main() -> None:
     settings = get_settings()
     setup_logging("WARNING")
 
-    parser = argparse.ArgumentParser(description="Benchmark all GGUF models and compare.")
-    parser.add_argument("--models-dir", default=None, help="Directory containing .gguf files (default: models/)")
-    parser.add_argument("--n-ctx",      type=int, default=settings.n_ctx)
-    parser.add_argument("--threads",    type=int, default=settings.n_threads)
+    parser = argparse.ArgumentParser(
+        description="Benchmark all GGUF models and compare."
+    )
+    parser.add_argument(
+        "--models-dir",
+        default=None,
+        help="Directory containing .gguf files (default: models/)",
+    )
+    parser.add_argument("--n-ctx", type=int, default=settings.n_ctx)
+    parser.add_argument("--threads", type=int, default=settings.n_threads)
     parser.add_argument("--gpu-layers", type=int, default=settings.n_gpu_layers)
     args = parser.parse_args()
 
-    base_dir   = Path(__file__).parent.parent
+    base_dir = Path(__file__).parent.parent
     models_dir = Path(args.models_dir) if args.models_dir else base_dir / "models"
 
     gguf_files = sorted(models_dir.glob("*.gguf"))
@@ -240,7 +316,9 @@ def main() -> None:
     try:
         from llama_cpp import Llama  # noqa: F401
     except ImportError:
-        print("ERROR: llama-cpp-python is not installed. Run: pip install llama-cpp-python")
+        print(
+            "ERROR: llama-cpp-python is not installed. Run: pip install llama-cpp-python"
+        )
         sys.exit(1)
 
     print(f"\nFound {len(gguf_files)} model(s) in '{models_dir}':")
@@ -248,7 +326,9 @@ def main() -> None:
         size_mb = f.stat().st_size / 1024 / 1024
         print(f"  - {f.name}  ({size_mb:.0f} MB)")
 
-    print(f"\nBenchmark settings: n_ctx={args.n_ctx}  threads={args.threads}  gpu_layers={args.gpu_layers}")
+    print(
+        f"\nBenchmark settings: n_ctx={args.n_ctx}  threads={args.threads}  gpu_layers={args.gpu_layers}"
+    )
     print(f"Q&A pairs: {len(QA_PAIRS)}")
 
     results = []

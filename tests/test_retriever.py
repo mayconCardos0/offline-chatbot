@@ -2,6 +2,7 @@
 Tests for rag/retriever.py — Retriever with hybrid BM25 + semantic search,
 and its helper functions.
 """
+
 import os
 import sys
 import pytest
@@ -17,10 +18,10 @@ from rag.retriever import (
     _normalize,
 )
 
-
 # ---------------------------------------------------------------------------
 # _tokenize
 # ---------------------------------------------------------------------------
+
 
 class TestTokenize:
     def test_lowercases_text(self):
@@ -59,6 +60,7 @@ class TestTokenize:
 # _bm25_scores
 # ---------------------------------------------------------------------------
 
+
 class TestBm25Scores:
     def test_returns_list_same_length_as_docs(self):
         docs = [["hello", "world"], ["foo", "bar"]]
@@ -96,6 +98,7 @@ class TestBm25Scores:
 # _normalize
 # ---------------------------------------------------------------------------
 
+
 class TestNormalize:
     def test_output_range_zero_to_one(self):
         values = [1.0, 2.0, 3.0, 4.0, 5.0]
@@ -123,6 +126,7 @@ class TestNormalize:
 # ---------------------------------------------------------------------------
 # Retriever
 # ---------------------------------------------------------------------------
+
 
 def _make_mock_chunk(text, source="doc.txt", score=0.8):
     return {"text": text, "source": source, "score": score}
@@ -172,7 +176,10 @@ class TestRetrieverRetrieve:
         assert len(results) > 0
 
     def test_result_count_respects_top_k(self):
-        chunks = [_make_mock_chunk(f"chunk {i} algoritmo processamento", score=0.9) for i in range(10)]
+        chunks = [
+            _make_mock_chunk(f"chunk {i} algoritmo processamento", score=0.9)
+            for i in range(10)
+        ]
         retriever = _make_retriever(chunks=chunks)
         results = retriever.retrieve("algoritmo processamento")
         assert len(results) <= 3
@@ -201,7 +208,9 @@ class TestRetrieverRetrieve:
 class TestRetrieverGapFilter:
     def test_gap_filter_discards_when_no_dominant_score(self):
         # All scores similar and low — gap_filter should discard
-        chunks = [_make_mock_chunk(f"content {i}", score=0.30 + i * 0.01) for i in range(5)]
+        chunks = [
+            _make_mock_chunk(f"content {i}", score=0.30 + i * 0.01) for i in range(5)
+        ]
         retriever = _make_retriever(chunks=chunks)
         retriever._vectorstore.size = 10
 
