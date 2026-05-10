@@ -4,7 +4,7 @@ Tests for llm/local_model.py — LocalModel wrapper (mocked llama_cpp).
 
 import os
 import sys
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 

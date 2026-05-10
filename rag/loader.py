@@ -32,7 +32,7 @@ SUPPORTED_EXTENSIONS = {".txt", ".md", ".pdf", ".json"}
 
 # Heurística de detecção de título/seção:
 #   linha com até 80 chars, sem ponto final, que começa com maiúscula ou número
-import re
+import re  # noqa: E402
 
 _SECTION_PATTERN = re.compile(
     r"^(?:\d+[\.\)]\s+)?[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ][^\n]{3,79}(?<![.!?,;:])$",

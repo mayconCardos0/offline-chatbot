@@ -5,14 +5,10 @@ Tests for rag/loader.py — load_documents with .txt, .md, .json, and PDF suppor
 import json
 import os
 import sys
-import tempfile
-from pathlib import Path
-
-import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.loader import _load_json, _load_txt, load_documents
+from rag.loader import _load_json, _load_txt, load_documents  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Helpers

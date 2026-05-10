@@ -11,10 +11,10 @@ import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from fastapi import FastAPI
-from fastapi.testclient import TestClient
+from fastapi import FastAPI  # noqa: E402
+from fastapi.testclient import TestClient  # noqa: E402
 
-from api.routes import router
+from api.routes import router  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Fixtures

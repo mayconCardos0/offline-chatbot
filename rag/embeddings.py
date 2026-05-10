@@ -9,10 +9,7 @@ Embedding model wrapper com:
 import hashlib
 import json
 import logging
-import os
 from pathlib import Path
-
-import numpy as np
 
 logger = logging.getLogger(__name__)
 

@@ -12,7 +12,7 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.config import get_settings, setup_logging
+from core.config import get_settings, setup_logging  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Q&A pairs

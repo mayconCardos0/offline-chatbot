@@ -6,14 +6,14 @@ import os
 import sys
 import tempfile
 import time
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from core.conversation import ConversationManager
-from rag.pipeline import (
+from core.conversation import ConversationManager  # noqa: E402
+from rag.pipeline import (  # noqa: E402
     _MAX_CONTEXT_CHARS,
     _MAX_HISTORY_TURNS,
     _NO_CONTEXT_RESPONSE,

@@ -16,18 +16,18 @@ for _p in (_root, _here):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
-from routes import router
+from fastapi import FastAPI, Request  # noqa: E402
+from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
+from fastapi.responses import JSONResponse  # noqa: E402
+from routes import router  # noqa: E402
 
-from core.config import get_settings, setup_logging
-from core.conversation import ConversationManager
-from llm.local_model import LocalModel
-from rag.embeddings import EmbeddingModel
-from rag.pipeline import RAGPipeline
-from rag.retriever import Retriever
-from rag.vectorstore import VectorStore
+from core.config import get_settings, setup_logging  # noqa: E402
+from core.conversation import ConversationManager  # noqa: E402
+from llm.local_model import LocalModel  # noqa: E402
+from rag.embeddings import EmbeddingModel  # noqa: E402
+from rag.pipeline import RAGPipeline  # noqa: E402
+from rag.retriever import Retriever  # noqa: E402
+from rag.vectorstore import VectorStore  # noqa: E402
 
 logger = logging.getLogger(__name__)
 

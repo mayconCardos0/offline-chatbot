@@ -20,11 +20,11 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
-from core.config import get_settings, setup_logging
-from rag.chunking import ChunkConfig, chunk_document, count_tokens
-from rag.embeddings import EmbeddingModel
-from rag.loader import load_documents
-from rag.vectorstore import VectorStore
+from core.config import get_settings, setup_logging  # noqa: E402
+from rag.chunking import ChunkConfig, chunk_document, count_tokens  # noqa: E402
+from rag.embeddings import EmbeddingModel  # noqa: E402
+from rag.loader import load_documents  # noqa: E402
+from rag.vectorstore import VectorStore  # noqa: E402
 
 
 def _print_chunk_stats(all_chunks: list[dict]) -> None:
@@ -42,7 +42,7 @@ def _print_chunk_stats(all_chunks: list[dict]) -> None:
     tiny = [c for c, t in zip(all_chunks, token_counts) if t < 30]
     large = [c for c, t in zip(all_chunks, token_counts) if t > 600]
 
-    print(f"\n  Estatísticas de chunks:")
+    print("\n  Estatísticas de chunks:")
     print(f"    Total de chunks   : {len(all_chunks)}")
     print(f"    Total de tokens   : {total_tokens:,}")
     print(
@@ -183,7 +183,7 @@ def main() -> None:
     # --- Relatório final ---
     index_path = Path(settings.index_dir).resolve()
     print(f"\n{'─' * 55}")
-    print(f"  ✓  Indexação concluída")
+    print("  ✓  Indexação concluída")
     print(f"{'─' * 55}")
     print(f"  Arquivos indexados   : {len(sources)}")
     print(f"  Chunks no índice     : {len(all_chunks)}")
@@ -192,7 +192,7 @@ def main() -> None:
     )
     print(f"  Índice salvo em      : {index_path}")
     print(f"  Modelo de embedding  : {settings.embed_model_name}")
-    print(f"  Tipo de índice       : HNSW (busca aproximada, baixa latência)")
+    print("  Tipo de índice       : HNSW (busca aproximada, baixa latência)")
     print(f"{'─' * 55}\n")
 
 

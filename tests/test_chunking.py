@@ -4,13 +4,10 @@ Tests for rag/chunking.py — clean_pdf_text, split_sentences, chunk_document.
 
 import os
 import sys
-from unittest.mock import patch
-
-import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.chunking import chunk_document, clean_pdf_text, split_sentences
+from rag.chunking import chunk_document, clean_pdf_text, split_sentences  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # clean_pdf_text

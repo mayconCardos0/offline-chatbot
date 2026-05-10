@@ -12,7 +12,7 @@ import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from core.conversation import ConversationManager
+from core.conversation import ConversationManager  # noqa: E402
 
 # ---------------------------------------------------------------------------
 # Fixtures
