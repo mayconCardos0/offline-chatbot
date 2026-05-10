@@ -1,0 +1,249 @@
+name: CI — Dev
+
+on:
+  push:
+    branches: [ dev ]
+  pull_request:
+    branches: [ dev ]
+
+# Cancel previous runs for the same PR/branch to save CI credits
+concurrency:
+  group: ci-dev-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PYTHON_VERSION: "3.11"
+
+jobs:
+  # ─────────────────────────────────────────────────────────────────────────
+  # 1. Lint — fail fast before running tests
+  # ─────────────────────────────────────────────────────────────────────────
+  lint:
+    name: Lint & Format
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install lint tools
+        run: pip install flake8 black isort
+
+      - name: flake8 — syntax errors and undefined names
+        run: |
+          flake8 . \
+            --count \
+            --select=E9,F63,F7,F82 \
+            --show-source \
+            --statistics \
+            --exclude=.venv,models,data,__pycache__
+
+      - name: black — check formatting (no apply)
+        run: black --check --diff .
+
+      - name: isort — check import order
+        run: isort --check-only --diff .
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 2. Unit tests across Python 3.10 / 3.11 / 3.12
+  # ─────────────────────────────────────────────────────────────────────────
+  test:
+    name: Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    needs: lint
+
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install dependencies (excluding llama-cpp-python — requires compilation)
+        run: |
+          python -m pip install --upgrade pip
+          # Skip llama-cpp-python (heavy binary, mocked in tests)
+          grep -v "llama-cpp-python" requirements.txt | pip install -r /dev/stdin
+          pip install pytest pytest-cov pytest-asyncio httpx
+
+      - name: Run tests
+        run: |
+          pytest tests/ \
+            -v \
+            --tb=short \
+            --cov=. \
+            --cov-report=xml \
+            --cov-report=term-missing \
+            --ignore=scripts \
+            -p no:warnings
+        env:
+          # Minimum env vars to avoid import errors
+          MODEL_PATH: models/fake.gguf
+          EMBED_CACHE_DIR: /tmp/models
+          DOCS_DIR: /tmp/docs
+          INDEX_DIR: /tmp/index
+
+      - name: Upload coverage (Python 3.11 only)
+        if: matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          file: ./coverage.xml
+          flags: dev
+          name: coverage-dev
+        continue-on-error: true
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 3. Security scan — runs in parallel with tests
+  # ─────────────────────────────────────────────────────────────────────────
+  security:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    needs: lint
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ env.PYTHON_VERSION }}
+          cache: pip
+
+      - name: Install security tools
+        run: pip install bandit safety
+
+      - name: bandit — static security analysis
+        run: |
+          bandit -r . \
+            -f json \
+            -o bandit-report.json \
+            --exclude .venv,models,data \
+            -ll \
+            || true
+
+      - name: Print bandit summary
+        if: always()
+        run: |
+          python -c "
+          import json, sys
+          try:
+            data = json.load(open('bandit-report.json'))
+            metrics = data.get('metrics', {}).get('_totals', {})
+            highs = metrics.get('SEVERITY.HIGH', 0)
+            print(f'HIGH: {highs}  MEDIUM: {metrics.get(\"SEVERITY.MEDIUM\", 0)}  LOW: {metrics.get(\"SEVERITY.LOW\", 0)}')
+            if highs > 0:
+              print('HIGH severity issues found:')
+              for r in data.get('results', []):
+                if r['issue_severity'] == 'HIGH':
+                  print(f'  {r[\"filename\"]}:{r[\"line_number\"]} — {r[\"issue_text\"]}')
+              sys.exit(1)
+          except Exception as e:
+            print(f'Error reading report: {e}')
+          "
+
+      - name: safety — known dependency vulnerabilities
+        run: |
+          pip install -r requirements.txt --dry-run 2>/dev/null || true
+          safety check --json -r requirements.txt || true
+
+      - name: Upload bandit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bandit-report-dev
+          path: bandit-report.json
+          retention-days: 7
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 4. Project structure validation
+  # ─────────────────────────────────────────────────────────────────────────
+  validate-structure:
+    name: Validate Project Structure
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check required files
+        run: |
+          echo "Checking files..."
+          for f in requirements.txt .env.example README.md .gitignore; do
+            test -f "$f" && echo "  ✓ $f" || (echo "  ✗ $f missing" && exit 1)
+          done
+
+      - name: Check required directories
+        run: |
+          echo "Checking directories..."
+          for d in api core llm rag scripts tests; do
+            test -d "$d" && echo "  ✓ $d/" || (echo "  ✗ $d/ missing" && exit 1)
+          done
+
+      - name: Check __init__.py in each module
+        run: |
+          echo "Checking __init__.py..."
+          for d in api core llm rag scripts tests; do
+            test -f "$d/__init__.py" \
+              && echo "  ✓ $d/__init__.py" \
+              || (echo "  ✗ $d/__init__.py missing" && exit 1)
+          done
+
+      - name: Check .env.example has required variables
+        run: |
+          echo "Checking .env.example..."
+          for var in PORT MODEL_PATH EMBED_MODEL_NAME DOCS_DIR INDEX_DIR TOP_K; do
+            grep -q "^${var}=" .env.example \
+              && echo "  ✓ $var" \
+              || (echo "  ✗ $var missing from .env.example" && exit 1)
+          done
+
+      - name: Ensure .env was not committed
+        run: |
+          if [ -f .env ]; then
+            echo "ERROR: .env must not be committed"
+            exit 1
+          fi
+          echo "  ✓ .env not found in repository"
+
+      - name: Ensure GGUF model files were not committed
+        run: |
+          if find . -name "*.gguf" 2>/dev/null | grep -q .; then
+            echo "ERROR: .gguf files must not be committed"
+            find . -name "*.gguf"
+            exit 1
+          fi
+          echo "  ✓ No .gguf files in repository"
+
+  # ─────────────────────────────────────────────────────────────────────────
+  # 5. Final status gate — required for merge into dev
+  # ─────────────────────────────────────────────────────────────────────────
+  ci-dev-ok:
+    name: CI Dev — OK
+    runs-on: ubuntu-latest
+    needs: [lint, test, security, validate-structure]
+    if: always()
+
+    steps:
+      - name: Check all jobs passed
+        run: |
+          if [[ "${{ needs.lint.result }}" != "success" ]]; then
+            echo "Lint failed"
+            exit 1
+          fi
+          if [[ "${{ needs.test.result }}" != "success" ]]; then
+            echo "Tests failed"
+            exit 1
+          fi
+          if [[ "${{ needs.validate-structure.result }}" != "success" ]]; then
+            echo "Structure validation failed"
+            exit 1
+          fi
+          echo "All checks passed — PR can be merged into dev ✓"
