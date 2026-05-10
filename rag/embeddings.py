@@ -5,13 +5,11 @@ Embedding model wrapper com:
   - Batch encoding eficiente para uso controlado de memória na Raspberry Pi.
   - Normalização L2 para melhorar qualidade do produto interno (cosine via FAISS IP).
 """
+
 import hashlib
 import json
 import logging
-import os
 from pathlib import Path
-
-import numpy as np
 
 logger = logging.getLogger(__name__)
 
@@ -66,11 +64,14 @@ class EmbeddingModel:
         else:
             logger.warning(
                 "Modelo '%s' não encontrado localmente em '%s'. Tentando download…",
-                model_name, cache_dir
+                model_name,
+                cache_dir,
             )
             load_path = model_name
 
-        logger.info("Carregando modelo de embedding '%s' de '%s'", model_name, load_path)
+        logger.info(
+            "Carregando modelo de embedding '%s' de '%s'", model_name, load_path
+        )
         self._model = SentenceTransformer(load_path, cache_folder=str(cache_dir))
         self._model_name = model_name
         self._batch_size = batch_size
@@ -117,7 +118,7 @@ class EmbeddingModel:
                     uncached_texts.append(text)
         else:
             uncached_indices = list(range(len(texts)))
-            uncached_texts   = list(texts)
+            uncached_texts = list(texts)
 
         # 2. Computa embeddings faltantes em lotes
         if uncached_texts:
@@ -146,7 +147,7 @@ class EmbeddingModel:
             vecs = self._model.encode(
                 batch,
                 convert_to_numpy=True,
-                normalize_embeddings=True,   # L2-norm → cosine via IP index
+                normalize_embeddings=True,  # L2-norm → cosine via IP index
                 show_progress_bar=False,
             )
             all_vecs.extend(v.tolist() for v in vecs)

@@ -4,6 +4,7 @@ FastAPI application entry point para o Offline Chatbot.
 Startup (lifespan) carrega todos os componentes pesados uma vez:
   LocalModel → EmbeddingModel → VectorStore → Retriever → RAGPipeline → ConversationManager
 """
+
 import logging
 import os
 import sys
@@ -15,18 +16,18 @@ for _p in (_root, _here):
     if _p not in sys.path:
         sys.path.insert(0, _p)
 
-from fastapi import FastAPI, Request
-from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi import FastAPI, Request  # noqa: E402
+from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
+from fastapi.responses import JSONResponse  # noqa: E402
+from routes import router  # noqa: E402
 
-from core.config import get_settings, setup_logging
-from core.conversation import ConversationManager
-from llm.local_model import LocalModel
-from rag.embeddings import EmbeddingModel
-from rag.pipeline import RAGPipeline
-from rag.retriever import Retriever
-from rag.vectorstore import VectorStore
-from routes import router
+from core.config import get_settings, setup_logging  # noqa: E402
+from core.conversation import ConversationManager  # noqa: E402
+from llm.local_model import LocalModel  # noqa: E402
+from rag.embeddings import EmbeddingModel  # noqa: E402
+from rag.pipeline import RAGPipeline  # noqa: E402
+from rag.retriever import Retriever  # noqa: E402
+from rag.vectorstore import VectorStore  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
@@ -40,7 +41,11 @@ async def lifespan(app: FastAPI):
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     def resolve(path: str) -> str:
-        return path if os.path.isabs(path) else os.path.normpath(os.path.join(base_dir, path))
+        return (
+            path
+            if os.path.isabs(path)
+            else os.path.normpath(os.path.join(base_dir, path))
+        )
 
     # --- LLM ---
     llm = LocalModel(
@@ -88,7 +93,7 @@ async def lifespan(app: FastAPI):
         max_history_turns=settings.max_history_turns,
     )
 
-    app.state.pipeline    = pipeline
+    app.state.pipeline = pipeline
     app.state.conv_manager = conv_manager
 
     logger.info("Todos os componentes carregados. API pronta.")
@@ -112,8 +117,12 @@ def create_app() -> FastAPI:
     )
 
     @app.exception_handler(Exception)
-    async def unhandled_exception_handler(request: Request, exc: Exception) -> JSONResponse:
-        logger.exception("Exceção não tratada em %s %s", request.method, request.url.path)
+    async def unhandled_exception_handler(
+        request: Request, exc: Exception
+    ) -> JSONResponse:
+        logger.exception(
+            "Exceção não tratada em %s %s", request.method, request.url.path
+        )
         return JSONResponse(status_code=500, content={"error": str(exc)})
 
     app.include_router(router)
