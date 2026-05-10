@@ -183,7 +183,7 @@ def _make_chunk_id(source: str, index: int) -> str:
     Mesmo documento re-indexado produz os mesmos IDs se o texto não mudou.
     """
     raw = f"{source}::{index}"
-    return hashlib.sha1(raw.encode("utf-8")).hexdigest()[:16]
+    return hashlib.sha1(raw.encode("utf-8"), usedforsecurity=False).hexdigest()[:16]
 
 
 # ---------------------------------------------------------------------------

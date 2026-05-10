@@ -198,7 +198,7 @@ class VectorStore:
 
 
 def _text_hash(text: str) -> str:
-    return hashlib.md5(text.encode("utf-8")).hexdigest()
+    return hashlib.md5(text.encode("utf-8"), usedforsecurity=False).hexdigest()
 
 
 def _set_ef_search(index, ef: int) -> None:

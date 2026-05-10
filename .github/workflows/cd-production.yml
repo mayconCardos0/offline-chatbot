@@ -110,7 +110,7 @@ jobs:
       - name: Security scan (zero HIGH tolerance)
         run: |
           bandit -r . \
-            --exclude .venv,models,data \
+            --exclude ./.venv,./models,./data \
             -ll
 
   # ───────────────────────────────────────────────────────────────────────
