@@ -20,6 +20,7 @@ Estratégia de dois estágios:
     - Filtra chunks com score abaixo de min_score e threshold adaptativo.
     - Retorna os top-k finais com campo 'confidence'.
 """
+
 import logging
 import math
 import re
@@ -29,28 +30,154 @@ logger = logging.getLogger(__name__)
 
 # Stopwords PT-BR
 _STOPWORDS_PT = {
-    "a", "o", "e", "é", "de", "do", "da", "dos", "das", "em", "no", "na",
-    "nos", "nas", "por", "para", "com", "um", "uma", "uns", "umas", "se",
-    "que", "ao", "aos", "às", "ou", "mas", "também", "já", "mais", "como",
-    "seu", "sua", "seus", "suas", "este", "esta", "estes", "estas", "esse",
-    "essa", "esses", "essas", "isso", "aqui", "ali", "quando", "onde",
-    "há", "ter", "ser", "estar", "foi", "são", "era", "tem", "não", "the",
-    "of", "and", "in", "to", "is", "it", "that", "for", "on", "are",
-    "fazer", "feito", "faz", "fazia", "faça", "pode", "podem",
-    "deve", "devem", "dever", "usar", "usado", "precisa",
-    "precisar", "preciso", "quero", "quer", "querer", "saber", "sabe",
-    "dizer", "disse", "diz", "ver", "veja", "vai", "vão", "ir",
-    "dar", "dá", "dado", "tudo", "todo", "toda", "todos", "todas",
-    "muito", "muita", "muitos", "muitas", "pouco", "pouca", "poucos",
-    "cada", "qual", "quais", "quem", "cujo", "cuja", "cujos", "cujas",
-    "mesmo", "mesma", "apenas", "ainda", "então", "assim", "pois",
-    "sobre", "entre", "após", "antes", "durante", "contra", "desde",
-    "até", "pelo", "pela", "pelos", "pelas", "num", "numa", "nuns", "numas",
+    "a",
+    "o",
+    "e",
+    "é",
+    "de",
+    "do",
+    "da",
+    "dos",
+    "das",
+    "em",
+    "no",
+    "na",
+    "nos",
+    "nas",
+    "por",
+    "para",
+    "com",
+    "um",
+    "uma",
+    "uns",
+    "umas",
+    "se",
+    "que",
+    "ao",
+    "aos",
+    "às",
+    "ou",
+    "mas",
+    "também",
+    "já",
+    "mais",
+    "como",
+    "seu",
+    "sua",
+    "seus",
+    "suas",
+    "este",
+    "esta",
+    "estes",
+    "estas",
+    "esse",
+    "essa",
+    "esses",
+    "essas",
+    "isso",
+    "aqui",
+    "ali",
+    "quando",
+    "onde",
+    "há",
+    "ter",
+    "ser",
+    "estar",
+    "foi",
+    "são",
+    "era",
+    "tem",
+    "não",
+    "the",
+    "of",
+    "and",
+    "in",
+    "to",
+    "is",
+    "it",
+    "that",
+    "for",
+    "on",
+    "are",
+    "fazer",
+    "feito",
+    "faz",
+    "fazia",
+    "faça",
+    "pode",
+    "podem",
+    "deve",
+    "devem",
+    "dever",
+    "usar",
+    "usado",
+    "precisa",
+    "precisar",
+    "preciso",
+    "quero",
+    "quer",
+    "querer",
+    "saber",
+    "sabe",
+    "dizer",
+    "disse",
+    "diz",
+    "ver",
+    "veja",
+    "vai",
+    "vão",
+    "ir",
+    "dar",
+    "dá",
+    "dado",
+    "tudo",
+    "todo",
+    "toda",
+    "todos",
+    "todas",
+    "muito",
+    "muita",
+    "muitos",
+    "muitas",
+    "pouco",
+    "pouca",
+    "poucos",
+    "cada",
+    "qual",
+    "quais",
+    "quem",
+    "cujo",
+    "cuja",
+    "cujos",
+    "cujas",
+    "mesmo",
+    "mesma",
+    "apenas",
+    "ainda",
+    "então",
+    "assim",
+    "pois",
+    "sobre",
+    "entre",
+    "após",
+    "antes",
+    "durante",
+    "contra",
+    "desde",
+    "até",
+    "pelo",
+    "pela",
+    "pelos",
+    "pelas",
+    "num",
+    "numa",
+    "nuns",
+    "numas",
 }
 
 # Parâmetros BM25
 _BM25_K1 = 1.5
-_BM25_B  = 0.75
+_BM25_B = 0.75
 
 # Score mínimo elevado: 0.40 reduz chunks irrelevantes no contexto
 _MIN_SCORE = 0.40
@@ -59,7 +186,7 @@ _MIN_SCORE = 0.40
 _HIGH_CONFIDENCE_SCORE = 0.70
 
 # Score abaixo do qual o pipeline deve avisar o aluno sobre baixa confiança
-_LOW_CONFIDENCE_SCORE  = 0.55
+_LOW_CONFIDENCE_SCORE = 0.55
 
 # Peso da fusão: semântico vs léxico
 _LEXICAL_WEIGHT = 0.30
@@ -77,11 +204,11 @@ class Retriever:
         min_score: float = _MIN_SCORE,
         lexical_weight: float = _LEXICAL_WEIGHT,
     ) -> None:
-        self._vectorstore    = vectorstore
-        self._embed_model    = embed_model
-        self._top_k          = top_k
-        self._candidates     = top_k * candidate_multiplier
-        self._min_score      = min_score
+        self._vectorstore = vectorstore
+        self._embed_model = embed_model
+        self._top_k = top_k
+        self._candidates = top_k * candidate_multiplier
+        self._min_score = min_score
         self._lexical_weight = lexical_weight
 
     # ------------------------------------------------------------------
@@ -106,7 +233,7 @@ class Retriever:
             return []
 
         # Estágio 1: candidatos semânticos
-        query_vec  = self._embed_model.embed([query])[0]
+        query_vec = self._embed_model.embed([query])[0]
         candidates = self._vectorstore.search(query_vec, self._candidates)
 
         if not candidates:
@@ -117,31 +244,38 @@ class Retriever:
         if not candidates:
             logger.info(
                 "Nenhum chunk passou o limiar absoluto %.2f (query='%s')",
-                self._min_score, query[:60]
+                self._min_score,
+                query[:60],
             )
             return []
 
         # Camada 2: threshold adaptativo baseado em desvio padrão
         candidates = self._adaptive_filter(candidates)
         if not candidates:
-            logger.info("Filtro adaptativo descartou todos os chunks (query='%s')", query[:60])
+            logger.info(
+                "Filtro adaptativo descartou todos os chunks (query='%s')", query[:60]
+            )
             return []
 
         # Camada 3: gap detection
         candidates = self._gap_filter(candidates)
         if not candidates:
-            logger.info("Gap detection descartou todos os chunks (query='%s')", query[:60])
+            logger.info(
+                "Gap detection descartou todos os chunks (query='%s')", query[:60]
+            )
             return []
 
         # Camada 4: overlap léxico (keyword filter)
         candidates = self._keyword_filter(query, candidates)
         if not candidates:
-            logger.info("Keyword filter descartou todos os chunks (query='%s')", query[:60])
+            logger.info(
+                "Keyword filter descartou todos os chunks (query='%s')", query[:60]
+            )
             return []
 
         # Estágio 2: reranking híbrido
         reranked = self._hybrid_rerank(query, candidates)
-        results  = reranked[: self._top_k]
+        results = reranked[: self._top_k]
 
         # Adiciona campo 'confidence' a cada chunk
         for chunk in results:
@@ -155,7 +289,9 @@ class Retriever:
 
         logger.debug(
             "Retrieve: %d candidatos → %d resultados (query='%s')",
-            len(candidates), len(results), query[:60]
+            len(candidates),
+            len(results),
+            query[:60],
         )
         return results
 
@@ -182,18 +318,23 @@ class Retriever:
         passam pelo threshold absoluto mas ficam muito abaixo do melhor.
         """
         scores = [c.get("score", 0.0) for c in candidates]
-        best   = max(scores)
-        mean   = sum(scores) / len(scores)
+        best = max(scores)
+        mean = sum(scores) / len(scores)
         variance = sum((s - mean) ** 2 for s in scores) / len(scores)
-        std    = variance ** 0.5
+        std = variance**0.5
 
         # Threshold = melhor - 1σ, mas nunca abaixo de min_score
         threshold = max(self._min_score, best - std)
-        filtered  = [c for c in candidates if c.get("score", 0) >= threshold]
+        filtered = [c for c in candidates if c.get("score", 0) >= threshold]
 
         logger.debug(
             "adaptive_filter: best=%.3f mean=%.3f std=%.3f threshold=%.3f → %d/%d chunks",
-            best, mean, std, threshold, len(filtered), len(candidates)
+            best,
+            mean,
+            std,
+            threshold,
+            len(filtered),
+            len(candidates),
         )
         return filtered
 
@@ -223,19 +364,20 @@ class Retriever:
             return []
 
         scores = [c.get("score", 0.0) for c in candidates]
-        best   = max(scores)
+        best = max(scores)
 
         # Score alto: confia no threshold absoluto
         if best >= _HIGH_CONFIDENCE_SCORE:
             return [c for c in candidates if c.get("score", 0) >= best - 0.15]
 
-        others    = [s for s in scores if s != best]
+        others = [s for s in scores if s != best]
         avg_others = sum(others) / len(others) if others else 0.0
 
-        if best - avg_others < 0.12:   # era 0.15 — um pouco mais tolerante
+        if best - avg_others < 0.12:  # era 0.15 — um pouco mais tolerante
             logger.debug(
                 "Gap insuficiente: best=%.3f avg_others=%.3f — descartando todos",
-                best, avg_others
+                best,
+                avg_others,
             )
             return []
 
@@ -260,15 +402,15 @@ class Retriever:
         )
 
         sem_scores = [c.get("score", 0.0) for c in candidates]
-        sem_norm   = _normalize(sem_scores)
-        bm25_norm  = _normalize(bm25_scores)
+        sem_norm = _normalize(sem_scores)
+        bm25_norm = _normalize(bm25_scores)
 
         w_sem = 1.0 - self._lexical_weight
         w_lex = self._lexical_weight
 
         reranked = []
         for chunk, s_sem, s_lex in zip(candidates, sem_norm, bm25_norm):
-            combined  = w_sem * s_sem + w_lex * s_lex
+            combined = w_sem * s_sem + w_lex * s_lex
             new_chunk = dict(chunk)
             new_chunk["score"] = combined
             reranked.append(new_chunk)
@@ -281,9 +423,10 @@ class Retriever:
 # BM25 local
 # ---------------------------------------------------------------------------
 
+
 def _tokenize(text: str) -> list[str]:
     """Tokenização simples: minúsculo, remove pontuação, filtra stopwords."""
-    tokens = re.findall(r'\b\w+\b', text.lower())
+    tokens = re.findall(r"\b\w+\b", text.lower())
     return [t for t in tokens if t not in _STOPWORDS_PT and len(t) > 2]
 
 
@@ -297,8 +440,8 @@ def _bm25_scores(
         return []
 
     doc_lengths = [len(d) for d in doc_tokens_list]
-    avg_dl      = sum(doc_lengths) / n_docs if n_docs else 1.0
-    doc_freqs   = [Counter(d) for d in doc_tokens_list]
+    avg_dl = sum(doc_lengths) / n_docs if n_docs else 1.0
+    doc_freqs = [Counter(d) for d in doc_tokens_list]
 
     idf: dict[str, float] = {}
     for term in set(query_tokens):
@@ -309,10 +452,10 @@ def _bm25_scores(
     for dl, df_c in zip(doc_lengths, doc_freqs):
         score = 0.0
         for term in query_tokens:
-            tf    = df_c.get(term, 0)
+            tf = df_c.get(term, 0)
             idf_v = idf.get(term, 0.0)
-            num   = tf * (_BM25_K1 + 1)
-            den   = tf + _BM25_K1 * (1 - _BM25_B + _BM25_B * dl / avg_dl)
+            num = tf * (_BM25_K1 + 1)
+            den = tf + _BM25_K1 * (1 - _BM25_B + _BM25_B * dl / avg_dl)
             score += idf_v * num / (den + 1e-9)
         scores.append(score)
 

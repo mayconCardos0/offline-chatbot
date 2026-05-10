@@ -2,6 +2,7 @@
 ConversationManager: CRUD for chat sessions, persisted to a JSON file.
 Ported from the root-level chat_ai.py ConversationManager.
 """
+
 import json
 import logging
 import os
@@ -30,7 +31,9 @@ class ConversationManager:
                     data = json.load(f)
                 return {c["id"]: c for c in data}
             except Exception as e:
-                logger.error("Failed to load conversations from %s: %s", self.storage_path, e)
+                logger.error(
+                    "Failed to load conversations from %s: %s", self.storage_path, e
+                )
         return {}
 
     def _save(self) -> None:

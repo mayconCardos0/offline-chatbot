@@ -1,14 +1,16 @@
 """
 Tests for core/config.py — Settings dataclass and setup_logging.
 """
+
 import logging
 import os
 import sys
+
 import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from core.config import Settings, get_settings, setup_logging
+from core.config import Settings, get_settings, setup_logging  # noqa: E402
 
 
 class TestSettingsDefaults:

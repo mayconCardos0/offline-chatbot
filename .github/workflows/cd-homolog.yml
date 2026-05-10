@@ -1,0 +1,159 @@
+name: CD — Deploy Homolog
+
+on:
+  workflow_run:
+    workflows: ["CI — Homolog"]
+    branches: [ homolog ]
+    types: [ completed ]
+
+  workflow_dispatch:
+    inputs:
+      reason:
+        description: "Reason for manual deploy"
+        required: true
+        default: "Manual deploy"
+
+# Deploy must never be cancelled mid-run
+concurrency:
+  group: cd-homolog
+  cancel-in-progress: false
+
+jobs:
+  # ───────────────────────────────────────────────────────────────────────
+  # Guard: only proceed if CI passed
+  # ───────────────────────────────────────────────────────────────────────
+  check-ci:
+    name: Check CI passed
+    runs-on: ubuntu-latest
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event.workflow_run.conclusion == 'success'
+    steps:
+      - name: Log
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "Manual deploy — reason: ${{ github.event.inputs.reason }}"
+          else
+            echo "Automatic deploy — commit: ${{ github.event.workflow_run.head_sha }}"
+          fi
+
+  # ───────────────────────────────────────────────────────────────────────
+  # Deploy — runs DIRECTLY on the Raspberry Pi (self-hosted runner)
+  #
+  # How it works:
+  #   The RPi registers itself as a GitHub Actions runner. When this job
+  #   triggers, GitHub sends it to the RPi to execute — no external SSH,
+  #   no open ports, no rsync. The code is already on the right machine.
+  #
+  # How to register the runner on the RPi (one-time setup):
+  #   1. GitHub → Settings → Actions → Runners → New self-hosted runner
+  #   2. Choose Linux / ARM64
+  #   3. Follow the commands shown on screen to download and register
+  #   4. Install as a service: sudo ./svc.sh install && sudo ./svc.sh start
+  #   5. Add the label "raspberry-homolog" to the runner on GitHub
+  # ───────────────────────────────────────────────────────────────────────
+  deploy-homolog:
+    name: Deploy → Homolog (Raspberry Pi)
+    runs-on: [self-hosted, raspberry-homolog]
+    needs: check-ci
+    environment:
+      name: homolog
+      url: http://localhost:8000/health
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: homolog
+          clean: true
+
+      # ── Update Python dependencies ────────────────────────────────────
+      - name: Update dependencies
+        run: |
+          if [ ! -d .venv ]; then
+            python3 -m venv .venv
+            echo "Venv created"
+          fi
+          .venv/bin/pip install --upgrade pip --quiet
+          .venv/bin/pip install -r requirements.txt --quiet
+          echo "Dependencies updated ✓"
+
+      # ── Validate .env before restarting ──────────────────────────────
+      # .env is not versioned — it must exist on the RPi, configured
+      # manually once before the first deploy.
+      - name: Check .env
+        run: |
+          if [ ! -f .env ]; then
+            echo "ERROR: .env not found."
+            echo "Create the file based on .env.example before the first deploy."
+            exit 1
+          fi
+          for var in MODEL_PATH EMBED_CACHE_DIR DOCS_DIR INDEX_DIR; do
+            grep -q "^${var}=" .env \
+              && echo "  ✓ $var" \
+              || (echo "  ✗ $var missing from .env" && exit 1)
+          done
+          echo ".env valid ✓"
+
+      # ── Restart service ───────────────────────────────────────────────
+      - name: Restart service
+        run: |
+          if systemctl is-enabled offline-chatbot 2>/dev/null; then
+            sudo systemctl restart offline-chatbot
+            echo "Service restarted via systemd ✓"
+          else
+            pkill -f "uvicorn api.main:app" || true
+            sleep 2
+            mkdir -p logs
+            nohup .venv/bin/uvicorn api.main:app \
+              --host 0.0.0.0 \
+              --port 8000 \
+              --workers 1 \
+              > logs/uvicorn.log 2>&1 &
+            echo "Service started via nohup ✓"
+          fi
+
+      # ── Health check ──────────────────────────────────────────────────
+      - name: Health check (wait up to 60s)
+        run: |
+          for i in $(seq 1 12); do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:8000/health || echo "000")
+            if [ "$STATUS" = "200" ]; then
+              echo "Service responding on attempt $i ✓"
+              curl -s http://localhost:8000/health
+              exit 0
+            fi
+            echo "Attempt $i/12 — HTTP $STATUS — waiting 5s..."
+            sleep 5
+          done
+          echo "ERROR: service did not respond within 60s"
+          exit 1
+
+      # ── Smoke tests ───────────────────────────────────────────────────
+      - name: Smoke tests
+        run: |
+          for endpoint in /health /conversations; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "http://localhost:8000$endpoint")
+            [ "$STATUS" = "200" ] \
+              && echo "GET $endpoint → 200 ✓" \
+              || (echo "GET $endpoint → $STATUS ✗" && exit 1)
+          done
+
+      # ── Record result ─────────────────────────────────────────────────
+      - name: Record deploy
+        if: always()
+        run: |
+          mkdir -p logs
+          RESULT=${{ job.status }}
+          echo "$(date -u +"%Y-%m-%dT%H:%M:%SZ") | homolog | ${{ github.sha }} | $RESULT" \
+            >> logs/deploys.log
+
+      # ── Stop service if something went wrong ──────────────────────────
+      - name: Stop service on failure
+        if: failure()
+        run: |
+          echo "Deploy failed — stopping service to avoid inconsistent version"
+          systemctl is-enabled offline-chatbot 2>/dev/null \
+            && sudo systemctl stop offline-chatbot \
+            || pkill -f "uvicorn api.main:app" || true
+          echo "Check .env, dependencies and logs/ before retrying"
