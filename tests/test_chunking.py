@@ -153,7 +153,9 @@ class TestChunkDocument:
 
     def test_overlap_shares_content(self):
         """With overlap=50 tokens, adjacent chunks should share content."""
-        sentences = [f"Esta é a sentença número {i} do documento de teste." for i in range(20)]
+        sentences = [
+            f"Esta é a sentença número {i} do documento de teste." for i in range(20)
+        ]
         text = " ".join(sentences)
         doc = self._make_doc(text)
         chunks = chunk_document(doc, chunk_size=150, overlap=50)
@@ -181,7 +183,9 @@ class TestChunkDocument:
 
     def test_metadata_fields_present(self):
         """Verifica que os novos campos de metadata estão presentes."""
-        doc = self._make_doc("Capítulo 3: A Revolução Industrial. Este é um texto sobre história.")
+        doc = self._make_doc(
+            "Capítulo 3: A Revolução Industrial. Este é um texto sobre história."
+        )
         chunks = chunk_document(doc, chunk_size=512)
         assert len(chunks) >= 1
         chunk = chunks[0]

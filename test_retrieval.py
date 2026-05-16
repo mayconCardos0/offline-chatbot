@@ -1,4 +1,5 @@
 """Testa o retrieval para as perguntas problemáticas."""
+
 import sys
 from pathlib import Path
 
@@ -39,29 +40,29 @@ queries = [
     "O que foi o populismo no Brasil?",
 ]
 
-print("="*80)
+print("=" * 80)
 print("TESTE DE RETRIEVAL - Análise de Chunks Recuperados")
-print("="*80)
+print("=" * 80)
 
 for query in queries:
     print(f"\n{'─'*80}")
     print(f"QUERY: {query}")
     print(f"{'─'*80}")
-    
+
     chunks = retriever.retrieve(query)
-    
+
     if not chunks:
         print("❌ NENHUM CHUNK RECUPERADO")
         continue
-    
+
     print(f"\n✓ {len(chunks)} chunks recuperados\n")
-    
+
     for i, chunk in enumerate(chunks, 1):
         score = chunk.get("score", 0)
         confidence = chunk.get("confidence", "?")
         breadcrumb = chunk.get("breadcrumb", "N/A")
         text = chunk.get("text", "")[:200]
-        
+
         print(f"[{i}] Score: {score:.3f} | Confidence: {confidence}")
         print(f"    Breadcrumb: {breadcrumb}")
         print(f"    Texto: {text}...")

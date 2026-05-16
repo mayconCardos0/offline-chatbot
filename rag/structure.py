@@ -31,7 +31,6 @@ import re
 from dataclasses import dataclass, field
 from typing import Optional
 
-
 # ---------------------------------------------------------------------------
 # Padrões de heading
 # ---------------------------------------------------------------------------
@@ -87,9 +86,7 @@ _TOPIC_PATTERNS = [
 ]
 
 # Heading genérico (linha toda em maiúsculas, 4-100 chars, sem ponto final)
-_ALLCAPS_HEADING = re.compile(
-    r"^[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\s\-–—:,0-9]{4,100}$"
-)
+_ALLCAPS_HEADING = re.compile(r"^[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\s\-–—:,0-9]{4,100}$")
 
 # Linha que claramente é corpo de texto (comprimento e pontuação interna)
 _BODY_SIGNALS = re.compile(r"[,;:\(\)\[\]]|\.{2,}")
@@ -288,9 +285,9 @@ def detect_structure(
 
         # Ignora páginas de sumário/índice (detecta por densidade de pontos)
         # Sumários têm muitos "..." consecutivos
-        lines = [l.strip() for l in raw_text.split('\n') if l.strip()]
+        lines = [l.strip() for l in raw_text.split("\n") if l.strip()]
         if len(lines) > 5:
-            dots_lines = sum(1 for line in lines if '.....' in line or '…' in line)
+            dots_lines = sum(1 for line in lines if "....." in line or "…" in line)
             # Se mais de 40% das linhas têm muitos pontos, é sumário
             if dots_lines > len(lines) * 0.4:
                 continue
@@ -306,8 +303,10 @@ def detect_structure(
             state.flush(source)
 
             # Limpa o título (remove números de página e pontos no final)
-            clean_title = re.sub(r'\s*\.{3,}.*$', '', line)  # Remove "... 123"
-            clean_title = re.sub(r'\s+\d{1,4}\s*$', '', clean_title)  # Remove número de página no final
+            clean_title = re.sub(r"\s*\.{3,}.*$", "", line)  # Remove "... 123"
+            clean_title = re.sub(
+                r"\s+\d{1,4}\s*$", "", clean_title
+            )  # Remove número de página no final
             clean_title = clean_title.strip()
 
             if level == 1:

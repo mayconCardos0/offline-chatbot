@@ -173,7 +173,11 @@ def mode_evaluate(args, vs: VectorStore, retriever: Retriever) -> None:
     reports: dict[str, EvaluationReport] = {}
 
     for k in k_values:
-        print(f"\n[EVAL] Avaliando K={k} sobre {len(dataset)} queries...", end=" ", flush=True)
+        print(
+            f"\n[EVAL] Avaliando K={k} sobre {len(dataset)} queries...",
+            end=" ",
+            flush=True,
+        )
         t0 = time.perf_counter()
         report = evaluate_retriever(retriever, dataset, k=k)
         elapsed = time.perf_counter() - t0
@@ -288,7 +292,8 @@ def build_parser() -> argparse.ArgumentParser:
         help="Salva relatório de métricas em JSON. Ex: reports/eval.json",
     )
     parser.add_argument(
-        "--verbose", "-v",
+        "--verbose",
+        "-v",
         action="store_true",
         help="Exibe métricas detalhadas por query",
     )

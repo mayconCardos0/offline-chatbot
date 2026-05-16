@@ -221,63 +221,61 @@ class Retriever:
 
     def _adjust_top_k(self, query: str) -> int:
         """Ajusta dinamicamente o número de chunks (k) baseado no tipo de query.
-        
+
         Queries que pedem informação ampla ou biográfica precisam de mais chunks
         para fornecer uma resposta completa.
-        
+
         Tipos de query e multiplicadores:
         - Biográfica ("quem foi", "biografia"): k * 2
         - Período/governo ("como foi", "governo", "período"): k * 1.5
         - Normal: k (sem ajuste)
-        
+
         Returns:
             Número ajustado de chunks a recuperar
         """
         query_lower = query.lower()
-        
+
         # Indicadores de query biográfica (precisa de mais contexto)
         biographical_indicators = [
-            'quem foi',
-            'quem é',
-            'biografia',
-            'história de',
-            'trajetória',
-            'vida de',
+            "quem foi",
+            "quem é",
+            "biografia",
+            "história de",
+            "trajetória",
+            "vida de",
         ]
-        
+
         # Indicadores de query sobre período/governo (precisa de contexto moderado)
         period_indicators = [
-            'como foi',
-            'o que foi',
-            'governo',
-            'período',
-            'periodo',
-            'era',
-            'fase',
-            'mandato',
-            'administração',
-            'administracao',
+            "como foi",
+            "o que foi",
+            "governo",
+            "período",
+            "periodo",
+            "era",
+            "fase",
+            "mandato",
+            "administração",
+            "administracao",
         ]
-        
+
         # Verifica tipo de query
         if any(ind in query_lower for ind in biographical_indicators):
             k = int(self._base_top_k * 2)
             logger.debug(
-                "Query biográfica detectada. Aumentando k: %d → %d",
-                self._base_top_k,
-                k
+                "Query biográfica detectada. Aumentando k: %d → %d", self._base_top_k, k
             )
             return k
-        
+
         if any(ind in query_lower for ind in period_indicators):
             k = int(self._base_top_k * 1.5)
             logger.debug(
                 "Query sobre período detectada. Aumentando k: %d → %d",
                 self._base_top_k,
-                k
+                k,
             )
             return k
-        
+
         # Query normal, usa k base
         return self._base_top_k
 
@@ -305,7 +303,7 @@ class Retriever:
 
         # Ajusta k dinamicamente baseado no tipo de query
         k = self._adjust_top_k(query)
-        
+
         # Ajusta também o número de candidatos proporcionalmente
         candidates_count = k * 4
 
@@ -331,7 +329,7 @@ class Retriever:
         candidates = self._adaptive_filter(candidates)
         if not candidates:
             logger.info(
-                "Filtro adaptativo descartou todos os chunks (query='%s', k=%d)", 
+                "Filtro adaptativo descartou todos os chunks (query='%s', k=%d)",
                 query[:60],
                 k,
             )
@@ -341,7 +339,7 @@ class Retriever:
         candidates = self._gap_filter(candidates)
         if not candidates:
             logger.info(
-                "Gap detection descartou todos os chunks (query='%s', k=%d)", 
+                "Gap detection descartou todos os chunks (query='%s', k=%d)",
                 query[:60],
                 k,
             )
@@ -351,7 +349,7 @@ class Retriever:
         candidates = self._keyword_filter(query, candidates)
         if not candidates:
             logger.info(
-                "Keyword filter descartou todos os chunks (query='%s', k=%d)", 
+                "Keyword filter descartou todos os chunks (query='%s', k=%d)",
                 query[:60],
                 k,
             )

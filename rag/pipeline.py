@@ -195,10 +195,10 @@ class RAGPipeline:
 
         # Detecta se é uma pergunta de follow-up
         is_followup = self._is_followup_question(message, conv["messages"])
-        
+
         # Aplica desambiguação para termos conhecidos
         disambiguated_query = self._disambiguate_query(message)
-        
+
         # Se for follow-up, enriquece a query com contexto da conversa anterior
         enriched_query = disambiguated_query
         if is_followup:
@@ -206,16 +206,13 @@ class RAGPipeline:
             if context_from_history:
                 enriched_query = f"{disambiguated_query} {context_from_history}"
                 logger.debug(
-                    "Follow-up detectado. Query enriquecida: '%s'",
-                    enriched_query[:100]
+                    "Follow-up detectado. Query enriquecida: '%s'", enriched_query[:100]
                 )
 
         # Log da transformação da query
         if enriched_query != message:
             logger.debug(
-                "Query transformada: '%s' → '%s'",
-                message[:80],
-                enriched_query[:80]
+                "Query transformada: '%s' → '%s'", message[:80], enriched_query[:80]
             )
 
         # Recupera chunks relevantes (usa query enriquecida se for follow-up)
@@ -229,12 +226,12 @@ class RAGPipeline:
                 enriched_query[:100],
             )
             return self._persist_and_return(conv, message, _NO_CONTEXT_RESPONSE)
-        
+
         # Log dos chunks recuperados
         logger.debug(
             "Chunks recuperados: %d | Scores: %s",
             len(chunks),
-            [f"{c.get('score', 0):.3f}" for c in chunks[:5]]
+            [f"{c.get('score', 0):.3f}" for c in chunks[:5]],
         )
 
         # --- Verificação 2: relevância temática ---
@@ -277,20 +274,22 @@ class RAGPipeline:
 
         # Validação temporal da resposta
         validation = validate_temporal_consistency(message, response_text)
-        
+
         if not validation["valid"]:
             logger.warning(
                 "Inconsistência temporal detectada na resposta | sessão='%s' | issues=%s",
                 session_id,
-                validation["issues"]
+                validation["issues"],
             )
-            
+
             # Se houver problemas graves (períodos conflitantes), retorna resposta padrão
             critical_issues = [
-                issue for issue in validation["issues"]
-                if "mas query pergunta sobre" in issue or "mas resposta fala sobre" in issue
+                issue
+                for issue in validation["issues"]
+                if "mas query pergunta sobre" in issue
+                or "mas resposta fala sobre" in issue
             ]
-            
+
             if critical_issues:
                 logger.info(
                     "Problema crítico de período histórico detectado - retornando resposta padrão"
@@ -308,56 +307,56 @@ class RAGPipeline:
 
     def _is_followup_question(self, message: str, history: list[dict]) -> bool:
         """Detecta se a mensagem é uma pergunta de follow-up.
-        
+
         Follow-ups são perguntas que referenciam a conversa anterior,
         pedindo mais detalhes ou esclarecimentos sobre o tópico em discussão.
         """
         if not history or len(history) < 2:
             return False
-        
+
         followup_indicators = [
-            'explique melhor',
-            'e sobre',
-            'e quanto',
-            'nos estavamos falando',
-            'nós estávamos falando',
-            'você disse',
-            'você mencionou',
-            'continue',
-            'mais detalhes',
-            'aprofunde',
-            'detalhe',
-            'e a',
-            'e o',
-            'como assim',
-            'o que você quis dizer',
-            'pode explicar',
+            "explique melhor",
+            "e sobre",
+            "e quanto",
+            "nos estavamos falando",
+            "nós estávamos falando",
+            "você disse",
+            "você mencionou",
+            "continue",
+            "mais detalhes",
+            "aprofunde",
+            "detalhe",
+            "e a",
+            "e o",
+            "como assim",
+            "o que você quis dizer",
+            "pode explicar",
             # Novos indicadores para melhorar detecção
-            'como foi',
-            'o que foi',
-            'quem foi',
-            'quando foi',
-            'onde foi',
-            'por que',
-            'porque',
-            'qual foi',
-            'quais foram',
-            'me fale mais',
-            'conte mais',
-            'explique',
-            'esclareça',
-            'desenvolva',
+            "como foi",
+            "o que foi",
+            "quem foi",
+            "quando foi",
+            "onde foi",
+            "por que",
+            "porque",
+            "qual foi",
+            "quais foram",
+            "me fale mais",
+            "conte mais",
+            "explique",
+            "esclareça",
+            "desenvolva",
         ]
-        
+
         message_lower = message.lower()
         return any(indicator in message_lower for indicator in followup_indicators)
 
     def _disambiguate_query(self, query: str) -> str:
         """Enriquece queries ambíguas com variações e termos relacionados.
-        
+
         Detecta termos que podem ter múltiplos significados ou referências
         e adiciona variações conhecidas para melhorar a recuperação de chunks.
-        
+
         Exemplos:
         - "segundo governo Vargas" → adiciona "1951-1954" e "governo constitucional 1934-1937"
         - "primeiro governo" → adiciona "governo provisório 1930-1934"
@@ -365,33 +364,29 @@ class RAGPipeline:
         """
         disambiguation_map = {
             # Vargas - períodos de governo (com datas explícitas)
-            'segundo governo vargas': 'segundo governo Vargas 1951 1952 1953 1954 trabalhismo nacionalismo econômico Petrobras suicídio carta-testamento governo democrático eleito',
-            'segundo governo getúlio': 'segundo governo Getúlio Vargas 1951 1952 1953 1954 trabalhismo nacionalismo Petrobras',
-            'segundo mandato vargas': 'segundo governo Vargas 1951 1952 1953 1954 democrático eleito trabalhismo',
-            'primeiro governo vargas': 'primeiro governo Vargas governo provisório 1930 1931 1932 1933 1934 revolução 1930 interventores',
-            'primeiro governo getúlio': 'primeiro governo Getúlio Vargas governo provisório 1930 1931 1932 1933 1934',
-            'governo constitucional vargas': 'governo constitucional Vargas 1934 1935 1936 1937 segunda fase constituição',
-            'estado novo vargas': 'Estado Novo Vargas 1937 1938 1939 1940 1941 1942 1943 1944 1945 ditadura autoritarismo',
-            'era vargas': 'Era Vargas governo provisório 1930 constitucional 1934 Estado Novo 1937 1945 primeira fase',
-            
+            "segundo governo vargas": "segundo governo Vargas 1951 1952 1953 1954 trabalhismo nacionalismo econômico Petrobras suicídio carta-testamento governo democrático eleito",
+            "segundo governo getúlio": "segundo governo Getúlio Vargas 1951 1952 1953 1954 trabalhismo nacionalismo Petrobras",
+            "segundo mandato vargas": "segundo governo Vargas 1951 1952 1953 1954 democrático eleito trabalhismo",
+            "primeiro governo vargas": "primeiro governo Vargas governo provisório 1930 1931 1932 1933 1934 revolução 1930 interventores",
+            "primeiro governo getúlio": "primeiro governo Getúlio Vargas governo provisório 1930 1931 1932 1933 1934",
+            "governo constitucional vargas": "governo constitucional Vargas 1934 1935 1936 1937 segunda fase constituição",
+            "estado novo vargas": "Estado Novo Vargas 1937 1938 1939 1940 1941 1942 1943 1944 1945 ditadura autoritarismo",
+            "era vargas": "Era Vargas governo provisório 1930 constitucional 1934 Estado Novo 1937 1945 primeira fase",
             # Napoleão Bonaparte
-            'napoleão bonaparte': 'Napoleão Bonaparte cônsul imperador França 1799 1804 1814 1815 guerras napoleônicas Waterloo Elba',
-            'napoleão': 'Napoleão Bonaparte imperador França cônsul 1799 1804 1814 1815',
-            
+            "napoleão bonaparte": "Napoleão Bonaparte cônsul imperador França 1799 1804 1814 1815 guerras napoleônicas Waterloo Elba",
+            "napoleão": "Napoleão Bonaparte imperador França cônsul 1799 1804 1814 1815",
             # Revolução Industrial
-            'revolução industrial': 'Revolução Industrial industrialização mecanização trabalho tempo recursos naturais máquina vapor fábricas',
-            
+            "revolução industrial": "Revolução Industrial industrialização mecanização trabalho tempo recursos naturais máquina vapor fábricas",
             # Segunda Guerra Mundial
-            'segunda guerra mundial': 'Segunda Guerra Mundial 1939 1940 1941 1942 1943 1944 1945 nazismo fascismo Aliados Eixo Hitler',
-            'segunda guerra': 'Segunda Guerra Mundial 1939 1945 Hitler Mussolini nazismo fascismo',
-            
+            "segunda guerra mundial": "Segunda Guerra Mundial 1939 1940 1941 1942 1943 1944 1945 nazismo fascismo Aliados Eixo Hitler",
+            "segunda guerra": "Segunda Guerra Mundial 1939 1945 Hitler Mussolini nazismo fascismo",
             # Populismo
-            'populismo brasil': 'populismo Brasil Vargas trabalhismo nacionalismo período democrático 1945 1964 lideranças carismáticas',
-            'populismo': 'populismo trabalhismo lideranças carismáticas trabalhadores urbanos massas',
+            "populismo brasil": "populismo Brasil Vargas trabalhismo nacionalismo período democrático 1945 1964 lideranças carismáticas",
+            "populismo": "populismo trabalhismo lideranças carismáticas trabalhadores urbanos massas",
         }
-        
+
         query_lower = query.lower()
-        
+
         # Verifica se algum termo ambíguo está presente na query
         for ambiguous_term, enrichment in disambiguation_map.items():
             if ambiguous_term in query_lower:
@@ -399,42 +394,64 @@ class RAGPipeline:
                 logger.debug(
                     "Query ambígua detectada: '%s' → enriquecida com: '%s'",
                     ambiguous_term,
-                    enrichment[:100]
+                    enrichment[:100],
                 )
                 return enriched
-        
+
         return query
 
     def _extract_context_from_history(self, history: list[dict]) -> str:
         """Extrai tópicos principais das últimas mensagens para enriquecer follow-ups.
-        
+
         Pega as últimas respostas do assistente e extrai keywords principais
         para adicionar contexto à query de follow-up.
         """
         if not history:
             return ""
-        
+
         # Pega as últimas 2 mensagens do assistente
         recent_responses = [
-            msg["content"] for msg in history[-4:]
-            if msg["role"] == "assistant" 
+            msg["content"]
+            for msg in history[-4:]
+            if msg["role"] == "assistant"
             and "Esse conteúdo não está no material" not in msg["content"]
         ][-2:]
-        
+
         if not recent_responses:
             return ""
-        
+
         # Entidades históricas conhecidas para enriquecimento
         historical_entities = {
-            'vargas': ['Getúlio Vargas', 'governo Vargas', 'Era Vargas', 'trabalhismo', 'nacionalismo'],
-            'getúlio': ['Getúlio Vargas', 'governo Vargas', 'Era Vargas'],
-            'napoleão': ['Napoleão Bonaparte', 'império napoleônico', 'guerras napoleônicas', 'França'],
-            'bonaparte': ['Napoleão Bonaparte', 'imperador', 'cônsul'],
-            'revolução industrial': ['industrialização', 'mecanização', 'trabalho', 'tempo'],
-            'segunda guerra': ['Segunda Guerra Mundial', '1939-1945', 'nazismo', 'fascismo'],
-            'populismo': ['trabalhismo', 'lideranças carismáticas', 'trabalhadores'],
+            "vargas": [
+                "Getúlio Vargas",
+                "governo Vargas",
+                "Era Vargas",
+                "trabalhismo",
+                "nacionalismo",
+            ],
+            "getúlio": ["Getúlio Vargas", "governo Vargas", "Era Vargas"],
+            "napoleão": [
+                "Napoleão Bonaparte",
+                "império napoleônico",
+                "guerras napoleônicas",
+                "França",
+            ],
+            "bonaparte": ["Napoleão Bonaparte", "imperador", "cônsul"],
+            "revolução industrial": [
+                "industrialização",
+                "mecanização",
+                "trabalho",
+                "tempo",
+            ],
+            "segunda guerra": [
+                "Segunda Guerra Mundial",
+                "1939-1945",
+                "nazismo",
+                "fascismo",
+            ],
+            "populismo": ["trabalhismo", "lideranças carismáticas", "trabalhadores"],
         }
-        
+
         # Extrai keywords principais (palavras com 5+ chars, capitalizadas ou técnicas)
         context_keywords = set()
         for response in recent_responses:
@@ -446,19 +463,37 @@ class RAGPipeline:
                 if clean_word and len(clean_word) >= 5:
                     # Adiciona se for capitalizada ou se for uma palavra técnica comum
                     if clean_word[0].isupper() or clean_word.lower() in {
-                        'revolução', 'revolucao', 'guerra', 'governo', 'industrial',
-                        'trabalhadores', 'economia', 'política', 'politica', 'estado',
-                        'brasil', 'brasileiro', 'brasileira', 'período', 'periodo',
-                        'ditadura', 'democracia', 'constitucional', 'provisório', 'provisorio'
+                        "revolução",
+                        "revolucao",
+                        "guerra",
+                        "governo",
+                        "industrial",
+                        "trabalhadores",
+                        "economia",
+                        "política",
+                        "politica",
+                        "estado",
+                        "brasil",
+                        "brasileiro",
+                        "brasileira",
+                        "período",
+                        "periodo",
+                        "ditadura",
+                        "democracia",
+                        "constitucional",
+                        "provisório",
+                        "provisorio",
                     }:
                         context_keywords.add(clean_word)
-                        
+
                         # Adiciona entidades relacionadas se encontradas
                         word_lower = clean_word.lower()
                         for entity_key, related_terms in historical_entities.items():
                             if entity_key in word_lower:
-                                context_keywords.update(related_terms[:3])  # Adiciona até 3 termos relacionados
-        
+                                context_keywords.update(
+                                    related_terms[:3]
+                                )  # Adiciona até 3 termos relacionados
+
         # Limita a 8 keywords mais relevantes
         return " ".join(list(context_keywords)[:8])
 
@@ -495,7 +530,8 @@ class RAGPipeline:
 
         # Extrai nomes próprios da query (palavras capitalizadas com 3+ chars)
         proper_nouns = set(
-            word for word in query.split() 
+            word
+            for word in query.split()
             if word and word[0].isupper() and len(word) > 3
         )
 
@@ -506,7 +542,8 @@ class RAGPipeline:
             all_chunk_tokens.update(self._extract_keywords(chunk_text))
             # Adiciona também palavras capitalizadas do chunk (lowercased para comparação)
             all_chunk_tokens.update(
-                word.lower() for word in chunk_text.split()
+                word.lower()
+                for word in chunk_text.split()
                 if word and word[0].isupper() and len(word) > 3
             )
 
@@ -514,13 +551,12 @@ class RAGPipeline:
 
         # Se há nomes próprios na query, verifica se pelo menos um está nos chunks
         if proper_nouns:
-            proper_matched = any(
-                pn.lower() in all_chunk_tokens for pn in proper_nouns
-            )
+            proper_matched = any(pn.lower() in all_chunk_tokens for pn in proper_nouns)
             if proper_matched:
                 logger.debug(
                     "Nome próprio encontrado nos chunks: %s → relevante",
-                    proper_nouns & {pn for pn in proper_nouns if pn.lower() in all_chunk_tokens}
+                    proper_nouns
+                    & {pn for pn in proper_nouns if pn.lower() in all_chunk_tokens},
                 )
                 return True  # Nome próprio encontrado = relevante
 

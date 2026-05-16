@@ -103,12 +103,8 @@ def _print_structure_report(all_chunks: list[dict]) -> None:
 
     if no_structure:
         pct = no_structure / len(all_chunks) * 100
-        print(
-            f"\n  ⚠  {no_structure} chunk(s) ({pct:.0f}%) sem heading detectado."
-        )
-        print(
-            "     Isso é normal para prefácios, apêndices e páginas de índice."
-        )
+        print(f"\n  ⚠  {no_structure} chunk(s) ({pct:.0f}%) sem heading detectado.")
+        print("     Isso é normal para prefácios, apêndices e páginas de índice.")
 
 
 def _print_chunk_stats(all_chunks: list[dict]) -> None:
@@ -140,7 +136,7 @@ def _print_chunk_stats(all_chunks: list[dict]) -> None:
         print(f"\n  ⚠  {len(large)} chunk(s) com > 600 tokens (chunk muito grande):")
         for c in large[:3]:
             preview = c["text"][:80].replace("\n", " ")
-            print(f"     \"{preview}\"")
+            print(f'     "{preview}"')
 
 
 # ---------------------------------------------------------------------------
@@ -368,7 +364,9 @@ def main() -> None:
 
     all_chunks: list[dict] = []
     for doc in all_docs:
-        chunks = chunk_document(doc, chunk_size=chunk_size, overlap=overlap, config=chunk_config)
+        chunks = chunk_document(
+            doc, chunk_size=chunk_size, overlap=overlap, config=chunk_config
+        )
         # Mantém apenas text e source nos metadados
         for c in chunks:
             # Remove metadados hierárquicos, mantendo apenas text e source
@@ -416,7 +414,9 @@ def main() -> None:
     print(f"  Tokens estimados     : {total_tok:,}")
     print(f"  Índice salvo em      : {index_path}")
     print(f"  Modelo de embedding  : {settings.embed_model_name}")
-    print(f"  Hierarquia           : {'desativada' if args.no_structure else 'ativada'}")
+    print(
+        f"  Hierarquia           : {'desativada' if args.no_structure else 'ativada'}"
+    )
     print(f"{sep}\n")
 
     # --- 6. Avaliação ---

@@ -172,7 +172,9 @@ def count_tokens(text: str) -> int:
 # ---------------------------------------------------------------------------
 
 
-def clean_pdf_text(text: str, remove_headers: bool = True, remove_boilerplate: bool = True) -> str:
+def clean_pdf_text(
+    text: str, remove_headers: bool = True, remove_boilerplate: bool = True
+) -> str:
     """Remove e corrige artefatos comuns de PDFs em português.
 
     Melhorias em relação à versão anterior:
@@ -246,7 +248,7 @@ def _make_chunk_id(source: str, index: int, page: Optional[int] = None) -> str:
     """SHA-1 truncado garante idempotência na re-indexação.
 
     Mesmo documento re-indexado produz os mesmos IDs se o texto não mudou.
-    
+
     CORREÇÃO: Inclui número da página no hash para evitar colisões de IDs
     entre chunks de páginas diferentes com o mesmo índice.
     """
@@ -304,10 +306,10 @@ def _build_chunks_from_sentences(
         text = " ".join(s for s in sents if s).strip()
         if not text:
             return
-        
+
         # Extrai metadados enriquecidos
         metadata = _extract_metadata(text, section, page)
-        
+
         chunks.append(
             {
                 "text": text,
@@ -369,23 +371,23 @@ def _build_chunks_from_sentences(
 
 def _get_overlap_sentences(sentences: list[str], target_tokens: int) -> list[str]:
     """Retorna sentenças do final da lista até atingir aproximadamente target_tokens.
-    
+
     Implementa overlap baseado em tokens em vez de número fixo de sentenças.
     Isso garante overlap proporcional independente do tamanho das sentenças.
-    
+
     Args:
         sentences: Lista de sentenças do chunk anterior
         target_tokens: Número alvo de tokens para o overlap
-        
+
     Returns:
         Lista de sentenças do final que somam ~target_tokens
     """
     if not sentences or target_tokens <= 0:
         return []
-    
+
     overlap_sents = []
     overlap_tokens = 0
-    
+
     # Itera de trás para frente até atingir o target
     for sent in reversed(sentences):
         sent_tokens = count_tokens(sent)
@@ -394,25 +396,25 @@ def _get_overlap_sentences(sentences: list[str], target_tokens: int) -> list[str
             break
         overlap_sents.insert(0, sent)
         overlap_tokens += sent_tokens
-    
+
     return overlap_sents
 
 
 def _extract_metadata(text: str, section: Optional[str], page: Optional[int]) -> dict:
     """Extrai metadados enriquecidos do texto do chunk.
-    
+
     Detecta:
     - chapter: Número do capítulo (ex: "Capítulo 3", "Cap. 5")
     - topic: Tópico principal (primeira linha significativa)
     - section_title: Título da seção (já vem do loader, mas pode refinar)
-    
+
     Esses metadados melhoram reranking e hybrid search.
-    
+
     Args:
         text: Texto do chunk
         section: Seção detectada pelo loader (pode ser None)
         page: Número da página (pode ser None)
-        
+
     Returns:
         Dict com chapter, topic, section_title
     """
@@ -421,28 +423,25 @@ def _extract_metadata(text: str, section: Optional[str], page: Optional[int]) ->
         "topic": None,
         "section_title": section,  # Usa seção do loader como fallback
     }
-    
+
     # Detecta capítulo (ex: "Capítulo 3", "Cap. 5", "CAPÍTULO III")
-    chapter_pattern = re.compile(
-        r"(?i)cap(?:ítulo)?\.?\s+(\d+|[IVX]+)",
-        re.IGNORECASE
-    )
+    chapter_pattern = re.compile(r"(?i)cap(?:ítulo)?\.?\s+(\d+|[IVX]+)", re.IGNORECASE)
     chapter_match = chapter_pattern.search(text[:200])  # Busca nos primeiros 200 chars
     if chapter_match:
         metadata["chapter"] = chapter_match.group(0).strip()
-    
+
     # Detecta tópico principal (primeira linha significativa com 10-80 chars)
-    lines = text.split('\n')
+    lines = text.split("\n")
     for line in lines[:5]:  # Verifica as primeiras 5 linhas
         line = line.strip()
-        if 10 <= len(line) <= 80 and not line.endswith(('.', '!', '?')):
+        if 10 <= len(line) <= 80 and not line.endswith((".", "!", "?")):
             # Linha curta sem pontuação final = provável título/tópico
             metadata["topic"] = line
             # Se não tinha section_title, usa o tópico
             if not metadata["section_title"]:
                 metadata["section_title"] = line
             break
-    
+
     return metadata
 
 
@@ -512,9 +511,9 @@ def chunk_document(
 
     # Limpa artefatos de PDF E boilerplate editorial
     text = clean_pdf_text(
-        raw_text, 
+        raw_text,
         remove_headers=config.remove_headers,
-        remove_boilerplate=config.remove_boilerplate
+        remove_boilerplate=config.remove_boilerplate,
     )
 
     if not text:
@@ -624,9 +623,7 @@ def _merge_tiny_chunks(chunks: list[dict], config: ChunkConfig) -> list[dict]:
             last["text"] = merged_text.strip()
             # Re-extrai metadados do texto mesclado
             metadata = _extract_metadata(
-                last["text"], 
-                last.get("section"), 
-                last.get("page")
+                last["text"], last.get("section"), last.get("page")
             )
             last["chapter"] = metadata.get("chapter")
             last["topic"] = metadata.get("topic")

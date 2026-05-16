@@ -89,10 +89,10 @@ class EvaluationReport:
     mean_precision: float = 0.0
     mean_recall: float = 0.0
     mean_f1: float = 0.0
-    hit_rate: float = 0.0        # fração de queries com ≥1 hit
-    mrr: float = 0.0             # Mean Reciprocal Rank
+    hit_rate: float = 0.0  # fração de queries com ≥1 hit
+    mrr: float = 0.0  # Mean Reciprocal Rank
     mean_ndcg: float = 0.0
-    map_at_k: float = 0.0       # Mean Average Precision
+    map_at_k: float = 0.0  # Mean Average Precision
     mean_latency_ms: float = 0.0
     per_query: list[QueryResult] = field(default_factory=list)
 
@@ -393,7 +393,9 @@ def build_synthetic_dataset(
         # --- Relevant IDs: chunk alvo + vizinhos do mesmo source -----------
         src = chunk.get("source", "")
         neighbor_positions = source_index.get(src, [])
-        current_offset = neighbor_positions.index(pos) if pos in neighbor_positions else -1
+        current_offset = (
+            neighbor_positions.index(pos) if pos in neighbor_positions else -1
+        )
 
         relevant_ids: list[str] = [cid]
         if current_offset >= 0:
@@ -428,16 +430,28 @@ def _extract_query_sentence(text: str, chunk: dict) -> str:
     Fallback: usa as top keywords para montar uma query descritiva.
     """
     # Divide em frases por pontuação
-    sentences = re.split(r'(?<=[.!?])\s+', text.strip())
+    sentences = re.split(r"(?<=[.!?])\s+", text.strip())
     sentences = [s.strip() for s in sentences if len(s.strip()) >= 40]
 
     if sentences:
         # Pega a frase do meio (mais representativa do conteúdo)
         mid = len(sentences) // 2
         # Prefere frases que contenham verbos ou palavras de definição
-        definition_markers = ["é ", "são ", "consiste", "define", "significa",
-                               "representa", "refere", "denomina", "caracteriza",
-                               "utiliza", "permite", "ocorre", "resulta"]
+        definition_markers = [
+            "é ",
+            "são ",
+            "consiste",
+            "define",
+            "significa",
+            "representa",
+            "refere",
+            "denomina",
+            "caracteriza",
+            "utiliza",
+            "permite",
+            "ocorre",
+            "resulta",
+        ]
         scored = []
         for i, sent in enumerate(sentences):
             sent_lower = sent.lower()
@@ -451,7 +465,7 @@ def _extract_query_sentence(text: str, chunk: dict) -> str:
         best_sentence = scored[0][2]
 
         # Limpa a frase: remove referências de página, colchetes, etc.
-        best_sentence = re.sub(r'\[.*?\]|\(p\.\s*\d+\)', '', best_sentence).strip()
+        best_sentence = re.sub(r"\[.*?\]|\(p\.\s*\d+\)", "", best_sentence).strip()
 
         if len(best_sentence) >= 30:
             return best_sentence
@@ -544,7 +558,15 @@ def compare_reports(
         return
 
     k = next(iter(reports.values())).k
-    metrics_keys = ["precision@k", "recall@k", "f1@k", "hit_rate@k", "mrr", "ndcg@k", "map@k"]
+    metrics_keys = [
+        "precision@k",
+        "recall@k",
+        "f1@k",
+        "hit_rate@k",
+        "mrr",
+        "ndcg@k",
+        "map@k",
+    ]
 
     col_w = 12
     header = f"  {'Métrica':<22}" + "".join(f"{n[:col_w]:>{col_w}}" for n in names)
@@ -574,12 +596,68 @@ def compare_reports(
 # ---------------------------------------------------------------------------
 
 _STOPWORDS_EVAL = {
-    "a", "o", "e", "é", "de", "do", "da", "em", "no", "na", "por", "para",
-    "com", "um", "uma", "se", "que", "ao", "ou", "mas", "como", "não", "foi",
-    "são", "era", "tem", "ser", "ter", "isso", "esse", "esta", "the", "of",
-    "and", "in", "to", "is", "it", "for", "on", "are", "que", "dos", "das",
-    "seu", "sua", "seus", "suas", "este", "esta", "estes", "estas", "esse",
-    "isso", "aqui", "ali", "quando", "onde", "há", "dizer", "fazer", "ver",
+    "a",
+    "o",
+    "e",
+    "é",
+    "de",
+    "do",
+    "da",
+    "em",
+    "no",
+    "na",
+    "por",
+    "para",
+    "com",
+    "um",
+    "uma",
+    "se",
+    "que",
+    "ao",
+    "ou",
+    "mas",
+    "como",
+    "não",
+    "foi",
+    "são",
+    "era",
+    "tem",
+    "ser",
+    "ter",
+    "isso",
+    "esse",
+    "esta",
+    "the",
+    "of",
+    "and",
+    "in",
+    "to",
+    "is",
+    "it",
+    "for",
+    "on",
+    "are",
+    "que",
+    "dos",
+    "das",
+    "seu",
+    "sua",
+    "seus",
+    "suas",
+    "este",
+    "esta",
+    "estes",
+    "estas",
+    "esse",
+    "isso",
+    "aqui",
+    "ali",
+    "quando",
+    "onde",
+    "há",
+    "dizer",
+    "fazer",
+    "ver",
 }
 
 
@@ -587,9 +665,8 @@ def _top_keywords(text: str, n: int = 3) -> list[str]:
     """Retorna as n palavras mais frequentes (sem stopwords, 4+ chars)."""
     tokens = re.findall(r"\b\w+\b", text.lower())
     from collections import Counter
-    freq = Counter(
-        t for t in tokens if len(t) >= 4 and t not in _STOPWORDS_EVAL
-    )
+
+    freq = Counter(t for t in tokens if len(t) >= 4 and t not in _STOPWORDS_EVAL)
     return [w for w, _ in freq.most_common(n)]
 
 
