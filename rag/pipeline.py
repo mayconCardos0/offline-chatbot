@@ -362,8 +362,7 @@ class RAGPipeline:
         - "primeiro governo" → adiciona "governo provisório 1930-1934"
         - "Napoleão Bonaparte" → adiciona "cônsul imperador 1799 1804 1814 1815"
         """
-        disambiguation_map = {
-        }
+        disambiguation_map = {}
 
         query_lower = query.lower()
 
