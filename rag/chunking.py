@@ -187,9 +187,6 @@ def clean_pdf_text(
       - Remoção opcional de linhas de cabeçalho/rodapé em maiúsculas.
       - Mantém: normalização NFC, remoção de números de página, espaços.
 
-    Exemplo antes/depois:
-      Antes: "© 2024 Editora Moderna\\nISBN: 123-456\\nA energia atô-\\nmicas é libe-\\nrada no pro-\\ncesso de fis-\\nsão."
-      Depois: "A energia atômicas é liberada no processo de fissão."
     """
     if not text:
         return ""

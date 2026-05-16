@@ -11,10 +11,9 @@ Testa:
 
 import sys
 from pathlib import Path
+from rag.chunking import chunk_document, count_tokens
 
 sys.path.insert(0, str(Path(__file__).parent))
-
-from rag.chunking import ChunkConfig, chunk_document, count_tokens
 
 
 def test_chunk_sizes():
@@ -48,9 +47,9 @@ O impacto ambiental da industrialização começou a se fazer sentir já no séc
 
         # Verifica se está no range ideal
         if 200 <= tokens <= 500:
-            print(f"  ✅ Tamanho OK")
+            print("  ✅ Tamanho OK")
         else:
-            print(f"  ⚠️  Fora do ideal")
+            print("  ⚠️  Fora do ideal")
 
 
 def test_overlap():
@@ -62,10 +61,8 @@ def test_overlap():
     text = """
     Primeira seção sobre a Revolução Industrial e suas características principais.
     A mecanização da produção foi um dos aspectos mais importantes deste período.
-    
     Segunda seção sobre o impacto social da industrialização no século XIX.
     O êxodo rural transformou a estrutura demográfica das cidades europeias.
-    
     Terceira seção sobre os movimentos operários e suas reivindicações históricas.
     As greves e manifestações marcaram a luta por direitos trabalhistas básicos.
     """ * 5
@@ -82,12 +79,12 @@ def test_overlap():
 
             print(f"\nChunks {i+1} e {i+2}:")
             print(f"  Palavras em comum: {len(overlap_words)}")
-            print(f"  Overlap esperado: ~35-40 palavras (50 tokens)")
+            print("  Overlap esperado: ~35-40 palavras (50 tokens)")
 
             if len(overlap_words) >= 20:
-                print(f"  ✅ Overlap OK")
+                print("  ✅ Overlap OK")
             else:
-                print(f"  ⚠️  Overlap baixo")
+                print("  ⚠️  Overlap baixo")
 
 
 def test_semantic_chunking():
@@ -126,7 +123,7 @@ Marianne é a personificação da República Francesa e um símbolo de liberdade
             title in chunk["text"]
             for title in ["Primavera dos Povos", "Três Dias Gloriosos", "Marianne"]
         ):
-            print(f"  ✅ Unidade semântica preservada")
+            print("  ✅ Unidade semântica preservada")
 
 
 def test_boilerplate_removal():
@@ -173,10 +170,10 @@ Este capítulo explora os principais aspectos deste período histórico.
     if boilerplate_found:
         print(f"  ⚠️  Boilerplate encontrado: {', '.join(boilerplate_found)}")
     else:
-        print(f"  ✅ Boilerplate removido com sucesso")
+        print("  ✅ Boilerplate removido com sucesso")
 
     if "Capítulo 3" in result_text and "Revolução Industrial" in result_text:
-        print(f"  ✅ Conteúdo real preservado")
+        print("  ✅ Conteúdo real preservado")
 
 
 def test_metadata():
@@ -227,9 +224,9 @@ Suas conquistas militares transformaram a Europa no início do século XIX.
         missing = [f for f in required_fields if f not in chunk]
 
         if missing:
-            print(f"  ⚠️  Campos faltando: {', '.join(missing)}")
+            print("  ⚠️  Campos faltando: {', '.join(missing)}")
         else:
-            print(f"  ✅ Todos os campos presentes")
+            print("  ✅ Todos os campos presentes")
 
 
 def main():
