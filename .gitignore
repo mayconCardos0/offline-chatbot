@@ -35,6 +35,7 @@ models/CACHEDIR.TAG
 data/index/
 data/conversations.json
 data/documents/
+data/eval/
 
 # Logs
 *.log
