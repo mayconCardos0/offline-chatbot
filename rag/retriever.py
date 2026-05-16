@@ -179,17 +179,20 @@ _STOPWORDS_PT = {
 _BM25_K1 = 1.5
 _BM25_B = 0.75
 
-# Score mínimo elevado: 0.40 reduz chunks irrelevantes no contexto
-_MIN_SCORE = 0.40
+# Score mínimo ajustado: 0.25 permite capturar mais candidatos relevantes
+# Reduzido de 0.30 para 0.25 para melhorar recall em queries com variações textuais
+# e evitar falsos negativos em perguntas sobre conteúdo disponível
+_MIN_SCORE = 0.25
 
 # Score a partir do qual o chunk é considerado altamente confiável
-_HIGH_CONFIDENCE_SCORE = 0.70
+_HIGH_CONFIDENCE_SCORE = 0.65
 
 # Score abaixo do qual o pipeline deve avisar o aluno sobre baixa confiança
-_LOW_CONFIDENCE_SCORE = 0.55
+_LOW_CONFIDENCE_SCORE = 0.45
 
-# Peso da fusão: semântico vs léxico
-_LEXICAL_WEIGHT = 0.30
+# Peso da fusão: semântico vs léxico (aumentado para 0.40)
+# Maior peso léxico ajuda a capturar variações de capitalização e sinônimos
+_LEXICAL_WEIGHT = 0.40
 
 
 class Retriever:
@@ -207,6 +210,7 @@ class Retriever:
         self._vectorstore = vectorstore
         self._embed_model = embed_model
         self._top_k = top_k
+        self._base_top_k = top_k  # Guarda o valor base para ajustes dinâmicos
         self._candidates = top_k * candidate_multiplier
         self._min_score = min_score
         self._lexical_weight = lexical_weight
@@ -214,6 +218,68 @@ class Retriever:
     # ------------------------------------------------------------------
     # API pública
     # ------------------------------------------------------------------
+
+    def _adjust_top_k(self, query: str) -> int:
+        """Ajusta dinamicamente o número de chunks (k) baseado no tipo de query.
+        
+        Queries que pedem informação ampla ou biográfica precisam de mais chunks
+        para fornecer uma resposta completa.
+        
+        Tipos de query e multiplicadores:
+        - Biográfica ("quem foi", "biografia"): k * 2
+        - Período/governo ("como foi", "governo", "período"): k * 1.5
+        - Normal: k (sem ajuste)
+        
+        Returns:
+            Número ajustado de chunks a recuperar
+        """
+        query_lower = query.lower()
+        
+        # Indicadores de query biográfica (precisa de mais contexto)
+        biographical_indicators = [
+            'quem foi',
+            'quem é',
+            'biografia',
+            'história de',
+            'trajetória',
+            'vida de',
+        ]
+        
+        # Indicadores de query sobre período/governo (precisa de contexto moderado)
+        period_indicators = [
+            'como foi',
+            'o que foi',
+            'governo',
+            'período',
+            'periodo',
+            'era',
+            'fase',
+            'mandato',
+            'administração',
+            'administracao',
+        ]
+        
+        # Verifica tipo de query
+        if any(ind in query_lower for ind in biographical_indicators):
+            k = int(self._base_top_k * 2)
+            logger.debug(
+                "Query biográfica detectada. Aumentando k: %d → %d",
+                self._base_top_k,
+                k
+            )
+            return k
+        
+        if any(ind in query_lower for ind in period_indicators):
+            k = int(self._base_top_k * 1.5)
+            logger.debug(
+                "Query sobre período detectada. Aumentando k: %d → %d",
+                self._base_top_k,
+                k
+            )
+            return k
+        
+        # Query normal, usa k base
+        return self._base_top_k
 
     def retrieve(self, query: str) -> list[dict]:
         """Retorna os top-k chunks mais relevantes para a query.
@@ -224,6 +290,11 @@ class Retriever:
           - confidence: 'high' | 'medium' | 'low' — usado pelo pipeline
             para decidir se deve alertar o aluno sobre incerteza.
 
+        Ajusta dinamicamente o número de chunks (top-k) baseado no tipo de query:
+          - Queries biográficas ("quem foi", "biografia"): k * 2
+          - Queries sobre períodos/governos: k * 1.5
+          - Queries normais: k
+
         Returns:
             Lista ordenada por relevância. Vazia se nenhum chunk
             passar os filtros de qualidade.
@@ -232,20 +303,27 @@ class Retriever:
             logger.warning("VectorStore vazio — sem contexto para: '%s'", query)
             return []
 
+        # Ajusta k dinamicamente baseado no tipo de query
+        k = self._adjust_top_k(query)
+        
+        # Ajusta também o número de candidatos proporcionalmente
+        candidates_count = k * 4
+
         # Estágio 1: candidatos semânticos
         query_vec = self._embed_model.embed([query])[0]
-        candidates = self._vectorstore.search(query_vec, self._candidates)
+        candidates = self._vectorstore.search(query_vec, candidates_count)
 
         if not candidates:
             return []
 
-        # Camada 1: threshold absoluto (min_score = 0.40)
+        # Camada 1: threshold absoluto (min_score = 0.25)
         candidates = [c for c in candidates if c.get("score", 0) >= self._min_score]
         if not candidates:
             logger.info(
-                "Nenhum chunk passou o limiar absoluto %.2f (query='%s')",
+                "Nenhum chunk passou o limiar absoluto %.2f (query='%s', k=%d)",
                 self._min_score,
                 query[:60],
+                k,
             )
             return []
 
@@ -253,7 +331,9 @@ class Retriever:
         candidates = self._adaptive_filter(candidates)
         if not candidates:
             logger.info(
-                "Filtro adaptativo descartou todos os chunks (query='%s')", query[:60]
+                "Filtro adaptativo descartou todos os chunks (query='%s', k=%d)", 
+                query[:60],
+                k,
             )
             return []
 
@@ -261,7 +341,9 @@ class Retriever:
         candidates = self._gap_filter(candidates)
         if not candidates:
             logger.info(
-                "Gap detection descartou todos os chunks (query='%s')", query[:60]
+                "Gap detection descartou todos os chunks (query='%s', k=%d)", 
+                query[:60],
+                k,
             )
             return []
 
@@ -269,13 +351,15 @@ class Retriever:
         candidates = self._keyword_filter(query, candidates)
         if not candidates:
             logger.info(
-                "Keyword filter descartou todos os chunks (query='%s')", query[:60]
+                "Keyword filter descartou todos os chunks (query='%s', k=%d)", 
+                query[:60],
+                k,
             )
             return []
 
         # Estágio 2: reranking híbrido
         reranked = self._hybrid_rerank(query, candidates)
-        results = reranked[: self._top_k]
+        results = reranked[:k]
 
         # Adiciona campo 'confidence' a cada chunk
         for chunk in results:
@@ -288,10 +372,11 @@ class Retriever:
                 chunk["confidence"] = "low"
 
         logger.debug(
-            "Retrieve: %d candidatos → %d resultados (query='%s')",
+            "Retrieve: %d candidatos → %d resultados (query='%s', k=%d)",
             len(candidates),
             len(results),
             query[:60],
+            k,
         )
         return results
 
@@ -359,21 +444,26 @@ class Retriever:
         return matched
 
     def _gap_filter(self, candidates: list[dict]) -> list[dict]:
-        """Descarta chunks quando não há score claramente dominante."""
+        """Descarta chunks apenas quando há evidência clara de irrelevância."""
         if not candidates:
             return []
 
         scores = [c.get("score", 0.0) for c in candidates]
         best = max(scores)
 
-        # Score alto: confia no threshold absoluto
+        # Score alto: confia no threshold absoluto (mais tolerante)
         if best >= _HIGH_CONFIDENCE_SCORE:
-            return [c for c in candidates if c.get("score", 0) >= best - 0.15]
+            return [c for c in candidates if c.get("score", 0) >= best - 0.20]
 
+        # Score médio: aceita chunks próximos (novo threshold intermediário)
+        if best >= 0.45:
+            return [c for c in candidates if c.get("score", 0) >= best - 0.18]
+
+        # Score baixo: verifica gap (mais tolerante: 0.10 em vez de 0.12)
         others = [s for s in scores if s != best]
         avg_others = sum(others) / len(others) if others else 0.0
 
-        if best - avg_others < 0.12:  # era 0.15 — um pouco mais tolerante
+        if best - avg_others < 0.10:
             logger.debug(
                 "Gap insuficiente: best=%.3f avg_others=%.3f — descartando todos",
                 best,
@@ -381,7 +471,7 @@ class Retriever:
             )
             return []
 
-        return [c for c in candidates if c.get("score", 0) >= best - 0.15]
+        return [c for c in candidates if c.get("score", 0) >= best - 0.18]
 
     # ------------------------------------------------------------------
     # Reranking híbrido
