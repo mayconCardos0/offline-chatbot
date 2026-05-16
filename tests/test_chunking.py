@@ -49,6 +49,24 @@ class TestCleanPdfText:
         assert "Hello world" in result
         assert "This is a test" in result
 
+    def test_removes_copyright(self):
+        text = "© 2024 Editora Moderna. Todos os direitos reservados.\n\nConteúdo real aqui."
+        result = clean_pdf_text(text, remove_boilerplate=True)
+        assert "©" not in result or "Editora Moderna" not in result
+        assert "Conteúdo real" in result
+
+    def test_removes_isbn(self):
+        text = "ISBN: 978-85-16-12345-6\n\nTexto do livro."
+        result = clean_pdf_text(text, remove_boilerplate=True)
+        assert "ISBN" not in result
+        assert "Texto do livro" in result
+
+    def test_removes_reproduction_notice(self):
+        text = "Reprodução proibida sem autorização.\n\nCapítulo 1: Introdução"
+        result = clean_pdf_text(text, remove_boilerplate=True)
+        assert "Reprodução proibida" not in result
+        assert "Capítulo 1" in result or "Introdução" in result
+
 
 # ---------------------------------------------------------------------------
 # split_sentences
@@ -134,17 +152,19 @@ class TestChunkDocument:
             assert chunk["source"] == "my_doc.pdf"
 
     def test_overlap_shares_content(self):
-        """With overlap=1, adjacent chunks should share at least one sentence."""
-        sentences = [f"Esta é a sentença número {i} do documento." for i in range(20)]
+        """With overlap=50 tokens, adjacent chunks should share content."""
+        sentences = [
+            f"Esta é a sentença número {i} do documento de teste." for i in range(20)
+        ]
         text = " ".join(sentences)
         doc = self._make_doc(text)
-        chunks = chunk_document(doc, chunk_size=150, overlap=1)
+        chunks = chunk_document(doc, chunk_size=150, overlap=50)
         if len(chunks) > 1:
-            # The last sentence of chunk[0] should appear in chunk[1]
+            # Adjacent chunks should have some overlap
             words_0 = set(chunks[0]["text"].split())
             words_1 = set(chunks[1]["text"].split())
-            # Some overlap expected
-            assert len(words_0 & words_1) > 0
+            # Some overlap expected (at least 10 words for 50 tokens)
+            assert len(words_0 & words_1) >= 10
 
     def test_no_overlap_zero(self):
         sentence = "Sentença separada e independente ponto final. "
@@ -160,3 +180,41 @@ class TestChunkDocument:
         chunks = chunk_document(doc, chunk_size=200)
         for chunk in chunks:
             assert chunk["text"].strip() != ""
+
+    def test_metadata_fields_present(self):
+        """Verifica que os novos campos de metadata estão presentes."""
+        doc = self._make_doc(
+            "Capítulo 3: A Revolução Industrial. Este é um texto sobre história."
+        )
+        chunks = chunk_document(doc, chunk_size=512)
+        assert len(chunks) >= 1
+        chunk = chunks[0]
+        # Verifica que os campos existem (podem ser None)
+        assert "page" in chunk
+        assert "section" in chunk
+        assert "chunk_id" in chunk
+        assert "chapter" in chunk
+        assert "topic" in chunk
+        assert "section_title" in chunk
+
+    def test_boilerplate_removal(self):
+        """Verifica que boilerplate editorial é removido."""
+        text = """
+        © 2024 Editora Moderna Ltda.
+        ISBN: 978-85-16-12345-6
+        Todos os direitos reservados.
+        Reprodução proibida.
+        Capítulo 1: Introdução
+        Este é o conteúdo real do documento que deve ser preservado.
+        """
+        doc = self._make_doc(text)
+        chunks = chunk_document(doc, chunk_size=512)
+        assert len(chunks) >= 1
+        result_text = " ".join(c["text"] for c in chunks)
+        # Boilerplate deve ter sido removido
+        assert "ISBN" not in result_text
+        assert "Editora Moderna" not in result_text
+        assert "Reprodução proibida" not in result_text
+        # Conteúdo real deve estar presente
+        assert "Capítulo 1" in result_text or "Introdução" in result_text
+        assert "conteúdo real" in result_text
