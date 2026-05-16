@@ -2,6 +2,7 @@
 
 import sys
 from pathlib import Path
+
 from core.config import get_settings
 from rag.embeddings import EmbeddingModel
 from rag.retriever import Retriever
