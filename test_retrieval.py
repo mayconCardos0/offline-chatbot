@@ -3,12 +3,12 @@
 import sys
 from pathlib import Path
 
-sys.path.insert(0, str(Path.cwd()))
-
 from core.config import get_settings
 from rag.embeddings import EmbeddingModel
 from rag.retriever import Retriever
 from rag.vectorstore import VectorStore
+
+sys.path.insert(0, str(Path.cwd()))
 
 # Inicializa componentes
 settings = get_settings()

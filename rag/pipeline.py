@@ -362,28 +362,7 @@ class RAGPipeline:
         - "primeiro governo" → adiciona "governo provisório 1930-1934"
         - "Napoleão Bonaparte" → adiciona "cônsul imperador 1799 1804 1814 1815"
         """
-        disambiguation_map = {
-            # Vargas - períodos de governo (com datas explícitas)
-            "segundo governo vargas": "segundo governo Vargas 1951 1952 1953 1954 trabalhismo nacionalismo econômico Petrobras suicídio carta-testamento governo democrático eleito",
-            "segundo governo getúlio": "segundo governo Getúlio Vargas 1951 1952 1953 1954 trabalhismo nacionalismo Petrobras",
-            "segundo mandato vargas": "segundo governo Vargas 1951 1952 1953 1954 democrático eleito trabalhismo",
-            "primeiro governo vargas": "primeiro governo Vargas governo provisório 1930 1931 1932 1933 1934 revolução 1930 interventores",
-            "primeiro governo getúlio": "primeiro governo Getúlio Vargas governo provisório 1930 1931 1932 1933 1934",
-            "governo constitucional vargas": "governo constitucional Vargas 1934 1935 1936 1937 segunda fase constituição",
-            "estado novo vargas": "Estado Novo Vargas 1937 1938 1939 1940 1941 1942 1943 1944 1945 ditadura autoritarismo",
-            "era vargas": "Era Vargas governo provisório 1930 constitucional 1934 Estado Novo 1937 1945 primeira fase",
-            # Napoleão Bonaparte
-            "napoleão bonaparte": "Napoleão Bonaparte cônsul imperador França 1799 1804 1814 1815 guerras napoleônicas Waterloo Elba",
-            "napoleão": "Napoleão Bonaparte imperador França cônsul 1799 1804 1814 1815",
-            # Revolução Industrial
-            "revolução industrial": "Revolução Industrial industrialização mecanização trabalho tempo recursos naturais máquina vapor fábricas",
-            # Segunda Guerra Mundial
-            "segunda guerra mundial": "Segunda Guerra Mundial 1939 1940 1941 1942 1943 1944 1945 nazismo fascismo Aliados Eixo Hitler",
-            "segunda guerra": "Segunda Guerra Mundial 1939 1945 Hitler Mussolini nazismo fascismo",
-            # Populismo
-            "populismo brasil": "populismo Brasil Vargas trabalhismo nacionalismo período democrático 1945 1964 lideranças carismáticas",
-            "populismo": "populismo trabalhismo lideranças carismáticas trabalhadores urbanos massas",
-        }
+        disambiguation_map = {}
 
         query_lower = query.lower()
 
