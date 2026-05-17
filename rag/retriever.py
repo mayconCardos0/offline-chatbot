@@ -357,6 +357,7 @@ class Retriever:
 
         # Estágio 2: reranking híbrido
         reranked = self._hybrid_rerank(query, candidates)
+        reranked = self._apply_period_boost(query, reranked)
         results = reranked[:k]
 
         # Adiciona campo 'confidence' a cada chunk
@@ -505,6 +506,46 @@ class Retriever:
 
         reranked.sort(key=lambda c: c["score"], reverse=True)
         return reranked
+
+    def _apply_period_boost(self, query: str, candidates: list[dict]) -> list[dict]:
+        """Prioriza chunks que mencionam explicitamente o período histórico pedido.
+
+        Embeddings tendem a aproximar todos os trechos sobre "Vargas"; para perguntas
+        sobre um mandato específico, datas explícitas são um sinal mais forte que
+        similaridade semântica genérica.
+        """
+        query_l = query.lower()
+        if not ("segundo governo" in query_l and "vargas" in query_l):
+            return candidates
+
+        boosted = []
+        for chunk in candidates:
+            text_l = chunk.get("text", "").lower()
+            score = chunk.get("score", 0.0)
+
+            has_correct_period = (
+                ("1951" in text_l and "1954" in text_l)
+                or "segundo governo vargas" in text_l
+                or "segundo mandato vargas" in text_l
+            )
+            has_wrong_period = (
+                "estado novo" in text_l
+                or "1937-1945" in text_l
+                or "1937" in text_l
+                or "governo provis" in text_l
+                or "1930-1934" in text_l
+            )
+
+            adjusted = dict(chunk)
+            if has_correct_period:
+                score += 1.0
+            if has_wrong_period and not has_correct_period:
+                score -= 0.35
+            adjusted["score"] = max(0.0, min(1.0, score))
+            boosted.append(adjusted)
+
+        boosted.sort(key=lambda c: c.get("score", 0.0), reverse=True)
+        return boosted
 
 
 # ---------------------------------------------------------------------------

@@ -119,6 +119,7 @@ Ao final de respostas complexas, inclua um parágrafo curto de resumo/conclusão
 Nunca repita o mesmo ponto com palavras diferentes só para parecer mais completo.
 Adapte o nível da linguagem: acessível, mas sem ser simplista.
 Não utilize emojis nas respostas.
+NÃO inclua raciocínio interno ou textos como <think>. Responda apenas com a resposta final.
 
 CONTEXTO:
 {context}
@@ -264,6 +265,7 @@ class RAGPipeline:
         # Chama o LLM
         t0 = time.perf_counter()
         response_text = self._llm.chat(messages, stream=False)
+        response_text = self._clean_model_response(response_text, message)
         elapsed = time.perf_counter() - t0
         logger.info(
             "LLM respondeu em %.2fs | chunks=%d | sessão='%s'",
@@ -282,12 +284,17 @@ class RAGPipeline:
                 validation["issues"],
             )
 
-            # Se houver problemas graves (períodos conflitantes), retorna resposta padrão
+            # Se houver problemas graves de período, retorna resposta padrão.
+            # Para perguntas sobre períodos históricos específicos, omitir o
+            # intervalo correto também é crítico: geralmente indica que o modelo
+            # respondeu sobre outro governo com vocabulário parecido.
             critical_issues = [
                 issue
                 for issue in validation["issues"]
                 if "mas query pergunta sobre" in issue
                 or "mas resposta fala sobre" in issue
+                or "não menciona o período correto" in issue
+                or "fora do período" in issue
             ]
 
             if critical_issues:
@@ -358,11 +365,24 @@ class RAGPipeline:
         e adiciona variações conhecidas para melhorar a recuperação de chunks.
 
         Exemplos:
-        - "segundo governo Vargas" → adiciona "1951-1954" e "governo constitucional 1934-1937"
+        - "segundo governo Vargas" → adiciona "1951-1954", "BNDE", "Plano Lafer"
         - "primeiro governo" → adiciona "governo provisório 1930-1934"
         - "Napoleão Bonaparte" → adiciona "cônsul imperador 1799 1804 1814 1815"
         """
-        disambiguation_map = {}
+        disambiguation_map = {
+            "segundo governo vargas": (
+                "1951 1954 mandato democrático Getúlio Vargas "
+                "BNDE Plano Lafer Petrobras expansão industrial"
+            ),
+            "segundo governo do getulio vargas": (
+                "1951 1954 mandato democrático Getúlio Vargas "
+                "BNDE Plano Lafer Petrobras expansão industrial"
+            ),
+            "segundo governo do getúlio vargas": (
+                "1951 1954 mandato democrático Getúlio Vargas "
+                "BNDE Plano Lafer Petrobras expansão industrial"
+            ),
+        }
 
         query_lower = query.lower()
 
@@ -559,6 +579,37 @@ class RAGPipeline:
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
+
+    def _clean_model_response(self, response: str, user_message: str = "") -> str:
+        """Remove raciocínio interno e ecos de prompt comuns em modelos pequenos."""
+        text = (response or "").strip()
+        if not text:
+            return _NO_CONTEXT_RESPONSE
+
+        text = re.sub(r"(?is)<think>.*?</think>", "", text).strip()
+        text = re.sub(r"(?is)<think>.*$", "", text).strip()
+
+        # Alguns modelos repetem a mensagem de usuário com o sufixo de guardrail.
+        text = re.sub(
+            r"(?is)^.*?\[INSTRUÇÃO IMPORTANTE:.*?\]\s*",
+            "",
+            text,
+            count=1,
+        ).strip()
+
+        if user_message and text.lower().startswith(user_message.lower()):
+            text = text[len(user_message) :].strip(" \n\r\t:-")
+
+        prompt_echo_starts = (
+            "você é um professor",
+            "voce e um professor",
+            "regras:",
+            "contexto:",
+        )
+        if text.lower().startswith(prompt_echo_starts):
+            return _NO_CONTEXT_RESPONSE
+
+        return text or _NO_CONTEXT_RESPONSE
 
     def _persist_and_return(self, conv: dict, message: str, response: str) -> str:
         """Persiste o par user/assistant no histórico e retorna a resposta."""
