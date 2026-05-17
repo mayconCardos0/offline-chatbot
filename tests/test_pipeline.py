@@ -103,6 +103,59 @@ class TestPipelineChat:
         assert llm.chat.called
         assert result == "LLM answer here."
 
+    def test_blocks_temporally_invalid_segundo_governo_vargas_answer(self):
+        pipeline, retriever, llm, _ = _make_pipeline()
+        retriever.retrieve.return_value = [
+            {
+                "text": "Segundo governo Vargas (1951-1954).",
+                "source": "doc.txt",
+                "score": 0.9,
+            }
+        ]
+        llm.chat.return_value = (
+            "O Segundo Governo Vargas foi um governo militar marcado por repressão."
+        )
+
+        result = pipeline.chat("session-vargas", "Como foi o Segundo Governo Vargas?")
+
+        assert result == _NO_CONTEXT_RESPONSE
+
+    def test_strips_model_think_blocks_and_prompt_echoes(self):
+        pipeline, retriever, llm, _ = _make_pipeline()
+        retriever.retrieve.return_value = [
+            {
+                "text": "O Iluminismo valorizava a razão.",
+                "source": "doc.txt",
+                "score": 0.9,
+            }
+        ]
+        llm.chat.return_value = (
+            "<think>hidden reasoning</think>\n"
+            "O Iluminismo valorizava a razão como guia para o conhecimento."
+        )
+
+        result = pipeline.chat("session-clean", "O que foi o Iluminismo?")
+
+        assert "<think>" not in result
+        assert result.startswith("O Iluminismo")
+
+    def test_prompt_echo_returns_no_context_response(self):
+        pipeline, retriever, llm, _ = _make_pipeline()
+        retriever.retrieve.return_value = [
+            {
+                "text": "Conteúdo relevante suficiente.",
+                "source": "doc.txt",
+                "score": 0.9,
+            }
+        ]
+        llm.chat.return_value = (
+            "Você é um professor particular especializado no Ensino Médio brasileiro."
+        )
+
+        result = pipeline.chat("session-echo", "Pergunta qualquer")
+
+        assert result == _NO_CONTEXT_RESPONSE
+
     def test_auto_creates_session(self):
         pipeline, retriever, llm, conv_manager = _make_pipeline()
         retriever.retrieve.return_value = []
