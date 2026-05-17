@@ -45,7 +45,6 @@ except ImportError:
 import sys
 import tempfile
 import time
-from collections import Counter
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
@@ -905,7 +904,6 @@ def benchmark_generation(
     print(f"{'='*75}")
 
     try:
-        rss_before_load = peak_rss_mb()
         t_load = time.perf_counter()
         llm = Llama(
             model_path=str(model_path),
@@ -988,7 +986,7 @@ def benchmark_generation(
             f"  {i:<3} {category:<12} "
             f"{_fmt(rl['f1'])} {_fmt(bs)} {_fmt(faith)} {_fmt(rel)} "
             f"{em_sym:<5} {gen['ttft_ms']:6.0f}ms {gen['tps']:5.1f}  "
-            f"{response[:40].replace(chr(10),' ')!r}"
+            f"{response[:40].replace(chr(10), ' ')!r}"
             f"{_fmt(rel)} {_fmt(ctx_rel)} "
         )
 
