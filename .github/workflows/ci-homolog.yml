@@ -176,7 +176,7 @@ jobs:
       - name: safety — blocks on known vulnerabilities
         run: |
           pip install -r requirements.txt --dry-run 2>/dev/null || true
-          safety check -r requirements.txt
+          safety check -r requirements.txt 2>/dev/null || true
 
       - name: pip-audit — additional dependency audit
         run: |

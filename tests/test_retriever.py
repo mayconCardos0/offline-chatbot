@@ -253,3 +253,24 @@ class TestRetrieverKeywordFilter:
         result = retriever._keyword_filter("ok hi", chunks)
         # No filtering — all returned
         assert result == chunks
+
+
+class TestRetrieverPeriodBoost:
+    def test_segundo_governo_vargas_prioritizes_correct_period(self):
+        retriever = _make_retriever()
+        chunks = [
+            _make_mock_chunk(
+                "Estado Novo: a ditadura varguista (1937-1945). Vargas dissolveu o Congresso.",
+                score=0.9,
+            ),
+            _make_mock_chunk(
+                "Segundo governo Vargas (1951-1954). O governo priorizou a expansão industrial e o BNDE.",
+                score=0.1,
+            ),
+        ]
+
+        result = retriever._apply_period_boost(
+            "Como foi o Segundo Governo Vargas?", chunks
+        )
+
+        assert "1951-1954" in result[0]["text"]
