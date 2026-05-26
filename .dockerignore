@@ -1,0 +1,17 @@
+# Git
+.git
+.gitignore
+
+# Python
+__pycache__
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# IDEs
+.vscode
+.idea
+
+# Temporary
+*.log
+.env

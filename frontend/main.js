@@ -9,6 +9,7 @@ let state = {
     sessionId: localStorage.getItem('chatbot_session_id') || generateSessionId(),
     isLoading: false,
     conversations: [],
+    lastDisplayedDate: null, // Rastreia a última data exibida para separador
 };
 
 // DOM Elements
@@ -29,6 +30,14 @@ const messageForm = document.getElementById('messageForm');
 // ============================================================================
 
 function init() {
+    // Configure marked for rendering markdown
+    if (typeof marked !== 'undefined') {
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+        });
+    }
+    
     // Save session to localStorage
     localStorage.setItem('chatbot_session_id', state.sessionId);
     updateSessionDisplay();
@@ -122,6 +131,7 @@ async function loadConversation(sessionId) {
         
         // Atualizar estado
         state.sessionId = sessionId;
+        state.lastDisplayedDate = null; // Resetar data para novo chat
         localStorage.setItem('chatbot_session_id', state.sessionId);
         updateSessionDisplay();
 
@@ -209,6 +219,7 @@ async function startNewChat() {
 
     // Create new session
     state.sessionId = generateSessionId();
+    state.lastDisplayedDate = null; // Resetar data para novo chat
     localStorage.setItem('chatbot_session_id', state.sessionId);
     updateSessionDisplay();
 
@@ -313,9 +324,66 @@ function addMessage(text, sender, timestamp = null) {
     const messageEl = document.createElement('div');
     messageEl.className = `message ${sender}`;
     
+    // Determinar a data da mensagem
+    let messageDate = null;
+    if (timestamp) {
+        messageDate = new Date(timestamp * 1000);
+    } else {
+        messageDate = new Date();
+    }
+    
+    // Formatar data em PT-BR
+    const dateStr = messageDate.toLocaleDateString('pt-BR', {
+        weekday: 'long',
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+    });
+    
+    // Verificar se a data mudou e inserir separador se necessário
+    if (state.lastDisplayedDate !== dateStr) {
+        const dateSeparator = document.createElement('div');
+        dateSeparator.className = 'message-date-separator';
+        
+        const dateLabel = document.createElement('span');
+        dateLabel.className = 'message-date-label';
+        dateLabel.textContent = dateStr;
+        
+        dateSeparator.appendChild(dateLabel);
+        chatMessages.appendChild(dateSeparator);
+        
+        state.lastDisplayedDate = dateStr;
+    }
+    
     const contentEl = document.createElement('div');
     contentEl.className = 'message-content';
-    contentEl.textContent = text;
+    
+    // Renderizar markdown para bot, texto plano para usuário
+    if (sender === 'bot') {
+        try {
+            if (typeof marked !== 'undefined') {
+                let htmlContent = marked.parse(text);
+                // Sanitizar HTML com DOMPurify se disponível
+                if (typeof DOMPurify !== 'undefined') {
+                    htmlContent = DOMPurify.sanitize(htmlContent);
+                }
+                contentEl.innerHTML = htmlContent;
+            } else {
+                // Fallback: renderizar com quebras de linha básicas
+                let fallbackHtml = escapeHtml(text)
+                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
+                    .replace(/\n\n/g, '</p><p>')
+                    .replace(/\n/g, '<br>');
+                contentEl.innerHTML = '<p>' + fallbackHtml + '</p>';
+            }
+        } catch (error) {
+            console.error('Erro ao renderizar markdown:', error);
+            contentEl.textContent = text;
+        }
+    } else {
+        contentEl.textContent = text;
+    }
     
     messageEl.appendChild(contentEl);
     
@@ -338,6 +406,7 @@ function addMessage(text, sender, timestamp = null) {
     
     contentEl.appendChild(timeEl);
     
+    messageEl.appendChild(contentEl);
     chatMessages.appendChild(messageEl);
     scrollToBottom();
 }

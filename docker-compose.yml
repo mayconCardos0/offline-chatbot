@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  chatbot:
+    build: .
+    container_name: offline-chatbot
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./data:/app/data
+      - ./models:/app/models
+    environment:
+      PORT: 8000
+      MODEL_PATH: models/gemma-2-2b-it-Q4_K_M.gguf
+      DOCS_DIR: data/documents
+      INDEX_DIR: data/index
+      CONVERSATIONS_FILE: data/conversations.json
+    restart: unless-stopped
