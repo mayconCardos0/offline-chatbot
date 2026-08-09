@@ -65,7 +65,7 @@ from rag.evaluation import (  # noqa: E402
     _effective_ids_from_item,
     load_dataset_from_file,
 )
-from rag.retriever import RetrievalTrace, Retriever  # noqa: E402
+from rag.retriever import Retriever  # noqa: E402
 from rag.vectorstore import VectorStore  # noqa: E402
 
 logger = logging.getLogger(__name__)
@@ -313,7 +313,7 @@ def print_failure_summary(records: list[dict]) -> None:
     misses = total - hits
 
     print(f"\n{'═' * 65}")
-    print(f"  Failure Analysis Summary")
+    print("  Failure Analysis Summary")
     print(f"{'═' * 65}")
     print(f"  Queries analysed : {total}")
     print(f"  Hits             : {hits}  ({hits/total*100:.1f}%)")
@@ -329,7 +329,7 @@ def print_failure_summary(records: list[dict]) -> None:
             stage_counts[fs] += 1
 
     if stage_counts:
-        print(f"\n  Failure stage breakdown (answerable queries only):")
+        print("\n  Failure stage breakdown (answerable queries only):")
         for stage, count in stage_counts.most_common():
             bar = "█" * count
             print(f"    {stage:<35} {count:>3}  {bar}")
@@ -344,7 +344,7 @@ def print_failure_summary(records: list[dict]) -> None:
         if r.get("hit"):
             cat_stats[cat]["hits"] += 1
 
-    print(f"\n  Hit rate by category:")
+    print("\n  Hit rate by category:")
     for cat in sorted(cat_stats):
         s = cat_stats[cat]
         hr = s["hits"] / s["total"] if s["total"] else 0
@@ -360,7 +360,7 @@ def print_failure_summary(records: list[dict]) -> None:
         top1 = sum(1 for r in faiss_ranks if r == 1)
         top5 = sum(1 for r in faiss_ranks if r <= 5)
         top10 = sum(1 for r in faiss_ranks if r <= 10)
-        print(f"\n  FAISS rank of expected chunk (when found in semantic results):")
+        print("\n  FAISS rank of expected chunk (when found in semantic results):")
         print(
             f"    Rank 1     : {top1}/{found_in_faiss} ({top1/found_in_faiss*100:.1f}%)"
         )
@@ -467,7 +467,7 @@ def main() -> None:
     settings = get_settings()
 
     print(f"\n{'═' * 65}")
-    print(f"  RAG Failure Analyser")
+    print("  RAG Failure Analyser")
     print(f"{'═' * 65}")
 
     vs, embed_model, retriever = _load_components(settings)

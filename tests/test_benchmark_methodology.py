@@ -9,24 +9,16 @@ without changing retrieval behavior.
 from __future__ import annotations
 
 import json
-import os
-import sys
 from unittest.mock import MagicMock
 
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
-
 from rag.evaluation import (
-    EvaluationReport,
-    QueryResult,
-    _build_graded_relevance,
     _effective_ids_from_item,
     evaluate_query,
     evaluate_retriever,
-    load_dataset_from_file,
 )
-from rag.retriever import RetrievalTrace, Retriever, StageSnapshot
+from rag.retriever import Retriever
 
 # ---------------------------------------------------------------------------
 # Helpers

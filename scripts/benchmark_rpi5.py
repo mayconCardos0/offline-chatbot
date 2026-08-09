@@ -159,7 +159,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
     results["memory"] = {"startup_rss_mb": round(get_process_rss_mb(), 1)}
 
     # ── Load embedding model ───────────────────────────────────────────────
-    print(f"  Loading embedding model...")
+    print("  Loading embedding model...")
     t0 = time.perf_counter()
     embed_model = EmbeddingModel(
         model_name=settings.embed_model_name,
@@ -179,7 +179,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
     )
 
     # ── Load FAISS index ───────────────────────────────────────────────────
-    print(f"  Loading FAISS index...")
+    print("  Loading FAISS index...")
     t0 = time.perf_counter()
     index_dir = (
         str(ROOT / settings.index_dir)
@@ -206,7 +206,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
     if mode == "fusion":
         from rag.cross_encoder import CrossEncoderReranker
 
-        print(f"  Loading cross-encoder...")
+        print("  Loading cross-encoder...")
         t0 = time.perf_counter()
         cross_encoder = CrossEncoderReranker(
             model_name=settings.cross_encoder_model,
@@ -260,7 +260,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
     }
 
     # ── Cold start query ───────────────────────────────────────────────────
-    print(f"\n  Cold-start query...")
+    print("\n  Cold-start query...")
     cold_query = dataset[0]["query"]
     t0 = time.perf_counter()
     _ = retriever.retrieve(cold_query, k=5)
@@ -367,7 +367,7 @@ def print_report(results: dict):
     print(f"  PHASE 3G BENCHMARK — {mode.upper()}")
     print(f"{'='*70}")
 
-    print(f"\n  System:")
+    print("\n  System:")
     print(f"    Platform:   {sys_info.get('platform', '?')}")
     print(f"    Machine:    {sys_info.get('machine', '?')}")
     print(f"    CPU:        {sys_info.get('cpu_model', '?')}")
@@ -381,13 +381,13 @@ def print_report(results: dict):
     print(f"    HR@5:       {m['hit_rate_at_5']:.4f}")
     print(f"    MRR:        {m['mrr']:.4f}")
     if m.get("by_category"):
-        print(f"    Per-category HR@5:")
+        print("    Per-category HR@5:")
         for cat, v in sorted(m["by_category"].items()):
             print(
                 f"      {cat:<14} {v['hit_rate']:.3f} ({int(v['hit_rate']*v['n'])}/{v['n']})"
             )
 
-    print(f"\n  Latency:")
+    print("\n  Latency:")
     print(f"    Cold start: {lat['cold_start_ms']:.0f}ms")
     print(f"    Mean:       {lat['mean_ms']:.0f}ms")
     print(f"    Median:     {lat['median_ms']:.0f}ms")
@@ -396,7 +396,7 @@ def print_report(results: dict):
     print(f"    Min:        {lat['min_ms']:.0f}ms")
     print(f"    Max:        {lat['max_ms']:.0f}ms")
 
-    print(f"\n  Memory:")
+    print("\n  Memory:")
     print(f"    Startup:    {mem.get('startup_rss_mb', '?')} MB")
     print(f"    +Embedding: {mem.get('after_embedding_rss_mb', '?')} MB")
     print(f"    +FAISS:     {mem.get('after_faiss_rss_mb', '?')} MB")
@@ -425,7 +425,7 @@ def print_report(results: dict):
 
     load = results.get("load_times", {})
     if load:
-        print(f"\n  Load times:")
+        print("\n  Load times:")
         for k, v in load.items():
             print(f"    {k}: {v:.1f}s")
 
@@ -473,7 +473,7 @@ def main():
     ]
 
     print(f"\n{'='*70}")
-    print(f"  PHASE 3G — RASPBERRY PI 5 PRODUCTION BENCHMARK")
+    print("  PHASE 3G — RASPBERRY PI 5 PRODUCTION BENCHMARK")
     print(f"{'='*70}")
     print(f"  Dataset: {len(dataset)} queries")
     print(f"  Mode:    {args.mode}")
@@ -503,7 +503,7 @@ def main():
         h = all_results["hybrid"]
         f = all_results["fusion"]
         print(f"\n{'='*70}")
-        print(f"  COMPARISON: HYBRID vs FUSION")
+        print("  COMPARISON: HYBRID vs FUSION")
         print(f"{'='*70}")
         print(f"  {'Metric':<20} {'Hybrid':>12} {'Fusion':>12} {'Delta':>12}")
         print(f"  {'-'*56}")
@@ -518,7 +518,7 @@ def main():
             delta = fv - hv
             print(f"  {name:<20} {hv:>12.4f} {fv:>12.4f} {delta:>+12.4f}")
 
-    print(f"\nBenchmark complete.")
+    print("\nBenchmark complete.")
 
 
 if __name__ == "__main__":

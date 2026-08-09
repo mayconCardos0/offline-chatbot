@@ -76,7 +76,6 @@ from core.config import get_settings, setup_logging  # noqa: E402
 from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.evaluation import (  # noqa: E402
     EvaluationReport,
-    compare_reports,
     evaluate_retriever,
     load_dataset_from_file,
     print_report,
@@ -292,7 +291,7 @@ def compare_results(paths: list[str]) -> None:
     sep = "─" * len(header)
 
     print(f"\n{'═' * len(header)}")
-    print(f"  Experiment Comparison")
+    print("  Experiment Comparison")
     print(f"{'═' * len(header)}")
     print(header)
     print(sep)

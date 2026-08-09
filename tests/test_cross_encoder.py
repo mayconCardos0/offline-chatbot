@@ -6,14 +6,11 @@ Tests the rag/cross_encoder.py module without requiring the actual model.
 
 from __future__ import annotations
 
-import os
-import sys
-from unittest.mock import MagicMock, patch
+from unittest.mock import MagicMock
 
 import numpy as np
 import pytest
 
-sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 from rag.cross_encoder import CrossEncoderReranker, _normalize_scores
 
 
@@ -132,7 +129,7 @@ class TestCrossEncoderRerankerRerank:
         mock_model.predict.return_value = np.array([0.9, 0.1, 0.5])
         r._model = mock_model
         cands = self._candidates(10)
-        results = r.rerank("query", cands, final_k=3)
+        r.rerank("query", cands, final_k=3)
         # Only 3 candidates scored
         mock_model.predict.assert_called_once()
         pairs = mock_model.predict.call_args[0][0]
