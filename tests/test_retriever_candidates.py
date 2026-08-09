@@ -8,6 +8,7 @@ Tests verify:
   - Interaction between candidate pool and final top_k
   - Deterministic retrieval at different pool sizes
 """
+
 from __future__ import annotations
 
 import os
@@ -21,7 +22,6 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from rag.retriever import Retriever
 
-
 # ---------------------------------------------------------------------------
 # Helper
 # ---------------------------------------------------------------------------
@@ -30,7 +30,11 @@ from rag.retriever import Retriever
 def _make_retriever(n_chunks=50, cm=4, top_k=5):
     """Create a retriever with n_chunks available and configurable cm."""
     chunks = [
-        {"text": f"chunk {i} with content keyword text", "chunk_id": f"c{i:03d}", "score": 0.8 - i * 0.01}
+        {
+            "text": f"chunk {i} with content keyword text",
+            "chunk_id": f"c{i:03d}",
+            "score": 0.8 - i * 0.01,
+        }
         for i in range(n_chunks)
     ]
     vs = MagicMock()
@@ -38,17 +42,20 @@ def _make_retriever(n_chunks=50, cm=4, top_k=5):
     vs.search.return_value = chunks
     em = MagicMock()
     em.embed.return_value = [np.random.randn(64).tolist()]
-    return Retriever(
-        vectorstore=vs,
-        embed_model=em,
-        top_k=top_k,
-        candidate_multiplier=cm,
-        min_score=0.25,
-        lexical_weight=0.0,
-        adaptive_sigma=999.0,  # adaptive OFF
-        gap_filter_enabled=False,
-        keyword_filter_enabled=False,
-    ), vs
+    return (
+        Retriever(
+            vectorstore=vs,
+            embed_model=em,
+            top_k=top_k,
+            candidate_multiplier=cm,
+            min_score=0.25,
+            lexical_weight=0.0,
+            adaptive_sigma=999.0,  # adaptive OFF
+            gap_filter_enabled=False,
+            keyword_filter_enabled=False,
+        ),
+        vs,
+    )
 
 
 # ---------------------------------------------------------------------------
@@ -133,7 +140,11 @@ class TestHigherCmSurfacesMoreChunks:
         # Create chunks where the target is at position 24 (0-indexed)
         n = 50
         chunks = [
-            {"text": f"generic chunk {i} filler content text", "chunk_id": f"c{i:03d}", "score": 0.8 - i * 0.005}
+            {
+                "text": f"generic chunk {i} filler content text",
+                "chunk_id": f"c{i:03d}",
+                "score": 0.8 - i * 0.005,
+            }
             for i in range(n)
         ]
         target_idx = 24
@@ -149,9 +160,15 @@ class TestHigherCmSurfacesMoreChunks:
         # cm=4: pool=20 — target at rank 25 NOT in pool
         vs.search.return_value = chunks[:20]  # only first 20
         r4 = Retriever(
-            vectorstore=vs, embed_model=em, top_k=5, candidate_multiplier=4,
-            min_score=0.25, lexical_weight=0.0, adaptive_sigma=999.0,
-            gap_filter_enabled=False, keyword_filter_enabled=False,
+            vectorstore=vs,
+            embed_model=em,
+            top_k=5,
+            candidate_multiplier=4,
+            min_score=0.25,
+            lexical_weight=0.0,
+            adaptive_sigma=999.0,
+            gap_filter_enabled=False,
+            keyword_filter_enabled=False,
         )
         res4 = r4.retrieve("target keyword content", k=5)
         ids4 = {c["chunk_id"] for c in res4}
@@ -160,9 +177,15 @@ class TestHigherCmSurfacesMoreChunks:
         # cm=6: pool=30 — target at rank 25 IS in pool
         vs.search.return_value = chunks[:30]  # first 30 includes rank 25
         r6 = Retriever(
-            vectorstore=vs, embed_model=em, top_k=5, candidate_multiplier=6,
-            min_score=0.25, lexical_weight=0.0, adaptive_sigma=999.0,
-            gap_filter_enabled=False, keyword_filter_enabled=False,
+            vectorstore=vs,
+            embed_model=em,
+            top_k=5,
+            candidate_multiplier=6,
+            min_score=0.25,
+            lexical_weight=0.0,
+            adaptive_sigma=999.0,
+            gap_filter_enabled=False,
+            keyword_filter_enabled=False,
         )
         res6 = r6.retrieve("target keyword content", k=30)
         ids6 = {c["chunk_id"] for c in res6}

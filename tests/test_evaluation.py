@@ -45,7 +45,6 @@ from rag.evaluation import (  # noqa: E402
     save_dataset_to_file,
 )
 
-
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -244,7 +243,9 @@ class TestBuildGradedRelevance:
         assert result == {"abc": 3, "def": 1}
 
     def test_skips_entries_without_chunk_id(self):
-        item = {"relevant_chunks": [{"relevance": 3}, {"chunk_id": "abc", "relevance": 2}]}
+        item = {
+            "relevant_chunks": [{"relevance": 3}, {"chunk_id": "abc", "relevance": 2}]
+        }
         result = _build_graded_relevance(item)
         assert result == {"abc": 2}
 
@@ -355,9 +356,7 @@ class TestEvaluateQuery:
         """When relevant_chunk_ids is empty, match by text prefix."""
         text = "This is the relevant chunk text content for this test."
         retriever = _make_retriever_returning([{"text": text, "score": 0.9}])
-        result = evaluate_query(
-            retriever, "query", set(), relevant_texts=[text], k=1
-        )
+        result = evaluate_query(retriever, "query", set(), relevant_texts=[text], k=1)
         assert result.hit_rate == pytest.approx(1.0)
 
 
@@ -375,7 +374,9 @@ class TestEvaluateRetriever:
     def test_legacy_schema_item_evaluated(self):
         """Old schema with relevant_chunk_ids must work."""
         retriever = _make_retriever_returning([_chunk("abc", score=0.9)])
-        dataset = [{"query": "test?", "relevant_chunk_ids": ["abc"], "relevant_texts": []}]
+        dataset = [
+            {"query": "test?", "relevant_chunk_ids": ["abc"], "relevant_texts": []}
+        ]
         report = evaluate_retriever(retriever, dataset, k=5)
         assert report.n_queries == 1
         assert report.hit_rate == pytest.approx(1.0)
@@ -433,6 +434,7 @@ class TestEvaluateRetriever:
 
     def test_aggregated_metrics_are_averages(self):
         """Mean recall should be the average of individual query recalls."""
+
         # q1: hit, q2: miss
         def _side_effect(query, k=5):
             if "hit" in query:
@@ -474,7 +476,9 @@ class TestEvaluateRetriever:
 
 class TestDatasetIO:
     def test_save_and_load_legacy_schema(self, tmp_path):
-        dataset = [{"query": "q1", "relevant_chunk_ids": ["abc"], "category": "factual"}]
+        dataset = [
+            {"query": "q1", "relevant_chunk_ids": ["abc"], "category": "factual"}
+        ]
         path = str(tmp_path / "ds.json")
         save_dataset_to_file(dataset, path)
         loaded = load_dataset_from_file(path)
@@ -577,7 +581,11 @@ class TestBuildSyntheticDataset:
     def test_n_samples_capped_at_metadata_length(self):
         vs = MagicMock()
         vs.metadata = [
-            {"text": f"Texto {i} com conteúdo suficiente.", "source": "doc.txt", "chunk_id": f"c{i}"}
+            {
+                "text": f"Texto {i} com conteúdo suficiente.",
+                "source": "doc.txt",
+                "chunk_id": f"c{i}",
+            }
             for i in range(3)
         ]
         result = build_synthetic_dataset(vs, n_samples=100, seed=42)

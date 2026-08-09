@@ -5,6 +5,7 @@ conversational query separation, and stage-level retrieval tracing.
 Tests verify the diagnostic methodology and evaluation framework extensions
 without changing retrieval behavior.
 """
+
 from __future__ import annotations
 
 import json
@@ -17,16 +18,15 @@ import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from rag.evaluation import (
-    QueryResult,
     EvaluationReport,
-    _effective_ids_from_item,
+    QueryResult,
     _build_graded_relevance,
+    _effective_ids_from_item,
     evaluate_query,
     evaluate_retriever,
     load_dataset_from_file,
 )
-from rag.retriever import Retriever, RetrievalTrace, StageSnapshot
-
+from rag.retriever import RetrievalTrace, Retriever, StageSnapshot
 
 # ---------------------------------------------------------------------------
 # Helpers
@@ -108,8 +108,12 @@ class TestNegativeQueryHandling:
         We can detect this by checking hit_rate > 0 with answerable=False."""
         retriever = _mock_retriever([_chunk("c0", 0.4)])
         dataset = [
-            {"query": "question not in corpus", "answerable": False,
-             "category": "negative", "relevant_chunks": []}
+            {
+                "query": "question not in corpus",
+                "answerable": False,
+                "category": "negative",
+                "relevant_chunks": [],
+            }
         ]
         report = evaluate_retriever(retriever, dataset, k=5)
         # The query retrieved something — potentially a false positive
@@ -122,15 +126,17 @@ class TestNegativeQueryHandling:
         We can compute no_answer_accuracy as fraction with hit_rate==0."""
         retriever = _mock_retriever([])  # returns nothing
         neg_queries = [
-            {"query": f"neg_{i}", "answerable": False, "category": "negative",
-             "relevant_chunks": []}
+            {
+                "query": f"neg_{i}",
+                "answerable": False,
+                "category": "negative",
+                "relevant_chunks": [],
+            }
             for i in range(5)
         ]
         report = evaluate_retriever(retriever, neg_queries, k=5)
         # All negative queries returned nothing — 100% no-answer accuracy
-        no_answer_correct = sum(
-            1 for qr in report.per_query if len(qr.retrieved) == 0
-        )
+        no_answer_correct = sum(1 for qr in report.per_query if len(qr.retrieved) == 0)
         assert no_answer_correct == 5
 
 
@@ -164,8 +170,12 @@ class TestConversationalQuerySeparation:
         """Category is propagated for filtering in analysis."""
         retriever = _mock_retriever([])
         dataset = [
-            {"query": "Why?", "category": "conversational",
-             "answerable": True, "relevant_chunks": []}
+            {
+                "query": "Why?",
+                "category": "conversational",
+                "answerable": True,
+                "relevant_chunks": [],
+            }
         ]
         report = evaluate_retriever(retriever, dataset, k=5)
         assert report.per_query[0].category == "conversational"
@@ -181,6 +191,7 @@ class TestStageLevelTracing:
 
     def _make_retriever_with_trace(self, chunks, gap_enabled=True, kw_enabled=True):
         import numpy as np
+
         vs = MagicMock()
         vs.size = 100
         vs.search.return_value = chunks
@@ -229,7 +240,11 @@ class TestStageLevelTracing:
     def test_trace_candidate_count_decreases_or_stays(self):
         """Each stage should have equal or fewer candidates than the previous."""
         chunks = [
-            {"text": f"chunk {i} with some relevant text", "chunk_id": f"c{i}", "score": 0.6 - i * 0.05}
+            {
+                "text": f"chunk {i} with some relevant text",
+                "chunk_id": f"c{i}",
+                "score": 0.6 - i * 0.05,
+            }
             for i in range(8)
         ]
         r = self._make_retriever_with_trace(chunks)
@@ -239,7 +254,9 @@ class TestStageLevelTracing:
             assert counts[i] <= counts[i - 1] or counts[i] == 0
 
     def test_trace_to_dict_serializable(self):
-        chunks = [{"text": "testing serialization output", "chunk_id": "c1", "score": 0.7}]
+        chunks = [
+            {"text": "testing serialization output", "chunk_id": "c1", "score": 0.7}
+        ]
         r = self._make_retriever_with_trace(chunks)
         _, trace = r.retrieve_with_trace("testing serialization")
         d = trace.to_dict()
@@ -257,6 +274,7 @@ class TestAdaptiveFilterAblation:
 
     def _make_retriever(self, chunks, sigma=1.0):
         import numpy as np
+
         vs = MagicMock()
         vs.size = 100
         vs.search.return_value = chunks
@@ -277,7 +295,11 @@ class TestAdaptiveFilterAblation:
     def test_sigma_1_removes_low_scorers(self):
         """With tight scores and σ=1, only top scorers survive."""
         chunks = [
-            {"text": f"content chunk {i} relevant", "chunk_id": f"c{i}", "score": 0.7 - i * 0.02}
+            {
+                "text": f"content chunk {i} relevant",
+                "chunk_id": f"c{i}",
+                "score": 0.7 - i * 0.02,
+            }
             for i in range(10)
         ]
         r = self._make_retriever(chunks, sigma=1.0)
@@ -288,7 +310,11 @@ class TestAdaptiveFilterAblation:
     def test_sigma_999_keeps_all_above_min_score(self):
         """With σ=999, all candidates above min_score survive."""
         chunks = [
-            {"text": f"content chunk {i} relevant", "chunk_id": f"c{i}", "score": 0.7 - i * 0.02}
+            {
+                "text": f"content chunk {i} relevant",
+                "chunk_id": f"c{i}",
+                "score": 0.7 - i * 0.02,
+            }
             for i in range(10)
         ]
         r_no_adaptive = self._make_retriever(chunks, sigma=999.0)
@@ -300,7 +326,11 @@ class TestAdaptiveFilterAblation:
     def test_disabling_adaptive_never_reduces_results(self):
         """Results with adaptive disabled should be >= results with adaptive enabled."""
         chunks = [
-            {"text": f"content chunk {i} matching text", "chunk_id": f"c{i}", "score": 0.6 - i * 0.03}
+            {
+                "text": f"content chunk {i} matching text",
+                "chunk_id": f"c{i}",
+                "score": 0.6 - i * 0.03,
+            }
             for i in range(8)
         ]
         r_enabled = self._make_retriever(chunks, sigma=1.0)
@@ -324,7 +354,11 @@ class TestExperimentReproducibility:
         retriever = _mock_retriever([_chunk("c0", 0.9), _chunk("c1", 0.7)])
         dataset = [
             {"query": "test query", "relevant_chunk_ids": ["c0"], "relevant_texts": []},
-            {"query": "another query", "relevant_chunk_ids": ["c1"], "relevant_texts": []},
+            {
+                "query": "another query",
+                "relevant_chunk_ids": ["c1"],
+                "relevant_texts": [],
+            },
         ]
         r1 = evaluate_retriever(retriever, dataset, k=5)
         r2 = evaluate_retriever(retriever, dataset, k=5)
@@ -380,19 +414,21 @@ class TestRequiredVsSupportingEvidence:
         }
         # Simulate "required-only" filtering
         required_ids = {
-            e["chunk_id"] for e in item["relevant_chunks"]
-            if e.get("relevance", 0) >= 3
+            e["chunk_id"] for e in item["relevant_chunks"] if e.get("relevance", 0) >= 3
         }
         assert required_ids == {"must_have"}
 
     def test_graded_ndcg_respects_relevance_grades(self):
         """NDCG with graded relevance gives higher score to high-grade chunks."""
         from rag.evaluation import _ndcg_at_k
+
         graded = {"must_have": 3, "nice": 1}
         # Perfect order: must_have@1, nice@2
-        perfect = _ndcg_at_k(["must_have", "nice"], {"must_have", "nice"}, 2,
-                             graded_relevance=graded)
+        perfect = _ndcg_at_k(
+            ["must_have", "nice"], {"must_have", "nice"}, 2, graded_relevance=graded
+        )
         # Reversed: nice@1, must_have@2
-        reversed_ = _ndcg_at_k(["nice", "must_have"], {"must_have", "nice"}, 2,
-                               graded_relevance=graded)
+        reversed_ = _ndcg_at_k(
+            ["nice", "must_have"], {"must_have", "nice"}, 2, graded_relevance=graded
+        )
         assert perfect > reversed_

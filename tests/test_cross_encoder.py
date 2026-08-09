@@ -3,9 +3,13 @@ Phase 3F tests — CrossEncoderReranker score fusion logic.
 
 Tests the rag/cross_encoder.py module without requiring the actual model.
 """
+
 from __future__ import annotations
-import os, sys
+
+import os
+import sys
 from unittest.mock import MagicMock, patch
+
 import numpy as np
 import pytest
 
@@ -141,8 +145,10 @@ class TestCrossEncoderRerankerFallback:
         r = CrossEncoderReranker(hybrid_weight=0.4, ce_top_k=20)
         # Force load failure by making _load_model raise
         r._model = None
+
         def _fail():
             raise ImportError("no module")
+
         r._load_model = _fail
         cands = [{"text": "x", "chunk_id": "c0", "score": 0.5}]
         results = r.rerank("query", cands, final_k=5)

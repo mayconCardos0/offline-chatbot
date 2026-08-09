@@ -10,6 +10,7 @@ Tests verify:
   - Edge cases: empty candidates, single candidate, all same score
   - Adaptive filter always preserves at least the best-scoring chunk
 """
+
 from __future__ import annotations
 
 import os
@@ -23,15 +24,12 @@ sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from rag.retriever import Retriever
 
-
 # ---------------------------------------------------------------------------
 # Helper
 # ---------------------------------------------------------------------------
 
 
-def _make_retriever(
-    chunks, sigma=1.0, gap=False, keyword=False, top_k=5, cm=2
-):
+def _make_retriever(chunks, sigma=1.0, gap=False, keyword=False, top_k=5, cm=2):
     vs = MagicMock()
     vs.size = 100
     vs.search.return_value = chunks

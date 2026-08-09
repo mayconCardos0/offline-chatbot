@@ -25,12 +25,11 @@ import pytest
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
 from rag.retriever import (  # noqa: E402
-    Retriever,
     RetrievalTrace,
+    Retriever,
     StageSnapshot,
     _bm25_scores,
 )
-
 
 # ---------------------------------------------------------------------------
 # Fixtures / helpers
@@ -79,10 +78,7 @@ def _make_retriever(
 class TestRetrieveExplicitK:
     def test_explicit_k_overrides_base_top_k(self):
         """retrieve(query, k=1) must return at most 1 result even if top_k=10."""
-        chunks = [
-            _make_chunk(f"algoritmo chunk {i}", 0.9 - i * 0.01)
-            for i in range(5)
-        ]
+        chunks = [_make_chunk(f"algoritmo chunk {i}", 0.9 - i * 0.01) for i in range(5)]
         retriever = _make_retriever(chunks=chunks, top_k=10)
         results = retriever.retrieve("algoritmo chunk", k=1)
         assert len(results) <= 1
@@ -108,7 +104,9 @@ class TestRetrieveExplicitK:
 
     def test_explicit_k_bypasses_dynamic_adjustment(self):
         """retrieve(query, k=2) must request exactly 2 results regardless of query type."""
-        chunks = [_make_chunk(f"governo período {i}", 0.9 - i * 0.01) for i in range(10)]
+        chunks = [
+            _make_chunk(f"governo período {i}", 0.9 - i * 0.01) for i in range(10)
+        ]
         retriever = _make_retriever(chunks=chunks, top_k=5, size=10)
         retriever._vectorstore.search.return_value = chunks
         results = retriever.retrieve("como foi o governo?", k=2)
@@ -180,6 +178,7 @@ class TestRetrieveWithTrace:
         _, trace = retriever.retrieve_with_trace("conteúdo chunk")
         d = trace.to_dict()
         import json
+
         # Must be JSON-serializable without error
         serialized = json.dumps(d)
         assert isinstance(serialized, str)
@@ -205,9 +204,7 @@ class TestStageSnapshot:
     def test_to_dict_has_stage_count_candidates(self):
         snap = StageSnapshot(
             stage="TEST_STAGE",
-            candidates=[
-                {"text": "chunk text here", "score": 0.8, "chunk_id": "abc"}
-            ],
+            candidates=[{"text": "chunk text here", "score": 0.8, "chunk_id": "abc"}],
         )
         d = snap.to_dict()
         assert d["stage"] == "TEST_STAGE"
@@ -217,7 +214,9 @@ class TestStageSnapshot:
     def test_to_dict_candidate_has_required_keys(self):
         snap = StageSnapshot(
             stage="S",
-            candidates=[{"text": "hello world content", "score": 0.75, "chunk_id": "x"}],
+            candidates=[
+                {"text": "hello world content", "score": 0.75, "chunk_id": "x"}
+            ],
         )
         cand = snap.to_dict()["candidates"][0]
         assert "chunk_id" in cand
@@ -248,7 +247,10 @@ class TestStageSnapshot:
 class TestGapFilterAblation:
     def test_gap_filter_disabled_does_not_add_gap_filter_stage_to_trace(self):
         """When gap_filter_enabled=False, AFTER_GAP_FILTER should not appear in trace."""
-        chunks = [_make_chunk(f"conteúdo chunk {i} histórico", 0.30 + i * 0.01) for i in range(5)]
+        chunks = [
+            _make_chunk(f"conteúdo chunk {i} histórico", 0.30 + i * 0.01)
+            for i in range(5)
+        ]
         retriever = _make_retriever(
             chunks=chunks, gap_filter_enabled=False, keyword_filter_enabled=False
         )
@@ -258,7 +260,10 @@ class TestGapFilterAblation:
 
     def test_gap_filter_enabled_adds_gap_filter_stage_to_trace(self):
         """When gap_filter_enabled=True, AFTER_GAP_FILTER should appear if filter runs."""
-        chunks = [_make_chunk(f"conteúdo histórico chunk {i}", 0.9 - i * 0.01) for i in range(3)]
+        chunks = [
+            _make_chunk(f"conteúdo histórico chunk {i}", 0.9 - i * 0.01)
+            for i in range(3)
+        ]
         retriever = _make_retriever(chunks=chunks, gap_filter_enabled=True)
         _, trace = retriever.retrieve_with_trace("conteúdo histórico", k=3)
         stage_names = [s.stage for s in trace.stages]
@@ -267,10 +272,17 @@ class TestGapFilterAblation:
     def test_gap_filter_disabled_returns_more_results_than_enabled(self):
         """Disabling gap filter should never reduce result count vs enabled."""
         # Uniform low scores — gap filter would normally discard all
-        chunks = [_make_chunk(f"conteúdo {i} tópico histórico", 0.28 + i * 0.001) for i in range(5)]
+        chunks = [
+            _make_chunk(f"conteúdo {i} tópico histórico", 0.28 + i * 0.001)
+            for i in range(5)
+        ]
 
-        r_with_gap = _make_retriever(chunks=chunks, gap_filter_enabled=True, keyword_filter_enabled=False)
-        r_no_gap = _make_retriever(chunks=chunks, gap_filter_enabled=False, keyword_filter_enabled=False)
+        r_with_gap = _make_retriever(
+            chunks=chunks, gap_filter_enabled=True, keyword_filter_enabled=False
+        )
+        r_no_gap = _make_retriever(
+            chunks=chunks, gap_filter_enabled=False, keyword_filter_enabled=False
+        )
 
         results_with = r_with_gap.retrieve("conteúdo tópico", k=5)
         results_without = r_no_gap.retrieve("conteúdo tópico", k=5)

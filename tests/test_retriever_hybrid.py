@@ -9,6 +9,7 @@ Tests verify:
   - Deterministic ranking across repeated calls
   - BM25 contributes positively to ranking for keyword-rich queries
 """
+
 from __future__ import annotations
 
 import os
@@ -20,8 +21,7 @@ import pytest
 
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), ".."))
 
-from rag.retriever import Retriever, _normalize, _bm25_scores, _tokenize
-
+from rag.retriever import Retriever, _bm25_scores, _normalize, _tokenize
 
 # ---------------------------------------------------------------------------
 # Helper
@@ -63,11 +63,13 @@ def _chunks_with_text_scores(items):
 class TestPureSemanticMode:
     def test_lw_zero_sorts_by_original_score(self):
         """lexical_weight=0 must return candidates sorted by semantic score only."""
-        chunks = _chunks_with_text_scores([
-            ("chunk A with bm25 keyword match", 0.60),
-            ("chunk B semantically closer text", 0.80),
-            ("chunk C moderate content here", 0.70),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("chunk A with bm25 keyword match", 0.60),
+                ("chunk B semantically closer text", 0.80),
+                ("chunk C moderate content here", 0.70),
+            ]
+        )
         r = _make_retriever(chunks, lexical_weight=0.0)
         results = r.retrieve("keyword match bm25 query", k=3)
         scores = [c["score"] for c in results]
@@ -77,10 +79,12 @@ class TestPureSemanticMode:
 
     def test_lw_zero_faster_no_bm25(self):
         """At lw=0, BM25 is not computed (short-circuit path)."""
-        chunks = _chunks_with_text_scores([
-            ("text one content", 0.50),
-            ("text two content", 0.60),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("text one content", 0.50),
+                ("text two content", 0.60),
+            ]
+        )
         r = _make_retriever(chunks, lexical_weight=0.0)
         # Should not raise even with unusual text
         results = r.retrieve("anything", k=2)
@@ -95,11 +99,13 @@ class TestPureSemanticMode:
 class TestBM25Contribution:
     def test_bm25_promotes_keyword_matching_chunk(self):
         """A chunk with lower semantic score but keyword match should be promoted by BM25."""
-        chunks = _chunks_with_text_scores([
-            ("revolução industrial mecanização produção fábricas trabalho", 0.55),
-            ("conteúdo genérico sobre assuntos diversos sem relação direta", 0.65),
-            ("outro texto sem relação com a consulta original feita", 0.60),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("revolução industrial mecanização produção fábricas trabalho", 0.55),
+                ("conteúdo genérico sobre assuntos diversos sem relação direta", 0.65),
+                ("outro texto sem relação com a consulta original feita", 0.60),
+            ]
+        )
         # At lw=0.40, BM25 should boost chunk 0 ("revolução industrial")
         r_with_bm25 = _make_retriever(chunks, lexical_weight=0.40)
         results = r_with_bm25.retrieve("revolução industrial", k=3)
@@ -115,11 +121,13 @@ class TestBM25Contribution:
 
     def test_different_weights_produce_different_rankings(self):
         """lw=0.40 and lw=0 should produce different orderings when BM25 signal exists."""
-        chunks = _chunks_with_text_scores([
-            ("Waterloo batalha derrota 1815 Napoleão exército final", 0.45),
-            ("Europa guerras conflitos imperiais durante século dezenove", 0.70),
-            ("Napoleão Bonaparte império francês expansão continental", 0.65),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("Waterloo batalha derrota 1815 Napoleão exército final", 0.45),
+                ("Europa guerras conflitos imperiais durante século dezenove", 0.70),
+                ("Napoleão Bonaparte império francês expansão continental", 0.65),
+            ]
+        )
         r40 = _make_retriever(chunks, lexical_weight=0.40)
         r00 = _make_retriever(chunks, lexical_weight=0.00)
 
@@ -181,11 +189,13 @@ class TestWeightFormula:
         """Final score = (1-lw)*sem_norm + lw*bm25_norm."""
         # We can verify this by checking the output scores
         # Chunk with highest semantic but no BM25
-        chunks = _chunks_with_text_scores([
-            ("completely unrelated text without keywords", 0.90),
-            ("keyword keyword keyword keyword keyword keyword", 0.50),
-            ("some moderate text with keyword presence here", 0.70),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("completely unrelated text without keywords", 0.90),
+                ("keyword keyword keyword keyword keyword keyword", 0.50),
+                ("some moderate text with keyword presence here", 0.70),
+            ]
+        )
         r = _make_retriever(chunks, lexical_weight=0.40)
         results = r.retrieve("keyword", k=3)
 
@@ -195,11 +205,13 @@ class TestWeightFormula:
 
     def test_lw_1_is_pure_bm25(self):
         """At lexical_weight=1.0, ranking should follow BM25 order only."""
-        chunks = _chunks_with_text_scores([
-            ("revolução francesa liberdade igualdade fraternidade", 0.90),
-            ("texto sem relação com a consulta feita aqui", 0.80),
-            ("revolução revolução revolução liberdade liberdade", 0.30),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("revolução francesa liberdade igualdade fraternidade", 0.90),
+                ("texto sem relação com a consulta feita aqui", 0.80),
+                ("revolução revolução revolução liberdade liberdade", 0.30),
+            ]
+        )
         # lw=1.0 → pure BM25. Chunk c2 has most keyword repetitions
         r = _make_retriever(chunks, lexical_weight=1.0)
         results = r.retrieve("revolução liberdade", k=3)
@@ -215,11 +227,13 @@ class TestWeightFormula:
 class TestRankingDeterminism:
     def test_same_weight_same_results(self):
         """Repeated calls with same config produce identical results."""
-        chunks = _chunks_with_text_scores([
-            ("conteúdo A relevante para pesquisa", 0.70),
-            ("conteúdo B parcialmente relevante aqui", 0.68),
-            ("conteúdo C pouco relevante para pesquisa", 0.65),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("conteúdo A relevante para pesquisa", 0.70),
+                ("conteúdo B parcialmente relevante aqui", 0.68),
+                ("conteúdo C pouco relevante para pesquisa", 0.65),
+            ]
+        )
         r = _make_retriever(chunks, lexical_weight=0.40)
         res1 = r.retrieve("conteúdo relevante pesquisa", k=3)
         res2 = r.retrieve("conteúdo relevante pesquisa", k=3)
@@ -228,10 +242,12 @@ class TestRankingDeterminism:
 
     def test_ranking_stable_for_ties(self):
         """When hybrid scores are tied, order is stable (from Python stable sort)."""
-        chunks = _chunks_with_text_scores([
-            ("conteúdo idêntico para teste estabilidade", 0.60),
-            ("conteúdo idêntico para teste estabilidade", 0.60),
-        ])
+        chunks = _chunks_with_text_scores(
+            [
+                ("conteúdo idêntico para teste estabilidade", 0.60),
+                ("conteúdo idêntico para teste estabilidade", 0.60),
+            ]
+        )
         r = _make_retriever(chunks, lexical_weight=0.40)
         results = r.retrieve("conteúdo idêntico teste", k=2)
         # Stable sort preserves original order for ties

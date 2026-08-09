@@ -17,8 +17,13 @@ class TestSettingsDefaults:
     def setup_method(self):
         self._original = {}
         for key in [
-            "PORT", "MODEL_PATH", "N_CTX", "N_THREADS", "TOP_K",
-            "CHUNK_SIZE", "CHUNK_OVERLAP",
+            "PORT",
+            "MODEL_PATH",
+            "N_CTX",
+            "N_THREADS",
+            "TOP_K",
+            "CHUNK_SIZE",
+            "CHUNK_OVERLAP",
         ]:
             self._original[key] = os.environ.pop(key, None)
 
