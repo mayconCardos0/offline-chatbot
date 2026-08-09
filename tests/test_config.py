@@ -16,7 +16,15 @@ from core.config import Settings, get_settings, setup_logging  # noqa: E402
 class TestSettingsDefaults:
     def setup_method(self):
         self._original = {}
-        for key in ["PORT", "MODEL_PATH", "N_CTX", "N_THREADS", "TOP_K"]:
+        for key in [
+            "PORT",
+            "MODEL_PATH",
+            "N_CTX",
+            "N_THREADS",
+            "TOP_K",
+            "CHUNK_SIZE",
+            "CHUNK_OVERLAP",
+        ]:
             self._original[key] = os.environ.pop(key, None)
 
     def teardown_method(self):
@@ -120,3 +128,131 @@ class TestSetupLogging:
         self._reset()
         setup_logging("NOTAVALIDLEVEL")
         assert logging.getLogger().level == logging.INFO
+
+
+# ---------------------------------------------------------------------------
+# Phase 2: new settings added in core/config.py
+# ---------------------------------------------------------------------------
+
+
+class TestSettingsPhase2Defaults:
+    """Verify that every Phase 2 parameter has the correct baseline default."""
+
+    def test_lexical_weight_baseline_is_0_40(self):
+        # Corrected from 0.30 to match the actual retriever default
+        assert Settings().lexical_weight == pytest.approx(0.40)
+
+    def test_max_context_chars_baseline_is_3500(self):
+        # Corrected from 2000 to match the actual pipeline default
+        assert Settings().max_context_chars == 3500
+
+    def test_chunk_overlap_baseline_is_50_tokens(self, monkeypatch):
+        # Corrected from 1 sentence to 50 tokens
+        monkeypatch.delenv("CHUNK_OVERLAP", raising=False)
+        assert Settings().chunk_overlap == 50
+
+    def test_chunk_min_tokens_default(self):
+        assert Settings().chunk_min_tokens == 200
+
+    def test_chunk_max_tokens_default(self):
+        assert Settings().chunk_max_tokens == 375
+
+    def test_bm25_k1_default(self):
+        assert Settings().bm25_k1 == pytest.approx(1.5)
+
+    def test_bm25_b_default(self):
+        assert Settings().bm25_b == pytest.approx(0.75)
+
+    def test_hnsw_m_default(self):
+        assert Settings().hnsw_m == 32
+
+    def test_hnsw_ef_construction_default(self):
+        assert Settings().hnsw_ef_construction == 200
+
+    def test_hnsw_ef_search_default(self):
+        assert Settings().hnsw_ef_search == 64
+
+    def test_adaptive_sigma_default(self):
+        assert Settings().adaptive_sigma == pytest.approx(1.0)
+
+    def test_gap_filter_enabled_default_true(self):
+        assert Settings().gap_filter_enabled is True
+
+    def test_keyword_filter_enabled_default_true(self):
+        assert Settings().keyword_filter_enabled is True
+
+    def test_min_keyword_overlap_default(self):
+        assert Settings().min_keyword_overlap == pytest.approx(0.15)
+
+    def test_temporal_validation_enabled_default_true(self):
+        assert Settings().temporal_validation_enabled is True
+
+    def test_high_confidence_score_default(self):
+        assert Settings().high_confidence_score == pytest.approx(0.65)
+
+    def test_low_confidence_score_default(self):
+        assert Settings().low_confidence_score == pytest.approx(0.45)
+
+
+class TestSettingsPhase2FromEnv:
+    """Verify that Phase 2 parameters can be overridden via environment."""
+
+    def test_lexical_weight_from_env(self, monkeypatch):
+        monkeypatch.setenv("LEXICAL_WEIGHT", "0.6")
+        assert Settings().lexical_weight == pytest.approx(0.6)
+
+    def test_max_context_chars_from_env(self, monkeypatch):
+        monkeypatch.setenv("MAX_CONTEXT_CHARS", "5000")
+        assert Settings().max_context_chars == 5000
+
+    def test_chunk_overlap_from_env(self, monkeypatch):
+        monkeypatch.setenv("CHUNK_OVERLAP", "100")
+        assert Settings().chunk_overlap == 100
+
+    def test_chunk_min_tokens_from_env(self, monkeypatch):
+        monkeypatch.setenv("CHUNK_MIN_TOKENS", "150")
+        assert Settings().chunk_min_tokens == 150
+
+    def test_chunk_max_tokens_from_env(self, monkeypatch):
+        monkeypatch.setenv("CHUNK_MAX_TOKENS", "500")
+        assert Settings().chunk_max_tokens == 500
+
+    def test_bm25_k1_from_env(self, monkeypatch):
+        monkeypatch.setenv("BM25_K1", "2.0")
+        assert Settings().bm25_k1 == pytest.approx(2.0)
+
+    def test_bm25_b_from_env(self, monkeypatch):
+        monkeypatch.setenv("BM25_B", "0.5")
+        assert Settings().bm25_b == pytest.approx(0.5)
+
+    def test_hnsw_m_from_env(self, monkeypatch):
+        monkeypatch.setenv("HNSW_M", "16")
+        assert Settings().hnsw_m == 16
+
+    def test_hnsw_ef_search_from_env(self, monkeypatch):
+        monkeypatch.setenv("HNSW_EF_SEARCH", "128")
+        assert Settings().hnsw_ef_search == 128
+
+    def test_adaptive_sigma_from_env(self, monkeypatch):
+        monkeypatch.setenv("ADAPTIVE_SIGMA", "0.5")
+        assert Settings().adaptive_sigma == pytest.approx(0.5)
+
+    def test_gap_filter_disabled_from_env(self, monkeypatch):
+        monkeypatch.setenv("GAP_FILTER_ENABLED", "false")
+        assert Settings().gap_filter_enabled is False
+
+    def test_keyword_filter_disabled_from_env(self, monkeypatch):
+        monkeypatch.setenv("KEYWORD_FILTER_ENABLED", "false")
+        assert Settings().keyword_filter_enabled is False
+
+    def test_temporal_validation_disabled_from_env(self, monkeypatch):
+        monkeypatch.setenv("TEMPORAL_VALIDATION_ENABLED", "false")
+        assert Settings().temporal_validation_enabled is False
+
+    def test_high_confidence_score_from_env(self, monkeypatch):
+        monkeypatch.setenv("HIGH_CONFIDENCE_SCORE", "0.80")
+        assert Settings().high_confidence_score == pytest.approx(0.80)
+
+    def test_low_confidence_score_from_env(self, monkeypatch):
+        monkeypatch.setenv("LOW_CONFIDENCE_SCORE", "0.35")
+        assert Settings().low_confidence_score == pytest.approx(0.35)

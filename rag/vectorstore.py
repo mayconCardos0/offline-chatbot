@@ -33,7 +33,14 @@ _HNSW_EF_SEARCH = 64  # Qualidade da busca (pode ajustar em runtime)
 class VectorStore:
     """FAISS HNSW vector store com deduplicação e persistência em disco."""
 
-    def __init__(self, index_dir: str, embedding_dim: int) -> None:
+    def __init__(
+        self,
+        index_dir: str,
+        embedding_dim: int,
+        hnsw_m: int = _HNSW_M,
+        hnsw_ef_construction: int = _HNSW_EF_CONSTRUCTION,
+        hnsw_ef_search: int = _HNSW_EF_SEARCH,
+    ) -> None:
         try:
             import faiss
         except ImportError as exc:
@@ -44,6 +51,9 @@ class VectorStore:
         self._faiss = faiss
         self._index_dir = Path(index_dir)
         self._embedding_dim = embedding_dim
+        self._hnsw_m = hnsw_m
+        self._hnsw_ef_construction = hnsw_ef_construction
+        self._hnsw_ef_search = hnsw_ef_search
         self._metadata: list[dict] = []
         self._hashes: set[str] = set()
         self._index = self._build_empty_index()
@@ -58,6 +68,15 @@ class VectorStore:
     def size(self) -> int:
         """Número de vetores no índice."""
         return self._index.ntotal
+
+    @property
+    def metadata(self) -> list[dict]:
+        """Read-only view of chunk metadata stored in the index.
+
+        Returns a copy to prevent external mutation of internal state.
+        Use this instead of accessing _metadata directly.
+        """
+        return list(self._metadata)
 
     # ------------------------------------------------------------------
     # API pública
@@ -134,7 +153,7 @@ class VectorStore:
                 self._hashes = {_text_hash(c["text"]) for c in self._metadata}
 
             # Garante ef_search no índice carregado
-            _set_ef_search(self._index, _HNSW_EF_SEARCH)
+            _set_ef_search(self._index, self._hnsw_ef_search)
 
             logger.info(
                 "VectorStore carregado de '%s' (%d chunks).",
@@ -185,10 +204,10 @@ class VectorStore:
     def _build_empty_index(self):
         """Cria um índice HNSW-IP vazio."""
         index = self._faiss.IndexHNSWFlat(
-            self._embedding_dim, _HNSW_M, self._faiss.METRIC_INNER_PRODUCT
+            self._embedding_dim, self._hnsw_m, self._faiss.METRIC_INNER_PRODUCT
         )
-        index.hnsw.efConstruction = _HNSW_EF_CONSTRUCTION
-        _set_ef_search(index, _HNSW_EF_SEARCH)
+        index.hnsw.efConstruction = self._hnsw_ef_construction
+        _set_ef_search(index, self._hnsw_ef_search)
         return index
 
 

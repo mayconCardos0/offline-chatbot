@@ -101,6 +101,9 @@ def load_components(settings) -> tuple[VectorStore, EmbeddingModel, Retriever]:
     vs = VectorStore(
         index_dir=settings.index_dir,
         embedding_dim=embed_model.dimension,
+        hnsw_m=settings.hnsw_m,
+        hnsw_ef_construction=settings.hnsw_ef_construction,
+        hnsw_ef_search=settings.hnsw_ef_search,
     )
 
     if vs.size == 0:
@@ -111,10 +114,17 @@ def load_components(settings) -> tuple[VectorStore, EmbeddingModel, Retriever]:
     retriever = Retriever(
         vectorstore=vs,
         embed_model=embed_model,
-        top_k=getattr(settings, "top_k", 5),
-        candidate_multiplier=getattr(settings, "candidate_multiplier", 4),
-        min_score=getattr(settings, "min_score", 0.25),
-        lexical_weight=getattr(settings, "lexical_weight", 0.40),
+        top_k=settings.top_k,
+        candidate_multiplier=settings.candidate_multiplier,
+        min_score=settings.min_score,
+        lexical_weight=settings.lexical_weight,
+        bm25_k1=settings.bm25_k1,
+        bm25_b=settings.bm25_b,
+        adaptive_sigma=settings.adaptive_sigma,
+        gap_filter_enabled=settings.gap_filter_enabled,
+        keyword_filter_enabled=settings.keyword_filter_enabled,
+        high_confidence_score=settings.high_confidence_score,
+        low_confidence_score=settings.low_confidence_score,
     )
 
     return vs, embed_model, retriever
