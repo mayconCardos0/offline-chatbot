@@ -67,9 +67,28 @@ async def lifespan(app: FastAPI):
     vectorstore = VectorStore(
         index_dir=resolve(settings.index_dir),
         embedding_dim=embed_model.dimension,
+        hnsw_m=settings.hnsw_m,
+        hnsw_ef_construction=settings.hnsw_ef_construction,
+        hnsw_ef_search=settings.hnsw_ef_search,
     )
 
     # --- Retriever ---
+    cross_encoder = None
+    if settings.cross_encoder_enabled:
+        from rag.cross_encoder import CrossEncoderReranker
+
+        cross_encoder = CrossEncoderReranker(
+            model_name=settings.cross_encoder_model,
+            hybrid_weight=settings.cross_encoder_hybrid_weight,
+            ce_top_k=settings.cross_encoder_top_k,
+        )
+        logger.info(
+            "Cross-encoder enabled: model=%s hw=%.2f ce_top_k=%d",
+            settings.cross_encoder_model,
+            settings.cross_encoder_hybrid_weight,
+            settings.cross_encoder_top_k,
+        )
+
     retriever = Retriever(
         vectorstore=vectorstore,
         embed_model=embed_model,
@@ -77,6 +96,14 @@ async def lifespan(app: FastAPI):
         candidate_multiplier=settings.candidate_multiplier,
         min_score=settings.min_score,
         lexical_weight=settings.lexical_weight,
+        bm25_k1=settings.bm25_k1,
+        bm25_b=settings.bm25_b,
+        adaptive_sigma=settings.adaptive_sigma,
+        gap_filter_enabled=settings.gap_filter_enabled,
+        keyword_filter_enabled=settings.keyword_filter_enabled,
+        high_confidence_score=settings.high_confidence_score,
+        low_confidence_score=settings.low_confidence_score,
+        cross_encoder=cross_encoder,
     )
 
     # --- Conversation Manager ---

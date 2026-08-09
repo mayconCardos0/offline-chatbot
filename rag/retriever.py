@@ -1,30 +1,36 @@
 """
 Retriever com busca híbrida (semântica + BM25 léxico) e reranking.
 
-Melhorias em relação à versão anterior:
-  - min_score elevado de 0.25 → 0.40 (menos ruído no contexto).
-  - Threshold adaptativo baseado em desvio padrão dos scores.
-  - Campo 'confidence' exposto nos chunks retornados (usado pelo pipeline).
-  - Keyword filter com peso mínimo de 3 chars (antes era 4).
-  - Gap detection mais conservador para PDFs técnicos densos.
-
 Estratégia de dois estágios:
 
   Estágio 1 — Candidatos (rápido):
     - Busca semântica FAISS retorna top-(k * candidate_multiplier) chunks.
     - BM25 leve pontua os mesmos chunks por relevância léxica.
-    - Scores são combinados por fusão (Reciprocal Rank Fusion simplificada).
 
-  Estágio 2 — Reranking (preciso):
-    - Re-ordena os candidatos por score combinado.
-    - Filtra chunks com score abaixo de min_score e threshold adaptativo.
-    - Retorna os top-k finais com campo 'confidence'.
+  Estágio 2 — Reranking e filtros:
+    - Filtro absoluto (min_score).
+    - Filtro adaptativo (best − sigma * std).
+    - Gap detection.
+    - Keyword filter (opcional — controlado por keyword_filter_enabled).
+    - Hybrid reranking (weighted semantic + BM25).
+    - Period boost (corpus-specific, ver Phase 3 para remoção).
+
+Todos os parâmetros são configuráveis via core/config.py.
+
+Phase 2 changes:
+  - retrieve(query, k=None) aceita k explícito — remove necessidade de
+    mutation de atributos privados em evaluation.py.
+  - Parâmetros BM25 (k1, b), sigma do filtro adaptativo e flags de
+    filtros são lidos do Settings, não de constantes de módulo.
+  - Observabilidade: retrieve_with_trace() expõe candidatos em cada estágio.
 """
 
 import logging
 import math
 import re
 from collections import Counter
+from dataclasses import dataclass, field
+from typing import Optional
 
 logger = logging.getLogger(__name__)
 
@@ -175,24 +181,78 @@ _STOPWORDS_PT = {
     "numas",
 }
 
-# Parâmetros BM25
+# Module-level defaults (fallback when Retriever is constructed without settings).
+# These match the Phase 2 baseline values documented in core/config.py.
 _BM25_K1 = 1.5
 _BM25_B = 0.75
-
-# Score mínimo ajustado: 0.25 permite capturar mais candidatos relevantes
-# Reduzido de 0.30 para 0.25 para melhorar recall em queries com variações textuais
-# e evitar falsos negativos em perguntas sobre conteúdo disponível
 _MIN_SCORE = 0.25
-
-# Score a partir do qual o chunk é considerado altamente confiável
 _HIGH_CONFIDENCE_SCORE = 0.65
-
-# Score abaixo do qual o pipeline deve avisar o aluno sobre baixa confiança
 _LOW_CONFIDENCE_SCORE = 0.45
-
-# Peso da fusão: semântico vs léxico (aumentado para 0.40)
-# Maior peso léxico ajuda a capturar variações de capitalização e sinônimos
 _LEXICAL_WEIGHT = 0.40
+
+
+# ---------------------------------------------------------------------------
+# Trace data structures (Step 2 — observability)
+# ---------------------------------------------------------------------------
+
+
+@dataclass
+class StageSnapshot:
+    """Snapshot of candidates after a single retrieval stage."""
+
+    stage: str
+    candidates: list[dict] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return {
+            "stage": self.stage,
+            "count": len(self.candidates),
+            "candidates": [
+                {
+                    "chunk_id": c.get("chunk_id", ""),
+                    "score": round(c.get("score", 0.0), 4),
+                    "text_preview": c.get("text", "")[:80].replace("\n", " "),
+                }
+                for c in self.candidates
+            ],
+        }
+
+
+@dataclass
+class RetrievalTrace:
+    """Full trace of a retrieve_with_trace() call."""
+
+    query: str
+    rewritten_query: str
+    stages: list[StageSnapshot] = field(default_factory=list)
+    final_results: list[dict] = field(default_factory=list)
+
+    def to_dict(self) -> dict:
+        return {
+            "query": self.query,
+            "rewritten_query": self.rewritten_query,
+            "stages": [s.to_dict() for s in self.stages],
+            "final_count": len(self.final_results),
+        }
+
+    def summary(self) -> str:
+        lines = [
+            f"QUERY: {self.query}",
+            f"REWRITTEN: {self.rewritten_query}",
+            "",
+        ]
+        for snap in self.stages:
+            lines.append(f"[{snap.stage}]  {len(snap.candidates)} candidates")
+            for c in snap.candidates[:5]:
+                cid = c.get("chunk_id", "?")
+                score = c.get("score", 0.0)
+                preview = c.get("text", "")[:60].replace("\n", " ")
+                lines.append(f'  {cid:<18} score={score:.4f}  "{preview}"')
+            if len(snap.candidates) > 5:
+                lines.append(f"  ... and {len(snap.candidates) - 5} more")
+            lines.append("")
+        lines.append(f"FINAL: {len(self.final_results)} results")
+        return "\n".join(lines)
 
 
 class Retriever:
@@ -206,36 +266,211 @@ class Retriever:
         candidate_multiplier: int = 4,
         min_score: float = _MIN_SCORE,
         lexical_weight: float = _LEXICAL_WEIGHT,
+        bm25_k1: float = _BM25_K1,
+        bm25_b: float = _BM25_B,
+        adaptive_sigma: float = 1.0,
+        gap_filter_enabled: bool = True,
+        keyword_filter_enabled: bool = True,
+        high_confidence_score: float = _HIGH_CONFIDENCE_SCORE,
+        low_confidence_score: float = _LOW_CONFIDENCE_SCORE,
+        cross_encoder=None,
     ) -> None:
         self._vectorstore = vectorstore
         self._embed_model = embed_model
         self._top_k = top_k
-        self._base_top_k = top_k  # Guarda o valor base para ajustes dinâmicos
-        self._candidates = top_k * candidate_multiplier
+        self._base_top_k = top_k
+        self._candidate_multiplier = candidate_multiplier
         self._min_score = min_score
         self._lexical_weight = lexical_weight
+        self._bm25_k1 = bm25_k1
+        self._bm25_b = bm25_b
+        self._adaptive_sigma = adaptive_sigma
+        self._gap_filter_enabled = gap_filter_enabled
+        self._keyword_filter_enabled = keyword_filter_enabled
+        self._high_confidence_score = high_confidence_score
+        self._low_confidence_score = low_confidence_score
+        self._cross_encoder = cross_encoder  # Optional CrossEncoderReranker instance
 
     # ------------------------------------------------------------------
-    # API pública
+    # Public API
+    # ------------------------------------------------------------------
+
+    def retrieve(self, query: str, k: Optional[int] = None) -> list[dict]:
+        """Return the top-k most relevant chunks for the query.
+
+        Args:
+            query: The user query string.
+            k:     Number of results to return. If None, uses self._top_k
+                   (with dynamic adjustment for biographical/period queries).
+                   Pass an explicit value to bypass the dynamic adjustment —
+                   used by evaluation to ensure consistent depth across queries.
+
+        Returns:
+            Ordered list of chunk dicts. Empty if nothing passes quality filters.
+            Each chunk includes: text, source, score, confidence.
+        """
+        results, _ = self._retrieve_internal(query, k=k, trace=False)
+        return results
+
+    def retrieve_with_trace(
+        self, query: str, k: Optional[int] = None
+    ) -> tuple[list[dict], RetrievalTrace]:
+        """Like retrieve(), but also returns a full RetrievalTrace.
+
+        The trace records candidate counts and scores at every filter stage,
+        enabling per-query failure analysis. Disabled in the normal hot path.
+
+        Args:
+            query: The user query string.
+            k:     Explicit top-k (same semantics as retrieve()).
+
+        Returns:
+            (results, trace) tuple.
+        """
+        return self._retrieve_internal(query, k=k, trace=True)
+
+    def best_confidence(self, chunks: list[dict]) -> str:
+        """Return the confidence label of the highest-scoring chunk."""
+        if not chunks:
+            return "none"
+        best = max(c.get("score", 0) for c in chunks)
+        if best >= self._high_confidence_score:
+            return "high"
+        if best >= self._low_confidence_score:
+            return "medium"
+        return "low"
+
+    # ------------------------------------------------------------------
+    # Internal implementation
+    # ------------------------------------------------------------------
+
+    def _retrieve_internal(
+        self, query: str, k: Optional[int], trace: bool
+    ) -> tuple[list[dict], Optional[RetrievalTrace]]:
+        """Core retrieval logic shared by retrieve() and retrieve_with_trace()."""
+        tr = RetrievalTrace(query=query, rewritten_query=query) if trace else None
+
+        if self._vectorstore.size == 0:
+            logger.warning("VectorStore vazio — sem contexto para: '%s'", query)
+            return [], tr
+
+        # Determine k: explicit > dynamic > base
+        if k is not None:
+            effective_k = k
+        else:
+            effective_k = self._adjust_top_k(query)
+
+        candidates_count = effective_k * self._candidate_multiplier
+
+        # When cross-encoder is enabled, ensure the FAISS pool is large enough
+        # to provide ce_top_k candidates after filtering. Use ce_top_k * cm
+        # as the minimum FAISS pool to guarantee enough hybrid candidates.
+        if self._cross_encoder is not None:
+            min_pool = self._cross_encoder._ce_top_k * self._candidate_multiplier
+            candidates_count = max(candidates_count, min_pool)
+
+        # Stage: FAISS semantic retrieval
+        query_vec = self._embed_model.embed([query])[0]
+        candidates = self._vectorstore.search(query_vec, candidates_count)
+        if trace and tr:
+            tr.stages.append(StageSnapshot("FAISS_SEMANTIC", list(candidates)))
+
+        if not candidates:
+            return [], tr
+
+        # Stage: absolute threshold
+        candidates = [c for c in candidates if c.get("score", 0) >= self._min_score]
+        if trace and tr:
+            tr.stages.append(StageSnapshot("AFTER_ABSOLUTE_FILTER", list(candidates)))
+        if not candidates:
+            logger.info(
+                "Nenhum chunk passou o limiar absoluto %.2f (query='%s')",
+                self._min_score,
+                query[:60],
+            )
+            return [], tr
+
+        # Stage: adaptive filter
+        candidates = self._adaptive_filter(candidates)
+        if trace and tr:
+            tr.stages.append(StageSnapshot("AFTER_ADAPTIVE_FILTER", list(candidates)))
+        if not candidates:
+            logger.info("Filtro adaptativo descartou todos (query='%s')", query[:60])
+            return [], tr
+
+        # Stage: gap filter (optional)
+        if self._gap_filter_enabled:
+            candidates = self._gap_filter(candidates)
+            if trace and tr:
+                tr.stages.append(StageSnapshot("AFTER_GAP_FILTER", list(candidates)))
+            if not candidates:
+                logger.info("Gap filter descartou todos (query='%s')", query[:60])
+                return [], tr
+
+        # Stage: keyword filter (optional)
+        if self._keyword_filter_enabled:
+            candidates = self._keyword_filter(query, candidates)
+            if trace and tr:
+                tr.stages.append(
+                    StageSnapshot("AFTER_KEYWORD_FILTER", list(candidates))
+                )
+            if not candidates:
+                logger.info("Keyword filter descartou todos (query='%s')", query[:60])
+                return [], tr
+
+        # Stage: hybrid reranking
+        reranked = self._hybrid_rerank(query, candidates)
+        reranked = self._apply_period_boost(query, reranked)
+        if trace and tr:
+            tr.stages.append(StageSnapshot("AFTER_HYBRID_RERANK", list(reranked)))
+
+        # Stage: cross-encoder reranking (optional — Phase 3F)
+        # When CE is enabled, pass the full hybrid-reranked pool to it.
+        # The CE internally takes its ce_top_k (default 20) best candidates,
+        # applies score fusion, and returns final_k results.
+        if self._cross_encoder is not None:
+            reranked = self._cross_encoder.rerank(query, reranked, final_k=effective_k)
+            if trace and tr:
+                tr.stages.append(StageSnapshot("AFTER_CROSS_ENCODER", list(reranked)))
+            results = reranked  # CE already returns final_k
+        else:
+            results = reranked[:effective_k]
+
+        # Attach confidence label
+        for chunk in results:
+            score = chunk.get("score", 0)
+            if score >= self._high_confidence_score:
+                chunk["confidence"] = "high"
+            elif score >= self._low_confidence_score:
+                chunk["confidence"] = "medium"
+            else:
+                chunk["confidence"] = "low"
+
+        if trace and tr:
+            tr.final_results = list(results)
+
+        logger.debug(
+            "Retrieve: %d candidatos → %d resultados (query='%s', k=%d)",
+            len(candidates),
+            len(results),
+            query[:60],
+            effective_k,
+        )
+        return results, tr
+
+    # ------------------------------------------------------------------
+    # Dynamic k adjustment
     # ------------------------------------------------------------------
 
     def _adjust_top_k(self, query: str) -> int:
-        """Ajusta dinamicamente o número de chunks (k) baseado no tipo de query.
+        """Dynamically adjust k based on detected query type.
 
-        Queries que pedem informação ampla ou biográfica precisam de mais chunks
-        para fornecer uma resposta completa.
-
-        Tipos de query e multiplicadores:
-        - Biográfica ("quem foi", "biografia"): k * 2
-        - Período/governo ("como foi", "governo", "período"): k * 1.5
-        - Normal: k (sem ajuste)
-
-        Returns:
-            Número ajustado de chunks a recuperar
+        NOTE: This uses PT-BR phrase indicators — marked as corpus-specific
+        in the Phase 1 audit (weakness W4). Retained for baseline fidelity;
+        scheduled for replacement in Phase 4.
         """
         query_lower = query.lower()
 
-        # Indicadores de query biográfica (precisa de mais contexto)
         biographical_indicators = [
             "quem foi",
             "quem é",
@@ -244,8 +479,6 @@ class Retriever:
             "trajetória",
             "vida de",
         ]
-
-        # Indicadores de query sobre período/governo (precisa de contexto moderado)
         period_indicators = [
             "como foi",
             "o que foi",
@@ -259,163 +492,38 @@ class Retriever:
             "administracao",
         ]
 
-        # Verifica tipo de query
         if any(ind in query_lower for ind in biographical_indicators):
             k = int(self._base_top_k * 2)
-            logger.debug(
-                "Query biográfica detectada. Aumentando k: %d → %d", self._base_top_k, k
-            )
+            logger.debug("Query biográfica → k=%d", k)
             return k
-
         if any(ind in query_lower for ind in period_indicators):
             k = int(self._base_top_k * 1.5)
-            logger.debug(
-                "Query sobre período detectada. Aumentando k: %d → %d",
-                self._base_top_k,
-                k,
-            )
+            logger.debug("Query sobre período → k=%d", k)
             return k
-
-        # Query normal, usa k base
         return self._base_top_k
 
-    def retrieve(self, query: str) -> list[dict]:
-        """Retorna os top-k chunks mais relevantes para a query.
-
-        Cada chunk retornado possui:
-          - text, source: conteúdo e origem
-          - score: score combinado (semântico + BM25), normalizado [0,1]
-          - confidence: 'high' | 'medium' | 'low' — usado pelo pipeline
-            para decidir se deve alertar o aluno sobre incerteza.
-
-        Ajusta dinamicamente o número de chunks (top-k) baseado no tipo de query:
-          - Queries biográficas ("quem foi", "biografia"): k * 2
-          - Queries sobre períodos/governos: k * 1.5
-          - Queries normais: k
-
-        Returns:
-            Lista ordenada por relevância. Vazia se nenhum chunk
-            passar os filtros de qualidade.
-        """
-        if self._vectorstore.size == 0:
-            logger.warning("VectorStore vazio — sem contexto para: '%s'", query)
-            return []
-
-        # Ajusta k dinamicamente baseado no tipo de query
-        k = self._adjust_top_k(query)
-
-        # Ajusta também o número de candidatos proporcionalmente
-        candidates_count = k * 4
-
-        # Estágio 1: candidatos semânticos
-        query_vec = self._embed_model.embed([query])[0]
-        candidates = self._vectorstore.search(query_vec, candidates_count)
-
-        if not candidates:
-            return []
-
-        # Camada 1: threshold absoluto (min_score = 0.25)
-        candidates = [c for c in candidates if c.get("score", 0) >= self._min_score]
-        if not candidates:
-            logger.info(
-                "Nenhum chunk passou o limiar absoluto %.2f (query='%s', k=%d)",
-                self._min_score,
-                query[:60],
-                k,
-            )
-            return []
-
-        # Camada 2: threshold adaptativo baseado em desvio padrão
-        candidates = self._adaptive_filter(candidates)
-        if not candidates:
-            logger.info(
-                "Filtro adaptativo descartou todos os chunks (query='%s', k=%d)",
-                query[:60],
-                k,
-            )
-            return []
-
-        # Camada 3: gap detection
-        candidates = self._gap_filter(candidates)
-        if not candidates:
-            logger.info(
-                "Gap detection descartou todos os chunks (query='%s', k=%d)",
-                query[:60],
-                k,
-            )
-            return []
-
-        # Camada 4: overlap léxico (keyword filter)
-        candidates = self._keyword_filter(query, candidates)
-        if not candidates:
-            logger.info(
-                "Keyword filter descartou todos os chunks (query='%s', k=%d)",
-                query[:60],
-                k,
-            )
-            return []
-
-        # Estágio 2: reranking híbrido
-        reranked = self._hybrid_rerank(query, candidates)
-        reranked = self._apply_period_boost(query, reranked)
-        results = reranked[:k]
-
-        # Adiciona campo 'confidence' a cada chunk
-        for chunk in results:
-            score = chunk.get("score", 0)
-            if score >= _HIGH_CONFIDENCE_SCORE:
-                chunk["confidence"] = "high"
-            elif score >= _LOW_CONFIDENCE_SCORE:
-                chunk["confidence"] = "medium"
-            else:
-                chunk["confidence"] = "low"
-
-        logger.debug(
-            "Retrieve: %d candidatos → %d resultados (query='%s', k=%d)",
-            len(candidates),
-            len(results),
-            query[:60],
-            k,
-        )
-        return results
-
-    def best_confidence(self, chunks: list[dict]) -> str:
-        """Retorna o nível de confiança do melhor chunk da lista."""
-        if not chunks:
-            return "none"
-        scores = [c.get("score", 0) for c in chunks]
-        best = max(scores)
-        if best >= _HIGH_CONFIDENCE_SCORE:
-            return "high"
-        if best >= _LOW_CONFIDENCE_SCORE:
-            return "medium"
-        return "low"
-
     # ------------------------------------------------------------------
-    # Filtros
+    # Filters
     # ------------------------------------------------------------------
 
     def _adaptive_filter(self, candidates: list[dict]) -> list[dict]:
-        """Mantém chunks dentro de 1 desvio padrão abaixo do melhor score.
-
-        Isso remove a cauda longa de chunks vagamente relacionados que
-        passam pelo threshold absoluto mas ficam muito abaixo do melhor.
-        """
+        """Keep chunks within adaptive_sigma standard deviations below best score."""
         scores = [c.get("score", 0.0) for c in candidates]
         best = max(scores)
         mean = sum(scores) / len(scores)
         variance = sum((s - mean) ** 2 for s in scores) / len(scores)
         std = variance**0.5
 
-        # Threshold = melhor - 1σ, mas nunca abaixo de min_score
-        threshold = max(self._min_score, best - std)
+        threshold = max(self._min_score, best - self._adaptive_sigma * std)
         filtered = [c for c in candidates if c.get("score", 0) >= threshold]
 
         logger.debug(
-            "adaptive_filter: best=%.3f mean=%.3f std=%.3f threshold=%.3f → %d/%d chunks",
+            "adaptive_filter: best=%.3f mean=%.3f std=%.3f sigma=%.1f "
+            "threshold=%.3f → %d/%d chunks",
             best,
             mean,
             std,
+            self._adaptive_sigma,
             threshold,
             len(filtered),
             len(candidates),
@@ -423,14 +531,13 @@ class Retriever:
         return filtered
 
     def _keyword_filter(self, query: str, candidates: list[dict]) -> list[dict]:
-        """Mantém apenas chunks com ao menos uma keyword da query (3+ chars).
+        """Keep only chunks that share at least one keyword (3+ chars) with the query.
 
-        Tokens de 3+ chars capturam termos técnicos curtos comuns em
-        matemática e ciências (sin, cos, pH, mol, lei, etc.).
-        Se a query não tiver keywords com 3+ chars (saudação etc.), não filtra.
+        NOTE: Identified as the most likely source of false negatives in Phase 1
+        audit (weakness W2). Retained for baseline fidelity; ablation scheduled
+        in Phase 3 Experiment A. Disable via keyword_filter_enabled=False.
         """
         query_keywords = {t for t in _tokenize(query) if len(t) >= 3}
-
         if not query_keywords:
             return candidates
 
@@ -439,29 +546,29 @@ class Retriever:
             chunk_tokens = {t for t in _tokenize(chunk.get("text", "")) if len(t) >= 3}
             if query_keywords & chunk_tokens:
                 matched.append(chunk)
-
         return matched
 
     def _gap_filter(self, candidates: list[dict]) -> list[dict]:
-        """Descarta chunks apenas quando há evidência clara de irrelevância."""
+        """Discard candidates only when there is clear evidence of irrelevance.
+
+        NOTE: Identified as a probable false-negative source in Phase 1 audit
+        (weakness W1, W5). Retained for baseline; ablation in Phase 3 Experiment B.
+        Disable via gap_filter_enabled=False.
+        """
         if not candidates:
             return []
 
         scores = [c.get("score", 0.0) for c in candidates]
         best = max(scores)
 
-        # Score alto: confia no threshold absoluto (mais tolerante)
-        if best >= _HIGH_CONFIDENCE_SCORE:
+        if best >= self._high_confidence_score:
             return [c for c in candidates if c.get("score", 0) >= best - 0.20]
-
-        # Score médio: aceita chunks próximos (novo threshold intermediário)
-        if best >= 0.45:
+        if best >= self._low_confidence_score:
             return [c for c in candidates if c.get("score", 0) >= best - 0.18]
 
-        # Score baixo: verifica gap (mais tolerante: 0.10 em vez de 0.12)
+        # Low best score: only keep if there is a meaningful gap
         others = [s for s in scores if s != best]
         avg_others = sum(others) / len(others) if others else 0.0
-
         if best - avg_others < 0.10:
             logger.debug(
                 "Gap insuficiente: best=%.3f avg_others=%.3f — descartando todos",
@@ -469,15 +576,14 @@ class Retriever:
                 avg_others,
             )
             return []
-
         return [c for c in candidates if c.get("score", 0) >= best - 0.18]
 
     # ------------------------------------------------------------------
-    # Reranking híbrido
+    # Hybrid reranking
     # ------------------------------------------------------------------
 
     def _hybrid_rerank(self, query: str, candidates: list[dict]) -> list[dict]:
-        """Combina score semântico e BM25 por fusão ponderada."""
+        """Combine semantic score and BM25 via weighted score fusion."""
         if self._lexical_weight == 0 or len(candidates) < 3:
             return sorted(candidates, key=lambda c: c.get("score", 0), reverse=True)
 
@@ -488,6 +594,8 @@ class Retriever:
         bm25_scores = _bm25_scores(
             query_tokens,
             [_tokenize(c["text"]) for c in candidates],
+            k1=self._bm25_k1,
+            b=self._bm25_b,
         )
 
         sem_scores = [c.get("score", 0.0) for c in candidates]
@@ -508,11 +616,11 @@ class Retriever:
         return reranked
 
     def _apply_period_boost(self, query: str, candidates: list[dict]) -> list[dict]:
-        """Prioriza chunks que mencionam explicitamente o período histórico pedido.
+        """Corpus-specific score boost for Vargas period disambiguation.
 
-        Embeddings tendem a aproximar todos os trechos sobre "Vargas"; para perguntas
-        sobre um mandato específico, datas explícitas são um sinal mais forte que
-        similaridade semântica genérica.
+        NOTE: This function is explicitly corpus-specific (Phase 1 audit, item 4.4).
+        It is retained unchanged for baseline fidelity but is scheduled for removal
+        in Phase 4 (item P2). Do not add new cases here.
         """
         query_l = query.lower()
         if not ("segundo governo" in query_l and "vargas" in query_l):
@@ -549,12 +657,12 @@ class Retriever:
 
 
 # ---------------------------------------------------------------------------
-# BM25 local
+# BM25 helpers
 # ---------------------------------------------------------------------------
 
 
 def _tokenize(text: str) -> list[str]:
-    """Tokenização simples: minúsculo, remove pontuação, filtra stopwords."""
+    """Tokenize: lowercase, strip punctuation, remove stopwords."""
     tokens = re.findall(r"\b\w+\b", text.lower())
     return [t for t in tokens if t not in _STOPWORDS_PT and len(t) > 2]
 
@@ -562,8 +670,10 @@ def _tokenize(text: str) -> list[str]:
 def _bm25_scores(
     query_tokens: list[str],
     doc_tokens_list: list[list[str]],
+    k1: float = _BM25_K1,
+    b: float = _BM25_B,
 ) -> list[float]:
-    """Calcula BM25 para query contra cada documento na lista."""
+    """Compute BM25 score for query against each document."""
     n_docs = len(doc_tokens_list)
     if n_docs == 0:
         return []
@@ -583,8 +693,8 @@ def _bm25_scores(
         for term in query_tokens:
             tf = df_c.get(term, 0)
             idf_v = idf.get(term, 0.0)
-            num = tf * (_BM25_K1 + 1)
-            den = tf + _BM25_K1 * (1 - _BM25_B + _BM25_B * dl / avg_dl)
+            num = tf * (k1 + 1)
+            den = tf + k1 * (1 - b + b * dl / avg_dl)
             score += idf_v * num / (den + 1e-9)
         scores.append(score)
 
@@ -592,7 +702,7 @@ def _bm25_scores(
 
 
 def _normalize(values: list[float]) -> list[float]:
-    """Normaliza lista para [0, 1]."""
+    """Normalize list to [0, 1]."""
     mn, mx = min(values), max(values)
     if mx - mn < 1e-9:
         return [0.0] * len(values)

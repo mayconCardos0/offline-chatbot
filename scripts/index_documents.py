@@ -305,7 +305,7 @@ def main() -> None:
     overlap = args.overlap or settings.chunk_overlap
 
     print(f"\nIndexando documentos de: {docs_dir}")
-    print(f"Configuração: chunk_size={chunk_size} chars  overlap={overlap} sentenças")
+    print(f"Configuração: chunk_size={chunk_size} chars  overlap={overlap} tokens")
     print(
         f"Detecção hierárquica: {'desativada (--no-structure)' if args.no_structure else 'ativada'}"
     )
@@ -367,13 +367,10 @@ def main() -> None:
         chunks = chunk_document(
             doc, chunk_size=chunk_size, overlap=overlap, config=chunk_config
         )
-        # Mantém apenas text e source nos metadados
-        for c in chunks:
-            # Remove metadados hierárquicos, mantendo apenas text e source
-            c.pop("unit", None)
-            c.pop("chapter", None)
-            c.pop("topic", None)
-            c.pop("breadcrumb", None)
+        # Preserve all hierarchical metadata (unit/chapter/topic/breadcrumb/section)
+        # so that every chunk stored in the vector index carries its full context.
+        # DO NOT strip these fields — they are needed for metadata-aware retrieval
+        # and for the failure analysis tooling introduced in Phase 2.
         all_chunks.extend(chunks)
 
     logger.info("%d chunks criados.", len(all_chunks))
@@ -398,6 +395,9 @@ def main() -> None:
     store = VectorStore(
         index_dir=settings.index_dir,
         embedding_dim=embed_model.dimension,
+        hnsw_m=settings.hnsw_m,
+        hnsw_ef_construction=settings.hnsw_ef_construction,
+        hnsw_ef_search=settings.hnsw_ef_search,
     )
     store.add(all_chunks, embeddings)
     store.save()

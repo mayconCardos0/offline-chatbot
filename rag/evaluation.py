@@ -69,6 +69,10 @@ class QueryResult:
     relevant_ids: set[str]
     retrieved: list[dict]  # chunks retornados pelo retriever (com score)
 
+    # Optional metadata from curated dataset
+    category: str = ""  # e.g. "factual", "paraphrase", "negative"
+    answerable: bool = True  # False for out-of-scope / negative queries
+
     # Métricas calculadas por evaluate_query()
     precision_at_k: float = 0.0
     recall_at_k: float = 0.0
@@ -97,7 +101,7 @@ class EvaluationReport:
     per_query: list[QueryResult] = field(default_factory=list)
 
     def to_dict(self) -> dict:
-        return {
+        base = {
             "k": self.k,
             "n_queries": self.n_queries,
             "precision@k": round(self.mean_precision, 4),
@@ -109,6 +113,25 @@ class EvaluationReport:
             "map@k": round(self.map_at_k, 4),
             "mean_latency_ms": round(self.mean_latency_ms, 2),
         }
+        # Per-category breakdown (if categories are present)
+        if self.per_query:
+            categories: dict[str, list] = {}
+            for qr in self.per_query:
+                cat = qr.category or "uncategorized"
+                categories.setdefault(cat, []).append(qr)
+            if len(categories) > 1:
+                base["by_category"] = {
+                    cat: {
+                        "n": len(qrs),
+                        "hit_rate": round(sum(q.hit_rate for q in qrs) / len(qrs), 4),
+                        "recall@k": round(
+                            sum(q.recall_at_k for q in qrs) / len(qrs), 4
+                        ),
+                        "mrr": round(sum(q.reciprocal_rank for q in qrs) / len(qrs), 4),
+                    }
+                    for cat, qrs in sorted(categories.items())
+                }
+        return base
 
 
 # ---------------------------------------------------------------------------
@@ -161,18 +184,38 @@ def _reciprocal_rank(retrieved_ids: list[str], relevant_ids: set[str]) -> float:
     return 0.0
 
 
-def _ndcg_at_k(retrieved_ids: list[str], relevant_ids: set[str], k: int) -> float:
-    """NDCG@K com relevância binária (1 se relevante, 0 caso contrário)."""
+def _ndcg_at_k(
+    retrieved_ids: list[str],
+    relevant_ids: set[str],
+    k: int,
+    graded_relevance: Optional[dict[str, int]] = None,
+) -> float:
+    """NDCG@K with binary or graded relevance.
+
+    Args:
+        retrieved_ids:    Ordered list of retrieved chunk IDs.
+        relevant_ids:     Set of relevant chunk IDs (for binary relevance).
+        k:                Evaluation depth.
+        graded_relevance: Optional dict mapping chunk_id -> relevance grade (0-3).
+                          If provided, uses graded gains instead of binary.
+    """
     top = retrieved_ids[:k]
+
+    def _gain(rid: str) -> float:
+        if graded_relevance is not None:
+            return float(graded_relevance.get(rid, 0))
+        return 1.0 if rid in relevant_ids else 0.0
+
     # DCG
-    dcg = sum(
-        1.0 / math.log2(i + 2)  # i+2 porque i é 0-indexed, log2(1) = 0
-        for i, rid in enumerate(top)
-        if rid in relevant_ids
-    )
-    # IDCG: todos os relevantes no topo
-    n_ideal = min(len(relevant_ids), k)
-    idcg = sum(1.0 / math.log2(i + 2) for i in range(n_ideal))
+    dcg = sum(_gain(rid) / math.log2(i + 2) for i, rid in enumerate(top))
+
+    # IDCG: best possible ordering
+    if graded_relevance is not None:
+        ideal_gains = sorted(graded_relevance.values(), reverse=True)[:k]
+    else:
+        n_ideal = min(len(relevant_ids), k)
+        ideal_gains = [1.0] * n_ideal
+    idcg = sum(g / math.log2(i + 2) for i, g in enumerate(ideal_gains))
     return dcg / idcg if idcg > 0 else 0.0
 
 
@@ -200,6 +243,7 @@ def evaluate_query(
     relevant_ids: set[str],
     relevant_texts: Optional[list[str]],
     k: int,
+    graded_relevance: Optional[dict[str, int]] = None,
 ) -> QueryResult:
     """Avalia uma única query contra o retriever.
 
@@ -213,23 +257,11 @@ def evaluate_query(
 
     Returns:
         QueryResult com todas as métricas preenchidas.
-
-    IMPORTANTE: o retriever é chamado com top_k=k para garantir que ele
-    devolva exatamente k resultados. Sem isso, Precision@10 == Precision@5
-    porque retrieved[:10] == retrieved[:5] quando o retriever retorna só 5.
     """
-    # Salva top_k original e força o retriever a devolver k resultados
-    original_top_k = retriever._top_k
-    original_base_top_k = retriever._base_top_k
-    retriever._top_k = k
-    retriever._base_top_k = k
-    try:
-        t0 = time.perf_counter()
-        retrieved = retriever.retrieve(query)
-        latency_ms = (time.perf_counter() - t0) * 1000
-    finally:
-        retriever._top_k = original_top_k
-        retriever._base_top_k = original_base_top_k
+    # Pass k explicitly — no private attribute mutation needed.
+    t0 = time.perf_counter()
+    retrieved = retriever.retrieve(query, k=k)
+    latency_ms = (time.perf_counter() - t0) * 1000
 
     retrieved_ids = [_chunk_id(c) for c in retrieved]
 
@@ -261,15 +293,54 @@ def evaluate_query(
     result.f1_at_k = 2 * p * r / (p + r) if (p + r) > 0 else 0.0
     result.hit_rate = _hit_rate(retrieved_ids, effective_ids, k)
     result.reciprocal_rank = _reciprocal_rank(retrieved_ids, effective_ids)
-    result.ndcg_at_k = _ndcg_at_k(retrieved_ids, effective_ids, k)
+    result.ndcg_at_k = _ndcg_at_k(
+        retrieved_ids, effective_ids, k, graded_relevance=graded_relevance
+    )
     result.ap_at_k = _average_precision_at_k(retrieved_ids, effective_ids, k)
 
     return result
 
 
 # ---------------------------------------------------------------------------
-# Avaliação sobre dataset completo
+# New-schema helpers (Phase 2)
 # ---------------------------------------------------------------------------
+
+
+def _build_graded_relevance(item: dict) -> Optional[dict[str, int]]:
+    """Extract graded relevance dict from a curated dataset item.
+
+    New schema uses:
+        "relevant_chunks": [{"chunk_id": "...", "relevance": 3}, ...]
+
+    Old schema uses:
+        "relevant_chunk_ids": ["..."]   (binary, relevance=3 assumed)
+
+    Returns None if the item only has binary relevance.
+    """
+    chunks = item.get("relevant_chunks")
+    if not chunks:
+        return None
+    graded: dict[str, int] = {}
+    for entry in chunks:
+        cid = entry.get("chunk_id", "")
+        rel = int(entry.get("relevance", 3))
+        if cid:
+            graded[cid] = rel
+    return graded if graded else None
+
+
+def _effective_ids_from_item(item: dict) -> set[str]:
+    """Extract all relevant chunk IDs from a dataset item (old or new schema)."""
+    # New schema
+    chunks = item.get("relevant_chunks")
+    if chunks:
+        return {
+            entry["chunk_id"]
+            for entry in chunks
+            if entry.get("chunk_id") and int(entry.get("relevance", 1)) > 0
+        }
+    # Old schema
+    return set(item.get("relevant_chunk_ids", []))
 
 
 def evaluate_retriever(
@@ -297,14 +368,25 @@ def evaluate_retriever(
     results: list[QueryResult] = []
     for i, item in enumerate(dataset):
         query = item.get("query", "")
-        relevant_ids = set(item.get("relevant_chunk_ids", []))
+        # Support both old schema (relevant_chunk_ids) and new schema (relevant_chunks)
+        relevant_ids = _effective_ids_from_item(item)
         relevant_texts = item.get("relevant_texts", [])
+        graded_relevance = _build_graded_relevance(item)
 
         if not query:
             continue
 
         logger.debug("Avaliando query %d/%d: '%s'", i + 1, len(dataset), query[:60])
-        qr = evaluate_query(retriever, query, relevant_ids, relevant_texts, k)
+        qr = evaluate_query(
+            retriever,
+            query,
+            relevant_ids,
+            relevant_texts,
+            k,
+            graded_relevance=graded_relevance,
+        )
+        qr.category = item.get("category", "")
+        qr.answerable = item.get("answerable", True)
         results.append(qr)
 
     if not results:
@@ -361,7 +443,7 @@ def build_synthetic_dataset(
         Lista de dicts compatíveis com evaluate_retriever().
     """
     rng = random.Random(seed)
-    metadata: list[dict] = vectorstore._metadata  # acesso direto à lista interna
+    metadata: list[dict] = vectorstore.metadata  # use public property
 
     if not metadata:
         logger.warning("VectorStore vazio — dataset sintético vazio.")
@@ -408,6 +490,8 @@ def build_synthetic_dataset(
         dataset.append(
             {
                 "query": query,
+                "category": "synthetic_smoke",
+                "answerable": True,
                 "relevant_chunk_ids": relevant_ids,
                 # Fallback: texto completo (não truncado) para matching por texto
                 "relevant_texts": [text.strip()],
@@ -478,10 +562,22 @@ def _extract_query_sentence(text: str, chunk: dict) -> str:
 
 
 def load_dataset_from_file(path: str) -> list[dict]:
-    """Carrega dataset de avaliação de um arquivo JSON.
+    """Load evaluation dataset from a JSON file.
 
-    Formato esperado:
+    Supports both schemas:
+
+    Legacy schema (synthetic smoke-test):
         [{"query": "...", "relevant_chunk_ids": [...], "relevant_texts": [...]}, ...]
+
+    Curated schema (Phase 2+):
+        [{
+            "id": "q001",
+            "query": "...",
+            "category": "factual",
+            "answerable": true,
+            "relevant_chunks": [{"chunk_id": "...", "relevance": 3}],
+            "reference_answer": "..."
+        }, ...]
     """
     p = Path(path)
     if not p.exists():

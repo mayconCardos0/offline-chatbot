@@ -489,6 +489,11 @@ def chunk_document(
     source: str = doc.get("source", "desconhecido")
     page: Optional[int] = doc.get("page")
     section: Optional[str] = doc.get("section")
+    # Hierarchical metadata passed through from structure detection (Phase 2 fix)
+    doc_unit: Optional[str] = doc.get("unit")
+    doc_chapter: Optional[str] = doc.get("chapter")
+    doc_topic: Optional[str] = doc.get("topic")
+    doc_breadcrumb: Optional[str] = doc.get("breadcrumb")
 
     if not raw_text.strip():
         return []
@@ -528,9 +533,11 @@ def chunk_document(
                 "page": page,
                 "section": section,
                 "chunk_id": _make_chunk_id(source, 0, page),
-                "chapter": metadata.get("chapter"),
-                "topic": metadata.get("topic"),
+                "chapter": metadata.get("chapter") or doc_chapter,
+                "topic": metadata.get("topic") or doc_topic,
                 "section_title": metadata.get("section_title"),
+                "unit": doc_unit,
+                "breadcrumb": doc_breadcrumb,
             }
         ]
 
@@ -572,6 +579,19 @@ def chunk_document(
 
     # Mescla parágrafos minúsculos consecutivos (títulos soltos, listas curtas)
     all_chunks = _merge_tiny_chunks(all_chunks, config)
+
+    # Propagate document-level hierarchical metadata (unit/breadcrumb) to every chunk.
+    # chunk-level chapter/topic may override doc-level if detected inside the chunk text,
+    # but unit and breadcrumb always come from the document structure detection.
+    for chunk in all_chunks:
+        if doc_unit is not None:
+            chunk.setdefault("unit", doc_unit)
+        if doc_chapter is not None:
+            chunk.setdefault("chapter", chunk.get("chapter") or doc_chapter)
+        if doc_topic is not None:
+            chunk.setdefault("topic", chunk.get("topic") or doc_topic)
+        if doc_breadcrumb is not None:
+            chunk["breadcrumb"] = doc_breadcrumb
 
     logger.debug(
         "chunk_document: %d parágrafos → %d chunks | %d tokens totais | overlap=%d tokens (source=%s)",

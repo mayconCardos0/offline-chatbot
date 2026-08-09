@@ -1,0 +1,1428 @@
+[
+  {
+    "id": "q001",
+    "query": "Em que ano Getúlio Vargas tomou o poder pela primeira vez?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1930",
+      "Revolução de 1930",
+      "Getúlio Vargas"
+    ],
+    "reference_answer": "1930, com a Revolução de 1930.",
+    "notes": ""
+  },
+  {
+    "id": "q002",
+    "query": "Quando foi proclamado o Estado Novo?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "1937",
+      "ditadura"
+    ],
+    "reference_answer": "Em 10 de novembro de 1937.",
+    "notes": ""
+  },
+  {
+    "id": "q003",
+    "query": "Em que ano terminou o Estado Novo?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "1945",
+      "fim"
+    ],
+    "reference_answer": "Em 1945, com a deposição de Vargas.",
+    "notes": ""
+  },
+  {
+    "id": "q004",
+    "query": "Qual foi o período do segundo governo Vargas?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1951",
+      "1954",
+      "segundo governo",
+      "mandato democrático"
+    ],
+    "reference_answer": "De 1951 a 1954.",
+    "notes": ""
+  },
+  {
+    "id": "q005",
+    "query": "Como Getúlio Vargas morreu?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "suicídio",
+      "1954",
+      "carta testamento",
+      "morte de Vargas"
+    ],
+    "reference_answer": "Suicídio em 24 de agosto de 1954.",
+    "notes": ""
+  },
+  {
+    "id": "q006",
+    "query": "Qual era o nome do partido criado por Vargas para apoiar seus candidatos?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "PTB",
+      "Partido Trabalhista Brasileiro",
+      "Vargas"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q007",
+    "query": "Quando começou a Segunda Guerra Mundial?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1939",
+      "Segunda Guerra Mundial",
+      "início"
+    ],
+    "reference_answer": "Em setembro de 1939, com a invasão da Polônia pela Alemanha.",
+    "notes": ""
+  },
+  {
+    "id": "q008",
+    "query": "Quando terminou a Segunda Guerra Mundial?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1945",
+      "fim da Segunda Guerra",
+      "rendição"
+    ],
+    "reference_answer": "Em 1945 — maio na Europa (VE Day), setembro no Pacífico (VJ Day).",
+    "notes": ""
+  },
+  {
+    "id": "q009",
+    "query": "Quem era o líder da Alemanha nazista durante a Segunda Guerra?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Hitler",
+      "Adolf Hitler",
+      "nazismo",
+      "Alemanha"
+    ],
+    "reference_answer": "Adolf Hitler.",
+    "notes": ""
+  },
+  {
+    "id": "q010",
+    "query": "O que foi a Conferência de Yalta?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Yalta",
+      "Churchill",
+      "Roosevelt",
+      "Stalin",
+      "pós-guerra"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q011",
+    "query": "Quando ocorreu a Revolução Francesa?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1789",
+      "Revolução Francesa"
+    ],
+    "reference_answer": "Em 1789.",
+    "notes": ""
+  },
+  {
+    "id": "q012",
+    "query": "Quando Napoleão Bonaparte se tornou imperador?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1804",
+      "Napoleão",
+      "imperador",
+      "coroação"
+    ],
+    "reference_answer": "Em 1804.",
+    "notes": ""
+  },
+  {
+    "id": "q013",
+    "query": "O que foi o Consulado napoleônico?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Consulado",
+      "Napoleão",
+      "cônsul",
+      "1799"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q014",
+    "query": "Em que ano ocorreu a Batalha de Waterloo?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Waterloo",
+      "1815",
+      "Napoleão",
+      "derrota"
+    ],
+    "reference_answer": "Em 1815.",
+    "notes": ""
+  },
+  {
+    "id": "q015",
+    "query": "O que foi o Congresso de Viena?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Congresso de Viena",
+      "1815",
+      "pós-napoleônico",
+      "equilíbrio europeu"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q016",
+    "query": "Quando começou a Revolução Industrial?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Revolução Industrial",
+      "Inglaterra",
+      "século XVIII",
+      "1760"
+    ],
+    "reference_answer": "Segunda metade do século XVIII, na Inglaterra.",
+    "notes": ""
+  },
+  {
+    "id": "q017",
+    "query": "Qual país foi o berço da Revolução Industrial?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Inglaterra",
+      "Grã-Bretanha",
+      "Revolução Industrial"
+    ],
+    "reference_answer": "Inglaterra (Grã-Bretanha).",
+    "notes": ""
+  },
+  {
+    "id": "q018",
+    "query": "O que foi o Estado Novo brasileiro?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "ditadura",
+      "1937",
+      "Vargas",
+      "constituição"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q019",
+    "query": "Qual o nome da constituição outorgada durante o Estado Novo?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Constituição de 1937",
+      "polaca",
+      "Estado Novo"
+    ],
+    "reference_answer": "Constituição de 1937, apelidada de 'polaca'.",
+    "notes": ""
+  },
+  {
+    "id": "q020",
+    "query": "O que foi a Intentona Comunista de 1935?",
+    "category": "factual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Intentona Comunista",
+      "1935",
+      "PCB",
+      "levante"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q021",
+    "query": "O que foi o trabalhismo varguista e como ele mobilizou os trabalhadores?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "trabalhismo",
+      "CLT",
+      "legislação trabalhista",
+      "sindicatos",
+      "Vargas"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q022",
+    "query": "Por que a Revolução Industrial transformou a sociedade europeia?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Revolução Industrial",
+      "urbanização",
+      "proletariado",
+      "burguesia",
+      "mecanização"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q023",
+    "query": "Como o nacionalismo contribuiu para o surgimento dos estados nacionais europeus no século XIX?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "nacionalismo",
+      "unificação",
+      "identidade nacional"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q024",
+    "query": "Qual foi o impacto do imperialismo europeu na África e na Ásia?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "imperialismo",
+      "colonialismo",
+      "África",
+      "Ásia",
+      "exploração"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q025",
+    "query": "O que foi o totalitarismo e quais foram seus principais regimes no século XX?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "totalitarismo",
+      "nazismo",
+      "fascismo",
+      "stalinismo"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q026",
+    "query": "Por que o crack da Bolsa de 1929 provocou uma crise econômica mundial?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1929",
+      "crise econômica",
+      "Great Depression",
+      "Bolsa de Valores"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q027",
+    "query": "Como o Estado Novo limitou as liberdades políticas no Brasil?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "censura",
+      "repressão",
+      "DIP",
+      "liberdades"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q028",
+    "query": "O que foi o iluminismo e como influenciou as revoluções do século XVIII?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "iluminismo",
+      "razão",
+      "liberdade",
+      "Revolução Francesa",
+      "philosophes"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q029",
+    "query": "Como a guerra fria dividiu o mundo em dois blocos após 1945?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "guerra fria",
+      "capitalismo",
+      "socialismo",
+      "URSS",
+      "EUA"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q030",
+    "query": "Qual foi o papel da CLT na relação entre trabalhadores e o Estado durante o governo Vargas?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "CLT",
+      "Consolidação das Leis do Trabalho",
+      "Vargas",
+      "trabalhadores"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q031",
+    "query": "Por que a Revolução Francesa foi considerada um marco na história moderna?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Revolução Francesa",
+      "liberté",
+      "egalité",
+      "fraternité",
+      "direitos"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q032",
+    "query": "O que foi o plano Marshall e qual foi seu objetivo?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Plano Marshall",
+      "reconstrução",
+      "Europa",
+      "EUA",
+      "pós-guerra"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q033",
+    "query": "Como o nazismo utilizou a propaganda para consolidar o poder de Hitler?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "propaganda nazista",
+      "Goebbels",
+      "Hitler",
+      "mídia",
+      "manipulação"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q034",
+    "query": "O que diferencia o fascismo italiano do nazismo alemão?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "fascismo",
+      "nazismo",
+      "Mussolini",
+      "Hitler",
+      "diferença"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q035",
+    "query": "Como a urbanização e a industrialização mudaram as condições de vida dos trabalhadores no século XIX?",
+    "category": "conceptual",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "urbanização",
+      "industrialização",
+      "condições de trabalho",
+      "proletariado"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q036",
+    "query": "Que processo permitiu à Alemanha submeter nações europeias entre 1939 e 1945?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Segunda Guerra Mundial",
+      "blitzkrieg",
+      "ocupação",
+      "Wehrmacht"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of 'Segunda Guerra Mundial / conquistas alemãs'"
+  },
+  {
+    "id": "q037",
+    "query": "Que mecanismo legal Vargas usou para se manter no poder além do mandato previsto?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "golpe de 1937",
+      "Estado Novo",
+      "constituição de 1937"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of 'golpe do Estado Novo'"
+  },
+  {
+    "id": "q038",
+    "query": "Qual movimento ideológico defendia a superioridade racial germânica?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "nazismo",
+      "racismo",
+      "arianismo",
+      "Hitler"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of nazismo"
+  },
+  {
+    "id": "q039",
+    "query": "Que convenção diplomática reorganizou a Europa após as guerras napoleônicas?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Congresso de Viena",
+      "1815",
+      "Metternich",
+      "equilíbrio"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Congresso de Viena"
+  },
+  {
+    "id": "q040",
+    "query": "Que revolução substituiu o trabalho manual pela produção mecanizada nas fábricas inglesas?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Revolução Industrial",
+      "máquinas",
+      "vapor",
+      "fábricas"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Revolução Industrial"
+  },
+  {
+    "id": "q041",
+    "query": "De que forma o governo de Vargas entre 1951 e 1954 diferia do período do Estado Novo?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "segundo governo Vargas",
+      "democrático",
+      "eleições",
+      "1951",
+      "1954"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase asking to distinguish the two Vargas eras"
+  },
+  {
+    "id": "q042",
+    "query": "Que conjunto de leis consolidou os direitos dos assalariados no Brasil nos anos 1940?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "CLT",
+      "Consolidação das Leis do Trabalho",
+      "1943"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of CLT"
+  },
+  {
+    "id": "q043",
+    "query": "Qual foi o impacto da mecanização na classe operária inglesa durante os séculos XVIII e XIX?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Revolução Industrial",
+      "luddismo",
+      "trabalhadores",
+      "máquinas"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase asking about effects of industrialization on workers"
+  },
+  {
+    "id": "q044",
+    "query": "Por quais razões Napoleão foi exilado em Santa Helena?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Waterloo",
+      "exílio",
+      "Santa Helena",
+      "derrota"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Napoleon's exile"
+  },
+  {
+    "id": "q045",
+    "query": "Que propaganda o regime de Vargas usava para legitimar seu poder junto às massas?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "DIP",
+      "propaganda varguista",
+      "Estado Novo",
+      "populismo"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Estado Novo propaganda"
+  },
+  {
+    "id": "q046",
+    "query": "Quais potências formaram a aliança que derrotou a Alemanha na Segunda Guerra?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Aliados",
+      "EUA",
+      "URSS",
+      "Reino Unido",
+      "coalizão"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Allied powers"
+  },
+  {
+    "id": "q047",
+    "query": "Qual foi o papel do exército na queda do Estado Novo em 1945?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1945",
+      "deposição de Vargas",
+      "militares",
+      "fim do Estado Novo"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of military role in ending Estado Novo"
+  },
+  {
+    "id": "q048",
+    "query": "Que transformação econômica o governo Vargas promoveu na indústria brasileira?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "industrialização",
+      "substituição de importações",
+      "Vargas",
+      "CSN",
+      "Petrobras"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Vargas industrialization policy"
+  },
+  {
+    "id": "q049",
+    "query": "Como as ideias iluministas influenciaram os líderes da Revolução Francesa?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "iluminismo",
+      "Rousseau",
+      "Voltaire",
+      "Revolução Francesa"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of Enlightenment influence on French Revolution"
+  },
+  {
+    "id": "q050",
+    "query": "Qual ideologia sustentava a expansão colonial europeia no século XIX?",
+    "category": "paraphrase",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "imperialismo",
+      "darwinismo social",
+      "missão civilizadora",
+      "colonialismo"
+    ],
+    "reference_answer": "",
+    "notes": "Paraphrase of the ideology behind 19th-century colonialism"
+  },
+  {
+    "id": "q051",
+    "query": "O que aconteceu no Brasil entre 1937 e 1945?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "1937",
+      "1945",
+      "ditadura",
+      "Vargas"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q052",
+    "query": "Quais foram os principais eventos do governo democrático de Vargas entre 1951 e 1954?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1951",
+      "1954",
+      "segundo governo",
+      "BNDE",
+      "Petrobras",
+      "Plano Lafer"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q053",
+    "query": "O que marcou o período de 1914 a 1918 na Europa?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Primeira Guerra Mundial",
+      "1914",
+      "1918"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q054",
+    "query": "O que ocorreu na Europa entre 1939 e 1945?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Segunda Guerra Mundial",
+      "1939",
+      "1945",
+      "nazismo"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q055",
+    "query": "Qual foi a situação política do Brasil entre 1930 e 1934?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "governo provisório",
+      "1930",
+      "1934",
+      "Vargas",
+      "Revolução de 1930"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q056",
+    "query": "O que foi o período napoleônico entre 1799 e 1815?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Napoleão",
+      "1799",
+      "1815",
+      "Consulado",
+      "Império"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q057",
+    "query": "Quais mudanças ocorreram na Europa entre 1815 e 1848?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Congresso de Viena",
+      "Primavera dos Povos",
+      "1848",
+      "restauração"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q058",
+    "query": "Qual foi o contexto político brasileiro no período de 1945 a 1950?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "redemocratização",
+      "1945",
+      "1950",
+      "Dutra",
+      "república"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q059",
+    "query": "O que foi a 'Belle Époque' e em que período ocorreu?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Belle Époque",
+      "1871",
+      "1914",
+      "prosperidade",
+      "Europa"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q060",
+    "query": "Quando e por que o Brasil declarou guerra às potências do Eixo?",
+    "category": "temporal",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1942",
+      "Brasil na guerra",
+      "Eixo",
+      "afundamento",
+      "FEB"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q061",
+    "query": "Quais são as diferenças entre o primeiro e o segundo governo Vargas?",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "1937",
+      "segundo governo",
+      "1951",
+      "democrático",
+      "ditadura"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q062",
+    "query": "Compare o fascismo italiano e o nazismo alemão.",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "fascismo",
+      "nazismo",
+      "Mussolini",
+      "Hitler",
+      "semelhanças",
+      "diferenças"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q063",
+    "query": "Quais foram as diferenças entre a Revolução Americana e a Revolução Francesa?",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Revolução Americana",
+      "Revolução Francesa",
+      "independência",
+      "radicalismo"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q064",
+    "query": "Compare as causas da Primeira e da Segunda Guerra Mundial.",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Primeira Guerra",
+      "Segunda Guerra",
+      "causas",
+      "nacionalismo",
+      "nazismo"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q065",
+    "query": "Como diferem o liberalismo econômico e o intervencionismo estatal varguista?",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "liberalismo",
+      "intervencionismo",
+      "Vargas",
+      "estado",
+      "economia"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q066",
+    "query": "Quais são as semelhanças e diferenças entre o imperialismo do século XIX e o colonialismo anterior?",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "imperialismo",
+      "colonialismo",
+      "diferenças",
+      "semelhanças"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q067",
+    "query": "Compare o Consulado e o Império napoleônico em termos de estrutura política.",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Consulado",
+      "Império napoleônico",
+      "estrutura política",
+      "Napoleão"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q068",
+    "query": "Quais foram as diferenças entre o bloco capitalista e o bloco socialista durante a Guerra Fria?",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "capitalismo",
+      "socialismo",
+      "Guerra Fria",
+      "EUA",
+      "URSS"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q069",
+    "query": "Compare o populismo de Vargas com o de Perón na Argentina.",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Vargas",
+      "Perón",
+      "populismo",
+      "trabalhismo"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q070",
+    "query": "Quais foram as principais diferenças entre o Estado Novo brasileiro e o Estado Novo português?",
+    "category": "comparative",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Estado Novo",
+      "Vargas",
+      "Salazar",
+      "Portugal",
+      "Brasil"
+    ],
+    "reference_answer": "",
+    "notes": ""
+  },
+  {
+    "id": "q071",
+    "query": "Como a crise de 1929 afetou a ascensão de Vargas ao poder no Brasil?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "crise de 1929",
+      "café",
+      "oligarquias",
+      "Revolução de 1930",
+      "Vargas"
+    ],
+    "reference_answer": "",
+    "notes": "Requires linking global economic crisis → Brazilian coffee economy → political instability → 1930 revolution"
+  },
+  {
+    "id": "q072",
+    "query": "De que forma o fim da Segunda Guerra Mundial e a redemocratização no Brasil estão relacionados?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "1945",
+      "fim da Segunda Guerra",
+      "redemocratização",
+      "Estado Novo",
+      "deposição Vargas"
+    ],
+    "reference_answer": "",
+    "notes": "Requires linking WWII end → pressure on authoritarian regimes → end of Estado Novo"
+  },
+  {
+    "id": "q073",
+    "query": "Como o iluminismo e a Revolução Industrial juntos contribuíram para o surgimento do movimento operário?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "iluminismo",
+      "Revolução Industrial",
+      "movimento operário",
+      "socialismo"
+    ],
+    "reference_answer": "",
+    "notes": "Requires combining Enlightenment ideas with industrial working conditions"
+  },
+  {
+    "id": "q074",
+    "query": "Qual foi o papel da criação da Petrobras no contexto do segundo governo Vargas e do nacionalismo econômico?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Petrobras",
+      "1953",
+      "nacionalismo",
+      "segundo governo Vargas",
+      "petróleo"
+    ],
+    "reference_answer": "",
+    "notes": "Requires connecting Petrobras creation to Vargas nationalism and economic policy"
+  },
+  {
+    "id": "q075",
+    "query": "Como os Tratados de Paz de 1919 contribuíram para a ascensão do nazismo?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Tratado de Versalhes",
+      "1919",
+      "Alemanha",
+      "humilhação",
+      "nazismo",
+      "Hitler"
+    ],
+    "reference_answer": "",
+    "notes": "Requires linking Versailles → German resentment → rise of Nazism"
+  },
+  {
+    "id": "q076",
+    "query": "De que forma a industrialização e o urbanismo do século XIX geraram novos movimentos sociais e políticos?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "industrialização",
+      "urbanização",
+      "socialismo",
+      "marxismo",
+      "sindicatos"
+    ],
+    "reference_answer": "",
+    "notes": "Requires combining industrial conditions with emergence of labor movements"
+  },
+  {
+    "id": "q077",
+    "query": "Como a política de Vargas para os trabalhadores ajudou a criar sua base eleitoral para 1950?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "CLT",
+      "trabalhismo",
+      "PTB",
+      "eleições 1950",
+      "trabalhadores"
+    ],
+    "reference_answer": "",
+    "notes": "Requires linking labor laws → political loyalty → 1950 election victory"
+  },
+  {
+    "id": "q078",
+    "query": "Qual foi o percurso de Napoleão desde cônsul até o exílio em Santa Helena?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Consulado",
+      "Primeiro Cônsul",
+      "Imperador",
+      "Waterloo",
+      "Santa Helena"
+    ],
+    "reference_answer": "",
+    "notes": "Requires combining Napoleonic career timeline across multiple chunks"
+  },
+  {
+    "id": "q079",
+    "query": "Como o Congresso de Viena tentou conter os efeitos da Revolução Francesa e das guerras napoleônicas?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "Congresso de Viena",
+      "restauração",
+      "Santa Aliança",
+      "equilíbrio europeu"
+    ],
+    "reference_answer": "",
+    "notes": "Requires linking Revolution/Napoleon consequences → Vienna Congress responses"
+  },
+  {
+    "id": "q080",
+    "query": "De que maneira a participação do Brasil na Segunda Guerra influenciou a queda do Estado Novo?",
+    "category": "multi_hop",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [
+      "FEB",
+      "Brasil na guerra",
+      "democracia",
+      "Estado Novo",
+      "contradição"
+    ],
+    "reference_answer": "",
+    "notes": "Requires linking fighting for democracy abroad while living under dictatorship at home"
+  },
+  {
+    "id": "q081",
+    "query": "Por que ele fez isso?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Follow-up after asking about Vargas's coup of 1937 — requires prior context"
+  },
+  {
+    "id": "q082",
+    "query": "Quando isso aconteceu?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Temporal follow-up — depends on preceding exchange"
+  },
+  {
+    "id": "q083",
+    "query": "Quais foram as consequências?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Generic consequences follow-up"
+  },
+  {
+    "id": "q084",
+    "query": "Pode explicar melhor?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Clarification request — retrieval should use last topic"
+  },
+  {
+    "id": "q085",
+    "query": "E antes disso, o que acontecia?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Temporal backward reference"
+  },
+  {
+    "id": "q086",
+    "query": "Qual foi o papel da oposição nesse processo?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Follow-up asking about opposition in a previously discussed event"
+  },
+  {
+    "id": "q087",
+    "query": "Como isso se relaciona com o que você disse sobre a crise econômica?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Cross-referencing previous answer about economic crisis"
+  },
+  {
+    "id": "q088",
+    "query": "Quem eram os principais líderes desse movimento?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Follow-up about leadership in a previously discussed movement"
+  },
+  {
+    "id": "q089",
+    "query": "E no Brasil, como foi diferente?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Comparative follow-up contrasting Brazil with a previously discussed country"
+  },
+  {
+    "id": "q090",
+    "query": "Você pode dar um exemplo concreto?",
+    "category": "conversational",
+    "answerable": true,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Elaboration request — should retrieve illustrative examples"
+  },
+  {
+    "id": "q091",
+    "query": "Qual é a capital da Austrália?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "Canberra. (Fora do corpus — história moderna europeia/brasileira)",
+    "notes": "Geography question completely outside the corpus domain"
+  },
+  {
+    "id": "q092",
+    "query": "Como funciona a fotossíntese?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Biology topic not covered by a history textbook"
+  },
+  {
+    "id": "q093",
+    "query": "Quem foi o primeiro presidente dos Estados Unidos?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "US history question not in the Brazilian history textbook"
+  },
+  {
+    "id": "q094",
+    "query": "O que foi a Revolução Russa de 1917?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "May have partial coverage but Russian Revolution is not the focus; test for hallucination"
+  },
+  {
+    "id": "q095",
+    "query": "Qual é a fórmula química da água?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Chemistry question, completely out of scope"
+  },
+  {
+    "id": "q096",
+    "query": "Quem inventou o telefone?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Invention history, not covered in this history textbook"
+  },
+  {
+    "id": "q097",
+    "query": "Qual foi a política econômica do governo Lula entre 2003 e 2010?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Contemporary politics — after the textbook's coverage period"
+  },
+  {
+    "id": "q098",
+    "query": "O que foi a Primavera Árabe?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "21st-century event not in the textbook"
+  },
+  {
+    "id": "q099",
+    "query": "Como funciona o motor a combustão interna?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Engineering/physics — not a history topic"
+  },
+  {
+    "id": "q100",
+    "query": "Quem escreveu Dom Quixote?",
+    "category": "negative",
+    "answerable": false,
+    "relevant_chunks": [],
+    "relevant_texts": [],
+    "reference_answer": "",
+    "notes": "Literature question outside history corpus"
+  }
+]
