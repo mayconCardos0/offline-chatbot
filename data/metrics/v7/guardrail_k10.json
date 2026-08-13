@@ -1,0 +1,92 @@
+[
+  {
+    "id": "q0149",
+    "query": "Qual é a fórmula de Bhaskara?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 2.06
+  },
+  {
+    "id": "q0150",
+    "query": "Como funciona a fotossíntese nas plantas?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 1306.0
+  },
+  {
+    "id": "q0151",
+    "query": "Qual é a capital da Austrália?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 455.19
+  },
+  {
+    "id": "q0152",
+    "query": "Como calcular a área de um círculo?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 79.91
+  },
+  {
+    "id": "q0153",
+    "query": "O que é a tabela periódica dos elementos?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 222.99
+  },
+  {
+    "id": "q0154",
+    "query": "Quais são as leis de Newton?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 2864.35
+  },
+  {
+    "id": "q0155",
+    "query": "Como funciona um motor de combustão interna?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 297.12
+  },
+  {
+    "id": "q0156",
+    "query": "O que é inteligência artificial?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 290.33
+  },
+  {
+    "id": "q0157",
+    "query": "Qual é a receita de um bolo de chocolate?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 2.45
+  },
+  {
+    "id": "q0158",
+    "query": "Como programar em Python?",
+    "k": 10,
+    "retrieved_count": 0,
+    "top_score": null,
+    "passed": true,
+    "latency_ms": 1.77
+  }
+]

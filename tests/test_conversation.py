@@ -156,6 +156,30 @@ class TestUpdate:
 
 
 # ---------------------------------------------------------------------------
+# set_title
+# ---------------------------------------------------------------------------
+
+
+class TestSetTitle:
+    def test_set_title_updates_title(self, manager):
+        manager.create(session_id="title-test")
+        manager.set_title("title-test", "Fotossíntese nas plantas")
+        assert manager.get("title-test")["title"] == "Fotossíntese nas plantas"
+
+    def test_set_title_nonexistent_session_is_noop(self, manager):
+        # Should not raise
+        manager.set_title("ghost", "Título qualquer")
+
+    def test_set_title_persists_to_disk(self, tmp_file):
+        manager = ConversationManager(storage_path=tmp_file)
+        manager.create(session_id="title-persist")
+        manager.set_title("title-persist", "Título persistido")
+
+        manager2 = ConversationManager(storage_path=tmp_file)
+        assert manager2.get("title-persist")["title"] == "Título persistido"
+
+
+# ---------------------------------------------------------------------------
 # delete
 # ---------------------------------------------------------------------------
 

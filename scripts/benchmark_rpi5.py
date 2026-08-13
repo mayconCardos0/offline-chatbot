@@ -212,6 +212,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
             model_name=settings.cross_encoder_model,
             hybrid_weight=settings.cross_encoder_hybrid_weight,
             ce_top_k=settings.cross_encoder_top_k,
+            min_score=settings.cross_encoder_min_score,
         )
         # Force load (lazy load triggers on first rerank, but we want to measure)
         cross_encoder._load_model()
@@ -250,6 +251,9 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
         ),
         "cross_encoder_hybrid_weight": (
             settings.cross_encoder_hybrid_weight if mode == "fusion" else None
+        ),
+        "cross_encoder_min_score": (
+            settings.cross_encoder_min_score if mode == "fusion" else None
         ),
         "candidate_multiplier": settings.candidate_multiplier,
         "top_k": settings.top_k,

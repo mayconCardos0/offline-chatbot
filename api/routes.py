@@ -4,6 +4,7 @@ API routes for the Offline Chatbot.
 Endpoints:
   GET    /conversations                     — list all conversations
   GET    /conversations/{session_id}        — get a specific conversation
+  PATCH  /conversations/{session_id}        — rename a conversation (404 if not found)
   POST   /chat                              — send a message, get a response (auto-creates session)
   DELETE /chat/{session_id}                 — delete a session (404 if not found)
   GET    /health                            — liveness check
@@ -51,6 +52,10 @@ class ConversationDetail(BaseModel):
     updated_at: float
 
 
+class RenameRequest(BaseModel):
+    title: str
+
+
 # ---------------------------------------------------------------------------
 # Helpers
 # ---------------------------------------------------------------------------
@@ -96,6 +101,26 @@ async def get_conversation(session_id: str, request: Request) -> ConversationDet
         title=conversation["title"],
         messages=conversation["messages"],
         updated_at=conversation["updated_at"],
+    )
+
+
+@router.patch("/conversations/{session_id}", response_model=ConversationPreview)
+async def rename_conversation(
+    session_id: str, body: RenameRequest, request: Request
+) -> ConversationPreview:
+    """Rename a conversation's title (manual override of the auto-generated one)."""
+    conv_manager = _get_conv_manager(request)
+    title = body.title.strip()
+    if not title:
+        raise HTTPException(status_code=400, detail="title cannot be empty")
+
+    conversation = conv_manager.get(session_id)
+    if not conversation:
+        raise HTTPException(status_code=404, detail="conversation not found")
+
+    conv_manager.set_title(session_id, title)
+    return ConversationPreview(
+        id=conversation["id"], title=title, updated_at=conversation["updated_at"]
     )
 
 

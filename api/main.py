@@ -81,12 +81,14 @@ async def lifespan(app: FastAPI):
             model_name=settings.cross_encoder_model,
             hybrid_weight=settings.cross_encoder_hybrid_weight,
             ce_top_k=settings.cross_encoder_top_k,
+            min_score=settings.cross_encoder_min_score,
         )
         logger.info(
-            "Cross-encoder enabled: model=%s hw=%.2f ce_top_k=%d",
+            "Cross-encoder enabled: model=%s hw=%.2f ce_top_k=%d min_score=%.2f",
             settings.cross_encoder_model,
             settings.cross_encoder_hybrid_weight,
             settings.cross_encoder_top_k,
+            settings.cross_encoder_min_score,
         )
 
     retriever = Retriever(

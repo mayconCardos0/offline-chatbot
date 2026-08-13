@@ -51,6 +51,11 @@ class CrossEncoderReranker:
         hybrid_weight: Weight for the hybrid score in fusion (0.0–1.0).
                        ce_weight = 1.0 - hybrid_weight.
         ce_top_k:      How many hybrid candidates to pass to the CE.
+        min_score:     Absolute floor on the RAW (pre-normalization) CE score.
+                       Candidates scoring below this are dropped before score
+                       fusion — a guardrail against out-of-domain queries that
+                       still have a "best" candidate after the (deliberately
+                       loose) upstream semantic/keyword filters.
     """
 
     def __init__(
@@ -58,18 +63,22 @@ class CrossEncoderReranker:
         model_name: str = "cross-encoder/ms-marco-MiniLM-L-6-v2",
         hybrid_weight: float = 0.3,
         ce_top_k: int = 20,
+        min_score: float = float("-inf"),
     ) -> None:
         self._model_name = model_name
         self._hybrid_weight = hybrid_weight
         self._ce_weight = 1.0 - hybrid_weight
         self._ce_top_k = ce_top_k
+        self._min_score = min_score
         self._model = None
 
         logger.info(
-            "CrossEncoderReranker init: model=%s, hybrid_weight=%.2f, ce_top_k=%d",
+            "CrossEncoderReranker init: model=%s, hybrid_weight=%.2f, ce_top_k=%d, "
+            "min_score=%s",
             model_name,
             hybrid_weight,
             ce_top_k,
+            min_score,
         )
 
     def _load_model(self) -> None:
@@ -138,6 +147,31 @@ class CrossEncoderReranker:
                 exc,
             )
             return candidates[:final_k]
+
+        # Absolute floor on the RAW CE score, applied before normalization —
+        # min-max normalization always stretches the best surviving candidate
+        # to ~1.0 regardless of how irrelevant the whole pool is, so it can't
+        # reject an out-of-domain query on its own. Drop low-confidence pairs
+        # first so a query with no genuinely relevant chunk ends up with an
+        # empty pool instead of a confidently-scored wrong answer.
+        kept = [
+            (c, h, raw)
+            for c, h, raw in zip(ce_candidates, hybrid_scores, ce_raw_scores)
+            if raw >= self._min_score
+        ]
+        if not kept:
+            logger.debug(
+                "CE min_score (%.2f) descartou todos os %d candidatos (query='%s')",
+                self._min_score,
+                len(ce_candidates),
+                query[:60],
+            )
+            return []
+        ce_candidates, hybrid_scores, ce_raw_scores = (
+            [c for c, _, _ in kept],
+            [h for _, h, _ in kept],
+            [raw for _, _, raw in kept],
+        )
 
         # Normalize both score arrays to [0, 1]
         hybrid_norm = _normalize_scores(hybrid_scores)

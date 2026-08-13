@@ -28,37 +28,51 @@ Por que isso melhora o RAG?
 from __future__ import annotations
 
 import re
+import unicodedata
 from dataclasses import dataclass, field
 from typing import Optional
+
+from rag.chunking import count_tokens
 
 # ---------------------------------------------------------------------------
 # Padrões de heading
 # ---------------------------------------------------------------------------
 
 # Nível 1 — Unidade (mais flexível para capturar variações)
+#
+# CORREÇÃO: o grupo [IVXLCDM]+ sem word-boundary casava com a primeira letra
+# de QUALQUER palavra comum em PT-BR que começasse com uma dessas letras sob
+# IGNORECASE (ex: "dos", "da", "do", "com" começam com d/c — letras romanas
+# válidas). Sem o `\b` no final, "Parte dos líderes..." batia como heading
+# nível 1 (num="d"), corrompendo o breadcrumb de todo o conteúdo seguinte até
+# a próxima Unidade real. `\b` garante que o "numeral" termine numa fronteira
+# de palavra de verdade (espaço, dois-pontos, fim de linha), não no meio dela.
 _UNIT_PATTERNS = [
     # "UNIDADE 1" ou "Unidade 1" (case insensitive)
     re.compile(
-        r"^\s*UNIDADE\s+(?P<num>[IVXLCDM]+|\d+)",
+        r"^\s*UNIDADE\s+(?P<num>[IVXLCDM]+|\d+)\b",
         re.IGNORECASE,
     ),
     # "MÓDULO 1" ou "Módulo 1"
     re.compile(
-        r"^\s*M[ÓO]DULO\s+(?P<num>[IVXLCDM]+|\d+)",
+        r"^\s*M[ÓO]DULO\s+(?P<num>[IVXLCDM]+|\d+)\b",
         re.IGNORECASE,
     ),
     # "PARTE 1" ou "Parte 1"
     re.compile(
-        r"^\s*PARTE\s+(?P<num>[IVXLCDM]+|\d+)",
+        r"^\s*PARTE\s+(?P<num>[IVXLCDM]+|\d+)\b",
         re.IGNORECASE,
     ),
 ]
 
 # Nível 2 — Capítulo (mais flexível)
 _CHAPTER_PATTERNS = [
-    # "CAPÍTULO 1" ou "Capítulo 1" (com ou sem acento) - DEVE estar isolado ou com título curto
+    # "CAPÍTULO 1", "Capítulo 1 Título", "Capitulo 1: Título" (com/sem acento,
+    # com/sem separador ':'/'-' antes do título) - DEVE estar isolado ou com
+    # título curto.
     re.compile(
-        r"^\s*CAP[ÍI]TULO\s+(?P<num>[IVXLCDM]+|\d+)(?:\s+[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ][^\n]{0,80})?$",
+        r"^\s*CAP[ÍI]TULO\s+(?P<num>[IVXLCDM]+|\d+)\b\s*[:\-–—]?"
+        r"(?:\s+[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ][^\n]{0,80})?$",
         re.IGNORECASE,
     ),
     # Padrão "CAPÍTULO X Nome do capítulo" em linha separada
@@ -90,6 +104,12 @@ _ALLCAPS_HEADING = re.compile(r"^[A-ZÁÉÍÓÚÀÂÊÔÃÕÇ\s\-–—:,0-9]{4,
 
 # Linha que claramente é corpo de texto (comprimento e pontuação interna)
 _BODY_SIGNALS = re.compile(r"[,;:\(\)\[\]]|\.{2,}")
+
+# Uma linha em negrito só é tratada como "unidade" (nível 1) em vez de
+# "subtítulo" (nível 3) quando sua fonte é sensivelmente maior que o corpo do
+# texto. Livros didáticos tipicamente usam ~12pt para corpo/capítulo/subtítulo
+# e algo maior (14-18pt) só para o heading de maior hierarquia.
+_UNIT_FONT_SIZE_RATIO = 1.2
 
 
 # ---------------------------------------------------------------------------
@@ -151,8 +171,44 @@ class DocumentSection:
 # ---------------------------------------------------------------------------
 
 
-def _classify_line(line: str) -> tuple[int, str]:
+def _normalize_for_match(text: str) -> str:
+    """Normaliza texto para comparar linhas extraídas por caminhos diferentes
+    (texto limpo via clean_pdf_text vs. spans brutos do PyMuPDF)."""
+    return re.sub(r"\s+", " ", unicodedata.normalize("NFC", text)).strip()
+
+
+def _looks_like_heading_text(text: str) -> bool:
+    """Filtro de sanidade para candidatos a heading detectados só por negrito.
+
+    Um span em negrito no meio de uma frase (ênfase) ou um fragmento de
+    legenda/rodapé não deve virar um heading. Headings reais neste tipo de
+    material são frases curtas, começam com maiúscula/dígito e não têm
+    pontuação de fechamento de frase no meio.
+    """
+    if not (4 <= len(text) <= 120):
+        return False
+    if not (text[0].isupper() or text[0].isdigit()):
+        return False
+    if len(text.split()) > 20:
+        return False
+    return True
+
+
+def _classify_line(
+    line: str,
+    is_bold: bool = False,
+    font_size: float = 0.0,
+    body_size: float = 12.0,
+) -> tuple[int, str]:
     """Retorna (nível, texto_limpo). Nível 0 = corpo de texto.
+
+    Args:
+        line:      Texto da linha (já limpo por clean_pdf_text).
+        is_bold:   True se a linha correspondente no PDF original está
+                   inteiramente em negrito (ver rag.loader._page_styled_lines).
+                   Sempre False para fontes sem informação de fonte (.txt/.md).
+        font_size: Tamanho de fonte da linha em negrito (0.0 se desconhecido).
+        body_size: Tamanho de fonte predominante do corpo do documento.
 
     Returns:
         (level, clean_text) onde level é 0=body, 1=unit, 2=chapter, 3=topic.
@@ -177,11 +233,29 @@ def _classify_line(line: str) -> tuple[int, str]:
         if match:
             return 2, stripped
 
-    # Nível 3 — Tópico
+    # Nível 3 — Tópico (padrões textuais: numeração, letras, palavras-chave)
     for pat in _TOPIC_PATTERNS:
         match = pat.match(stripped)
         if match:
             return 3, stripped
+
+    # Detecção por formatação: muitos materiais didáticos marcam subtítulos
+    # SOMENTE com negrito, sem nenhum padrão textual (sem numeração, sem
+    # palavra-chave). Sem olhar a fonte, essas linhas são indistinguíveis do
+    # corpo do texto — por isso o loader anota bold/size por linha.
+    #
+    # IMPORTANTE: o filtro de sanidade (_looks_like_heading_text) precisa
+    # valer para os DOIS níveis, não só o subtítulo. Um parágrafo de destaque
+    # (ex: uma citação em caixa de texto) também pode vir em negrito e fonte
+    # maior — sem o filtro de forma/tamanho, uma frase corrida inteira era
+    # classificada como Unidade, corrompendo o breadcrumb de todo o conteúdo
+    # seguinte até a próxima Unidade real ser encontrada.
+    if is_bold and font_size > 0 and _looks_like_heading_text(stripped):
+        if font_size >= body_size * _UNIT_FONT_SIZE_RATIO:
+            # Negrito e visivelmente maior que o corpo → heading de maior nível
+            # (cobre uma Unidade cujo texto não bateu com _UNIT_PATTERNS).
+            return 1, stripped
+        return 3, stripped
 
     # Heading ALL-CAPS genérico: linha curta sem sinais de corpo
     # Mas ignora se tem muitos números (provavelmente é página/data)
@@ -282,6 +356,16 @@ def detect_structure(
     for page_dict in pages:
         raw_text: str = page_dict.get("text", "")
         page_num: Optional[int] = page_dict.get("page")
+        body_size: float = page_dict.get("body_size", 12.0)
+
+        # Lookup de linhas em negrito desta página (só existe para PDFs — ver
+        # rag.loader._page_styled_lines). Normalizado para casar com as linhas
+        # de `raw_text`, que passaram por clean_pdf_text e podem diferir em
+        # espaçamento dos spans brutos do PyMuPDF.
+        bold_lookup: dict[str, float] = {
+            _normalize_for_match(bl["text"]): bl["size"]
+            for bl in page_dict.get("bold_lines", [])
+        }
 
         # Ignora páginas de sumário/índice (detecta por densidade de pontos)
         # Sumários têm muitos "..." consecutivos
@@ -293,7 +377,13 @@ def detect_structure(
                 continue
 
         for raw_line in raw_text.splitlines():
-            level, line = _classify_line(raw_line)
+            font_size = bold_lookup.get(_normalize_for_match(raw_line), 0.0)
+            level, line = _classify_line(
+                raw_line,
+                is_bold=font_size > 0,
+                font_size=font_size,
+                body_size=body_size,
+            )
 
             if level == 0:
                 state.push_line(line, page_num)
@@ -335,3 +425,34 @@ def sections_to_docs(sections: list[DocumentSection]) -> list[dict]:
     chunk_document() e vectorstore.add().
     """
     return [s.to_dict() for s in sections if s.text.strip()]
+
+
+def merge_tiny_sections(
+    sections: list[DocumentSection], min_tokens: int
+) -> list[DocumentSection]:
+    """Mescla seções consecutivas da mesma fonte que ficaram abaixo de min_tokens.
+
+    Com a detecção de subtítulo por negrito (ver _classify_line), o número de
+    seções cresce muito em relação à detecção só por padrão textual — um
+    subtítulo pode introduzir apenas um parágrafo curto antes do próximo
+    heading. Sem esta mesclagem, chunk_document() (chamado uma vez por seção)
+    emitiria um chunk minúsculo e pouco informativo para cada uma dessas
+    seções, em vez de uma unidade semântica coerente. Mesma lógica de
+    chunking._merge_tiny_chunks, aplicada um nível acima (seções, não chunks).
+
+    A seção mesclada herda unit/chapter/topic/level da PRIMEIRA seção do par
+    (o heading mais antigo continua sendo o título mais relevante do trecho).
+    """
+    if not sections:
+        return sections
+
+    merged: list[DocumentSection] = [sections[0]]
+
+    for current in sections[1:]:
+        last = merged[-1]
+        if count_tokens(last.text) < min_tokens and last.source == current.source:
+            last.text = (last.text + "\n\n" + current.text).strip()
+        else:
+            merged.append(current)
+
+    return merged

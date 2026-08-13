@@ -71,6 +71,12 @@ class ConversationManager:
             self.conversations[session_id]["updated_at"] = time.time()
             self._save()
 
+    def set_title(self, session_id: str, title: str) -> None:
+        """Rename a session's title and persist. No-op if it doesn't exist."""
+        if session_id in self.conversations:
+            self.conversations[session_id]["title"] = title
+            self._save()
+
     def delete(self, session_id: str) -> bool:
         """Delete a session. Returns True if it existed, False otherwise."""
         if session_id in self.conversations:

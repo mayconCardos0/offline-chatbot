@@ -105,6 +105,13 @@ python scripts/index_documents.py
 
 # 6. Start the server
 uvicorn api.main:app --port 8000
+
+# 7. Gerar o dataset para avaliação
+python scripts/generate_eval_dataset.py
+
+# 8. Analisar metricas
+python scripts/eval_rag.py --mode file --dataset data/eval/dataset.json
+
 ```
 
 Open the frontend by serving `frontend/` with any static file server, or open `frontend/index.html` directly in your browser.

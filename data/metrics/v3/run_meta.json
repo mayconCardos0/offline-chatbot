@@ -1,0 +1,23 @@
+{
+  "version": "v3",
+  "timestamp": "2026-08-12T17:14:52+00:00",
+  "dataset": "data/eval/dataset_v2.json",
+  "k_values": [
+    5,
+    10,
+    15
+  ],
+  "config": {
+    "top_k": 5,
+    "candidate_multiplier": 6,
+    "min_score": 0.25,
+    "lexical_weight": 0.4,
+    "adaptive_sigma": 999.0,
+    "gap_filter_enabled": false,
+    "keyword_filter_enabled": true,
+    "cross_encoder_enabled": true,
+    "cross_encoder_model": "cross-encoder/mmarco-mMiniLMv2-L12-H384-v1",
+    "cross_encoder_top_k": 20,
+    "cross_encoder_hybrid_weight": 0.4
+  }
+}

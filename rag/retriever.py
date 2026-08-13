@@ -13,16 +13,21 @@ Estratégia de dois estágios:
     - Gap detection.
     - Keyword filter (opcional — controlado por keyword_filter_enabled).
     - Hybrid reranking (weighted semantic + BM25).
-    - Period boost (corpus-specific, ver Phase 3 para remoção).
+    - Cross-encoder reranking (opcional — score fusion com o score híbrido).
 
 Todos os parâmetros são configuráveis via core/config.py.
 
-Phase 2 changes:
   - retrieve(query, k=None) aceita k explícito — remove necessidade de
     mutation de atributos privados em evaluation.py.
   - Parâmetros BM25 (k1, b), sigma do filtro adaptativo e flags de
     filtros são lidos do Settings, não de constantes de módulo.
   - Observabilidade: retrieve_with_trace() expõe candidatos em cada estágio.
+
+Removido (era corpus-específico, hardcoded para um único período histórico
+de um corpus particular — não generaliza para outros documentos):
+  - Period boost e o ajuste dinâmico de k por heurísticas biográficas/de
+    período (frases fixas em PT-BR). effective_k agora é sempre k explícito
+    ou top_k configurado, sem heurística de query.
 """
 
 import logging
@@ -179,6 +184,39 @@ _STOPWORDS_PT = {
     "numa",
     "nuns",
     "numas",
+    # Verbos genéricos comuns em PT-BR, ausentes das formas já cobertas acima
+    # (fazer/poder/dever/usar/precisar/querer/saber/dizer/ver/ir/dar/ter/ser/
+    # estar) — sem eles, uma query fora do domínio que compartilhe só um
+    # verbo genérico com qualquer chunk do livro já passa no _keyword_filter
+    # (overlap de qualquer 1 token, não uma razão mínima).
+    "funciona",
+    "funcionam",
+    "funcionava",
+    "funcionavam",
+    "funcionar",
+    "significa",
+    "significam",
+    "significava",
+    "significar",
+    "existe",
+    "existem",
+    "existia",
+    "existiam",
+    "existir",
+    "acontece",
+    "acontecem",
+    "aconteceu",
+    "aconteciam",
+    "acontecer",
+    "chama",
+    "chamado",
+    "chamada",
+    "chamam",
+    "chamava",
+    "explica",
+    "explicam",
+    "explicar",
+    "explicou",
 }
 
 # Module-level defaults (fallback when Retriever is constructed without settings).
@@ -262,7 +300,7 @@ class Retriever:
         self,
         vectorstore,
         embed_model,
-        top_k: int = 5,
+        top_k: int = 10,
         candidate_multiplier: int = 4,
         min_score: float = _MIN_SCORE,
         lexical_weight: float = _LEXICAL_WEIGHT,
@@ -354,11 +392,7 @@ class Retriever:
             logger.warning("VectorStore vazio — sem contexto para: '%s'", query)
             return [], tr
 
-        # Determine k: explicit > dynamic > base
-        if k is not None:
-            effective_k = k
-        else:
-            effective_k = self._adjust_top_k(query)
+        effective_k = k if k is not None else self._base_top_k
 
         candidates_count = effective_k * self._candidate_multiplier
 
@@ -420,7 +454,6 @@ class Retriever:
 
         # Stage: hybrid reranking
         reranked = self._hybrid_rerank(query, candidates)
-        reranked = self._apply_period_boost(query, reranked)
         if trace and tr:
             tr.stages.append(StageSnapshot("AFTER_HYBRID_RERANK", list(reranked)))
 
@@ -457,50 +490,6 @@ class Retriever:
             effective_k,
         )
         return results, tr
-
-    # ------------------------------------------------------------------
-    # Dynamic k adjustment
-    # ------------------------------------------------------------------
-
-    def _adjust_top_k(self, query: str) -> int:
-        """Dynamically adjust k based on detected query type.
-
-        NOTE: This uses PT-BR phrase indicators — marked as corpus-specific
-        in the Phase 1 audit (weakness W4). Retained for baseline fidelity;
-        scheduled for replacement in Phase 4.
-        """
-        query_lower = query.lower()
-
-        biographical_indicators = [
-            "quem foi",
-            "quem é",
-            "biografia",
-            "história de",
-            "trajetória",
-            "vida de",
-        ]
-        period_indicators = [
-            "como foi",
-            "o que foi",
-            "governo",
-            "período",
-            "periodo",
-            "era",
-            "fase",
-            "mandato",
-            "administração",
-            "administracao",
-        ]
-
-        if any(ind in query_lower for ind in biographical_indicators):
-            k = int(self._base_top_k * 2)
-            logger.debug("Query biográfica → k=%d", k)
-            return k
-        if any(ind in query_lower for ind in period_indicators):
-            k = int(self._base_top_k * 1.5)
-            logger.debug("Query sobre período → k=%d", k)
-            return k
-        return self._base_top_k
 
     # ------------------------------------------------------------------
     # Filters
@@ -614,46 +603,6 @@ class Retriever:
 
         reranked.sort(key=lambda c: c["score"], reverse=True)
         return reranked
-
-    def _apply_period_boost(self, query: str, candidates: list[dict]) -> list[dict]:
-        """Corpus-specific score boost for Vargas period disambiguation.
-
-        NOTE: This function is explicitly corpus-specific (Phase 1 audit, item 4.4).
-        It is retained unchanged for baseline fidelity but is scheduled for removal
-        in Phase 4 (item P2). Do not add new cases here.
-        """
-        query_l = query.lower()
-        if not ("segundo governo" in query_l and "vargas" in query_l):
-            return candidates
-
-        boosted = []
-        for chunk in candidates:
-            text_l = chunk.get("text", "").lower()
-            score = chunk.get("score", 0.0)
-
-            has_correct_period = (
-                ("1951" in text_l and "1954" in text_l)
-                or "segundo governo vargas" in text_l
-                or "segundo mandato vargas" in text_l
-            )
-            has_wrong_period = (
-                "estado novo" in text_l
-                or "1937-1945" in text_l
-                or "1937" in text_l
-                or "governo provis" in text_l
-                or "1930-1934" in text_l
-            )
-
-            adjusted = dict(chunk)
-            if has_correct_period:
-                score += 1.0
-            if has_wrong_period and not has_correct_period:
-                score -= 0.35
-            adjusted["score"] = max(0.0, min(1.0, score))
-            boosted.append(adjusted)
-
-        boosted.sort(key=lambda c: c.get("score", 0.0), reverse=True)
-        return boosted
 
 
 # ---------------------------------------------------------------------------

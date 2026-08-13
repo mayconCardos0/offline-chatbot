@@ -128,6 +128,65 @@ class TestChatEndpoint:
 
 
 # ---------------------------------------------------------------------------
+# PATCH /conversations/{session_id}
+# ---------------------------------------------------------------------------
+
+
+class TestRenameConversationEndpoint:
+    def _existing_conversation(self):
+        return {
+            "id": "s1",
+            "title": "New Chat",
+            "messages": [],
+            "updated_at": 123.0,
+        }
+
+    def test_returns_200_when_session_exists(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = self._existing_conversation()
+        resp = client.patch("/conversations/s1", json={"title": "Novo Título"})
+        assert resp.status_code == 200
+
+    def test_returns_updated_title(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = self._existing_conversation()
+        resp = client.patch("/conversations/s1", json={"title": "Novo Título"})
+        assert resp.json()["title"] == "Novo Título"
+
+    def test_strips_whitespace_from_title(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = self._existing_conversation()
+        resp = client.patch(
+            "/conversations/s1", json={"title": "  Título com espaços  "}
+        )
+        assert resp.json()["title"] == "Título com espaços"
+
+    def test_conv_manager_set_title_called_with_correct_args(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = self._existing_conversation()
+        client.patch("/conversations/s1", json={"title": "Novo Título"})
+        conv_manager.set_title.assert_called_once_with("s1", "Novo Título")
+
+    def test_returns_404_when_session_not_found(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = None
+        resp = client.patch("/conversations/ghost", json={"title": "Qualquer"})
+        assert resp.status_code == 404
+
+    def test_returns_400_when_title_empty(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = self._existing_conversation()
+        resp = client.patch("/conversations/s1", json={"title": "   "})
+        assert resp.status_code == 400
+
+    def test_missing_title_returns_422(self, client_and_mocks):
+        client, _, conv_manager = client_and_mocks
+        conv_manager.get.return_value = self._existing_conversation()
+        resp = client.patch("/conversations/s1", json={})
+        assert resp.status_code == 422
+
+
+# ---------------------------------------------------------------------------
 # DELETE /chat/{session_id}
 # ---------------------------------------------------------------------------
 

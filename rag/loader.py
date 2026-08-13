@@ -6,6 +6,9 @@ Melhorias em relação à versão anterior:
   - PDFs: detecta títulos/seções heuristicamente (campo 'section' no output).
   - PDFs: retorna lista de dicts por página em vez de texto único concatenado,
     permitindo que chunk_document saiba a origem de cada pedaço.
+  - PDFs: extrai linhas em negrito com tamanho de fonte ('bold_lines') e o
+    tamanho de fonte do corpo do texto ('body_size'), para que rag.structure
+    detecte headings marcados apenas por formatação (sem padrão textual).
   - .txt/.md: detecção automática de encoding (utf-8 → latin-1 → cp1252).
   - .json: extração recursiva de todas as strings aninhadas (sem mudança).
   - Separação de responsabilidades: _load_pdf_pages() retorna páginas estruturadas;
@@ -23,6 +26,7 @@ Decisão técnica — por que retornar por página e não por documento inteiro?
 
 import json
 import logging
+from collections import Counter
 from pathlib import Path
 from typing import Optional
 
@@ -74,6 +78,53 @@ def _detect_section(text: str) -> Optional[str]:
     return None
 
 
+# Bit 4 (value 16) of a PyMuPDF span's "flags" field marks the bold font variant.
+# See https://pymupdf.readthedocs.io/en/latest/textpage.html#span-dictionary
+_BOLD_FLAG = 1 << 4
+
+
+def _is_bold_span(span: dict) -> bool:
+    return bool(span.get("flags", 0) & _BOLD_FLAG) or "bold" in span.get(
+        "font", ""
+    ).lower().replace(" ", "")
+
+
+def _page_styled_lines(page) -> list[dict]:
+    """Extrai as linhas de uma página com informação de negrito e tamanho de fonte.
+
+    Usa get_text("dict") em vez de get_text("text") porque a extração em texto
+    puro descarta toda a formatação — sem isso não há como distinguir um
+    subtítulo em negrito de uma linha comum de corpo de texto.
+
+    Returns:
+        Lista de {"text", "bold", "size"} em ordem de leitura. "bold" é True
+        apenas quando TODOS os spans não vazios da linha estão em negrito
+        (evita marcar como heading uma linha com uma única palavra em ênfase).
+    """
+    lines: list[dict] = []
+    try:
+        raw = page.get_text("dict")
+    except Exception:
+        return lines
+
+    for block in raw.get("blocks", []):
+        for line in block.get("lines", []):
+            spans = [s for s in line.get("spans", []) if s.get("text", "").strip()]
+            if not spans:
+                continue
+            text = "".join(s.get("text", "") for s in spans).strip()
+            if not text:
+                continue
+            lines.append(
+                {
+                    "text": text,
+                    "bold": all(_is_bold_span(s) for s in spans),
+                    "size": max(s.get("size", 0.0) for s in spans),
+                }
+            )
+    return lines
+
+
 def _load_pdf_pages(path: Path) -> list[dict]:
     """Extrai texto de PDF página a página usando PyMuPDF (fitz).
 
@@ -81,12 +132,18 @@ def _load_pdf_pages(path: Path) -> list[dict]:
       - Melhor suporte a texto rotacionado
       - Melhor preservação da ordem de leitura
       - Extração mais confiável para RAG
+      - Extrai também linhas em negrito com tamanho de fonte (bold_lines) e o
+        tamanho de fonte predominante do corpo do texto (body_size). Esses dois
+        campos permitem que rag.structure detecte subtítulos que são marcados
+        apenas por negrito, sem nenhum padrão textual (ex: numeração) — comum em
+        livros didáticos onde apenas Unidade/Capítulo têm um prefixo textual.
     """
     import fitz  # PyMuPDF
 
     from rag.chunking import clean_pdf_text
 
     pages: list[dict] = []
+    body_size_votes: Counter = Counter()
 
     # Abre o documento
     doc = fitz.open(str(path))
@@ -111,16 +168,32 @@ def _load_pdf_pages(path: Path) -> list[dict]:
         # Detecta seção (mantido)
         section = _detect_section(cleaned)
 
+        styled_lines = _page_styled_lines(page)
+        # Vota no tamanho de fonte do corpo usando apenas linhas não-negrito
+        # (o corpo do texto é sempre a maioria — moda é um proxy robusto).
+        for line in styled_lines:
+            if not line["bold"]:
+                body_size_votes[round(line["size"], 1)] += 1
+
         pages.append(
             {
                 "text": cleaned,
                 "source": str(path),
                 "page": page_num,
                 "section": section,
+                "bold_lines": [
+                    {"text": line["text"], "size": line["size"]}
+                    for line in styled_lines
+                    if line["bold"]
+                ],
             }
         )
 
     doc.close()
+
+    body_size = body_size_votes.most_common(1)[0][0] if body_size_votes else 12.0
+    for page_dict in pages:
+        page_dict["body_size"] = body_size
 
     return pages
 

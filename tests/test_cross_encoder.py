@@ -122,6 +122,37 @@ class TestCrossEncoderRerankerRerank:
         results = r.rerank("query", cands, final_k=5)
         assert len(results) == 2
 
+    def test_min_score_drops_low_scoring_candidates(self):
+        """Candidates whose raw CE score is below min_score are dropped
+        before fusion, even if they'd otherwise be the top result."""
+        r = CrossEncoderReranker(hybrid_weight=0.4, ce_top_k=20, min_score=0.4)
+        mock_model = MagicMock()
+        # raw CE scores: [0.9, 0.1, 0.5, 0.7, 0.3] — only indices 0, 2, 3 pass 0.4
+        mock_model.predict.return_value = np.array([0.9, 0.1, 0.5, 0.7, 0.3])
+        r._model = mock_model
+        cands = self._candidates(5)
+        results = r.rerank("query", cands, final_k=5)
+        assert {c["chunk_id"] for c in results} == {"c0", "c2", "c3"}
+
+    def test_min_score_drops_all_candidates(self):
+        """When every candidate is below min_score, rerank returns empty —
+        this is the guardrail path for out-of-domain queries."""
+        r = CrossEncoderReranker(hybrid_weight=0.4, ce_top_k=20, min_score=5.0)
+        mock_model = MagicMock()
+        mock_model.predict.return_value = np.array([0.9, 0.1, 0.5, 0.7, 0.3])
+        r._model = mock_model
+        cands = self._candidates(5)
+        results = r.rerank("query", cands, final_k=5)
+        assert results == []
+
+    def test_default_min_score_keeps_everything(self):
+        """Default min_score (-inf) preserves current behavior — no candidate
+        is dropped by the floor."""
+        r = self._make_reranker()
+        cands = self._candidates(5)
+        results = r.rerank("query", cands, final_k=5)
+        assert len(results) == 5
+
     def test_ce_top_k_limits_candidates(self):
         """Only first ce_top_k candidates are scored by CE."""
         r = CrossEncoderReranker(hybrid_weight=0.4, ce_top_k=3)

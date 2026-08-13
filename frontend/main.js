@@ -107,9 +107,16 @@ function renderConversationsList() {
                         <div class="conversation-item-title">${escapeHtml(conv.title)}</div>
                         <div class="conversation-item-date">${timeStr}</div>
                     </div>
-                    <button 
-                        class="conversation-item-delete" 
-                        onclick="deleteConversation('${conv.id}', event)" 
+                    <button
+                        class="conversation-item-edit"
+                        onclick="startEditTitle('${conv.id}', event)"
+                        title="Renomear"
+                    >
+                        ✏️
+                    </button>
+                    <button
+                        class="conversation-item-delete"
+                        onclick="deleteConversation('${conv.id}', event)"
                         title="Deletar"
                     >
                         🗑️
@@ -187,6 +194,84 @@ async function deleteConversation(sessionId, event) {
     } catch (error) {
         console.error('Erro ao deletar conversa:', error);
         setStatus('Erro ao deletar conversa', false);
+    }
+}
+
+function startEditTitle(sessionId, event) {
+    event.stopPropagation();
+
+    const item = conversationsList.querySelector(`.conversation-item[data-id="${sessionId}"]`);
+    if (!item) {
+        return;
+    }
+    const titleEl = item.querySelector('.conversation-item-title');
+    if (!titleEl) {
+        return;
+    }
+
+    const conv = state.conversations.find(c => c.id === sessionId);
+    const currentTitle = conv ? conv.title : titleEl.textContent;
+
+    const input = document.createElement('input');
+    input.type = 'text';
+    input.className = 'conversation-item-title-input';
+    input.value = currentTitle;
+    input.maxLength = 100;
+
+    titleEl.replaceWith(input);
+    input.focus();
+    input.select();
+
+    let settled = false;
+
+    const cancel = () => {
+        if (settled) return;
+        settled = true;
+        renderConversationsList();
+    };
+
+    const confirmEdit = () => {
+        if (settled) return;
+        settled = true;
+        const newTitle = input.value.trim();
+        if (newTitle && newTitle !== currentTitle) {
+            renameConversation(sessionId, newTitle);
+        } else {
+            renderConversationsList();
+        }
+    };
+
+    input.addEventListener('click', (e) => e.stopPropagation());
+    input.addEventListener('blur', confirmEdit);
+    input.addEventListener('keydown', (e) => {
+        e.stopPropagation();
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            input.blur();
+        } else if (e.key === 'Escape') {
+            e.preventDefault();
+            cancel();
+        }
+    });
+}
+
+async function renameConversation(sessionId, title) {
+    try {
+        const response = await fetch(`${API_URL}/conversations/${sessionId}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title }),
+        });
+
+        if (!response.ok) {
+            throw new Error('Erro ao renomear conversa');
+        }
+
+        await loadConversations();
+    } catch (error) {
+        console.error('Erro ao renomear conversa:', error);
+        setStatus('Erro ao renomear conversa', false);
+        await loadConversations();
     }
 }
 

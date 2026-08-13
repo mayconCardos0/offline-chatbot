@@ -1,0 +1,102 @@
+{
+  "positive": {
+    "K=5": {
+      "k": 5,
+      "n_queries": 100,
+      "precision@k": 0.202,
+      "recall@k": 0.7283,
+      "f1@k": 0.3061,
+      "hit_rate@k": 0.91,
+      "mrr": 0.7973,
+      "ndcg@k": 0.6928,
+      "map@k": 0.6339,
+      "mean_latency_ms": 2241.96,
+      "by_category": {
+        "factual": {
+          "n": 50,
+          "hit_rate": 0.96,
+          "recall@k": 1.02,
+          "mrr": 0.854
+        },
+        "multi_hop": {
+          "n": 50,
+          "hit_rate": 0.86,
+          "recall@k": 0.4367,
+          "mrr": 0.7407
+        }
+      }
+    },
+    "K=10": {
+      "k": 10,
+      "n_queries": 100,
+      "precision@k": 0.1062,
+      "recall@k": 0.7483,
+      "f1@k": 0.1819,
+      "hit_rate@k": 0.93,
+      "mrr": 0.8004,
+      "ndcg@k": 0.7016,
+      "map@k": 0.6385,
+      "mean_latency_ms": 1825.47,
+      "by_category": {
+        "factual": {
+          "n": 50,
+          "hit_rate": 0.96,
+          "recall@k": 1.02,
+          "mrr": 0.854
+        },
+        "multi_hop": {
+          "n": 50,
+          "hit_rate": 0.9,
+          "recall@k": 0.4767,
+          "mrr": 0.7469
+        }
+      }
+    },
+    "K=15": {
+      "k": 15,
+      "n_queries": 100,
+      "precision@k": 0.0725,
+      "recall@k": 0.7517,
+      "f1@k": 0.1301,
+      "hit_rate@k": 0.93,
+      "mrr": 0.8004,
+      "ndcg@k": 0.7028,
+      "map@k": 0.6389,
+      "mean_latency_ms": 1920.13,
+      "by_category": {
+        "factual": {
+          "n": 50,
+          "hit_rate": 0.96,
+          "recall@k": 1.02,
+          "mrr": 0.854
+        },
+        "multi_hop": {
+          "n": 50,
+          "hit_rate": 0.9,
+          "recall@k": 0.4833,
+          "mrr": 0.7469
+        }
+      }
+    }
+  },
+  "negative_guardrail": {
+    "K=5": {
+      "k": 5,
+      "n": 10,
+      "passed": 3,
+      "pass_rate": 0.3
+    },
+    "K=10": {
+      "k": 10,
+      "n": 10,
+      "passed": 3,
+      "pass_rate": 0.3
+    },
+    "K=15": {
+      "k": 15,
+      "n": 10,
+      "passed": 3,
+      "pass_rate": 0.3
+    }
+  }
+}

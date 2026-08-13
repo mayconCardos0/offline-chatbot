@@ -79,9 +79,14 @@ _HYPHEN_BREAK = re.compile(r"(\w)-\s*\n\s*(\w)")
 
 # Quebra de linha dentro de parágrafo (não é separador de parágrafo)
 # Heurística: linha seguinte começa com minúscula ou número → mesma frase
-_SOFT_NEWLINE = re.compile(
-    r"(?<=[^\n])\n(?=[a-záéíóúàâêôãõç0-9,;:\"\'])", re.IGNORECASE
-)
+#
+# CORREÇÃO: o `re.IGNORECASE` original também casava letras MAIÚSCULAS contra
+# a classe de caracteres minúsculos (`[a-z...]` sob IGNORECASE aceita A-Z),
+# invertendo a heurística — toda quebra de linha antes de uma frase/heading
+# COMEÇANDO em maiúscula também era unida ao parágrafo anterior. Na prática
+# isso colapsava a página inteira em uma única linha, destruindo os limites
+# de heading que rag.structure depende para detectar Unidade/Capítulo/Tópico.
+_SOFT_NEWLINE = re.compile(r"(?<=[^\n])\n(?=[a-záéíóúàâêôãõç0-9,;:\"\'])")
 
 # Número de página isolado (linha com só dígitos, opcional espaços)
 _PAGE_NUMBER = re.compile(r"^\s*\d{1,4}\s*$", re.MULTILINE)
@@ -615,6 +620,14 @@ def _merge_tiny_chunks(chunks: list[dict], config: ChunkConfig) -> list[dict]:
     Evita chunks como {"text": "Capítulo 3"} que poluem o índice vetorial
     sem adicionar informação semântica útil.
 
+    CORREÇÃO: a condição original só mesclava quando AMBOS os chunks
+    vizinhos eram pequenos — mas o caso mais comum é um único parágrafo
+    minúsculo (ex: um heading sozinho, sem nenhum corpo de texto na mesma
+    seção) seguido de um parágrafo de tamanho normal. Com o segundo chunk
+    não sendo "pequeno", a condição antiga nunca mesclava e o chunk-heading
+    ficava sozinho no índice — exatamente o problema que esta função afirma
+    evitar. Agora basta que UM dos dois lados seja pequeno.
+
     Preserva source, page e section do primeiro chunk do par mesclado.
     chunk_id do primeiro é mantido (o segundo é descartado).
     Metadados (chapter, topic, section_title) são re-extraídos do texto mesclado.
@@ -629,10 +642,10 @@ def _merge_tiny_chunks(chunks: list[dict], config: ChunkConfig) -> list[dict]:
         last_tokens = count_tokens(last["text"])
         curr_tokens = count_tokens(current["text"])
 
-        # Mescla se AMBOS são pequenos E têm a mesma fonte
+        # Mescla se UM dos dois é pequeno, têm a mesma fonte, e a soma cabe
+        # dentro de max_tokens.
         if (
-            last_tokens < config.min_tokens
-            and curr_tokens < config.min_tokens
+            (last_tokens < config.min_tokens or curr_tokens < config.min_tokens)
             and last["source"] == current["source"]
             and last_tokens + curr_tokens <= config.max_tokens
         ):

@@ -4,7 +4,48 @@
     "query": "Em que ano Getúlio Vargas tomou o poder pela primeira vez?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0e789294619ada1b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1511432c631c15d0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2247b9a52e301812",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "266dc81defd25fc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1f0045c4fa4525a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "eee08b7f349b308d",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1930",
       "Revolução de 1930",
@@ -18,7 +59,124 @@
     "query": "Quando foi proclamado o Estado Novo?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "152f25c86604be3f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16f93df8e189b62f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "234a78d26173f129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "266dc81defd25fc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e789962d583e719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "49d599b4508467f8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5484aab6feba2915",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "549f38fce2bd2ee2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "646ee46da2f1d51d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "75585fef9cc8fb9b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "991fa7cfe4b11265",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9e1f6e5e156ff97c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a56338b029db75d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b33436fba2cdfc1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b6e58171da43037d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be49e9e83be42641",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d85bf4f9a1c2dc83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd2c60de2476f9ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd0f66fcedb70dbc",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "1937",
@@ -32,7 +190,232 @@
     "query": "Em que ano terminou o Estado Novo?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0ba736cb1a57213c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "15938b4857835a78",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1c73682d0eb631dd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1d039a36fa0662eb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "264ffe38fb026c39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "26e7a522290e004a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2b32985161fa7684",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2d96b8e091d14354",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2e982c2ba1b74f58",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "383d092abf5daacf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "387ea2c6a86d741e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3a3aa46c9fc67080",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e789962d583e719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3f2508c5b1e82d83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41417605c4ffa9ce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4e55b387939ea8c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "50ff8c0f4309d3ab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "583b753238eadebd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5c6c4cb5786b691e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "736eb2a902b0fb37",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b3fe4f7d742e7a8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7bef5d9746940584",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "81121a93c2fbb299",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "84dad18e6aaa01ec",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "92ec8d51109bb087",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "93b3e5d038446ceb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "96d13fd52792678c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9f6c01cbefeea6f7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b0a402f2dbd24a66",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bf1831c1e64ce4ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c3f5b5736e44a422",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c996f975020012ea",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ca753172b67327df",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ce7304c0da5d4120",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3ee92996e1673f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dddbf889532c85ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e057abf3f3704d65",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd0f66fcedb70dbc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "1945",
@@ -46,7 +429,16 @@
     "query": "Qual foi o período do segundo governo Vargas?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "045d6696f05cca56",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1951",
       "1954",
@@ -61,7 +453,12 @@
     "query": "Como Getúlio Vargas morreu?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "03203f208ae1410d",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "suicídio",
       "1954",
@@ -76,7 +473,64 @@
     "query": "Qual era o nome do partido criado por Vargas para apoiar seus candidatos?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "PTB",
       "Partido Trabalhista Brasileiro",
@@ -90,7 +544,252 @@
     "query": "Quando começou a Segunda Guerra Mundial?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "00ff07e26a667327",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "079c119080ddc58a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "094cab4578aa0e02",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d15c82eb2a4d6d0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12f18397844c2fdf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "130c1a1c4fa51edf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "168cd3237d530017",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1acf85923711dfc6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "264ffe38fb026c39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2dbddfb2d2359f42",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30ae365a0bb88b4b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3863cb638388963d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3a7265dcee152560",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "441899de5d95c0dc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "46516fc53476e48e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4695745de5fdecb6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4e13f0af185b791d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4f02249c6fd735ad",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "50ff8c0f4309d3ab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "529b85390522dc7a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "52cf311b7dbb4db7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "58e1dd685854db39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "628d398df2b9f5c7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "635505e89f1daaf6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "64aafeb2d9ec101c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6d22af81e490b94f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b3647d18b2be8e8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8513522d0f082c87",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "874f2ab1a23ceb60",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8cbea757675fd36d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9864262171336b24",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9f6c01cbefeea6f7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a4a45841fcc5717a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ae9df94e96c768ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "af8630ecad1b3f3d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be49e9e83be42641",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d37b57e160819189",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d45137c831254496",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d85bf4f9a1c2dc83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d937412319ffb4b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d9a83166278d7a07",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "db3296f9627c073e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e68875fa9f33f12c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e78df235d89a86b0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "eee0a112d47ea836",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ef06cfdd02887978",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f18cc2378a620e78",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f491e76e5f4b9557",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1939",
       "Segunda Guerra Mundial",
@@ -104,7 +803,48 @@
     "query": "Quando terminou a Segunda Guerra Mundial?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41417605c4ffa9ce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1945",
       "fim da Segunda Guerra",
@@ -118,7 +858,88 @@
     "query": "Quem era o líder da Alemanha nazista durante a Segunda Guerra?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "21912c7dfdf3dea5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "259006ff5ad8d337",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "281d7a542d2304e6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41417605c4ffa9ce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "441899de5d95c0dc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4689d48fcc653ce9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4990e96fa0fcf372",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "49945296aced06bd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e8d7d2a26d31427",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "785c7e164f8d74eb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7027619d2927ca2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3ee92996e1673f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "da5aedad1b126f20",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd1f2e8ae2340759",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Hitler",
       "Adolf Hitler",
@@ -133,7 +954,32 @@
     "query": "O que foi a Conferência de Yalta?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "1dd3c2d6f4bea45e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa030cdea0cd06f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc5c46fe54ea481b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d45137c831254496",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ddcda41d80c8ea95",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Yalta",
       "Churchill",
@@ -149,7 +995,32 @@
     "query": "Quando ocorreu a Revolução Francesa?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "3863cb638388963d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8afbc57793925399",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "929d41820eb8fd30",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c19c7eb21b138e6e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c48de551dc71cf9d",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1789",
       "Revolução Francesa"
@@ -162,7 +1033,84 @@
     "query": "Quando Napoleão Bonaparte se tornou imperador?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1614289ee70939c8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1f7573b0be760f4d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23a067d2a3c6694e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2b9c52a60153e62c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3f5cf600a06c7bc2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "635505e89f1daaf6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8dfd8d4140abb44d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9304c30621d20c4c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97b1aeee43530532",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97cebd9d8afb3fe9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c5c38d9b66f18065",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e3f9afd121afba7a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e4f2166e9a2b7a69",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ef21e0171da70005",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f197d4abc248daee",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f98461d1c5de648e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1804",
       "Napoleão",
@@ -177,7 +1125,64 @@
     "query": "O que foi o Consulado napoleônico?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23a067d2a3c6694e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2b9c52a60153e62c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "42c76cfa1f0a953f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "635505e89f1daaf6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "85b6e8051d3c93c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8dfd8d4140abb44d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9304c30621d20c4c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97b1aeee43530532",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97cebd9d8afb3fe9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f197d4abc248daee",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f98461d1c5de648e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Consulado",
       "Napoleão",
@@ -192,7 +1197,100 @@
     "query": "Em que ano ocorreu a Batalha de Waterloo?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1007565da360519c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12f82ebb54e4288a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16e4480f8730e690",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1741f97c8321bae8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23a067d2a3c6694e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2b9c52a60153e62c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5a4337e98fa5b12a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "635505e89f1daaf6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8dfd8d4140abb44d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9304c30621d20c4c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97b1aeee43530532",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97cebd9d8afb3fe9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a5223f7e78709383",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba3c783005379f17",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd2c60de2476f9ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e172e04bb4f0b305",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f197d4abc248daee",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f98461d1c5de648e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Waterloo",
       "1815",
@@ -207,7 +1305,40 @@
     "query": "O que foi o Congresso de Viena?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01ea717252240fcc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12f82ebb54e4288a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16e4480f8730e690",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba3c783005379f17",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e172e04bb4f0b305",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Congresso de Viena",
       "1815",
@@ -222,7 +1353,116 @@
     "query": "Quando começou a Revolução Industrial?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0313390d1db145ca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d15c82eb2a4d6d0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "128ff2b72224f6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "28a31084439f6698",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2a78c400ed2e5dfc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2ec536ece02f1cf7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "403a3200b2ffa92f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "40b56fb23ba198e4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4fd1b9a177b984d5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "531021d25c016f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "61a6f859c24dfd7c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "70675d308ceb5c04",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "71290deffb0ceb0c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7cd1f5792f3cb6db",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9aa4fe935f297bbe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a90575a06e793791",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bb4d582a0e3b354b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c630cdc63ff9f29a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e2f16cf16cac0862",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e4e00674650b625a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e68875fa9f33f12c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e6cf4e06f7d59942",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e80b95be51bcc3e5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3f67e5b49c8ede",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f0651eb8d5537c81",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Revolução Industrial",
       "Inglaterra",
@@ -237,7 +1477,72 @@
     "query": "Qual país foi o berço da Revolução Industrial?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "128ff2b72224f6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "28a31084439f6698",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2ec536ece02f1cf7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "40b56fb23ba198e4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4fd1b9a177b984d5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "70675d308ceb5c04",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "71290deffb0ceb0c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "78095c8370025ed7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9aa4fe935f297bbe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c630cdc63ff9f29a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e68875fa9f33f12c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e80b95be51bcc3e5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3f67e5b49c8ede",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f80e33a5bc4ede30",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Inglaterra",
       "Grã-Bretanha",
@@ -251,7 +1556,208 @@
     "query": "O que foi o Estado Novo brasileiro?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "152f25c86604be3f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16f93df8e189b62f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "234a78d26173f129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "266dc81defd25fc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "34d123191784ebed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "39bd3226ecb23b79",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e789962d583e719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "49d599b4508467f8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5484aab6feba2915",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "549f38fce2bd2ee2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "646ee46da2f1d51d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "75585fef9cc8fb9b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8de492f439fa6ca6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "991fa7cfe4b11265",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "99bf0ae600086585",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9e1f6e5e156ff97c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a56338b029db75d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a9a00744c9dae091",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b33436fba2cdfc1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b6e58171da43037d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be49e9e83be42641",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d342f8c63c9e817c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d85bf4f9a1c2dc83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd2c60de2476f9ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd72b8588fbb4438",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fbe9d01d41dce2a6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd0f66fcedb70dbc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "ditadura",
@@ -267,7 +1773,28 @@
     "query": "Qual o nome da constituição outorgada durante o Estado Novo?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Constituição de 1937",
       "polaca",
@@ -281,7 +1808,36 @@
     "query": "O que foi a Intentona Comunista de 1935?",
     "category": "factual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "1877018be8330e7d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3040d8049bc2c5c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4990d530fdc4714b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8c016df62e249a81",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8c75351a932a26ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b910fe849c7c092",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa857760419539e1",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Intentona Comunista",
       "1935",
@@ -296,7 +1852,84 @@
     "query": "O que foi o trabalhismo varguista e como ele mobilizou os trabalhadores?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0cfa1b9f15748207",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12750323353f0bb9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "24a1b7a7bdff5742",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3829cecbeffca12e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "65826e70421b8fef",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "trabalhismo",
       "CLT",
@@ -312,7 +1945,80 @@
     "query": "Por que a Revolução Industrial transformou a sociedade europeia?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0313390d1db145ca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0dd2be13e62a388f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0ed4a43934d09eb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "128ff2b72224f6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "28a31084439f6698",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3225a7d3789e2ab2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "42c76cfa1f0a953f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "66e220abda4515c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "67bf9e9edff789cd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8de29fc0fd190775",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0bbec8c716f2f75",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a78d30880289687a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a7e9a6b593332d18",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c630cdc63ff9f29a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3935ecd7b8e6b3e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3f67e5b49c8ede",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Revolução Industrial",
       "urbanização",
@@ -328,7 +2034,56 @@
     "query": "Como o nacionalismo contribuiu para o surgimento dos estados nacionais europeus no século XIX?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "19c119fe75b7ec68",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6c32c63ba9908817",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8c016df62e249a81",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9a67bb711af62758",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ac25d3ccd5396f64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c8bc681565cd487d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d4fe999fac97432b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f3c21c25f92052a5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "nacionalismo",
       "unificação",
@@ -342,7 +2097,212 @@
     "query": "Qual foi o impacto do imperialismo europeu na África e na Ásia?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "05f6011755db06c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0668b3588d98af71",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "081508c0735bf9d3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "08c9a11f6262e7cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d6a6f7ef4afa25d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1132846d6345f36c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1bbef1aa9f7930b5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "229ccaf65c89f196",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "246ac30987e6db54",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "27fb8dc3c3cd1245",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2e9edb7babcb322d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "310277431a74def9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "327a0de5cb5680d2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4420ea57f5c8648f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4a89255ce0667957",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4ac5cfc1a5005575",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4ad372a61db29e63",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "60e60fc4639d07b1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "67826c06f62df585",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6ac83420cc5d2895",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6df519b74d0a915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f82778f42106da5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "78d5a4a79b3c5e18",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7d59cf4bd0ea5d76",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f101df5cf5d63de",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f64fd4b0cab0092",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9aa4fe935f297bbe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b46172e337983b9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9bb9d2b97c49bb7c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a6f38b59b9340223",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa82149cd39d7eeb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c12a37d563f0b8d9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c47b2e42bf54eb6a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9f739ac7d894344",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cb9cac782f4eb3e6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d2357f1e6300dcd3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d403d48d340717cf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d45137c831254496",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d9b43d5d9eb53e64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "da1816abe2efa2e4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "da1de64442a638e7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dee7e36bbb829d35",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dfba2b721d0640c9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e6cf4e06f7d59942",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e85be7391298bf45",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f05b1ecd71bf0ab5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f06ca84552b4cdae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f9050ac20889b901",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "imperialismo",
       "colonialismo",
@@ -358,7 +2318,32 @@
     "query": "O que foi o totalitarismo e quais foram seus principais regimes no século XX?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "794d2783ec2b61c6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bf1831c1e64ce4ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c32c3c90c5798a6f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c8510d682bc23246",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "totalitarismo",
       "nazismo",
@@ -373,7 +2358,44 @@
     "query": "Por que o crack da Bolsa de 1929 provocou uma crise econômica mundial?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "187b02a3ee25f4bd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "19610a71330aa84b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "262e52db2a135bdd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5a20130a35160c6b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "80f2a98c53d77228",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "916cc4b2daa13918",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d80dbf622eb8e96b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed7f166780183cd9",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1929",
       "crise econômica",
@@ -388,7 +2410,64 @@
     "query": "Como o Estado Novo limitou as liberdades políticas no Brasil?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0ba736cb1a57213c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "359b93bac691aad5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3fe8be7c50f2b563",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "64856cbdf4a597e5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "790d806f0392ab86",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ade033df7b82a66d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bba56173fdc75298",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bf1831c1e64ce4ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dbddf46950e45faa",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "censura",
@@ -404,7 +2483,128 @@
     "query": "O que foi o iluminismo e como influenciou as revoluções do século XVIII?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "094cab4578aa0e02",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0ba736cb1a57213c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2322854927e780ef",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "276db9170fe9525a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3225a7d3789e2ab2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3947d33b5cfc313c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4fd1b9a177b984d5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e452a1ae56dd977",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "705ea0c688bc32b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "83aac932ad4e01ee",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "871d85c5f43ac9e5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8d54dc10ab191996",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9e48a2026c4819b0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a608f8607b36a51f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b43e58ca142eb71e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc10b12680f6b591",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bd1b09ea5b5c2077",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bdeea3c6e1d2fe21",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c19c7eb21b138e6e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ceb1654028221d04",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d0cb2c60b0053710",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "debb70f13e887f63",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e02552041d95f00c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e365beb454e151fa",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3e671be7993338",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ef06cfdd02887978",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f1328a453692f0c0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f3707f1af8df9af8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fbd92d1afc2e57f4",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "iluminismo",
       "razão",
@@ -420,7 +2620,16 @@
     "query": "Como a guerra fria dividiu o mundo em dois blocos após 1945?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "b41338307a9fa96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bb4d582a0e3b354b",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "guerra fria",
       "capitalismo",
@@ -436,7 +2645,128 @@
     "query": "Qual foi o papel da CLT na relação entre trabalhadores e o Estado durante o governo Vargas?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d448e8d49f779be",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2616b9b0610a97d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "27fe566cce6ecd51",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2fb6a4a143aacc9e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e65555854476f76",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "589a78ad084e4ed3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e8d7d2a26d31427",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "60f9c6bec0faab3e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "762eceef7d4ee135",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b2964865c24859a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f0743fa93521dd0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "809fe545886efca2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bba56173fdc75298",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be6ca8aed16521a0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c31c03857ca230a7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c670c588a0f5d31e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "CLT",
       "Consolidação das Leis do Trabalho",
@@ -451,7 +2781,92 @@
     "query": "Por que a Revolução Francesa foi considerada um marco na história moderna?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0ba736cb1a57213c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d448e8d49f779be",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "144d855babf195c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "25b604810cb0ce1f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f2c7fdfadfd55a8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "71ab4c044c18bb10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8ae940d788b6a4a8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9f8f9be09569653c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a7bdb660fd47774a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a820f62cf3b0f3a9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a95ac954afe1e145",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ab5f2d05d2e78142",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b43e58ca142eb71e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7b01ea66a361b1a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7f6680d97978232",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be6ca8aed16521a0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c0e08cd048070baf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c19c7eb21b138e6e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d403d48d340717cf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e1c1835c50fca4d6",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Revolução Francesa",
       "liberté",
@@ -467,7 +2882,140 @@
     "query": "O que foi o plano Marshall e qual foi seu objetivo?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "08c9a11f6262e7cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1a48f4bfbfc4dbcd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2a31b4ac0c8967f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2cbc8aa26994ecf0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2d7de1ecea11a5d0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "310277431a74def9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3258be76bcda9ada",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41417605c4ffa9ce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "473df74c9adda4e7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "648b5f84246652b1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6bdb73bb9d0c777c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f2cd325dcd69e82",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f82778f42106da5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "736eb2a902b0fb37",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7cd1f5792f3cb6db",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f101df5cf5d63de",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8afbc57793925399",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8b3a5401b8e1cfb5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8cbea757675fd36d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "950d07c0272311d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9acf93103c873352",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa030cdea0cd06f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aca0d5b36a3e3b7d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3ee92996e1673f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d461a50734b376f5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d9a83166278d7a07",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dee7e36bbb829d35",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f267ca6465e6ebb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f78fd0755f01d83a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe6c9f0136ce9095",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Plano Marshall",
       "reconstrução",
@@ -483,7 +3031,32 @@
     "query": "Como o nazismo utilizou a propaganda para consolidar o poder de Hitler?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6ef5317695d7168b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e50559a687ab8e9f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "propaganda nazista",
       "Goebbels",
@@ -499,7 +3072,76 @@
     "query": "O que diferencia o fascismo italiano do nazismo alemão?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "008355a0d7811a05",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23cfc19aa74b7f09",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3040d8049bc2c5c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3feccec7785cb96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e9896948b2d6bdc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "71cc2663c94c94c7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8b3a5401b8e1cfb5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "972da505194a7652",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bd1a9eb13adcaa23",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bf1831c1e64ce4ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c32c3c90c5798a6f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c8510d682bc23246",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "fascismo",
       "nazismo",
@@ -515,7 +3157,64 @@
     "query": "Como a urbanização e a industrialização mudaram as condições de vida dos trabalhadores no século XIX?",
     "category": "conceptual",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01f5e7aa3fc6dac0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0313390d1db145ca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0ed4a43934d09eb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "50ff8c0f4309d3ab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "66e220abda4515c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0bbec8c716f2f75",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aefc7c302a95dd48",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be4f2e364a3c047e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c0a7def6f22c9736",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d937412319ffb4b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "eee0a112d47ea836",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "urbanização",
       "industrialização",
@@ -530,7 +3229,48 @@
     "query": "Que processo permitiu à Alemanha submeter nações europeias entre 1939 e 1945?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "264ffe38fb026c39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30d16cbb333acb56",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9814797a90b925e1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a4a45841fcc5717a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Segunda Guerra Mundial",
       "blitzkrieg",
@@ -545,7 +3285,28 @@
     "query": "Que mecanismo legal Vargas usou para se manter no poder além do mandato previsto?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "golpe de 1937",
       "Estado Novo",
@@ -559,7 +3320,60 @@
     "query": "Qual movimento ideológico defendia a superioridade racial germânica?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "171142caccdd5dc7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "229ccaf65c89f196",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3cad959740696ebc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "80f2a98c53d77228",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aea0aa2774edd2a2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b33436fba2cdfc1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c6aa0234e6699379",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e7ecee57b875c7e7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "nazismo",
       "racismo",
@@ -574,7 +3388,44 @@
     "query": "Que convenção diplomática reorganizou a Europa após as guerras napoleônicas?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01ea717252240fcc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12f82ebb54e4288a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16e4480f8730e690",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5b665c672dec2f8a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba3c783005379f17",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e172e04bb4f0b305",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Congresso de Viena",
       "1815",
@@ -589,7 +3440,72 @@
     "query": "Que revolução substituiu o trabalho manual pela produção mecanizada nas fábricas inglesas?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "128ff2b72224f6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "20f214bdc9b6f0fd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "26074fff41bfb032",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2616b9b0610a97d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "28a31084439f6698",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2e9edb7babcb322d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "61a6f859c24dfd7c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "628d398df2b9f5c7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6fb6c80a9d4d111e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8de29fc0fd190775",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c630cdc63ff9f29a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d937412319ffb4b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "de33a2ca5db8c596",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e74d9b0f9c674784",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3f67e5b49c8ede",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Revolução Industrial",
       "máquinas",
@@ -604,7 +3520,96 @@
     "query": "De que forma o governo de Vargas entre 1951 e 1954 diferia do período do Estado Novo?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "15f722521df2c85a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30ae365a0bb88b4b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3ab2178273b8a047",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5060cca66d551af5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5f67978d362171d9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "604d9e7f4c91bd27",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "61bd24050daa8ad7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "719fb442062a9ac4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "80bcc91268372455",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "898a0ebf442cb73b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa857760419539e1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b008efb527c65fe1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bd18677202731247",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c6a11e8d8b6a8b61",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d04c5a5e5d656554",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d127c8914ee32883",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e68c44cac232592e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd50426836dd6d1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "segundo governo Vargas",
       "democrático",
@@ -620,7 +3625,20 @@
     "query": "Que conjunto de leis consolidou os direitos dos assalariados no Brasil nos anos 1940?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "1845f3b622f6cf0f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3feccec7785cb96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "CLT",
       "Consolidação das Leis do Trabalho",
@@ -634,7 +3652,108 @@
     "query": "Qual foi o impacto da mecanização na classe operária inglesa durante os séculos XVIII e XIX?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d448e8d49f779be",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "128ff2b72224f6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "26074fff41bfb032",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2616b9b0610a97d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "27fe566cce6ecd51",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "28a31084439f6698",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2e9edb7babcb322d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2fb6a4a143aacc9e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e65555854476f76",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "589a78ad084e4ed3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e8d7d2a26d31427",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "60f9c6bec0faab3e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "762eceef7d4ee135",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b2964865c24859a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f0743fa93521dd0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "809fe545886efca2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8de29fc0fd190775",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bba56173fdc75298",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be6ca8aed16521a0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c31c03857ca230a7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c630cdc63ff9f29a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c670c588a0f5d31e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e74d9b0f9c674784",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3f67e5b49c8ede",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Revolução Industrial",
       "luddismo",
@@ -649,7 +3768,48 @@
     "query": "Por quais razões Napoleão foi exilado em Santa Helena?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0ecc6bd584d434e4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1007565da360519c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1741f97c8321bae8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5a4337e98fa5b12a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a5223f7e78709383",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd2c60de2476f9ff",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Waterloo",
       "exílio",
@@ -664,7 +3824,36 @@
     "query": "Que propaganda o regime de Vargas usava para legitimar seu poder junto às massas?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3ec5707c0a6cd024",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ae2de70d64bc6154",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "DIP",
       "propaganda varguista",
@@ -679,7 +3868,68 @@
     "query": "Quais potências formaram a aliança que derrotou a Alemanha na Segunda Guerra?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01a5f2ce3b10a311",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1e38416839073676",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "281d7a542d2304e6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "290bcc3ab8432129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "311b374c6531185d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4689d48fcc653ce9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "54b8beb10d471451",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f7ca09ebb2eab37",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b29d1dd62bc5f01",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa82149cd39d7eeb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba64a7218bc35344",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Aliados",
       "EUA",
@@ -695,7 +3945,108 @@
     "query": "Qual foi o papel do exército na queda do Estado Novo em 1945?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01f5e7aa3fc6dac0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1315100f5e93769a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "168cd3237d530017",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1845f3b622f6cf0f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "341a01aade6ca997",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "34ec33560b264525",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "359b93bac691aad5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "386018f0de813e8f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3feccec7785cb96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5616a6d156e2513a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "78ff7fc70558bccf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a8c2a95dc85e7688",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "afdcc33f14c87719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba3c783005379f17",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "da4e2d13b36f96f8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dbd2a9c70763899d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1945",
       "deposição de Vargas",
@@ -710,7 +4061,116 @@
     "query": "Que transformação econômica o governo Vargas promoveu na indústria brasileira?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01f5e7aa3fc6dac0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0ed4a43934d09eb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3a3aa46c9fc67080",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "50ff8c0f4309d3ab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "66e220abda4515c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0bbec8c716f2f75",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aefc7c302a95dd48",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be4f2e364a3c047e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c0a7def6f22c9736",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d937412319ffb4b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "industrialização",
       "substituição de importações",
@@ -726,7 +4186,16 @@
     "query": "Como as ideias iluministas influenciaram os líderes da Revolução Francesa?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c19c7eb21b138e6e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "iluminismo",
       "Rousseau",
@@ -741,7 +4210,20 @@
     "query": "Qual ideologia sustentava a expansão colonial europeia no século XIX?",
     "category": "paraphrase",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "78d5a4a79b3c5e18",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d45137c831254496",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "imperialismo",
       "darwinismo social",
@@ -756,7 +4238,204 @@
     "query": "O que aconteceu no Brasil entre 1937 e 1945?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "152f25c86604be3f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16f93df8e189b62f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "234a78d26173f129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "266dc81defd25fc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e789962d583e719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "49d599b4508467f8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5484aab6feba2915",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "549f38fce2bd2ee2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "646ee46da2f1d51d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "75585fef9cc8fb9b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "991fa7cfe4b11265",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9e1f6e5e156ff97c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a56338b029db75d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b33436fba2cdfc1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b6e58171da43037d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be49e9e83be42641",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d85bf4f9a1c2dc83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd2c60de2476f9ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd0f66fcedb70dbc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "1937",
@@ -772,7 +4451,16 @@
     "query": "Quais foram os principais eventos do governo democrático de Vargas entre 1951 e 1954?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "045d6696f05cca56",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1951",
       "1954",
@@ -789,7 +4477,60 @@
     "query": "O que marcou o período de 1914 a 1918 na Europa?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "1a48f4bfbfc4dbcd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1e38416839073676",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "76b664c974a89e42",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8cbea757675fd36d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "93b3e5d038446ceb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ae9df94e96c768ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b3cc647c2bd9bc8c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d58d0503620d9223",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "eded692c69aa5b9b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f87dd0ff08c34c1e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Primeira Guerra Mundial",
       "1914",
@@ -803,7 +4544,72 @@
     "query": "O que ocorreu na Europa entre 1939 e 1945?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "264ffe38fb026c39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a4a45841fcc5717a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Segunda Guerra Mundial",
       "1939",
@@ -818,7 +4624,92 @@
     "query": "Qual foi a situação política do Brasil entre 1930 e 1934?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0e789294619ada1b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1511432c631c15d0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2247b9a52e301812",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "266dc81defd25fc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1f0045c4fa4525a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "eee08b7f349b308d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fbe9d01d41dce2a6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "governo provisório",
       "1930",
@@ -834,7 +4725,188 @@
     "query": "O que foi o período napoleônico entre 1799 e 1815?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "03ff2efe93712b1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12f82ebb54e4288a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "168cd3237d530017",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16e4480f8730e690",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "19c119fe75b7ec68",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23a067d2a3c6694e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2a78c400ed2e5dfc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2b9c52a60153e62c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "327a0de5cb5680d2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "42c76cfa1f0a953f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "46516fc53476e48e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4ad372a61db29e63",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "54b8beb10d471451",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5c6c4cb5786b691e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "635505e89f1daaf6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6386f55e2c0c2a65",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6c5bf5313071887f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7194425e52c06c1d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "75dae267acf75022",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "76b664c974a89e42",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7a753fc19dbb0835",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f64fd4b0cab0092",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8dfd8d4140abb44d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "91ce97ed54906bd8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9304c30621d20c4c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "93cba25a64b8d990",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97b1aeee43530532",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97cebd9d8afb3fe9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9bf9cca2f67b3b0f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "afdcc33f14c87719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b3f81752ed7ffe00",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba3c783005379f17",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba64a7218bc35344",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c56268a2b354a127",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cf8c877cb9ee5d0d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e04a9b4efe4a6e86",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e172e04bb4f0b305",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e4fa27db0e5ff2b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e73f1940294e7390",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f197d4abc248daee",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f87dd0ff08c34c1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f98461d1c5de648e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Napoleão",
       "1799",
@@ -850,7 +4922,36 @@
     "query": "Quais mudanças ocorreram na Europa entre 1815 e 1848?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01ea717252240fcc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "079e00506e35e51e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "14e54bf41fc9ca6b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "950d07c0272311d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cfba09498b73d5f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Congresso de Viena",
       "Primavera dos Povos",
@@ -865,7 +4966,104 @@
     "query": "Qual foi o contexto político brasileiro no período de 1945 a 1950?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "00f825173bd0cd05",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0fb1e8520c8dba9e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16d266e0ba5ed214",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1723f239858c1dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30ae365a0bb88b4b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "352fd0b83b8b77fa",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5ee91ddedaed2f85",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6d22af81e490b94f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "81c3b48a5bcee466",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8862f6d97080887f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0839d5d4cbf3b30",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a95ac954afe1e145",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b51ea13b8a0f84b5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c6a11e8d8b6a8b61",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1d5427faf73a26a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "redemocratização",
       "1945",
@@ -881,7 +5079,148 @@
     "query": "O que foi a 'Belle Époque' e em que período ocorreu?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "08c9a11f6262e7cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1a48f4bfbfc4dbcd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2a31b4ac0c8967f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2cbc8aa26994ecf0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2d7de1ecea11a5d0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "310277431a74def9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3258be76bcda9ada",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41417605c4ffa9ce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "473df74c9adda4e7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "648b5f84246652b1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6bdb73bb9d0c777c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f2cd325dcd69e82",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f82778f42106da5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "736eb2a902b0fb37",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "76b664c974a89e42",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7cd1f5792f3cb6db",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7dd277568e0d4f8e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f101df5cf5d63de",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8afbc57793925399",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8b3a5401b8e1cfb5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8cbea757675fd36d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "950d07c0272311d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9acf93103c873352",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aca0d5b36a3e3b7d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c56268a2b354a127",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3ee92996e1673f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d461a50734b376f5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d58d0503620d9223",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d9a83166278d7a07",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dee7e36bbb829d35",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f78fd0755f01d83a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe6c9f0136ce9095",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Belle Époque",
       "1871",
@@ -897,7 +5236,24 @@
     "query": "Quando e por que o Brasil declarou guerra às potências do Eixo?",
     "category": "temporal",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "35ae82f03d65371c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a4a45841fcc5717a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ddcda41d80c8ea95",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1942",
       "Brasil na guerra",
@@ -913,7 +5269,144 @@
     "query": "Quais são as diferenças entre o primeiro e o segundo governo Vargas?",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "045d6696f05cca56",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "152f25c86604be3f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "15f722521df2c85a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "16f93df8e189b62f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "234a78d26173f129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "266dc81defd25fc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e789962d583e719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "49d599b4508467f8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5484aab6feba2915",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "549f38fce2bd2ee2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "646ee46da2f1d51d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "75585fef9cc8fb9b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "991fa7cfe4b11265",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9e1f6e5e156ff97c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a56338b029db75d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b008efb527c65fe1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b33436fba2cdfc1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b6e58171da43037d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be49e9e83be42641",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d04c5a5e5d656554",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1a4d63613010dc1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d85bf4f9a1c2dc83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dd2c60de2476f9ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd0f66fcedb70dbc",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "1937",
@@ -930,7 +5423,72 @@
     "query": "Compare o fascismo italiano e o nazismo alemão.",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "008355a0d7811a05",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23cfc19aa74b7f09",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3040d8049bc2c5c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3feccec7785cb96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e9896948b2d6bdc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "71cc2663c94c94c7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "972da505194a7652",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bd1a9eb13adcaa23",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bf1831c1e64ce4ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c32c3c90c5798a6f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c8510d682bc23246",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "fascismo",
       "nazismo",
@@ -947,7 +5505,132 @@
     "query": "Quais foram as diferenças entre a Revolução Americana e a Revolução Francesa?",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "09eaedf1a2ef4785",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "133922422218ea1f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "15329f017ff0574a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e55bd4c8fb93349",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4e55b387939ea8c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "511d5264c7e46dc4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "572ef62961a3d818",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5ab097d17fd22f9f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "71b10e4ea3cac9b2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "72fa06be3e55332c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "787a03f869c906d1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0fdc4c76b260784",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a68f8ffa7593d9cc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a6f38b59b9340223",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa82149cd39d7eeb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "afdcc33f14c87719",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b38fba0379b654f2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba009c706b0d0bca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba64a7218bc35344",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bdeea3c6e1d2fe21",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bfb009db48eb3073",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c12a37d563f0b8d9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c19c7eb21b138e6e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c273fc36c8992921",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c4fdadb8c278659a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ce2884d57c5acea5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e4fa27db0e5ff2b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e6cf4e06f7d59942",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f06ca84552b4cdae",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Revolução Americana",
       "Revolução Francesa",
@@ -962,7 +5645,120 @@
     "query": "Compare as causas da Primeira e da Segunda Guerra Mundial.",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01a5f2ce3b10a311",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "19c119fe75b7ec68",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1a48f4bfbfc4dbcd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "264ffe38fb026c39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4205a12fb440d6f0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8c016df62e249a81",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8cbea757675fd36d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a4a45841fcc5717a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ac25d3ccd5396f64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ae9df94e96c768ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b3cc647c2bd9bc8c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b6067ba81ffd80f2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d4fe999fac97432b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e78df235d89a86b0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f87dd0ff08c34c1e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Primeira Guerra",
       "Segunda Guerra",
@@ -978,7 +5774,208 @@
     "query": "Como diferem o liberalismo econômico e o intervencionismo estatal varguista?",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "00ff07e26a667327",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0313390d1db145ca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "045d6696f05cca56",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "079e00506e35e51e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "15938b4857835a78",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "17cbd51fd091113a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "182174425d5fce67",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1dd3c2d6f4bea45e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "359b93bac691aad5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4ec29cb138992764",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "51436982bcc0e37a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "51bb05f206742c27",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5535f82cb7583054",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "589a78ad084e4ed3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5a4337e98fa5b12a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6f84af872f754fdf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "77f8d2d5cf320ccb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "79dc9008f491cfc2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "80f2a98c53d77228",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "82685ecff1d0360c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "858002020e90169b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8d33fedd194e0d61",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "916cc4b2daa13918",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b372a8bd75e745c4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b79850d69476eb6d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c62c43cf44077157",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cd33926c6e69dfbd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ceb1654028221d04",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cfba09498b73d5f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e4e00674650b625a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e6c8dab50ca4b8b8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e8a15188809cf25e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f1328a453692f0c0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "feb26dec3c40d59c",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "liberalismo",
       "intervencionismo",
@@ -994,7 +5991,32 @@
     "query": "Quais são as semelhanças e diferenças entre o imperialismo do século XIX e o colonialismo anterior?",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "008355a0d7811a05",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33a0906e3ccf38d8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "78d5a4a79b3c5e18",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "972da505194a7652",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bd1a9eb13adcaa23",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d45137c831254496",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "imperialismo",
       "colonialismo",
@@ -1009,7 +6031,56 @@
     "query": "Compare o Consulado e o Império napoleônico em termos de estrutura política.",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23a067d2a3c6694e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2b9c52a60153e62c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "635505e89f1daaf6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8dfd8d4140abb44d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9304c30621d20c4c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97b1aeee43530532",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97cebd9d8afb3fe9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f197d4abc248daee",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f98461d1c5de648e",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Consulado",
       "Império napoleônico",
@@ -1024,7 +6095,56 @@
     "query": "Quais foram as diferenças entre o bloco capitalista e o bloco socialista durante a Guerra Fria?",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "264ffe38fb026c39",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "50ff8c0f4309d3ab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5400ee33024e2346",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "78d5a4a79b3c5e18",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "880d6289e7a77d64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a6f38b59b9340223",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa62d5ef6cfda561",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b1f190305958c2e3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b41338307a9fa96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7027619d2927ca2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bb4d582a0e3b354b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "capitalismo",
       "socialismo",
@@ -1040,7 +6160,80 @@
     "query": "Compare o populismo de Vargas com o de Perón na Argentina.",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "386018f0de813e8f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3ec5707c0a6cd024",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ae2de70d64bc6154",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d530d99be9b3187f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Vargas",
       "Perón",
@@ -1055,7 +6248,360 @@
     "query": "Quais foram as principais diferenças entre o Estado Novo brasileiro e o Estado Novo português?",
     "category": "comparative",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "015afe748f3dde85",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "01f5e7aa3fc6dac0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0313390d1db145ca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "06a0977b738c2435",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "09eaedf1a2ef4785",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "108687dedc72ff52",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12f82ebb54e4288a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "17ff94c31804cf46",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "19610a71330aa84b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1d64d1438cee8a7d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1daf33802b1299bd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2034426c92023d32",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2130cdc527d2eeb5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "225b6cb5b27a77df",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "234a78d26173f129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "262e52db2a135bdd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "290bcc3ab8432129",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33461eac9a473975",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "352fd0b83b8b77fa",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "402ab4dd87c6ab11",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4a72dc6d72ae2c45",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4e55b387939ea8c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4ed9f1e9df999d24",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "511d5264c7e46dc4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "589a78ad084e4ed3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59c361105b81d47a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "628d398df2b9f5c7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6ba8811bbbf411fe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6c1f28f26f69f799",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b1653b5a8b055e1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b3fe4f7d742e7a8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7d4e56d154868e5c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7d59cf4bd0ea5d76",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "81c3b48a5bcee466",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "81e702e753a74920",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "84dad18e6aaa01ec",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8da2133d165839b8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "986d1cc3526dc221",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "98b987c5b32d5cf9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "991fa7cfe4b11265",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9a7b253e60685807",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9bf9cca2f67b3b0f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0bbec8c716f2f75",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a4a45841fcc5717a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a8cb3197776d5bdc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aa857760419539e1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aca0d5b36a3e3b7d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b138b2919b30c25d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b372a8bd75e745c4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7004e732c5fe5bd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba64a7218bc35344",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bf1831c1e64ce4ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c49e8a61d0c33563",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c6a11e8d8b6a8b61",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cb29af94066923d9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ce2884d57c5acea5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cfba09498b73d5f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1d5427faf73a26a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d6dd4442caf243f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d6f0505880bd3434",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d85bf4f9a1c2dc83",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d8963ddd7c3ff294",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d944700303870930",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dc965624c53d7ea0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e3f9afd121afba7a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e8a15188809cf25e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f267ca6465e6ebb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f491e76e5f4b9557",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd0f66fcedb70dbc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fdd3d4d722e6900b",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Estado Novo",
       "Vargas",
@@ -1071,7 +6617,80 @@
     "query": "Como a crise de 1929 afetou a ascensão de Vargas ao poder no Brasil?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "015afe748f3dde85",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "01f5e7aa3fc6dac0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0e789294619ada1b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0f093b05d2e7f55a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cd537efcb6a0c6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "226b81c30ac2890f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "262e52db2a135bdd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5526c622c97690d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "59530137fc03e084",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "617cecaa6f3d6104",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b54d509ab7208ca3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7eaf1b57d7c87cb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be69e3b022501dab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d7ec9687b759e1c5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "effe2f339277686d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd4b9944ea616ccf",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "crise de 1929",
       "café",
@@ -1087,7 +6706,80 @@
     "query": "De que forma o fim da Segunda Guerra Mundial e a redemocratização no Brasil estão relacionados?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2aa51422d2495cfe",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30ae365a0bb88b4b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "43b0eea6dd083283",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6e4e06d8a8f85f13",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8f9b54072ab95b19",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "95c2c137faf80c14",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9b16ced6723ac6ff",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a95ac954afe1e145",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c6a11e8d8b6a8b61",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c9218bbea1b63d10",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d1d5427faf73a26a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e84da9cac950e6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe9ada7c9007d279",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "1945",
       "fim da Segunda Guerra",
@@ -1103,7 +6795,44 @@
     "query": "Como o iluminismo e a Revolução Industrial juntos contribuíram para o surgimento do movimento operário?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "128ff2b72224f6b4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "28a31084439f6698",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "33461eac9a473975",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b41338307a9fa96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c0e08cd048070baf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c630cdc63ff9f29a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e01c257495fa18e0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ed3f67e5b49c8ede",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "iluminismo",
       "Revolução Industrial",
@@ -1118,7 +6847,56 @@
     "query": "Qual foi o papel da criação da Petrobras no contexto do segundo governo Vargas e do nacionalismo econômico?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "19c119fe75b7ec68",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2474470cc17679d5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "309c2109e0e2bd04",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8c016df62e249a81",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "97cebd9d8afb3fe9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ac25d3ccd5396f64",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bc260ad2cb4354c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d4fe999fac97432b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "eda518807ead8679",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f319bf11a8a8bf6c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fa45c0e0d1687e7b",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Petrobras",
       "1953",
@@ -1134,7 +6912,96 @@
     "query": "Como os Tratados de Paz de 1919 contribuíram para a ascensão do nazismo?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "075d55c26c4ce244",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "21912c7dfdf3dea5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "23cfc19aa74b7f09",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "259006ff5ad8d337",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2616b9b0610a97d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "281d7a542d2304e6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41417605c4ffa9ce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "41ca2e438dd0281b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "441899de5d95c0dc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4689d48fcc653ce9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "48b9fb68fccb1905",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4990e96fa0fcf372",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "49945296aced06bd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e8d7d2a26d31427",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6aa2a96be218686f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "785c7e164f8d74eb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b7027619d2927ca2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3ee92996e1673f1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "da5aedad1b126f20",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fd1f2e8ae2340759",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fe5203f66b49e2ab",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Tratado de Versalhes",
       "1919",
@@ -1151,7 +7018,84 @@
     "query": "De que forma a industrialização e o urbanismo do século XIX geraram novos movimentos sociais e políticos?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01f5e7aa3fc6dac0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0313390d1db145ca",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0cfa1b9f15748207",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0ed4a43934d09eb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "12750323353f0bb9",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "24a1b7a7bdff5742",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3829cecbeffca12e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "50ff8c0f4309d3ab",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "65826e70421b8fef",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "66e220abda4515c1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a0bbec8c716f2f75",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "aefc7c302a95dd48",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b349400594f3c19f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b41338307a9fa96a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be4f2e364a3c047e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c0a7def6f22c9736",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d937412319ffb4b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fb9310a1d3d0946c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fee89fa40ac5e2b2",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "industrialização",
       "urbanização",
@@ -1167,7 +7111,76 @@
     "query": "Como a política de Vargas para os trabalhadores ajudou a criar sua base eleitoral para 1950?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d448e8d49f779be",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2616b9b0610a97d7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "27fe566cce6ecd51",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2fb6a4a143aacc9e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e65555854476f76",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "589a78ad084e4ed3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5e8d7d2a26d31427",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "60f9c6bec0faab3e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "762eceef7d4ee135",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7b2964865c24859a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f0743fa93521dd0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "809fe545886efca2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bba56173fdc75298",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "be6ca8aed16521a0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c31c03857ca230a7",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "c670c588a0f5d31e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d311542ab5856bc8",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "CLT",
       "trabalhismo",
@@ -1183,7 +7196,12 @@
     "query": "Qual foi o percurso de Napoleão desde cônsul até o exílio em Santa Helena?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "97b1aeee43530532",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Consulado",
       "Primeiro Cônsul",
@@ -1199,7 +7217,24 @@
     "query": "Como o Congresso de Viena tentou conter os efeitos da Revolução Francesa e das guerras napoleônicas?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "01ea717252240fcc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "69c756c2e70a6000",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cfba09498b73d5f4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f15f264f1a56f850",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "Congresso de Viena",
       "restauração",
@@ -1214,7 +7249,60 @@
     "query": "De que maneira a participação do Brasil na Segunda Guerra influenciou a queda do Estado Novo?",
     "category": "multi_hop",
     "answerable": true,
-    "relevant_chunks": [],
+    "relevant_chunks": [
+      {
+        "chunk_id": "0d350db354029620",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "18b2ad8925c0a456",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2356ac94cb3e915b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2c4ca3afe12467ae",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "30a38d58bab2ccf5",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3cad959740696ebc",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8ae940d788b6a4a8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9e1f6e5e156ff97c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b43e58ca142eb71e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b4829e794a5a29b8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d77247eacfe2490e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f267ca6465e6ebb8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f6191a6dbc9f6a99",
+        "relevance": 3
+      }
+    ],
     "relevant_texts": [
       "FEB",
       "Brasil na guerra",

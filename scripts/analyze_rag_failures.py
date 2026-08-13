@@ -60,64 +60,15 @@ ROOT = Path(__file__).parent.parent
 sys.path.insert(0, str(ROOT))
 
 from core.config import get_settings, setup_logging  # noqa: E402
-from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.evaluation import (  # noqa: E402
     _effective_ids_from_item,
     load_dataset_from_file,
 )
 from rag.retriever import Retriever  # noqa: E402
 from rag.vectorstore import VectorStore  # noqa: E402
+from scripts._eval_common import load_retriever_from_settings  # noqa: E402
 
 logger = logging.getLogger(__name__)
-
-# ---------------------------------------------------------------------------
-# Component loading (same pattern as run_rag_experiment.py)
-# ---------------------------------------------------------------------------
-
-
-def _load_components(settings) -> tuple[VectorStore, EmbeddingModel, Retriever]:
-    embed_model = EmbeddingModel(
-        model_name=settings.embed_model_name,
-        cache_dir=(
-            str(ROOT / settings.embed_cache_dir)
-            if not Path(settings.embed_cache_dir).is_absolute()
-            else settings.embed_cache_dir
-        ),
-        batch_size=settings.embed_batch_size,
-        use_disk_cache=settings.embed_disk_cache,
-    )
-
-    index_dir = (
-        str(ROOT / settings.index_dir)
-        if not Path(settings.index_dir).is_absolute()
-        else settings.index_dir
-    )
-    if not Path(index_dir).exists():
-        print(f"\n[ERROR] Index not found: {index_dir}")
-        sys.exit(1)
-
-    vs = VectorStore(
-        index_dir=index_dir,
-        embedding_dim=embed_model.dimension,
-        hnsw_m=settings.hnsw_m,
-        hnsw_ef_construction=settings.hnsw_ef_construction,
-        hnsw_ef_search=settings.hnsw_ef_search,
-    )
-
-    retriever = Retriever(
-        vectorstore=vs,
-        embed_model=embed_model,
-        top_k=settings.top_k,
-        candidate_multiplier=settings.candidate_multiplier,
-        min_score=settings.min_score,
-        lexical_weight=settings.lexical_weight,
-        bm25_k1=settings.bm25_k1,
-        bm25_b=settings.bm25_b,
-        adaptive_sigma=settings.adaptive_sigma,
-        gap_filter_enabled=settings.gap_filter_enabled,
-        keyword_filter_enabled=settings.keyword_filter_enabled,
-    )
-    return vs, embed_model, retriever
 
 
 # ---------------------------------------------------------------------------
@@ -470,7 +421,7 @@ def main() -> None:
     print("  RAG Failure Analyser")
     print(f"{'═' * 65}")
 
-    vs, embed_model, retriever = _load_components(settings)
+    vs, embed_model, retriever = load_retriever_from_settings(settings)
     print(f"  Index loaded: {vs.size} chunks")
 
     dataset = load_dataset_from_file(

@@ -17,7 +17,6 @@ Valores efetivos do baseline (Phase 2):
   gap_filter_enabled  : true
   keyword_filter_enabled: true
   min_keyword_overlap : 0.15
-  temporal_validation_enabled: true
 """
 
 import logging
@@ -78,7 +77,7 @@ class Settings:
     index_dir: str = field(
         default_factory=lambda: os.environ.get("INDEX_DIR", "data/index")
     )
-    top_k: int = field(default_factory=lambda: int(os.environ.get("TOP_K", "5")))
+    top_k: int = field(default_factory=lambda: int(os.environ.get("TOP_K", "10")))
 
     # Quantos candidatos buscar antes do reranking (top_k × multiplier)
     candidate_multiplier: int = field(
@@ -162,14 +161,6 @@ class Settings:
     min_keyword_overlap: float = field(
         default_factory=lambda: float(os.environ.get("MIN_KEYWORD_OVERLAP", "0.15"))
     )
-    # Ativa/desativa a validação temporal pós-geração (True = ativo no baseline).
-    temporal_validation_enabled: bool = field(
-        default_factory=lambda: os.environ.get(
-            "TEMPORAL_VALIDATION_ENABLED", "true"
-        ).lower()
-        == "true"
-    )
-
     # Scores de confiança
     high_confidence_score: float = field(
         default_factory=lambda: float(os.environ.get("HIGH_CONFIDENCE_SCORE", "0.65"))
@@ -201,6 +192,17 @@ class Settings:
         default_factory=lambda: float(
             os.environ.get("CROSS_ENCODER_HYBRID_WEIGHT", "0.4")
         )
+    )
+    # Piso absoluto sobre o score BRUTO do cross-encoder (antes da normalização
+    # min-max entre candidatos), usado como guardrail: candidatos abaixo deste
+    # valor são descartados antes da fusão de score, mesmo que sejam os
+    # "melhores" dentro de um lote todo irrelevante (ex: query fora do domínio
+    # do corpus). Diferente de min_score/adaptive_sigma/gap_filter — que operam
+    # sobre o score semântico FAISS e já são propositalmente frouxos para não
+    # cortar recall — este piso usa o julgamento par-a-par (query, passagem)
+    # do CE, um sinal absoluto mais confiável de relevância real.
+    cross_encoder_min_score: float = field(
+        default_factory=lambda: float(os.environ.get("CROSS_ENCODER_MIN_SCORE", "-1.0"))
     )
 
     # --- Conversas ---

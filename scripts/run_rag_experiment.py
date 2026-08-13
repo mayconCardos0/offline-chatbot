@@ -32,15 +32,24 @@ Usage examples
       --compare data/eval/results/baseline.json \\
                 data/eval/results/no_keyword_filter.json
 
-Ablation flags (all default to baseline behaviour)
-──────────────────────────────────────────────────
-  --gap-filter-enabled      true|false   (default: true)
-  --keyword-filter-enabled  true|false   (default: true)
-  --min-score               float        (default: 0.25)
-  --lexical-weight          float        (default: 0.40)
-  --adaptive-sigma          float        (default: 1.0)
-  --top-k                   int          (default: 5)
-  --k-eval                  int          (default: 5)  evaluation depth
+Ablation flags (all default to Settings/.env — i.e. the real deployed config)
+──────────────────────────────────────────────────────────────────────────────
+  --gap-filter-enabled          true|false
+  --keyword-filter-enabled      true|false
+  --min-score                   float
+  --lexical-weight              float
+  --adaptive-sigma              float
+  --top-k                       int
+  --candidate-multiplier        int
+  --cross-encoder-enabled       true|false
+  --cross-encoder-model         str
+  --cross-encoder-top-k         int
+  --cross-encoder-hybrid-weight float
+  --k-eval                      int    (default: 5)  evaluation depth
+
+Queries com "answerable": false (negativas/fora do domínio) nunca entram nas
+métricas de ranking — mesmo tratamento de scripts/eval_rag.py, já que elas
+não têm relevant_chunks por definição e só distorceriam a média.
 
 Output format
 ─────────────
@@ -82,92 +91,47 @@ from rag.evaluation import (  # noqa: E402
 )
 from rag.retriever import Retriever  # noqa: E402
 from rag.vectorstore import VectorStore  # noqa: E402
+from scripts._eval_common import load_retriever_from_settings, parse_bool  # noqa: E402
 
 logger = logging.getLogger(__name__)
 
 
 # ---------------------------------------------------------------------------
-# Components loader
+# Components loader — mesma construção usada em produção (api/main.py) e nos
+# outros scripts de avaliação, incluindo cross-encoder quando habilitado.
 # ---------------------------------------------------------------------------
 
 
 def load_components(settings, args) -> tuple[VectorStore, EmbeddingModel, Retriever]:
     """Load all RAG components, overriding settings with CLI ablation flags."""
-    print(f"  Loading embedding model: {settings.embed_model_name}")
-    embed_model = EmbeddingModel(
-        model_name=settings.embed_model_name,
-        cache_dir=(
-            str(ROOT / settings.embed_cache_dir)
-            if not Path(settings.embed_cache_dir).is_absolute()
-            else settings.embed_cache_dir
+    ce_enabled_arg = getattr(args, "cross_encoder_enabled", None)
+    return load_retriever_from_settings(
+        settings,
+        top_k=getattr(args, "top_k", None),
+        min_score=getattr(args, "min_score", None),
+        lexical_weight=getattr(args, "lexical_weight", None),
+        adaptive_sigma=getattr(args, "adaptive_sigma", None),
+        gap_filter_enabled=_parse_bool(
+            getattr(args, "gap_filter_enabled", None), settings.gap_filter_enabled
         ),
-        batch_size=settings.embed_batch_size,
-        use_disk_cache=settings.embed_disk_cache,
+        keyword_filter_enabled=_parse_bool(
+            getattr(args, "keyword_filter_enabled", None),
+            settings.keyword_filter_enabled,
+        ),
+        candidate_multiplier=getattr(args, "candidate_multiplier", None),
+        cross_encoder_enabled=(
+            _parse_bool(ce_enabled_arg, settings.cross_encoder_enabled)
+            if ce_enabled_arg is not None
+            else None
+        ),
+        cross_encoder_model=getattr(args, "cross_encoder_model", None),
+        cross_encoder_top_k=getattr(args, "cross_encoder_top_k", None),
+        cross_encoder_hybrid_weight=getattr(args, "cross_encoder_hybrid_weight", None),
     )
-
-    index_dir = (
-        str(ROOT / settings.index_dir)
-        if not Path(settings.index_dir).is_absolute()
-        else settings.index_dir
-    )
-    if not Path(index_dir).exists():
-        print(f"\n[ERROR] Index not found: {index_dir}")
-        print("        Run: python scripts/index_documents.py\n")
-        sys.exit(1)
-
-    vs = VectorStore(
-        index_dir=index_dir,
-        embedding_dim=embed_model.dimension,
-        hnsw_m=settings.hnsw_m,
-        hnsw_ef_construction=settings.hnsw_ef_construction,
-        hnsw_ef_search=settings.hnsw_ef_search,
-    )
-    if vs.size == 0:
-        print("\n[ERROR] VectorStore is empty — no chunks indexed.\n")
-        sys.exit(1)
-
-    # Build config dict with ablation overrides
-    top_k = getattr(args, "top_k", None) or settings.top_k
-    min_score = getattr(args, "min_score", None)
-    if min_score is None:
-        min_score = settings.min_score
-    lexical_weight = getattr(args, "lexical_weight", None)
-    if lexical_weight is None:
-        lexical_weight = settings.lexical_weight
-    adaptive_sigma = getattr(args, "adaptive_sigma", None)
-    if adaptive_sigma is None:
-        adaptive_sigma = settings.adaptive_sigma
-    gap_enabled = _parse_bool(
-        getattr(args, "gap_filter_enabled", None), settings.gap_filter_enabled
-    )
-    kw_enabled = _parse_bool(
-        getattr(args, "keyword_filter_enabled", None), settings.keyword_filter_enabled
-    )
-
-    retriever = Retriever(
-        vectorstore=vs,
-        embed_model=embed_model,
-        top_k=top_k,
-        candidate_multiplier=settings.candidate_multiplier,
-        min_score=min_score,
-        lexical_weight=lexical_weight,
-        bm25_k1=settings.bm25_k1,
-        bm25_b=settings.bm25_b,
-        adaptive_sigma=adaptive_sigma,
-        gap_filter_enabled=gap_enabled,
-        keyword_filter_enabled=kw_enabled,
-        high_confidence_score=settings.high_confidence_score,
-        low_confidence_score=settings.low_confidence_score,
-    )
-    return vs, embed_model, retriever
 
 
 def _parse_bool(value, default: bool) -> bool:
-    if value is None:
-        return default
-    if isinstance(value, bool):
-        return value
-    return str(value).lower() in ("true", "1", "yes")
+    return parse_bool(value, default)
 
 
 # ---------------------------------------------------------------------------
@@ -187,6 +151,13 @@ def run_experiment(args) -> dict:
     dataset = load_dataset_from_file(str(dataset_path))
     print(f"{len(dataset)} queries")
 
+    # Queries negativas (answerable=False) não têm ground-truth de chunks —
+    # nunca entram nas métricas de ranking (mesmo critério de eval_rag.py).
+    positive_dataset = [d for d in dataset if d.get("answerable", True)]
+    n_negative = len(dataset) - len(positive_dataset)
+    if n_negative:
+        print(f"  ({n_negative} queries negativas ignoradas nas métricas de ranking)")
+
     k_eval = getattr(args, "k_eval", 5)
 
     # Run evaluation at multiple depths for recall curves
@@ -194,7 +165,7 @@ def run_experiment(args) -> dict:
     reports: dict[int, EvaluationReport] = {}
     for k in all_k:
         t0 = time.perf_counter()
-        report = evaluate_retriever(retriever, dataset, k=k)
+        report = evaluate_retriever(retriever, positive_dataset, k=k)
         elapsed = time.perf_counter() - t0
         reports[k] = report
         print(
@@ -211,7 +182,8 @@ def run_experiment(args) -> dict:
         "experiment": args.name,
         "timestamp": datetime.now().isoformat(timespec="seconds"),
         "dataset": dataset_path.name,
-        "n_queries": len(dataset),
+        "n_queries": len(positive_dataset),
+        "n_negative_queries": n_negative,
         "config": config_dict,
         "metrics": {
             "recall@1": round(reports[1].mean_recall, 4) if 1 in reports else None,
@@ -244,8 +216,16 @@ def run_experiment(args) -> dict:
 
 def _build_config_dict(args, settings) -> dict:
     top_k = getattr(args, "top_k", None) or settings.top_k
+    ce_enabled_arg = getattr(args, "cross_encoder_enabled", None)
+    ce_enabled = (
+        _parse_bool(ce_enabled_arg, settings.cross_encoder_enabled)
+        if ce_enabled_arg is not None
+        else settings.cross_encoder_enabled
+    )
     return {
         "top_k": top_k,
+        "candidate_multiplier": getattr(args, "candidate_multiplier", None)
+        or settings.candidate_multiplier,
         "min_score": getattr(args, "min_score", None) or settings.min_score,
         "lexical_weight": getattr(args, "lexical_weight", None)
         or settings.lexical_weight,
@@ -258,7 +238,23 @@ def _build_config_dict(args, settings) -> dict:
             getattr(args, "keyword_filter_enabled", None),
             settings.keyword_filter_enabled,
         ),
-        "candidate_multiplier": settings.candidate_multiplier,
+        "cross_encoder_enabled": ce_enabled,
+        "cross_encoder_model": (
+            getattr(args, "cross_encoder_model", None) or settings.cross_encoder_model
+            if ce_enabled
+            else None
+        ),
+        "cross_encoder_top_k": (
+            getattr(args, "cross_encoder_top_k", None) or settings.cross_encoder_top_k
+            if ce_enabled
+            else None
+        ),
+        "cross_encoder_hybrid_weight": (
+            getattr(args, "cross_encoder_hybrid_weight", None)
+            or settings.cross_encoder_hybrid_weight
+            if ce_enabled
+            else None
+        ),
         "bm25_k1": settings.bm25_k1,
         "bm25_b": settings.bm25_b,
         "embed_model": settings.embed_model_name,
@@ -367,6 +363,7 @@ def build_parser() -> argparse.ArgumentParser:
     abl.add_argument("--min-score", type=float, default=None)
     abl.add_argument("--lexical-weight", type=float, default=None)
     abl.add_argument("--adaptive-sigma", type=float, default=None)
+    abl.add_argument("--candidate-multiplier", type=int, default=None)
     abl.add_argument(
         "--gap-filter-enabled", default=None, help="true|false (default: from settings)"
     )
@@ -375,6 +372,14 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="true|false (default: from settings)",
     )
+    abl.add_argument(
+        "--cross-encoder-enabled",
+        default=None,
+        help="true|false (default: from settings)",
+    )
+    abl.add_argument("--cross-encoder-model", default=None, help="HF model name")
+    abl.add_argument("--cross-encoder-top-k", type=int, default=None)
+    abl.add_argument("--cross-encoder-hybrid-weight", type=float, default=None)
 
     # ── compare ──────────────────────────────────────────────────────────────
     cmp = sub.add_parser("compare", help="Compare saved experiment results")

@@ -184,9 +184,6 @@ class TestSettingsPhase2Defaults:
     def test_min_keyword_overlap_default(self):
         assert Settings().min_keyword_overlap == pytest.approx(0.15)
 
-    def test_temporal_validation_enabled_default_true(self):
-        assert Settings().temporal_validation_enabled is True
-
     def test_high_confidence_score_default(self):
         assert Settings().high_confidence_score == pytest.approx(0.65)
 
@@ -244,10 +241,6 @@ class TestSettingsPhase2FromEnv:
     def test_keyword_filter_disabled_from_env(self, monkeypatch):
         monkeypatch.setenv("KEYWORD_FILTER_ENABLED", "false")
         assert Settings().keyword_filter_enabled is False
-
-    def test_temporal_validation_disabled_from_env(self, monkeypatch):
-        monkeypatch.setenv("TEMPORAL_VALIDATION_ENABLED", "false")
-        assert Settings().temporal_validation_enabled is False
 
     def test_high_confidence_score_from_env(self, monkeypatch):
         monkeypatch.setenv("HIGH_CONFIDENCE_SCORE", "0.80")

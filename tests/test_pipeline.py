@@ -103,23 +103,6 @@ class TestPipelineChat:
         assert llm.chat.called
         assert result == "LLM answer here."
 
-    def test_blocks_temporally_invalid_segundo_governo_vargas_answer(self):
-        pipeline, retriever, llm, _ = _make_pipeline()
-        retriever.retrieve.return_value = [
-            {
-                "text": "Segundo governo Vargas (1951-1954).",
-                "source": "doc.txt",
-                "score": 0.9,
-            }
-        ]
-        llm.chat.return_value = (
-            "O Segundo Governo Vargas foi um governo militar marcado por repressão."
-        )
-
-        result = pipeline.chat("session-vargas", "Como foi o Segundo Governo Vargas?")
-
-        assert result == _NO_CONTEXT_RESPONSE
-
     def test_strips_model_think_blocks_and_prompt_echoes(self):
         pipeline, retriever, llm, _ = _make_pipeline()
         retriever.retrieve.return_value = [
@@ -188,6 +171,99 @@ class TestPipelineChat:
         pipeline.chat("multi-turn", "Second message")
         messages = conv_manager.get("multi-turn")["messages"]
         assert len(messages) == 4  # 2 turns × (user + assistant)
+
+
+# ---------------------------------------------------------------------------
+# Título automático da conversa
+# ---------------------------------------------------------------------------
+
+
+class TestTitleGeneration:
+    # Par pergunta/chunk com overlap real de keywords (mesmo par usado em
+    # test_llm_called_with_chunks) — necessário para passar no filtro de
+    # relevância temática do pipeline (_is_topically_relevant) e garantir
+    # que o caminho testado é o de resposta normal do LLM, não o canônico
+    # de "fora do contexto".
+    _QUERY = "Como ocorre a fotossíntese nos cloroplastos?"
+    _CHUNK = {
+        "text": "A fotossíntese ocorre nos cloroplastos das células vegetais.",
+        "source": "doc.txt",
+        "score": 0.85,
+    }
+
+    def test_first_turn_generates_title(self):
+        pipeline, retriever, llm, conv_manager = _make_pipeline()
+        retriever.retrieve.return_value = [self._CHUNK]
+        llm.chat.side_effect = ["Resposta principal do LLM.", "Fotossíntese nas plantas"]
+
+        pipeline.chat("title-session", self._QUERY)
+
+        conv = conv_manager.get("title-session")
+        assert conv["title"] == "Fotossíntese nas plantas"
+        assert conv["title"] != "New Chat"
+
+    def test_second_turn_does_not_regenerate_title(self):
+        pipeline, retriever, llm, conv_manager = _make_pipeline()
+        retriever.retrieve.return_value = [self._CHUNK]
+        llm.chat.side_effect = [
+            "Primeira resposta.",
+            "Título Gerado",
+            "Segunda resposta.",
+        ]
+
+        pipeline.chat("multi-turn-title", self._QUERY)
+        pipeline.chat("multi-turn-title", self._QUERY)
+
+        assert conv_manager.get("multi-turn-title")["title"] == "Título Gerado"
+        assert llm.chat.call_count == 3
+
+    def test_title_generated_even_without_chunks(self):
+        pipeline, retriever, llm, conv_manager = _make_pipeline()
+        retriever.retrieve.return_value = []
+        llm.chat.return_value = "Dúvida Genérica"
+
+        pipeline.chat("no-context-title", "Pergunta qualquer")
+
+        conv = conv_manager.get("no-context-title")
+        assert conv["title"] == "Dúvida Genérica"
+
+    def test_title_generation_failure_falls_back_without_breaking_chat(self):
+        pipeline, retriever, llm, conv_manager = _make_pipeline()
+        retriever.retrieve.return_value = [self._CHUNK]
+
+        def _side_effect(messages, **kwargs):
+            if messages[0]["content"].startswith("Gere um título"):
+                raise RuntimeError("model error")
+            return "Resposta principal."
+
+        llm.chat.side_effect = _side_effect
+
+        result = pipeline.chat("fallback-title", self._QUERY)
+
+        assert result == "Resposta principal."
+        conv = conv_manager.get("fallback-title")
+        assert conv["title"] != "New Chat"
+        assert conv["title"].startswith("Como ocorre")
+
+    def test_title_strips_think_blocks_and_quotes(self):
+        pipeline, retriever, llm, conv_manager = _make_pipeline()
+        retriever.retrieve.return_value = [
+            {
+                "text": "A Revolução Francesa foi um marco histórico.",
+                "source": "doc.txt",
+                "score": 0.9,
+            }
+        ]
+        llm.chat.side_effect = [
+            "Resposta principal.",
+            '<think>pensando...</think>"Revolução Francesa"',
+        ]
+
+        pipeline.chat("clean-title", "O que foi a Revolução Francesa?")
+
+        title = conv_manager.get("clean-title")["title"]
+        assert "<think>" not in title
+        assert not title.startswith('"')
 
 
 # ---------------------------------------------------------------------------

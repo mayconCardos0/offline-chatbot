@@ -11,7 +11,6 @@ Melhorias nesta versão:
     modelos que ignoram instruções somente no system prompt).
   - Prefixo de confiança proporcional ao score dos chunks.
   - Contexto ampliado (3500 chars) e histórico reduzido (4 turnos).
-  - Validação temporal: detecta e corrige inconsistências em datas e períodos históricos.
 """
 
 import logging
@@ -21,7 +20,6 @@ import time
 from typing import TYPE_CHECKING
 
 from core.conversation import ConversationManager
-from rag.temporal_validator import validate_temporal_consistency
 
 if TYPE_CHECKING:
     from llm.local_model import LocalModel
@@ -104,18 +102,23 @@ _STOPWORDS = {
 # ---------------------------------------------------------------------------
 _SYSTEM_WITH_CONTEXT = """\
 Você é um professor particular especializado no Ensino Médio brasileiro. \
-Seu objetivo é explicar conteúdos de forma clara, completa e didática para estudantes.
+Seu objetivo é explicar conteúdos de forma clara, completa e didática para estudantes, \
+de um jeito que resolva completamente a dúvida do aluno.
 
 REGRAS:
 Responda SEMPRE em português brasileiro correto.
-Use EXCLUSIVAMENTE as informações do CONTEXTO fornecido
-VERIFICAÇÃO OBRIGATÓRIA: Antes de mencionar QUALQUER data, nome ou evento, verifique se está EXPLICITAMENTE no contexto
+Use EXCLUSIVAMENTE as informações do CONTEXTO fornecido.
+VERIFICAÇÃO OBRIGATÓRIA: Antes de mencionar QUALQUER data, nome ou evento, verifique se está EXPLICITAMENTE no contexto.
 Se o contexto não contiver a informação, diga: "Esse conteúdo não está no material disponível."
-Seja completo: cubra todos os pontos importantes da pergunta, sem deixar lacunas.
-Seja objetivo: evite enrolação, repetição e parágrafos desnecessários.
+Seja completo: cubra todos os pontos importantes da pergunta, sem deixar lacunas — prefira sempre uma resposta mais longa e completa a uma resposta breve e incompleta.
+"Objetivo" aqui significa não repetir a mesma ideia com palavras diferentes só para parecer mais completo — NÃO significa dar respostas curtas.
+Se a pergunta tiver mais de uma parte (ex: causa e consequência, comparação entre dois temas), responda cada parte explicitamente, sem pular nenhuma.
+Não se limite a listar fatos: explique as causas, o contexto e as consequências de cada evento ou conceito, sempre que o CONTEXTO trouxer essa informação.
+Ao explicar um conceito, mostre como ele se conecta ao que está descrito no CONTEXTO, em vez de apenas afirmar algo — isso ajuda o aluno a entender de onde vem a explicação.
+Se o CONTEXTO trouxer informações relacionadas que ajudem a entender melhor o tema perguntado, inclua-as — o objetivo é que o aluno não precise perguntar de novo sobre o mesmo assunto.
+Defina termos técnicos ou históricos que aparecerem na resposta, mesmo que brevemente.
 Use exemplos concretos, comparações ou analogias quando ajudarem a entender.
-Quando houver comparações (ex: A vs B), use estrutura com tópicos para facilitar a leitura.
-Ao final de respostas complexas, inclua um parágrafo curto de resumo/conclusão.
+Sempre que a resposta tiver mais de um aspecto (causas, consequências, características, etapas, comparações), organize com tópicos ou subtítulos para facilitar o estudo.
 Nunca repita o mesmo ponto com palavras diferentes só para parecer mais completo.
 Adapte o nível da linguagem: acessível, mas sem ser simplista.
 Não utilize emojis nas respostas.
@@ -129,7 +132,9 @@ CONTEXTO:
 # que tendem a ignorar instruções somente no system prompt (ex: Gemma).
 _USER_SUFFIX = (
     "\n\n[INSTRUÇÃO IMPORTANTE: responda APENAS com base no contexto fornecido "
-    "no system prompt. Se a resposta não estiver lá, diga que não está no material.]"
+    "no system prompt. Se a resposta não estiver lá, diga que não está no material. "
+    "Dê uma resposta completa e aprofundada, cobrindo causas, contexto e consequências "
+    "quando o material trouxer essa informação — não dê uma resposta curta.]"
 )
 
 _NO_CONTEXT_RESPONSE = (
@@ -152,6 +157,15 @@ _MEDIUM_CONFIDENCE_PREFIX = "Com base no material disponível:\n\n"
 _MAX_CONTEXT_CHARS = 3500
 _MAX_HISTORY_TURNS = 4
 _MIN_CHUNK_CHARS = 80
+
+# Geração automática de título da conversa (a partir da primeira pergunta)
+_TITLE_SYSTEM_PROMPT = (
+    "Gere um título curto (no máximo 6 palavras) em português para a "
+    "pergunta a seguir, resumindo o assunto. Responda APENAS com o título, "
+    "sem aspas, sem pontuação final e sem explicações."
+)
+_TITLE_MAX_TOKENS = 20
+_TITLE_MAX_CHARS = 60
 
 # Limiar mínimo de overlap de keywords entre query e chunks recuperados.
 # Se a sobreposição for menor, os chunks são considerados off-topic e o
@@ -197,15 +211,12 @@ class RAGPipeline:
         # Detecta se é uma pergunta de follow-up
         is_followup = self._is_followup_question(message, conv["messages"])
 
-        # Aplica desambiguação para termos conhecidos
-        disambiguated_query = self._disambiguate_query(message)
-
         # Se for follow-up, enriquece a query com contexto da conversa anterior
-        enriched_query = disambiguated_query
+        enriched_query = message
         if is_followup:
             context_from_history = self._extract_context_from_history(conv["messages"])
             if context_from_history:
-                enriched_query = f"{disambiguated_query} {context_from_history}"
+                enriched_query = f"{message} {context_from_history}"
                 logger.debug(
                     "Follow-up detectado. Query enriquecida: '%s'", enriched_query[:100]
                 )
@@ -274,35 +285,6 @@ class RAGPipeline:
             session_id,
         )
 
-        # Validação temporal da resposta
-        validation = validate_temporal_consistency(message, response_text)
-
-        if not validation["valid"]:
-            logger.warning(
-                "Inconsistência temporal detectada na resposta | sessão='%s' | issues=%s",
-                session_id,
-                validation["issues"],
-            )
-
-            # Se houver problemas graves de período, retorna resposta padrão.
-            # Para perguntas sobre períodos históricos específicos, omitir o
-            # intervalo correto também é crítico: geralmente indica que o modelo
-            # respondeu sobre outro governo com vocabulário parecido.
-            critical_issues = [
-                issue
-                for issue in validation["issues"]
-                if "mas query pergunta sobre" in issue
-                or "mas resposta fala sobre" in issue
-                or "não menciona o período correto" in issue
-                or "fora do período" in issue
-            ]
-
-            if critical_issues:
-                logger.info(
-                    "Problema crítico de período histórico detectado - retornando resposta padrão"
-                )
-                return self._persist_and_return(conv, message, _NO_CONTEXT_RESPONSE)
-
         final_response = (
             confidence_prefix + response_text if confidence_prefix else response_text
         )
@@ -358,47 +340,6 @@ class RAGPipeline:
         message_lower = message.lower()
         return any(indicator in message_lower for indicator in followup_indicators)
 
-    def _disambiguate_query(self, query: str) -> str:
-        """Enriquece queries ambíguas com variações e termos relacionados.
-
-        Detecta termos que podem ter múltiplos significados ou referências
-        e adiciona variações conhecidas para melhorar a recuperação de chunks.
-
-        Exemplos:
-        - "segundo governo Vargas" → adiciona "1951-1954", "BNDE", "Plano Lafer"
-        - "primeiro governo" → adiciona "governo provisório 1930-1934"
-        - "Napoleão Bonaparte" → adiciona "cônsul imperador 1799 1804 1814 1815"
-        """
-        disambiguation_map = {
-            "segundo governo vargas": (
-                "1951 1954 mandato democrático Getúlio Vargas "
-                "BNDE Plano Lafer Petrobras expansão industrial"
-            ),
-            "segundo governo do getulio vargas": (
-                "1951 1954 mandato democrático Getúlio Vargas "
-                "BNDE Plano Lafer Petrobras expansão industrial"
-            ),
-            "segundo governo do getúlio vargas": (
-                "1951 1954 mandato democrático Getúlio Vargas "
-                "BNDE Plano Lafer Petrobras expansão industrial"
-            ),
-        }
-
-        query_lower = query.lower()
-
-        # Verifica se algum termo ambíguo está presente na query
-        for ambiguous_term, enrichment in disambiguation_map.items():
-            if ambiguous_term in query_lower:
-                enriched = f"{query} {enrichment}"
-                logger.debug(
-                    "Query ambígua detectada: '%s' → enriquecida com: '%s'",
-                    ambiguous_term,
-                    enrichment[:100],
-                )
-                return enriched
-
-        return query
-
     def _extract_context_from_history(self, history: list[dict]) -> str:
         """Extrai tópicos principais das últimas mensagens para enriquecer follow-ups.
 
@@ -418,38 +359,6 @@ class RAGPipeline:
 
         if not recent_responses:
             return ""
-
-        # Entidades históricas conhecidas para enriquecimento
-        historical_entities = {
-            "vargas": [
-                "Getúlio Vargas",
-                "governo Vargas",
-                "Era Vargas",
-                "trabalhismo",
-                "nacionalismo",
-            ],
-            "getúlio": ["Getúlio Vargas", "governo Vargas", "Era Vargas"],
-            "napoleão": [
-                "Napoleão Bonaparte",
-                "império napoleônico",
-                "guerras napoleônicas",
-                "França",
-            ],
-            "bonaparte": ["Napoleão Bonaparte", "imperador", "cônsul"],
-            "revolução industrial": [
-                "industrialização",
-                "mecanização",
-                "trabalho",
-                "tempo",
-            ],
-            "segunda guerra": [
-                "Segunda Guerra Mundial",
-                "1939-1945",
-                "nazismo",
-                "fascismo",
-            ],
-            "populismo": ["trabalhismo", "lideranças carismáticas", "trabalhadores"],
-        }
 
         # Extrai keywords principais (palavras com 5+ chars, capitalizadas ou técnicas)
         context_keywords = set()
@@ -484,14 +393,6 @@ class RAGPipeline:
                         "provisorio",
                     }:
                         context_keywords.add(clean_word)
-
-                        # Adiciona entidades relacionadas se encontradas
-                        word_lower = clean_word.lower()
-                        for entity_key, related_terms in historical_entities.items():
-                            if entity_key in word_lower:
-                                context_keywords.update(
-                                    related_terms[:3]
-                                )  # Adiciona até 3 termos relacionados
 
         # Limita a 8 keywords mais relevantes
         return " ".join(list(context_keywords)[:8])
@@ -613,12 +514,54 @@ class RAGPipeline:
 
     def _persist_and_return(self, conv: dict, message: str, response: str) -> str:
         """Persiste o par user/assistant no histórico e retorna a resposta."""
+        is_first_turn = len(conv["messages"]) == 0
+
         ts = time.time()
         updated = list(conv["messages"])
         updated.append({"role": "user", "content": message, "timestamp": ts})
         updated.append({"role": "assistant", "content": response, "timestamp": ts})
         self._conv_manager.update(conv["id"], updated)
+
+        if is_first_turn:
+            title = self._generate_title(message)
+            self._conv_manager.set_title(conv["id"], title)
+
         return response
+
+    def _generate_title(self, message: str) -> str:
+        """Gera um título curto para a conversa a partir da primeira pergunta.
+
+        Chamada extra ao LLM, isolada da resposta principal — nunca deve
+        derrubar o turno do usuário. Em qualquer falha (exceção do modelo ou
+        saída vazia após limpeza), cai de volta na própria pergunta truncada.
+        """
+        fallback = self._clean_title(message)
+        try:
+            raw = self._llm.chat(
+                [
+                    {"role": "system", "content": _TITLE_SYSTEM_PROMPT},
+                    {"role": "user", "content": message},
+                ],
+                stream=False,
+                max_tokens=_TITLE_MAX_TOKENS,
+            )
+        except Exception as exc:
+            logger.warning("Falha ao gerar título da conversa: %s", exc)
+            return fallback
+
+        title = self._clean_title(raw)
+        return title or fallback
+
+    @staticmethod
+    def _clean_title(text: str) -> str:
+        """Normaliza um título bruto: remove <think>, aspas, quebras de linha."""
+        text = (text or "").strip()
+        text = re.sub(r"(?is)<think>.*?</think>", "", text).strip()
+        text = re.sub(r"(?is)<think>.*$", "", text).strip()
+        text = text.replace("\n", " ").strip(" \"'“”'.-")
+        if len(text) > _TITLE_MAX_CHARS:
+            text = text[:_TITLE_MAX_CHARS].rstrip() + "…"
+        return text
 
     def _confidence_prefix(self, chunks: list[dict]) -> str:
         """Retorna prefixo de aviso proporcional ao score dos chunks."""
