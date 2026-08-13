@@ -1,0 +1,102 @@
+{
+  "positive": {
+    "K=5": {
+      "k": 5,
+      "n_queries": 149,
+      "precision@k": 0.5223,
+      "recall@k": 0.9385,
+      "f1@k": 0.6164,
+      "hit_rate@k": 0.9329,
+      "mrr": 0.8557,
+      "ndcg@k": 0.8722,
+      "map@k": 0.8597,
+      "mean_latency_ms": 2104.43,
+      "by_category": {
+        "factual": {
+          "n": 100,
+          "hit_rate": 0.91,
+          "recall@k": 0.99,
+          "mrr": 0.8217
+        },
+        "multi_hop": {
+          "n": 49,
+          "hit_rate": 0.9796,
+          "recall@k": 0.8333,
+          "mrr": 0.9252
+        }
+      }
+    },
+    "K=10": {
+      "k": 10,
+      "n_queries": 149,
+      "precision@k": 0.508,
+      "recall@k": 0.953,
+      "f1@k": 0.5997,
+      "hit_rate@k": 0.9396,
+      "mrr": 0.8568,
+      "ndcg@k": 0.8782,
+      "map@k": 0.8647,
+      "mean_latency_ms": 2195.65,
+      "by_category": {
+        "factual": {
+          "n": 100,
+          "hit_rate": 0.91,
+          "recall@k": 1.0,
+          "mrr": 0.8217
+        },
+        "multi_hop": {
+          "n": 49,
+          "hit_rate": 1.0,
+          "recall@k": 0.8571,
+          "mrr": 0.9286
+        }
+      }
+    },
+    "K=15": {
+      "k": 15,
+      "n_queries": 149,
+      "precision@k": 0.5078,
+      "recall@k": 0.9564,
+      "f1@k": 0.5994,
+      "hit_rate@k": 0.9396,
+      "mrr": 0.8568,
+      "ndcg@k": 0.8793,
+      "map@k": 0.8653,
+      "mean_latency_ms": 2180.25,
+      "by_category": {
+        "factual": {
+          "n": 100,
+          "hit_rate": 0.91,
+          "recall@k": 1.0,
+          "mrr": 0.8217
+        },
+        "multi_hop": {
+          "n": 49,
+          "hit_rate": 1.0,
+          "recall@k": 0.8673,
+          "mrr": 0.9286
+        }
+      }
+    }
+  },
+  "negative_guardrail": {
+    "K=5": {
+      "k": 5,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0
+    },
+    "K=10": {
+      "k": 10,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0
+    },
+    "K=15": {
+      "k": 15,
+      "n": 10,
+      "passed": 10,
+      "pass_rate": 1.0
+    }
+  }
+}
