@@ -46,6 +46,11 @@ python scripts/generate_eval_dataset.py          # builds data/eval/dataset.json
 python scripts/eval_rag.py --mode file --dataset data/eval/dataset.json
 python scripts/run_rag_experiment.py run --name baseline --dataset data/eval/dataset.json
 python scripts/analyze_rag_failures.py --dataset data/eval/dataset.json
+
+# Generation quality evaluation (RAGAS — judged by models/ragas/*.gguf, not in requirements.txt)
+pip install ragas
+python scripts/eval_generation.py --dataset data/eval/dataset.json                              # every .gguf in models/
+python scripts/eval_generation.py --dataset data/eval/dataset.json --model models/some-model.gguf  # one candidate model
 ```
 
 CI installs dependencies with `llama-cpp-python` stripped out of `requirements.txt` (heavy binary, mocked in tests) — all tests must pass with that package absent/mocked. `tests/conftest.py` adds the repo root to `sys.path`; there is no package install step.
@@ -89,6 +94,7 @@ Layered defenses, in order: retriever score filters → topical relevance check 
 - `rag/embeddings.py` — SentenceTransformer wrapper with an optional disk cache for embeddings across restarts.
 - `rag/vectorstore.py` — FAISS HNSW index with deduplication.
 - `rag/evaluation.py` — generic retrieval-quality metrics (Precision/Recall/F1/Hit Rate/MRR/NDCG/MAP@K) and dataset I/O, decoupled from any particular corpus; `relevant_chunks` in a dataset entry is a list, so a query can cite 2+ chunks as relevant (already handled by `evaluate_query`, no special-casing needed). `scripts/generate_eval_dataset.py` builds `data/eval/dataset.json` from the real indexed chunks — stratified sampling across Unidade/Capítulo via `sample_chunk_groups()`, then one LLM-generated question per group via the same `LocalModel` used in chat: `n_single` groups of 1 chunk (category `factual`), plus `n_pairs`/`n_triples` groups of 2-3 chunks from the *same chapter* (category `multi_hop`, prompted to require combining all chunks in the group, not answerable from just one), plus a small fixed generic negative-query set. This is the primary, whole-corpus eval dataset; `scripts/eval_rag.py` / `run_rag_experiment.py` / `analyze_rag_failures.py` consume it (or any dataset in the same schema) via the shared `scripts/_eval_common.py::load_retriever_from_settings()`, which mirrors `api/main.py`'s retriever construction exactly (including the cross-encoder when enabled) so evaluation numbers reflect the real deployed pipeline. `data/eval/benchmark_v1*.json` is a legacy hand-curated dataset covering only one narrow slice of one corpus — kept for reference, no longer the default.
+- `rag/generation_evaluation.py` — generation-quality metrics via RAGAS (faithfulness/answer_relevancy/context_precision/context_recall/answer_correctness), scored by a local GGUF judge model (`Settings.ragas_model_path`, default `models/ragas/*.gguf`) instead of an external API. `ragas`/`langchain-core` are only imported lazily inside `_score_with_ragas()` so the module (and its pure aggregation logic in `GenerationEvaluationReport`) stays importable/testable without those packages installed — same reasoning as `llama-cpp-python` being stripped from CI. `scripts/eval_generation.py` is the CLI: evaluates every `.gguf` candidate in `models/` (or one via `--model`) against the same dataset schema as `rag/evaluation.py` (needs `reference_answer`), writing versioned results to `data/metrics/generation/vN/` via the same `next_metrics_version()` helper `eval_rag.py` uses for `data/metrics/`.
 - `core/conversation.py` — session CRUD with JSON file persistence (`CONVERSATIONS_FILE`).
 - `api/main.py` — FastAPI lifespan wires up `LocalModel → EmbeddingModel → VectorStore → Retriever → RAGPipeline → ConversationManager` once at startup and stores them on `app.state`; `api/routes.py` holds the actual endpoints.
 

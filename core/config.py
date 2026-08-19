@@ -205,6 +205,27 @@ class Settings:
         default_factory=lambda: float(os.environ.get("CROSS_ENCODER_MIN_SCORE", "-1.0"))
     )
 
+    # --- RAGAS (avaliação de geração) ---
+    # Modelo-juiz local usado pelo scripts/eval_generation.py para pontuar
+    # faithfulness/answer_relevancy/context_precision/context_recall/answer_correctness.
+    # Fixo (não é um dos modelos candidatos avaliados) — precisa existir localmente.
+    ragas_model_path: str = field(
+        default_factory=lambda: os.environ.get(
+            "RAGAS_MODEL_PATH", "models/ragas/gemma-3-27b-it-Q4_K_M.gguf"
+        )
+    )
+    # Maior que N_CTX padrão: os prompts internos do RAGAS (extração de
+    # statements, verificação de contexto) tendem a ser longos.
+    ragas_n_ctx: int = field(
+        default_factory=lambda: int(os.environ.get("RAGAS_N_CTX", "8192"))
+    )
+    ragas_n_threads: int = field(
+        default_factory=lambda: int(os.environ.get("RAGAS_N_THREADS", "4"))
+    )
+    ragas_n_gpu_layers: int = field(
+        default_factory=lambda: int(os.environ.get("RAGAS_N_GPU_LAYERS", "0"))
+    )
+
     # --- Conversas ---
     conversations_file: str = field(
         default_factory=lambda: os.environ.get(
