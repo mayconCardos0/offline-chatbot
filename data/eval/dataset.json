@@ -1,0 +1,2440 @@
+[
+  {
+    "id": "q0000",
+    "query": "Qual a principal razão para o Mar Mediterrâneo ser considerado um espaço privilegiado para o transporte e a troca de mercadorias?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d4655e3795002a77",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Mundo mediterrâneo"
+  },
+  {
+    "id": "q0001",
+    "query": "Qual era o principal objetivo da elite brasileira no contexto do projeto de \"nação civilizada\"?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "67d594538eada9c2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 12: Da Primeira República ao fim da Era Vargas > Movimentos sociais no campo e na cidade"
+  },
+  {
+    "id": "q0002",
+    "query": "Qual o período histórico que abrange a diáspora africana e o tráfico transatlântico?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1a73b86f0bb51a4c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América > A diáspora africana e o tráfico transatlântico"
+  },
+  {
+    "id": "q0003",
+    "query": "Qual foi o impacto do fim da Guerra Fria na região do Oriente Médio?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "fc38d4ce1786b13b",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 15: Mundo globalizado > Revoluções e conflitos no Oriente Médio"
+  },
+  {
+    "id": "q0004",
+    "query": "Quais correntes de pensamento se opunham à segregação racial e à dominação colonial dos africanos no início do século XX?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "3b0ecf0dbc475134",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 13: Da Segunda Guerra Mundial à Guerra Fria > Independências na Ásia e na África"
+  },
+  {
+    "id": "q0005",
+    "query": "Qual o ano que o Banco Mundial considerou como \"ano da desigualdade\"?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6425add844bbccb0",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades"
+  },
+  {
+    "id": "q0006",
+    "query": "Quais comunidades foram consideradas no processo de elaboração da Constituição de 1988?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "102392b2ef180cbb",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > A Constituição de 1988 e as comunidades tradicionais"
+  },
+  {
+    "id": "q0007",
+    "query": "Qual foi o principal motivo da Guerra Civil Inglesa?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "07a18ac1788133ae",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > A Revolução Puritana"
+  },
+  {
+    "id": "q0008",
+    "query": "Qual a principal característica que diferenciava os movimentos de independência hispano-americanos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "e042af6de2f7a620",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 9: Poder e reorganização política na América: as lutas por independência > As guerras de independência na América espanhola"
+  },
+  {
+    "id": "q0009",
+    "query": "Qual foi o principal motivo da dominação francesa na Indochina?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "04d93a37768633d2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > A dominação da Indochina pela França"
+  },
+  {
+    "id": "q0010",
+    "query": "Qual o nome dado ao controle menos rígido exercido pelos ingleses sobre as colônias americanas no século XVII?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "21de09bfbe3e78dd",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 9: Poder e reorganização política na América: as lutas por independência > A independência e a formação dos Estados Unidos"
+  },
+  {
+    "id": "q0011",
+    "query": "Qual o impacto da chegada de Cristóvão Colombo na América para a colonização europeia?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "3faae0a8d71b7a4e",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 5: A expansão marítima europeia e a colonização da > A Espanha e a colonização da América"
+  },
+  {
+    "id": "q0012",
+    "query": "Qual o principal problema econômico que o Brasil enfrentava no final da década de 1970?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "266decec7cebbb8b",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > A reconstrução da democracia"
+  },
+  {
+    "id": "q0013",
+    "query": "Quais formas de trabalho foram proibidas em períodos históricos, mas ainda persistem ilegalmente em algumas regiões do mundo?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "dcbc190896b57ba8",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia"
+  },
+  {
+    "id": "q0014",
+    "query": "Qual era o principal objetivo das exposições universais no século XIX?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "b93dfc5aa96b9782",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 7: Revolução Industrial e transformações no mundo do trabalho > Exposições universais"
+  },
+  {
+    "id": "q0015",
+    "query": "Quais são as principais atividades humanas responsáveis pelo lançamento de dióxido de carbono na atmosfera?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d4dfd0288464c090",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação"
+  },
+  {
+    "id": "q0016",
+    "query": "Quais as consequências da escravidão no Brasil que ainda se manifestam na sociedade contemporânea, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "a95f5377a763b1a8",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 10: A consolidação do Estado brasileiro > O pós-abolição no Brasil"
+  },
+  {
+    "id": "q0017",
+    "query": "Quais as consequências da globalização, segundo o texto?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "38f77a7c8412344e",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania"
+  },
+  {
+    "id": "q0018",
+    "query": "Qual a característica principal da organização política que se consolidou no século XIX?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "e06cd5dcee9853f5",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 4: Formação do Estado Moderno, Renascimento e > O processo de centralização política na Europa"
+  },
+  {
+    "id": "q0019",
+    "query": "Qual o principal motivo que instigou a Revolução Francesa?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "84c260b2696bb9b3",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > A Revolução Francesa"
+  },
+  {
+    "id": "q0020",
+    "query": "Qual a principal justificativa para a concentração de poderes no Imperador na monarquia constitucional brasileira, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0acca174b8c4df32",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 10: A consolidação do Estado brasileiro > O Poder Moderador"
+  },
+  {
+    "id": "q0021",
+    "query": "Qual o resultado da unificação de Castela e Aragão em 1469?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "93d7e462f996ffae",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 4: Formação do Estado Moderno, Renascimento e > A formação da monarquia espanhola"
+  },
+  {
+    "id": "q0022",
+    "query": "Qual foi a consequência da vitória do Estado de Israel na Primeira Guerra Árabe-Israelense?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "559cff596e32c6ca",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 15: Mundo globalizado > As guerras árabe-israelenses"
+  },
+  {
+    "id": "q0023",
+    "query": "Qual a relação entre poder e política, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "41f0e03f92b201a1",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política"
+  },
+  {
+    "id": "q0024",
+    "query": "Qual a forma como a cultura influencia a política em uma sociedade, segundo o texto?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "e4babad7d34b685a",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura"
+  },
+  {
+    "id": "q0025",
+    "query": "Qual o motivo principal da expansão territorial da República Romana?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1522fb51aeadc5d2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > A expansão territorial da República Romana"
+  },
+  {
+    "id": "q0026",
+    "query": "Quais são as três fases que historiadores costumam dividir na primeira presidência de Getúlio Vargas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "27154c7864ed5be2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 12: Da Primeira República ao fim da Era Vargas > A Era Vargas"
+  },
+  {
+    "id": "q0027",
+    "query": "Qual era a principal forma de trabalho utilizado na colonização da América?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "b42e110c6cf1a74c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América > Escravidão e trabalho compulsório na América"
+  },
+  {
+    "id": "q0028",
+    "query": "Qual foi a motivação do governo estadunidense para apoiar o Iraque na Guerra entre Irã e Iraque?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "3179f40be714d22f",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 15: Mundo globalizado > A Guerra entre Irã e Iraque"
+  },
+  {
+    "id": "q0029",
+    "query": "Em que ano o Instituto de Pesquisa para a Paz de Oslo registrou o maior número de conflitos armados desde 1946?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "2be30aaade022297",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades"
+  },
+  {
+    "id": "q0030",
+    "query": "Qual a motivação da Constituição de 1988 para reconhecer os direitos das comunidades quilombolas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "bbf09ad998d25f4e",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > As comunidades quilombolas"
+  },
+  {
+    "id": "q0031",
+    "query": "Quais foram as principais medidas tomadas pelo governo português para aumentar a arrecadação fiscal e explorar sua colônia na América, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "5b0a9c4defd97dfd",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 9: Poder e reorganização política na América: as lutas por independência > A crise do sistema colonial português"
+  },
+  {
+    "id": "q0032",
+    "query": "Qual foi o período histórico que marcou a Europa antes da Primeira Guerra Mundial?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1cb067c26104acc9",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > Primeira Guerra Mundial"
+  },
+  {
+    "id": "q0033",
+    "query": "Quais eram os produtos que os comerciantes das Treze Colônias levavam da América do Norte para o Caribe?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "ba04e0badd9c738c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 9: Poder e reorganização política na América: as lutas por independência > As leis de ruptura"
+  },
+  {
+    "id": "q0034",
+    "query": "Quais formas de organização do trabalho, surgidas a partir das revoluções industriais, são atravessadas por avanços científicos e tecnológicos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "40668e4aea4ddd34",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia"
+  },
+  {
+    "id": "q0035",
+    "query": "Qual a principal preocupação da unidade \"Natureza em transformação\"?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "f48120ca98081be8",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação"
+  },
+  {
+    "id": "q0036",
+    "query": "Quais consequências negativas da globalização foram mencionadas no trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "3e3cb828122e6042",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania"
+  },
+  {
+    "id": "q0037",
+    "query": "Qual a principal característica do governo de Napoleão Bonaparte?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "f7690967d316a4a5",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > Ascensão e queda de Napoleão Bonaparte"
+  },
+  {
+    "id": "q0038",
+    "query": "Qual o papel da política na esfera social, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "f961db9de46310cf",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Na prática"
+  },
+  {
+    "id": "q0039",
+    "query": "Quais elementos da cultura influenciam a forma como a política é praticada em uma sociedade, de acordo com o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "a7ab8cae7ebc6d3a",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura"
+  },
+  {
+    "id": "q0040",
+    "query": "Qual a motivação de Marco Antônio para buscar apoio em Cleópatra?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "de4f4a99adffa41b",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > O fim da República Romana"
+  },
+  {
+    "id": "q0041",
+    "query": "Em que regiões da América, além da América portuguesa, foram organizadas comunidades semelhantes aos quilombos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "57165fc594a2ae82",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América > Formas de resistência em outras partes da América"
+  },
+  {
+    "id": "q0042",
+    "query": "Qual foi a principal característica da economia dos Estados Unidos no final do século XX e início do século XXI?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4cf7ae0983fda2c1",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 15: Mundo globalizado > A América na virada do século XXI"
+  },
+  {
+    "id": "q0043",
+    "query": "Qual o contexto histórico que influenciou a consolidação das principais escolas de cinema na Europa após a Segunda Guerra Mundial?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "2e8f2e91852d00c2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Na prática"
+  },
+  {
+    "id": "q0044",
+    "query": "Qual foi o nome da conferência realizada em 1992 na cidade do Rio de Janeiro?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "e0c79df8ca3b345c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > A Rio-92 e a política ambiental"
+  },
+  {
+    "id": "q0045",
+    "query": "Quais atividades, além das tradicionais, as mulheres desempenharam durante a Primeira Guerra Mundial?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d58ebd32865e54c7",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > As mulheres e a Primeira Guerra Mundial"
+  },
+  {
+    "id": "q0046",
+    "query": "Qual a estrutura de organização do trabalho que está sendo impactada por avanços científicos e tecnológicos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "8fe8e932ee66e325",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia"
+  },
+  {
+    "id": "q0047",
+    "query": "Qual a função dos geoglifos na região da Amazônia?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "dba26d37a2d72c9c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Na prática"
+  },
+  {
+    "id": "q0048",
+    "query": "Qual o objetivo dos movimentos voltados para a emancipação e a garantia do exercício da cidadania?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "205ec6dff7744a36",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania"
+  },
+  {
+    "id": "q0049",
+    "query": "Quais as principais características do movimento operário e das lutas das mulheres no contexto da sociedade industrial?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "cafd36a6d7389ae2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > Teorias sociais, o movimento operário e as lutas das mulheres"
+  },
+  {
+    "id": "q0050",
+    "query": "Qual o objetivo principal das mulheres ao longo dos séculos XIX e XX?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0a7c4d7685815c6a",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Na prática"
+  },
+  {
+    "id": "q0051",
+    "query": "Qual a justificativa utilizada pelos colonizadores europeus para o controle e exploração das colônias americanas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1ffcb08c14692ad8",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Na prática"
+  },
+  {
+    "id": "q0052",
+    "query": "Qual a principal razão para o início da expansão do cristianismo no Império Romano?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4fa212dee146b35d",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > A expansão do cristianismo"
+  },
+  {
+    "id": "q0053",
+    "query": "Qual o principal objetivo do movimento neorrealismo na Itália no final dos anos 1940 e início de 1950?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "bbc354ba9c7868ac",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Na prática"
+  },
+  {
+    "id": "q0054",
+    "query": "Qual o partido político de Fernando Henrique Cardoso?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0acf95502af3e404",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > As eleições de 1994 e os governos FHC"
+  },
+  {
+    "id": "q0055",
+    "query": "Qual a principal crítica que o texto faz em relação ao trabalho compulsório?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4494b2bc1d001a93",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Na prática"
+  },
+  {
+    "id": "q0056",
+    "query": "Qual o principal argumento utilizado para justificar a importância histórica e cultural dos geoglifos encontrados na região amazônica?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6351dc829185c70f",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Na prática"
+  },
+  {
+    "id": "q0057",
+    "query": "Qual foi a principal influência na formação do ativismo on-line no início do século XXI?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "98bbab1c6c90eda2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Na prática"
+  },
+  {
+    "id": "q0058",
+    "query": "Qual o principal objetivo dos socialistas utópicos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "91e44fd7e0a9153b",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > Socialismo utópico"
+  },
+  {
+    "id": "q0059",
+    "query": "Qual a característica que diferenciava a monarquia inglesa das demais na Europa?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4dc950226bc5c3ec",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0060",
+    "query": "Qual a justificativa para o controle e exploração das colônias estabelecidas na América, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "9a9ec3ff5b221678",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Na prática"
+  },
+  {
+    "id": "q0061",
+    "query": "Qual foi a principal razão para os romanos denominarem povos não-greco-romanos como \"bárbaros\"?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "f3d282dae796fcc6",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > O fim do Império Romano do Ocidente"
+  },
+  {
+    "id": "q0062",
+    "query": "Quais foram alguns dos fatores que impulsionaram a expansão imperialista na segunda metade do século XIX?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "b3bfdc313b99c1ed",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > O imperialismo"
+  },
+  {
+    "id": "q0063",
+    "query": "Em que período de tempo o trabalho análogo à escravidão foi identificado em todos os estados brasileiros, segundo dados do Ministério do Trabalho e Emprego?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "b5f8c133749a8cce",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Na prática"
+  },
+  {
+    "id": "q0064",
+    "query": "Qual o motivo do Ministério Público Federal abrir um processo contra um pecuarista?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "52d94de2eaf2ef0a",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Na prática"
+  },
+  {
+    "id": "q0065",
+    "query": "Quais as consequências da expansão da internet e das redes sociais para o ativismo social?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "a3c3febb49ec39d4",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Na prática"
+  },
+  {
+    "id": "q0066",
+    "query": "Qual a principal característica da monarquia inglesa que diferenciava a Inglaterra das demais na Europa?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "27825c2a52bb8355",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0067",
+    "query": "Quais países estavam conectados pelas Rotas da Seda?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "710c05e56f982c12",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0068",
+    "query": "Qual a idade de Maomé quando começou a receber revelações do arcanjo Gabriel?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "16f429b5205b9812",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Fundação do islã"
+  },
+  {
+    "id": "q0069",
+    "query": "Qual a motivação por trás da exploração de territórios por parte dos europeus e estadunidenses?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "ada46fd54ada078d",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > O imperialismo"
+  },
+  {
+    "id": "q0070",
+    "query": "Qual o principal fator que contribui para a persistência do trabalho degradante em condições análogas à escravidão no Brasil?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d3614bef1aa9856c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Na prática"
+  },
+  {
+    "id": "q0071",
+    "query": "Qual é a principal diferença entre a percepção de que o modo como vivemos e o mundo que nos rodeia é natural, e a compreensão histórica?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "cf6eb1a835caf9f2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Capitulo 1: A origem da humanidade e as transformações da natureza"
+  },
+  {
+    "id": "q0072",
+    "query": "Qual o período histórico que se caracteriza como a \" república populista\" no Brasil?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "85d1fdba0c9cded6",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0073",
+    "query": "Qual a principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "99c1fce8dc121c6c",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0074",
+    "query": "Qual a extensão aproximada das Rotas da Seda, de leste a oeste?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "5740e059d4c723b8",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0075",
+    "query": "Quais foram as motivações dos europeus e estadunidenses em suas viagens ao redor do mundo?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "ad9b218f5547f7de",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > O imperialismo"
+  },
+  {
+    "id": "q0076",
+    "query": "Quais são as consequências das escravidão e outras formas de trabalho compulsório na formação das colônias americanas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "ae3440f1958429d4",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América"
+  },
+  {
+    "id": "q0077",
+    "query": "Qual a principal função da disciplina histórica, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0f824bfbb306f973",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Capitulo 1: A origem da humanidade e as transformações da natureza"
+  },
+  {
+    "id": "q0078",
+    "query": "Qual o principal motivo apontado para a caracterização do período como \"republicana populista\"?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6d2a6cb70c867750",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0079",
+    "query": "Qual foi a principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "2bc15065dd50739a",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0080",
+    "query": "Quais eram as principais consequências da circulação de pessoas por rotas comerciais secundárias, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "49db2d3e100eb235",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0081",
+    "query": "Qual o papel do conhecimento científico na estruturação das estratégias imperialistas e na justificativa da dominação?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1b171abdf8a695ee",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > O imperialismo"
+  },
+  {
+    "id": "q0082",
+    "query": "Qual o exemplo dado no trecho para ilustrar a prática da escravidão na Antiguidade?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "fef6b0e600c916f2",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América"
+  },
+  {
+    "id": "q0083",
+    "query": "Qual a definição de história, segundo o texto?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "478f8ecd9d72e029",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Capitulo 1: A origem da humanidade e as transformações da natureza"
+  },
+  {
+    "id": "q0084",
+    "query": "Qual o principal objetivo do populismo, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "a76417a9688886b6",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0085",
+    "query": "Qual foi a religião da rainha Maria Tudor?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "7f17c226a1d044da",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0086",
+    "query": "Quais povos e impérios foram responsáveis pela controladada das Rotas da Seda ao longo dos séculos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0e7a53a81a8ede95",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0087",
+    "query": "Qual o principal mecanismo por trás da adaptação das espécies, segundo a teoria de Darwin?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "068628c0d8dd8f04",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > A noção de progresso e as teorias racistas"
+  },
+  {
+    "id": "q0088",
+    "query": "Quais eram as formas de exploração que, segundo o trecho, foram determinantes na formação das colônias americanas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d078b2f7ee5bb1e7",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América"
+  },
+  {
+    "id": "q0089",
+    "query": "Qual é a principal função da história, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "394b19188b02b59a",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Capitulo 1: A origem da humanidade e as transformações da natureza"
+  },
+  {
+    "id": "q0090",
+    "query": "Qual o principal objetivo das práticas políticas de lideranças carismáticas, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "572b690a310de6cb",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0091",
+    "query": "Qual a principal consequência da ascensão de Elizabeth I ao trono?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "229c348f502db3fa",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0092",
+    "query": "Qual foi o principal motivo para a criação das rotas comerciais?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "f063be9bb3046820",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0093",
+    "query": "Qual a principal justificativa para a aceitação da teoria de Darwin por parte dos cientistas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "799795d7e6520bb4",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > A noção de progresso e as teorias racistas"
+  },
+  {
+    "id": "q0094",
+    "query": "Qual a característica que define as pessoas escravizadas no mundo greco-romano?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6e93d02167d0e139",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América"
+  },
+  {
+    "id": "q0095",
+    "query": "Qual o conceito que a história busca estudar, segundo o trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "94b6e8912384abe3",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Capitulo 1: A origem da humanidade e as transformações da natureza"
+  },
+  {
+    "id": "q0096",
+    "query": "Qual a relação entre os processos de urbanização e industrialização e o fenômeno descrito no trecho?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "ef5bdb4069693196",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0097",
+    "query": "Qual o nome dado à guerra civil que dividiu o reino em 1642?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "bb8590797f851b44",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > A Revolução Puritana"
+  },
+  {
+    "id": "q0098",
+    "query": "Qual o produto que a China imperial usava para fazer acordos com povos nômades?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "2dfdeb1ecbc8fd88",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0099",
+    "query": "Qual a interpretação que os defensores do evolucionismo social atribuíram ao modelo evolutivo proposto por Darwin?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "19790eb3e4f49c58",
+        "relevance": 3
+      }
+    ],
+    "category": "factual",
+    "answerable": true,
+    "n_source_chunks": 1,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > A noção de progresso e as teorias racistas"
+  },
+  {
+    "id": "q0100",
+    "query": "Quais foram as principais formas de trabalho compulsório utilizadas na colonização da América e como elas se relacionaram com a diáspora africana?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1a73b86f0bb51a4c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b42e110c6cf1a74c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América > A diáspora africana e o tráfico transatlântico"
+  },
+  {
+    "id": "q0101",
+    "query": "Qual a relação entre a negligência salutar praticada pelos ingleses e o desenvolvimento das Treze Colônias?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "21de09bfbe3e78dd",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ba04e0badd9c738c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 9: Poder e reorganização política na América: as lutas por independência > A independência e a formação dos Estados Unidos"
+  },
+  {
+    "id": "q0102",
+    "query": "Como resultado da globalização, quais impactos sociais e econômicos foram observados no início do século XXI?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "38f77a7c8412344e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e3cb828122e6042",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania"
+  },
+  {
+    "id": "q0103",
+    "query": "Como a política, em sua prática histórica, pode ser utilizada como instrumento para promover transformações sociais, de acordo com o trecho 2, levando em consideração os conceitos de poder e justiça social apresentados no trecho 1?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "41f0e03f92b201a1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f961db9de46310cf",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 4: Poder e política"
+  },
+  {
+    "id": "q0104",
+    "query": "Qual a relação entre a dominação da França na Indochina e o contexto de imperialismo que se consolidou na Europa durante a Primeira Guerra Mundial?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "04d93a37768633d2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "1cb067c26104acc9",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > A dominação da Indochina pela França"
+  },
+  {
+    "id": "q0105",
+    "query": "Quais são as principais atividades humanas responsáveis pelo aumento da concentração de dióxido de carbono na atmosfera e quais os impactos dessas atividades nas populações urbanas, especialmente em relação a eventos climáticos extremos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d4dfd0288464c090",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f48120ca98081be8",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação"
+  },
+  {
+    "id": "q0106",
+    "query": "Quais são os principais fatores que contribuíram para a intensificação de conflitos e desigualdades em 2023, segundo os trechos apresentados?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6425add844bbccb0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2be30aaade022297",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades"
+  },
+  {
+    "id": "q0107",
+    "query": "Quais impactos a precarização e o trabalho plataformizado têm no mundo, considerando as mudanças na organização do trabalho impulsionadas pelas revoluções industriais, como a automação de processos e o uso da inteligência artificial nas tarefas e linhas de produção?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "dcbc190896b57ba8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "40668e4aea4ddd34",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia"
+  },
+  {
+    "id": "q0108",
+    "query": "Qual o papel das comunidades tradicionais na Constituição de 1988 e como essa participação contribuiu para a garantia de direitos específicos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "102392b2ef180cbb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bbf09ad998d25f4e",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > A Constituição de 1988 e as comunidades tradicionais"
+  },
+  {
+    "id": "q0109",
+    "query": "Qual o impacto da expansão territorial romana no contexto do Mare Nostrum?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1522fb51aeadc5d2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "de4f4a99adffa41b",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > A expansão territorial da República Romana"
+  },
+  {
+    "id": "q0110",
+    "query": "Como a cultura influencia a política no Brasil, de acordo com os trechos fornecidos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "e4babad7d34b685a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a7ab8cae7ebc6d3a",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura"
+  },
+  {
+    "id": "q0111",
+    "query": "Quais foram as principais características da política de Getúlio Vargas, segundo os trechos, e como elas se relacionaram com a realidade social do período?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "67d594538eada9c2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "27154c7864ed5be2",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 12: Da Primeira República ao fim da Era Vargas > Movimentos sociais no campo e na cidade"
+  },
+  {
+    "id": "q0112",
+    "query": "Qual o principal motivo da Guerra entre Irã e Iraque, segundo o trecho 2?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "fc38d4ce1786b13b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3179f40be714d22f",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 15: Mundo globalizado > Revoluções e conflitos no Oriente Médio"
+  },
+  {
+    "id": "q0113",
+    "query": "Quais foram as principais motivações para a Revolução Francesa e como elas se manifestaram na ascensão de Napoleão Bonaparte?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "84c260b2696bb9b3",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f7690967d316a4a5",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > A Revolução Francesa"
+  },
+  {
+    "id": "q0114",
+    "query": "Como a globalização e a expansão da internet influenciaram os movimentos sociais, de acordo com o texto?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "205ec6dff7744a36",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "98bbab1c6c90eda2",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania"
+  },
+  {
+    "id": "q0115",
+    "query": "Qual a principal diferença entre o poder real na Inglaterra e os modelos de poder em outras monarquias europeias, segundo os trechos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0a7c4d7685815c6a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4dc950226bc5c3ec",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 4: Poder e política > Na prática"
+  },
+  {
+    "id": "q0116",
+    "query": "Qual a relação entre a presença de geoglifos na Amazônia e o desenvolvimento da agricultura por parte dos povos originários da região?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "dba26d37a2d72c9c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "6351dc829185c70f",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Na prática"
+  },
+  {
+    "id": "q0117",
+    "query": "Qual o papel do cinema na reconstrução da identidade cultural europeia após a Segunda Guerra Mundial, segundo os trechos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "2e8f2e91852d00c2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bbc354ba9c7868ac",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Na prática"
+  },
+  {
+    "id": "q0118",
+    "query": "Qual o impacto da Revolução Industrial no cenário do trabalho e como essa mudança se relaciona com a persistência do trabalho compulsório no mundo contemporâneo?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "8fe8e932ee66e325",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4494b2bc1d001a93",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia"
+  },
+  {
+    "id": "q0119",
+    "query": "Qual a influência da Rio-92 na política ambiental no Brasil, levando em consideração o contexto das eleições de 1994 e a ascensão de Fernando Henrique Cardoso ao cargo de presidente?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "e0c79df8ca3b345c",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0acf95502af3e404",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > A Rio-92 e a política ambiental"
+  },
+  {
+    "id": "q0120",
+    "query": "Qual a influência da religião cristã no Império Romano do Ocidente, segundo os trechos fornecidos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4fa212dee146b35d",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f3d282dae796fcc6",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > A expansão do cristianismo"
+  },
+  {
+    "id": "q0121",
+    "query": "Qual o papel do confronto entre povos e culturas diferentes na expansão marítima europeia, de acordo com os trechos fornecidos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1ffcb08c14692ad8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "9a9ec3ff5b221678",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Na prática"
+  },
+  {
+    "id": "q0122",
+    "query": "Quais foram as principais características das propostas dos socialistas utópicos e como elas contribuíram para a formação de um cenário que possibilitou o surgimento de movimentos sociais mais sistemáticos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "cafd36a6d7389ae2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "91e44fd7e0a9153b",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > Teorias sociais, o movimento operário e as lutas das mulheres"
+  },
+  {
+    "id": "q0123",
+    "query": "Qual a relação entre a expansão da internet, as redes sociais e a disseminação de pautas em movimentos sociais no contexto do período democrático no Brasil?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "a3c3febb49ec39d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "85d1fdba0c9cded6",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Na prática"
+  },
+  {
+    "id": "q0124",
+    "query": "Qual a principal mudança na estrutura de poder na Inglaterra após a promulgação da Carta Magna, e como essa mudança se relaciona com o rompimento entre o rei Henrique VIII e a Igreja Católica?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "27825c2a52bb8355",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "99c1fce8dc121c6c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0125",
+    "query": "Qual o papel da história na compreensão do impacto das ações humanas sobre patrimônios culturais, como exemplificado no caso do geoglifo localizado na Fazenda Crixá no Acre?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "52d94de2eaf2ef0a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cf6eb1a835caf9f2",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Na prática"
+  },
+  {
+    "id": "q0126",
+    "query": "Qual o papel do nacionalismo na expansão imperialista, segundo os trechos apresentados?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "b3bfdc313b99c1ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ada46fd54ada078d",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Capitulo 11: Do imperialismo ao fim da Primeira Guerra Mundial > O imperialismo"
+  },
+  {
+    "id": "q0127",
+    "query": "Quais fatores, segundo os dados apresentados, contribuem para a persistência do trabalho análogo à escravidão no Brasil?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "b5f8c133749a8cce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3614bef1aa9856c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Na prática"
+  },
+  {
+    "id": "q0128",
+    "query": "Qual a extensão aproximada das Rotas da Seda e quais as regiões que se conectaram através delas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "710c05e56f982c12",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5740e059d4c723b8",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0129",
+    "query": "Qual a característica principal que diferenciava o sistema político da época do populismo em relação ao modelo tradicional de governo?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6d2a6cb70c867750",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a76417a9688886b6",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 2,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0130",
+    "query": "Qual a relação entre o poder político e a política, como expressa nos trechos, e como essa relação se manifesta na luta das mulheres por direitos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "41f0e03f92b201a1",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f961db9de46310cf",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0a7c4d7685815c6a",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 4: Poder e política"
+  },
+  {
+    "id": "q0131",
+    "query": "Quais impactos a precarização e o trabalho plataformizado têm para os trabalhadores ao redor do mundo, levando em consideração as transformações nas estruturas de organização do trabalho impulsionadas por avanços científicos e tecnológicos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "dcbc190896b57ba8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "40668e4aea4ddd34",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "8fe8e932ee66e325",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia"
+  },
+  {
+    "id": "q0132",
+    "query": "Quais impactos negativos da globalização, segundo os trechos apresentados, foram combatidos por movimentos voltados para a emancipação e a garantia do exercício da cidadania?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "38f77a7c8412344e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3e3cb828122e6042",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "205ec6dff7744a36",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania"
+  },
+  {
+    "id": "q0133",
+    "query": "Qual a relação entre o desmatamento ilegal na Floresta Amazônica, a presença de geoglifos e as práticas de manejo sustentável da terra por povos originários?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "d4dfd0288464c090",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f48120ca98081be8",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "dba26d37a2d72c9c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação"
+  },
+  {
+    "id": "q0134",
+    "query": "Quais foram as principais motivações para a Guerra entre Irã e Iraque, segundo os trechos fornecidos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "fc38d4ce1786b13b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "3179f40be714d22f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4cf7ae0983fda2c1",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 15: Mundo globalizado > Revoluções e conflitos no Oriente Médio"
+  },
+  {
+    "id": "q0135",
+    "query": "Qual o impacto da expansão territorial romana na cultura e religião do Império Romano?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "1522fb51aeadc5d2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "de4f4a99adffa41b",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "4fa212dee146b35d",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > A expansão territorial da República Romana"
+  },
+  {
+    "id": "q0136",
+    "query": "Qual o impacto da Constituição de 1988 sobre as comunidades tradicionais, como os quilombolas e os povos indígenas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "102392b2ef180cbb",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "bbf09ad998d25f4e",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "e0c79df8ca3b345c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 16: Brasil contemporâneo > A Constituição de 1988 e as comunidades tradicionais"
+  },
+  {
+    "id": "q0137",
+    "query": "Em que contexto histórico o cinema italiano se consolidou como uma escola de cinema importante, e quais as características do movimento neorrealista que caracterizaram suas produções?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6425add844bbccb0",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2be30aaade022297",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "2e8f2e91852d00c2",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades"
+  },
+  {
+    "id": "q0138",
+    "query": "Qual a principal mudança na estrutura de poder no Reino Unido após a promulgação da Carta Magna em 1215, e como essa mudança se relaciona com o surgimento do Parlamento?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4dc950226bc5c3ec",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "27825c2a52bb8355",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "99c1fce8dc121c6c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0139",
+    "query": "Qual a relação entre o trabalho análogo à escravidão e os dados sobre a escolaridade e raça dos adolescentes resgatados em condições de trabalho degradantes, segundo os trechos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "4494b2bc1d001a93",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b5f8c133749a8cce",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d3614bef1aa9856c",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Na prática"
+  },
+  {
+    "id": "q0140",
+    "query": "Como o ativismo on-line se relaciona com a globalização, a expansão da internet e as redes sociais, levando à formação de grupos e coletivos para a organização de manifestações?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "98bbab1c6c90eda2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a3c3febb49ec39d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "85d1fdba0c9cded6",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Na prática"
+  },
+  {
+    "id": "q0141",
+    "query": "Qual a relação entre os geoglifos e a prática de manejo sustentável da terra por parte dos habitantes amazônicos, segundo o texto?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6351dc829185c70f",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "52d94de2eaf2ef0a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "cf6eb1a835caf9f2",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Na prática"
+  },
+  {
+    "id": "q0142",
+    "query": "Quais foram as principais características das Rotas da Seda e como elas contribuíram para a interação entre diferentes culturas, de acordo com o texto?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "9a9ec3ff5b221678",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "710c05e56f982c12",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "5740e059d4c723b8",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Na prática"
+  },
+  {
+    "id": "q0143",
+    "query": "Qual o papel do cinema como instrumento de reconstrução da identidade cultural europeia, segundo os trechos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "bbc354ba9c7868ac",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "b3bfdc313b99c1ed",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "ada46fd54ada078d",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > Na prática"
+  },
+  {
+    "id": "q0144",
+    "query": "Qual foi a consequência da morte de Henrique VIII para o desenvolvimento do anglicanismo na Inglaterra?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "2bc15065dd50739a",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "7f17c226a1d044da",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "229c348f502db3fa",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 4: Poder e política > Capitulo 8: Revoluções, nacionalismo e teorias sociais > As Revoluções Inglesas"
+  },
+  {
+    "id": "q0145",
+    "query": "Em que contexto histórico as sociedades greco-romanas, além de outras culturas do passado, praticavam a escravidão? Quais eram as características da escravidão nesse contexto e como essa prática impactou as sociedades americanas?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "ae3440f1958429d4",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "fef6b0e600c916f2",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "d078b2f7ee5bb1e7",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 3: Trabalho, ciência 3 e tecnologia > Capitulo 6: Formas de trabalho na América"
+  },
+  {
+    "id": "q0146",
+    "query": "Qual a relação entre o termo \"populismo\" e as práticas políticas empregadas por lideranças carismáticas no contexto da industrialização e urbanização em países como o Brasil, Argentina e México?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "6d2a6cb70c867750",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "a76417a9688886b6",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "572b690a310de6cb",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > Capitulo 14: Populismos e ditaduras no Brasil e na América Latina > Populismo no Brasil e o período democrático"
+  },
+  {
+    "id": "q0147",
+    "query": "Como a disciplina de história, segundo os trechos apresentados, busca compreender a transformação da humanidade ao longo do tempo, quais elementos são analisados para entender as diferentes formas de pensar, organizar a vida comum e transmitir e registrar as ações em diferentes épocas e lugares?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "0f824bfbb306f973",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "478f8ecd9d72e029",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "394b19188b02b59a",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 1: Natureza em transformação > Capitulo 1: A origem da humanidade e as transformações da natureza"
+  },
+  {
+    "id": "q0148",
+    "query": "Quais foram os principais impactos da expansão das Rotas da Seda na interação entre diferentes culturas e povos?",
+    "relevant_chunks": [
+      {
+        "chunk_id": "49db2d3e100eb235",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "0e7a53a81a8ede95",
+        "relevance": 3
+      },
+      {
+        "chunk_id": "f063be9bb3046820",
+        "relevance": 3
+      }
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "n_source_chunks": 3,
+    "source_breadcrumb": "Unidade 2: Sociedade, política e cultura > Capitulo 3: Fluxos e conexões: comércio e cultura na Ásia, na > Rotas da Seda"
+  },
+  {
+    "id": "q0149",
+    "query": "Qual é a fórmula de Bhaskara?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0150",
+    "query": "Como funciona a fotossíntese nas plantas?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0151",
+    "query": "Qual é a capital da Austrália?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0152",
+    "query": "Como calcular a área de um círculo?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0153",
+    "query": "O que é a tabela periódica dos elementos?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0154",
+    "query": "Quais são as leis de Newton?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0155",
+    "query": "Como funciona um motor de combustão interna?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0156",
+    "query": "O que é inteligência artificial?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0157",
+    "query": "Qual é a receita de um bolo de chocolate?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  },
+  {
+    "id": "q0158",
+    "query": "Como programar em Python?",
+    "relevant_chunks": [],
+    "category": "negative",
+    "answerable": false,
+    "source_breadcrumb": ""
+  }
+]

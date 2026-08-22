@@ -109,9 +109,15 @@ uvicorn api.main:app --port 8000
 # 7. Gerar o dataset para avaliação
 python scripts/generate_eval_dataset.py
 
-# 8. Analisar metricas
+# 8. Analisar metricas RAG
 python scripts/eval_rag.py --mode file --dataset data/eval/dataset.json
 
+# 8. Analisar metricas generation
+# 8.1. Roda todos os modelos .gguf de models/ contra o dataset completo
+python scripts/eval_generation.py
+
+# 8.2. Testa só um modelo específico
+python scripts/eval_generation.py --model models/{MODELO}
 ```
 
 Open the frontend by serving `frontend/` with any static file server, or open `frontend/index.html` directly in your browser.

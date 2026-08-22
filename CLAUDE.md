@@ -37,7 +37,7 @@ flake8 . --count --max-line-length=120 --extend-ignore=E203,E501,E741,W503 --sta
 black --check --diff .
 isort --check-only --diff .
 
-# Model benchmark (all .gguf files in models/ against Q&A pairs)
+# Model benchmark (all .gguf files in models/ against Q&A pairs — latency/accuracy only)
 python scripts/speed_test.py
 python scripts/speed_test.py --threads 4 --n-ctx 2048
 

@@ -197,6 +197,38 @@ class TestChunkDocument:
         assert "topic" in chunk
         assert "section_title" in chunk
 
+    def test_chunk_id_differs_for_different_sections_same_page(self):
+        """Duas seções distintas na mesma página/source não podem colidir de chunk_id.
+
+        Regressão: chunk_id era baseado num índice local a cada chamada de
+        chunk_document(), que reiniciava em 0 por seção — colidia quando duas
+        seções diferentes caíam na mesma página do mesmo documento.
+        """
+        doc_a = {
+            "text": "Primeira seção com conteúdo próprio.",
+            "source": "livro.pdf",
+            "page": 1,
+        }
+        doc_b = {
+            "text": "Segunda seção, texto totalmente diferente.",
+            "source": "livro.pdf",
+            "page": 1,
+        }
+        chunks_a = chunk_document(doc_a, chunk_size=512)
+        chunks_b = chunk_document(doc_b, chunk_size=512)
+        assert chunks_a[0]["chunk_id"] != chunks_b[0]["chunk_id"]
+
+    def test_chunk_id_stable_for_same_text_source_page(self):
+        """Reindexar o mesmo texto/source/page deve produzir o mesmo chunk_id (idempotência)."""
+        doc = {
+            "text": "Texto idêntico entre execuções.",
+            "source": "livro.pdf",
+            "page": 3,
+        }
+        chunks_1 = chunk_document(doc, chunk_size=512)
+        chunks_2 = chunk_document(doc, chunk_size=512)
+        assert chunks_1[0]["chunk_id"] == chunks_2[0]["chunk_id"]
+
     def test_boilerplate_removal(self):
         """Verifica que boilerplate editorial é removido."""
         text = """

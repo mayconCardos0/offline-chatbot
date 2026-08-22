@@ -1,0 +1,310 @@
+[
+  {
+    "id": "g0001",
+    "query": "Qual a principal razão para o Mar Mediterrâneo ser considerado um espaço privilegiado para o transporte e a troca de mercadorias?",
+    "context": [
+      "Mundo mediterrâneo\nDesde a Antiguidade, o Mar Mediterrâneo é um espaço de muita importância econômica e integração cultural. Como ele banha três continentes – o africano, o asiático e o europeu –, é u"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 38 > Mundo mediterrâneo"
+  },
+  {
+    "id": "g0002",
+    "query": "Qual o motivo principal da expansão territorial da República Romana?",
+    "context": [
+      "A expansão territorial da República Romana\nBuscando o controle das rotas comerciais do Mar Mediterrâneo, os romanos entraram em conflito com muitos Estados e povos, como o que habitava a cidade de Car"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 46 > A expansão territorial da República Romana"
+  },
+  {
+    "id": "g0003",
+    "query": "Como e quando começou a se formar o cristianismo, segundo o texto?",
+    "context": [
+      "A expansão do cristianismo\nNo século I d.C., algumas comunidades de judeus, na Palestina, começaram a seguir os ensinamentos de Jesus, um homem humilde que dizia ser filho de Deus e, acusado de sediçã"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 48 > A expansão do cristianismo"
+  },
+  {
+    "id": "g0004",
+    "query": "Qual foi a principal razão para os romanos denominarem povos não-greco-romanos como \"bárbaros\"?",
+    "context": [
+      "O fim do Império Romano do Ocidente\nOs romanos chamavam de “bárbaros” todos aqueles que não viviam em cidades que não faziam parte do império. Eles usavam essa palavra para inferiorizar as culturas di"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 49 > O fim do Império Romano do Ocidente"
+  },
+  {
+    "id": "g0005",
+    "query": "Quais povos e impérios controlaram as Rotas da Seda ao longo dos séculos?",
+    "context": [
+      "Ao longo dos séculos, essas rotas foram controladas por diversos povos e impérios, como os chineses, os kushanas (da Ásia Central), os persas, os sogdianos (da região correspondente a do atual territó"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 37 > Rotas da Seda"
+  },
+  {
+    "id": "g0006",
+    "query": "Qual a principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna?",
+    "context": [
+      "Desde a promulgação da Carta Magna, em 1215, o poder real na Inglaterra passou a ser limitado por um conselho formado por clérigos e nobres. Algumas décadas depois, esse conselho passou a se chamar Pa"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 120 > As Revoluções Inglesas"
+  },
+  {
+    "id": "g0007",
+    "query": "Qual foi a principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII?",
+    "context": [
+      "Como você estudou, o rei Henrique VIII foi o responsável pelo rompimento com a Igreja Católica e pelo confisco de suas terras, possibilitando à Coroa maior concentração de terras. Além disso, Henrique"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 120 > As Revoluções Inglesas"
+  },
+  {
+    "id": "g0008",
+    "query": "Qual a principal consequência da ascensão de Elizabeth I ao trono?",
+    "context": [
+      "O trono passou, então, para sua meia-irmã, Elizabeth I, que consolidou o anglicanismo como religião oficial da Inglaterra. No entanto, ela se envolveu em conflitos religiosos, perseguindo e ordenando"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 120 > As Revoluções Inglesas"
+  },
+  {
+    "id": "g0009",
+    "query": "O que motivou o início da guerra civil que dividiu o reino inglês em 1642?",
+    "context": [
+      "Os problemas com o Parlamento também aumentaram, principalmente depois que o rei tentou restabelecer impostos e criar taxas novas. Com a insatisfação generalizada, em 1642 iniciou-se uma guerra civil"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 121 > A Revolução Puritana"
+  },
+  {
+    "id": "g0010",
+    "query": "Em que ano teve início a Revolução Francesa e quem a impulsionou?",
+    "context": [
+      "A Revolução Francesa\nA Revolução Francesa foi um movimento complexo que modificou as estruturas sociais, políticas e culturais da Europa. Ela teve início em 1789, quando membros do terceiro estamento"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 124 > A Revolução Francesa"
+  },
+  {
+    "id": "g0011",
+    "query": "Qual a principal característica do governo de Napoleão Bonaparte logo após ele assumir o poder em 1799?",
+    "context": [
+      "O Consulado\nEm 1799, Napoleão Bonaparte assumiu o Poder Executivo da França junto a outros dois cônsules: o abade Emmanuel Joseph Sieyès e Roger Ducos. Nesse regime político, denominado Consulado, os"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 129 > O Consulado"
+  },
+  {
+    "id": "g0012",
+    "query": "Qual a diferença entre os socialistas científicos, Karl Marx e Friedrich Engels, e os socialistas utópicos?",
+    "context": [
+      "Socialismo científico\nOs filósofos alemães Karl Marx e Friedrich Engels também buscaram alternativas ao sistema capitalista, mas, diferentemente dos socialistas utópicos, propuseram a superação do cap"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 137 > Socialismo científico"
+  },
+  {
+    "id": "g0013",
+    "query": "Qual a característica que define as pessoas escravizadas no mundo greco-romano?",
+    "context": [
+      "No mundo greco-romano, por exemplo, as pessoas capturadas em guerras eram escravizadas. Isso também podia ocorrer com as pessoas endividadas, que eram submetidas à escravidão caso não tivessem meios d"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 95 > Capitulo 6: Formas de trabalho na América"
+  },
+  {
+    "id": "g0014",
+    "query": "Em que regiões da América, além da América portuguesa, foram organizadas comunidades semelhantes aos quilombos?",
+    "context": [
+      "Formas de resistência em outras partes da América\nA constituição de quilombos não ocorreu apenas na América portuguesa. Nas colônias espanholas, na Jamaica e em outras partes do Caribe e da América do"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 108 > Formas de resistência em outras partes da América"
+  },
+  {
+    "id": "g0015",
+    "query": "Que princípio orientou a Constituição de 1988 em relação ao racismo e às desigualdades raciais ligadas à escravidão?",
+    "context": [
+      "As comunidades quilombolas\nO combate ao racismo e às desigualdades raciais historicamente relacionadas à escravidão também direcionaram os princípios da Constituição de 1988. Durante a constituinte, c"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 298 > As comunidades quilombolas"
+  },
+  {
+    "id": "g0016",
+    "query": "Em que contexto Itamar Franco assumiu a Presidência do Brasil em 1992?",
+    "context": [
+      "O governo de Itamar Franco e o Plano Real\nEm dezembro de 1992, Itamar Franco assumiu a Presidência em um contexto de crise. Naquele ano, a inflação no Brasil havia chegado à média de 24% ao mês. As pe"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 302 > O governo de Itamar Franco e o Plano Real"
+  },
+  {
+    "id": "g0017",
+    "query": "Qual foi a orientação econômica do primeiro governo de Fernando Henrique Cardoso (FHC)?",
+    "context": [
+      "O primeiro governo de FHC\nO governo de FHC consolidou o neoliberalismo no Brasil pondo em prática políticas econômicas norteadas pela ideia de Estado mínimo e pela subordinação delas à lógica da econo"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 303 > O primeiro governo de FHC"
+  },
+  {
+    "id": "g0018",
+    "query": "Qual o ano que o Banco Mundial considerou como \"ano da desigualdade\"?",
+    "context": [
+      "Unidade 5: Conflitos e desigualdades\nO Banco Mundial denominou o ano de 2023 de “ano da desigualdade”. Diversos países, que já enfrentavam o desafio de reduzir as desigualdades sociais e econômicas in"
+    ],
+    "category": "factual",
+    "answerable": true,
+    "source_breadcrumb": "Unidade 5: Conflitos e desigualdades > p. 176"
+  },
+  {
+    "id": "g0019",
+    "query": "A escravidão já existia em sociedades africanas antes da chegada dos portugueses no século XV? E, nas Treze Colônias inglesas, a escravidão de africanos era a única forma de trabalho compulsório empregada?",
+    "context": [
+      "A escravidão na África\nAntes das primeiras incursões dos portugueses na costa da África, ocorridas na primeira metade do século XV, a escravidão já era praticada em algumas sociedades africanas e em o",
+      "Escravidão e trabalho compulsório na América inglesa\nNos territórios das Treze Colônias, colonizados pelos ingleses, além da escravidão de africanos e de seus descendentes, foram empregadas formas de"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 96 > A escravidão na África | Moderna Plus História > p. 99 > Escravidão e trabalho compulsório na América inglesa"
+  },
+  {
+    "id": "g0020",
+    "query": "Quando o termo \"globalização\" começou a ser usado e que fenômeno ele descrevia? Segundo o segundo trecho, como esse processo se manifestou no início do século XXI?",
+    "context": [
+      "Unidade 6: Globalização, emancipação e cidadania\nO termo globalização começou a ser utilizado nas décadas de 1980 e 1990 para descrever um fenômeno de internacionalização econômica que envolveu aspect",
+      "Ao analisar as consequências locais e mundiais da globalização, observa-se que o início do século XXI não só tem sido caracterizado por uma intensificação das trocas comerciais e culturais entre naçõe"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Unidade 6: Globalização, emancipação e cidadania > p. 249 | Moderna Plus História > p. 249 (consequências da globalização)"
+  },
+  {
+    "id": "g0021",
+    "query": "O trabalho compulsório é um problema apenas do passado? E, segundo dados da Organização Internacional do Trabalho, quantas pessoas foram submetidas a trabalho análogo à escravidão em 2021?",
+    "context": [
+      "Na prática\nMesmo com as transformações ocorridas nos últimos séculos, especialmente a partir da Revolução Industrial, o trabalho compulsório é um problema que persiste no mundo contemporâneo e é consi",
+      "De acordo com dados divulgados pela Organização Internacional do Trabalho, 28 milhões de pessoas foram submetidas a condição de trabalho análogo à escravidão em 2021. No Brasil, estima-se que nas últi"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 94 > Na prática | Moderna Plus História > p. 94 (dados da OIT)"
+  },
+  {
+    "id": "g0022",
+    "query": "Em que ano teve início a Revolução Francesa, e dez anos depois, em 1799, que regime político Napoleão Bonaparte passou a liderar na França?",
+    "context": [
+      "A Revolução Francesa\nA Revolução Francesa foi um movimento complexo que modificou as estruturas sociais, políticas e culturais da Europa. Ela teve início em 1789, quando membros do terceiro estamento",
+      "O Consulado\nEm 1799, Napoleão Bonaparte assumiu o Poder Executivo da França junto a outros dois cônsules: o abade Emmanuel Joseph Sieyès e Roger Ducos. Nesse regime político, denominado Consulado, os"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 124 > A Revolução Francesa | Moderna Plus História > p. 129 > O Consulado"
+  },
+  {
+    "id": "g0023",
+    "query": "Como e quando começou a se formar o cristianismo, segundo o texto? E que termo os romanos usavam para se referir aos povos que não viviam em cidades do império, com que intenção?",
+    "context": [
+      "A expansão do cristianismo\nNo século I d.C., algumas comunidades de judeus, na Palestina, começaram a seguir os ensinamentos de Jesus, um homem humilde que dizia ser filho de Deus e, acusado de sediçã",
+      "O fim do Império Romano do Ocidente\nOs romanos chamavam de “bárbaros” todos aqueles que não viviam em cidades que não faziam parte do império. Eles usavam essa palavra para inferiorizar as culturas di"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 48 > A expansão do cristianismo | Moderna Plus História > p. 49 > O fim do Império Romano do Ocidente"
+  },
+  {
+    "id": "g0024",
+    "query": "Qual foi o motivo da expansão territorial da República Romana? Que conflito de poder marcou o fim dessa República, envolvendo Marco Antônio e Otaviano? E que nova religião começou a se espalhar no império alguns séculos depois?",
+    "context": [
+      "A expansão territorial da República Romana\nBuscando o controle das rotas comerciais do Mar Mediterrâneo, os romanos entraram em conflito com muitos Estados e povos, como o que habitava a cidade de Car",
+      "O fim da República Romana\nOs conflitos se agravaram depois que Lépido foi afastado do triunvirato em 36 a.C., após uma revolta. Marco Antônio e Otaviano passaram, então, a disputar o poder sobre Roma.",
+      "A expansão do cristianismo\nNo século I d.C., algumas comunidades de judeus, na Palestina, começaram a seguir os ensinamentos de Jesus, um homem humilde que dizia ser filho de Deus e, acusado de sediçã"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 46 > A expansão territorial da República Romana | Moderna Plus História > p. 47 > O fim da República Romana | Moderna Plus História > p. 48 > A expansão do cristianismo"
+  },
+  {
+    "id": "g0025",
+    "query": "Que desigualdades marcavam o Antigo Regime na Europa, segundo o trecho? E como, a partir de 1215, a Carta Magna já havia começado a limitar o poder do rei inglês?",
+    "context": [
+      "As Revoluções Inglesas\nDurante o Antigo Regime, o clero e a nobreza viviam com muitos privilégios e luxos, sustentados pelo trabalho e altos impostos pagos pelo terceiro estamento. Essa desigualdade g",
+      "Desde a promulgação da Carta Magna, em 1215, o poder real na Inglaterra passou a ser limitado por um conselho formado por clérigos e nobres. Algumas décadas depois, esse conselho passou a se chamar Pa"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 120 > As Revoluções Inglesas | Moderna Plus História > p. 120 > As Revoluções Inglesas (Carta Magna)"
+  },
+  {
+    "id": "g0026",
+    "query": "Que mudança religiosa Henrique VIII promoveu na Inglaterra? Quem assumiu o trono após a morte de seu filho Eduardo VI, e que religião essa sucessora tentou restabelecer? Por fim, quem sucedeu essa rainha e consolidou o anglicanismo como religião oficial?",
+    "context": [
+      "Como você estudou, o rei Henrique VIII foi o responsável pelo rompimento com a Igreja Católica e pelo confisco de suas terras, possibilitando à Coroa maior concentração de terras. Além disso, Henrique",
+      "Com a morte de\nHenrique VIII e a de seu filho e sucessor, Eduardo VI, quem assumiu o trono foi sua filha, Maria Tudor. Católica fervorosa, ela tentou restabelecer o catolicismo na\nInglaterra e persegu",
+      "O trono passou, então, para sua meia-irmã, Elizabeth I, que consolidou o anglicanismo como religião oficial da Inglaterra. No entanto, ela se envolveu em conflitos religiosos, perseguindo e ordenando"
+    ],
+    "category": "multi_hop",
+    "answerable": true,
+    "source_breadcrumb": "Moderna Plus História > p. 120 > As Revoluções Inglesas (Henrique VIII) | Moderna Plus História > p. 120 > As Revoluções Inglesas (Maria Tudor) | Moderna Plus História > p. 120 > As Revoluções Inglesas (Elizabeth I)"
+  },
+  {
+    "id": "g0027",
+    "query": "Quais foram os principais efeitos da Revolução Industrial sobre as taxas de desmatamento na Floresta Amazônica no século XIX?",
+    "context": [],
+    "category": "unanswerable",
+    "answerable": false,
+    "source_breadcrumb": "N/A — sem contexto (caso degenerado)"
+  },
+  {
+    "id": "g0028",
+    "query": "De que forma a inteligência artificial e a automação têm substituído trabalhadores nas linhas de produção industriais nas últimas duas décadas?",
+    "context": [
+      "Na prática\nMesmo com as transformações ocorridas nos últimos séculos, especialmente a partir da Revolução Industrial, o trabalho compulsório é um problema que persiste no mundo contemporâneo e é consi"
+    ],
+    "category": "unanswerable",
+    "answerable": false,
+    "source_breadcrumb": "Moderna Plus História > p. 94 > Na prática"
+  },
+  {
+    "id": "g0029",
+    "query": "Como Vasco da Gama conseguiu abrir uma nova rota marítima até a Índia contornando a África, no final do século XV?",
+    "context": [
+      "Rotas da Seda\nEntre os fluxos mercantis mais simbólicos do universo das trocas comerciais e culturais, as Rotas da Seda ocupam um lugar especial. Rotas da Seda é o modo como são chamados os caminhos e"
+    ],
+    "category": "unanswerable",
+    "answerable": false,
+    "source_breadcrumb": "Moderna Plus História > p. 37 > Rotas da Seda"
+  },
+  {
+    "id": "g0030",
+    "query": "Qual foi o papel de Maomé na unificação política da Península Arábica sob um único califado após sua morte?",
+    "context": [
+      "Fundação do islã\nMaomé, também conhecido como Muhammad, da tribo dos coraixitas, trabalhava como condutor de caravanas. Isso lhe permitiu viajar e entrar em contato com diferentes povos e culturas. Ao"
+    ],
+    "category": "unanswerable",
+    "answerable": false,
+    "source_breadcrumb": "Moderna Plus História > p. 50 > Fundação do islã"
+  }
+]

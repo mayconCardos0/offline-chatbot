@@ -1,0 +1,40 @@
+{
+  "version": "v3",
+  "timestamp": "2026-08-20T20:17:33+00:00",
+  "dataset": "data/eval/dataset_generation.json",
+  "n_queries": 30,
+  "models": {
+    "gemma-2-2b-it-q4_k_m": {
+      "model_path": "C:\\Users\\arthu\\Documents\\offline-chatbot\\models\\gemma-2-2b-it-q4_k_m.gguf",
+      "n_queries": 30,
+      "faithfulness": {
+        "mean": 0.5848,
+        "n_scored": 30,
+        "n_parse_failures": 0
+      },
+      "answer_relevancy": {
+        "mean": 0.7947,
+        "n_scored": 30,
+        "n_parse_failures": 0
+      },
+      "mean_latency_ms": 32735.34,
+      "by_category": {
+        "factual": {
+          "n": 18,
+          "faithfulness": 0.5757,
+          "answer_relevancy": 0.7977
+        },
+        "multi_hop": {
+          "n": 8,
+          "faithfulness": 0.6704,
+          "answer_relevancy": 0.7781
+        },
+        "unanswerable": {
+          "n": 4,
+          "faithfulness": 0.4545,
+          "answer_relevancy": 0.8145
+        }
+      }
+    }
+  }
+}

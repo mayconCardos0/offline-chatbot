@@ -1,0 +1,1484 @@
+[
+  {
+    "id": "g0001",
+    "query": "Qual a principal razão para o Mar Mediterrâneo ser considerado um espaço privilegiado para o transporte e a troca de mercadorias?",
+    "category": "factual",
+    "answer": "## A importância do Mar Mediterrâneo para o transporte e a troca de mercadorias\n\nO Mar Mediterrâneo é considerado um espaço privilegiado para o transporte e a troca de mercadorias devido à sua localização estratégica entre três continentes: africano, asiático e europeu. \n\n**Causas:**\n\n* **Localização geográfica:** O Mar Mediterrâneo se encontra entre os continentes africano, asiático e europeu, conectando-os através de um canal marítimo que facilita o comércio entre eles.\n* **Infraestrutura:**  A região possui uma vasta rede de rotas comerciais, por exemplo, a rota do Mediterrâneo conecta as principais cidades da Europa com o Oriente Médio e África.\n\n**Consequências:**\n\n* **Integração cultural e econômica:** A proximidade geográfica e a interconexão entre os continentes através do Mar Mediterrâneo impulsionaram a integração cultural e econômica, favorecendo o comércio de produtos e serviços entre as regiões. \n* **Desenvolvimento econômico:** O acesso ao Mediterrâneo possibilitou o desenvolvimento de importantes centros comerciais, como cidades como Roma, Alexandria, Constantinopla e outras na região, que se tornaram importantes polos de comércio e produção.\n\n**Contexto:**\n\nA importância do Mar Mediterrâneo para a troca de mercadorias é um fator fundamental na história da região. Desde a Antiguidade, o Mediterrâneo foi palco de grandes migrações, interações culturais e comerciais entre diferentes civilizações. \n",
+    "latency_ms": 54672.3,
+    "faithfulness": {
+      "score": 0.7143,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O Mar Mediterrâneo banha três continentes — o africano, o asiático e o europeu",
+          "supported": true
+        },
+        {
+          "claim": "O Mar Mediterrâneo é um espaço de muita importância econômica e integração cultural",
+          "supported": true
+        },
+        {
+          "claim": "A localização geográfica do Mar Mediterrâneo entre os continentes africanos, asiáticos e europeus facilita o comércio entre eles",
+          "supported": true
+        },
+        {
+          "claim": "A região possui uma vasta rede de rotas comerciais que conectam as principais cidades da Europa com o Oriente Médio e África",
+          "supported": false
+        },
+        {
+          "claim": "A proximidade geográfica e a interconexão entre os continentes através do Mar Mediterrâneo impulsionaram a integração cultural e econômica",
+          "supported": true
+        },
+        {
+          "claim": "O acesso ao Mar Mediterrâneo possibilitou o desenvolvimento de importantes centros comerciais, como Roma, Alexandria e Constantinopla",
+          "supported": false
+        },
+        {
+          "claim": "Desde a Antiguidade, o Mar Mediterrâneo foi palco de grandes migrações, interações culturais e comerciais entre diferentes civilizações",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8787,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Por que o Mar Mediterrâneo é considerado um espaço privilegiado para o transporte e a troca de mercadorias?",
+        "Quais são as principais causas da importância do Mar Mediterrâneo no comércio entre continentes?",
+        "Como a localização geográfica do Mar Mediterrâneo contribuiu para o desenvolvimento econômico e cultural na região histórica?"
+      ],
+      "similarities": [
+        0.988,
+        0.8877,
+        0.7604
+      ]
+    }
+  },
+  {
+    "id": "g0002",
+    "query": "Qual o motivo principal da expansão territorial da República Romana?",
+    "category": "factual",
+    "answer": "## A Expansão Territorial da República Romana\n\nO texto menciona que a expansão territorial da República Romana buscava o controle das rotas comerciais do Mar Mediterrâneo.  Essa expansão se deu em um contexto de **busca por poder e influência** na região, visando garantir a **estabilidade econômica e política** da república. \n\n**Causa:** A necessidade de controlar as rotas comerciais do Mediterrâneo era fundamental para o desenvolvimento econômico e político da República Romana. O texto afirma que os romanos entraram em conflito com diversos Estados e povos por essa razão, buscando expandir seu domínio e garantir a sua hegemonia na região.\n\n**Contexto:** A expansão territorial foi um processo gradual que se deu ao longo de séculos, impulsionado pela necessidade de controlar as rotas comerciais e fortalecer a influência da República Romana. \n\n**Consequências:** A expansão territorial resultou em:\n\n* **Aumento do poder militar e político da República Romana:** A conquista de novos territórios permitiu a consolidação de um exército poderoso e uma estrutura administrativa eficiente, que contribuiu para o fortalecimento da República Romana.\n* **Difusão da cultura romana:** A expansão territorial levou à difusão da cultura romana, língua, costumes e leis, influenciando as sociedades conquistadas. \n* **Conflito com outras civilizações:** A expansão territorial gerou conflitos com outras civilizações, como os povos que habitavam a cidade de Car.\n\n**Em resumo:** A expansão territorial da República Romana foi um processo estratégico para garantir a segurança e o desenvolvimento econômico da nação. O controle das rotas comerciais do Mediterrâneo era fundamental para a prosperidade da república, impulsionando a conquista de novos territórios e a difusão da cultura romana. \n",
+    "latency_ms": 63696.41,
+    "faithfulness": {
+      "score": 0.5714,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A expansão territorial da República Romana buscava o controle das rotas comerciais do Mar Mediterrâneo",
+          "supported": true
+        },
+        {
+          "claim": "Os romanos entraram em conflito com diversos Estados e povos por causa da necessidade de controlar as rotas comerciais do Mediterrâneo",
+          "supported": true
+        },
+        {
+          "claim": "A expansão territorial foi um processo gradual que se deu ao longo de séculos",
+          "supported": false
+        },
+        {
+          "claim": "O controle das rotas comerciais do Mediterrâneo era fundamental para o desenvolvimento econômico e político da República Romana",
+          "supported": true
+        },
+        {
+          "claim": "A conquista de novos territórios permitiu a consolidação de um exército poderoso e uma estrutura administrativa eficiente",
+          "supported": false
+        },
+        {
+          "claim": "A expansão territorial levou à difusão da cultura romana, língua, costumes e leis nas sociedades conquistadas",
+          "supported": false
+        },
+        {
+          "claim": "A expansão territorial gerou conflitos com outras civilizações, como os povos que habitavam a cidade de Car",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.9055,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi a principal motivação para a expansão territorial da República Romana?",
+        "Como a conquista de novos territórios contribuiu para o fortalecimento do poder militar e político da República Romana?",
+        "Quais foram as principais consequências da expansão territorial da República Romana em termos cultural e político?"
+      ],
+      "similarities": [
+        0.9787,
+        0.8332,
+        0.9047
+      ]
+    }
+  },
+  {
+    "id": "g0003",
+    "query": "Como e quando começou a se formar o cristianismo, segundo o texto?",
+    "category": "factual",
+    "answer": "O texto menciona que, no século I d.C., comunidades de judeus na Palestina começaram a seguir os ensinamentos de Jesus.  Essa é a base da formação do cristianismo. \n",
+    "latency_ms": 14116.82,
+    "faithfulness": {
+      "score": 0.5,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "No século I d.C., algumas comunidades de judeus na Palestina começaram a seguir os ensinamentos de Jesus",
+          "supported": true
+        },
+        {
+          "claim": "Essa é a base da formação do cristianismo",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.682,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Quais comunidades de judeus na Palestina começaram a seguir os ensinamentos de Jesus no século I d.C.?",
+        "Qual é a base da formação do cristianismo segundo o texto?",
+        "Quando as comunidades de judeus na Palestina começaram a seguir os ensinamentos de Jesus?"
+      ],
+      "similarities": [
+        0.5706,
+        0.8707,
+        0.6046
+      ]
+    }
+  },
+  {
+    "id": "g0004",
+    "query": "Qual foi a principal razão para os romanos denominarem povos não-greco-romanos como \"bárbaros\"?",
+    "category": "factual",
+    "answer": "O contexto fornecido afirma que os romanos chamavam de \"bárbaros\" todos aqueles que não viviam em cidades que faziam parte do império.  \n\nEssa denominação se baseava na ideia de que os povos não-greco-romanos eram inferiores aos romanos, pois viviam em comunidades menos organizadas e urbanas. Essa prática era utilizada para inferiorizar as culturas não-romanas e justificar a dominação romana sobre essas regiões. \n",
+    "latency_ms": 21051.78,
+    "faithfulness": {
+      "score": 0.2,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Os romanos chamavam de \"bárbaros\" todos aqueles que não viviam em cidades que não faziam parte do império",
+          "supported": false
+        },
+        {
+          "claim": "Os romanos usavam a palavra \"bárbaro\" para inferiorizar as culturas não-romanas",
+          "supported": true
+        },
+        {
+          "claim": "A denominação \"bárbaro\" se baseava na ideia de que os povos não-greco-romanos eram inferiores aos romanos",
+          "supported": false
+        },
+        {
+          "claim": "Os povos que viviam em comunidades menos organizadas e urbanas eram considerados inferiores pelos romanos",
+          "supported": false
+        },
+        {
+          "claim": "A prática de usar a denominação \"bárbaro\" era utilizada para justificar a dominação romana sobre essas regiões",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8182,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "O que significava para os romanos o termo \"bárbaros\"?",
+        "Por que os romanos consideravam as comunidades não urbanas como inferiores?",
+        "Como a denominação de \"bárbaros\" era usada para justificar a dominação romana?"
+      ],
+      "similarities": [
+        0.866,
+        0.7687,
+        0.8201
+      ]
+    }
+  },
+  {
+    "id": "g0005",
+    "query": "Quais povos e impérios controlaram as Rotas da Seda ao longo dos séculos?",
+    "category": "factual",
+    "answer": "As Rotas da Seda foram controladas por diversos povos e impérios ao longo dos séculos.  Entre eles, podemos destacar:\n\n**1. Chineses:** \n* Os chineses dominaram as rotas durante um período significativo, principalmente no século II a.C., quando o Império Chinês se expandiu para controlar a região. \n* A influência chinesa na rota da seda foi fundamental para o desenvolvimento de uma estrutura comercial e econômica complexa.\n\n**2. Kushanas (da Ásia Central):** \n* Os Kushanas, um império que surgiu na Ásia Central, também desempenharam um papel importante na administração das rotas da seda. \n* Eles se destacaram por sua capacidade de controlar o comércio entre diferentes regiões e culturas.\n\n**3. Persas:** \n* Os persas também foram responsáveis pela organização e controle das rotas da seda. \n* A influência persa foi crucial para a expansão do comércio e da interação cultural entre diferentes povos.\n\n**4. Sogdianos (da região correspondente a do atual território):** \n* Os sogdianos, um povo que habitava a região da atual Turquia, também desempenharam um papel importante na administração das rotas da seda. \n* Eles se destacaram por sua capacidade de conectar diferentes regiões e culturas através da rota.\n\nÉ importante notar que o controle das rotas da seda foi dinâmico ao longo dos séculos, com diferentes povos e impérios assumindo o poder em diferentes períodos.  A influência dessas culturas na organização e desenvolvimento das rotas da seda teve um impacto significativo na história global. \n",
+    "latency_ms": 75728.01,
+    "faithfulness": {
+      "score": 0.2727,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "As Rotas da Seda foram controladas por diversos povos e impérios ao longo dos séculos",
+          "supported": true
+        },
+        {
+          "claim": "Os chineses dominaram as rotas durante um período significativo, principalmente no século II a.C., quando o Império Chinês se expandiu para controlar a região",
+          "supported": false
+        },
+        {
+          "claim": "A influência chinesa na rota da seda foi fundamental para o desenvolvimento de uma estrutura comercial e econômica complexa",
+          "supported": false
+        },
+        {
+          "claim": "Os Kushanas, um império que surgiu na Ásia Central, desempenharam um papel importante na administração das rotas da seda",
+          "supported": true
+        },
+        {
+          "claim": "Os Kushanas se destacaram por sua capacidade de controlar o comércio entre diferentes regiões e culturas",
+          "supported": false
+        },
+        {
+          "claim": "Os persas também foram responsáveis pela organização e controle das rotas da seda",
+          "supported": false
+        },
+        {
+          "claim": "A influência persa foi crucial para a expansão do comércio e da interação cultural entre diferentes povos",
+          "supported": false
+        },
+        {
+          "claim": "Os sogdianos, um povo que habitava a região da atual Turquia, desempenharam um papel importante na administração das rotas da seda",
+          "supported": false
+        },
+        {
+          "claim": "Os sogdianos se destacaram por sua capacidade de conectar diferentes regiões e culturas através da rota",
+          "supported": false
+        },
+        {
+          "claim": "O controle das rotas da seda foi dinâmico ao longo dos séculos, com diferentes povos e impérios assumindo o poder em diferentes períodos",
+          "supported": true
+        },
+        {
+          "claim": "A influência dessas culturas na organização e desenvolvimento das rotas da seda teve um impacto significativo na história global",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7765,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Quais povos e impérios controlaram as Rotas da Seda ao longo dos séculos?",
+        "Como o controle chinês das Rotas da Seda contribuiu para o desenvolvimento do comércio e da economia?",
+        "Qual foi o papel dos sogdianos na administração e conexão entre diferentes regiões pelas Rotas da Seda?"
+      ],
+      "similarities": [
+        1.0,
+        0.636,
+        0.6934
+      ]
+    }
+  },
+  {
+    "id": "g0006",
+    "query": "Qual a principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna?",
+    "category": "factual",
+    "answer": "A principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna foi a limitação do poder real por um conselho formado por clérigos e nobres. Antes, o poder era absoluto, mas com a Carta Magna, essa estrutura se transformou em uma nova forma de governo. \n\n**Contexto:** A Carta Magna, promulgada em 1215, marcou um ponto crucial na história da Inglaterra. Ela estabeleceu um sistema de governo baseado em um conselho formado por clérigos e nobres, o que limitava o poder real do monarca.  \n",
+    "latency_ms": 31658.6,
+    "faithfulness": {
+      "score": 0.75,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A Carta Magna foi promulgada em 1215",
+          "supported": true
+        },
+        {
+          "claim": "O poder real na Inglaterra passou a ser limitado por um conselho formado por clérigos e nobres após a promulgação da Carta Magna",
+          "supported": true
+        },
+        {
+          "claim": "Antes da Carta Magna, o poder real era absoluto",
+          "supported": false
+        },
+        {
+          "claim": "A mudança na estrutura do governo resultou em uma nova forma de governo com base em um conselho formado por clérigos e nobres",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8249,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi a principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna?",
+        "Como a Carta Magna influenciou o sistema de governo na Inglaterra no século XIII?",
+        "Quais foram os grupos que compuseram o conselho formado após a implementação da Carta Magna?"
+      ],
+      "similarities": [
+        0.9905,
+        0.8321,
+        0.6521
+      ]
+    }
+  },
+  {
+    "id": "g0007",
+    "query": "Qual foi a principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII?",
+    "category": "factual",
+    "answer": "## A principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII foi a **maior concentração de terras na Coroa**. \n\nO contexto informa que o rompimento, realizado por Henrique VIII, possibilitou à Coroa maior concentração de terras. Essa mudança teve impacto direto na estrutura política e social da época.  \n \nVale ressaltar que essa concentração de terras foi um dos principais objetivos de Henrique VIII ao romper com a Igreja Católica. A partir dessa ruptura, a Coroa passou a controlar mais recursos e poder, o que influenciou a organização política e social do país. \n",
+    "latency_ms": 31805.09,
+    "faithfulness": {
+      "score": 0.4,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O rei Henrique VIII foi o responsável pelo rompimento com a Igreja Católica",
+          "supported": true
+        },
+        {
+          "claim": "O rompimento com a Igreja Católica possibilitou à Coroa maior concentração de terras",
+          "supported": true
+        },
+        {
+          "claim": "A maior concentração de terras na Coroa foi um dos principais objetivos de Henrique VIII ao romper com a Igreja Católica",
+          "supported": false
+        },
+        {
+          "claim": "A partir da ruptura com a Igreja Católica, a Coroa passou a controlar mais recursos e poder",
+          "supported": false
+        },
+        {
+          "claim": "A concentração de terras teve impacto direto na estrutura política e social da época",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.875,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi a principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII?",
+        "Como o rompimento com a Igreja Católica influenciou a concentração de terras na Coroa?",
+        "Quais foram os principais objetivos de Henrique VIII ao se separar da Igreja Católica em termos de controle territorial e político?"
+      ],
+      "similarities": [
+        1.0,
+        0.8129,
+        0.8119
+      ]
+    }
+  },
+  {
+    "id": "g0008",
+    "query": "Qual a principal consequência da ascensão de Elizabeth I ao trono?",
+    "category": "factual",
+    "answer": "## A ascensão de Elizabeth I ao trono teve como principal consequência a consolidação do anglicanismo como religião oficial da Inglaterra. \n\n**Contexto:** O texto informa que Elizabeth I consolidou o anglicanismo como religião oficial da Inglaterra após a morte do seu irmão, James I.  A partir dessa mudança, Elizabeth I se viu envolvida em conflitos religiosos, perseguindo e ordenando a perseguição de outros grupos religiosos. \n\n\n**Causa:** A ascensão de Elizabeth I ao trono foi o evento que iniciou essa mudança.\n\n**Consequência:** A consolidação do anglicanismo como religião oficial da Inglaterra resultou em conflitos religiosos, com Elizabeth I perseguindo e ordenando a perseguição de outros grupos religiosos. \n",
+    "latency_ms": 37920.57,
+    "faithfulness": {
+      "score": 0.6,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Elizabeth I consolidou o anglicanismo como religião oficial da Inglaterra",
+          "supported": true
+        },
+        {
+          "claim": "Elizabeth I se envolveu em conflitos religiosos",
+          "supported": true
+        },
+        {
+          "claim": "Elizabeth I perseguia e ordenava a perseguição de outros grupos religiosos",
+          "supported": true
+        },
+        {
+          "claim": "A ascensão de Elizabeth I ao trono foi o evento que iniciou a consolidação do anglicanismo",
+          "supported": false
+        },
+        {
+          "claim": "A consolidação do anglicanismo como religião oficial da Inglaterra resultou em conflitos religiosos",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.6674,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi a principal consequência da ascensão de Elizabeth I ao trono da Inglaterra?",
+        "Como o anglicanismo se tornou a religião oficial da Inglaterra após a morte de James I?",
+        "Quais conflitos religiosos foram gerados pela consolidação do anglicanismo como religião oficial na Inglaterra?"
+      ],
+      "similarities": [
+        0.9565,
+        0.5725,
+        0.4731
+      ]
+    }
+  },
+  {
+    "id": "g0009",
+    "query": "O que motivou o início da guerra civil que dividiu o reino inglês em 1642?",
+    "category": "factual",
+    "answer": "## O que motivou o início da guerra civil em 1642 no Reino Unido?\n\nA guerra civil que dividiu o reino inglês em 1642 foi desencadeada por uma série de fatores, principalmente a insatisfação generalizada com a tentativa do rei de restaurar impostos e criar taxas.  \n\n**Causas:**\n\n* **Restrições financeiras:** O rei, buscando financiar suas atividades, tentou reintroduzir impostos e taxas que haviam sido suspensas durante a guerra civil anterior. Essa medida gerou grande descontentamento entre os cidadãos, que se sentiram sobrecarregados com as novas obrigações.\n* **Insatisfação popular:** A população, em geral, se sentia descontentes com a situação política e econômica do país. A falta de representatividade dos cidadãos no governo e a crescente desigualdade social também contribuíram para o clima de instabilidade.\n\n**Contexto:**\n\nA guerra civil foi um momento crucial na história do Reino Unido, marcando uma ruptura profunda entre as classes sociais e os poderes da monarquia. \n\n**Consequências:**\n\n* **Divisão política:** A guerra civil dividiu o reino em duas facções: os \"Royalists\" (apoiavam o rei) e os \"Parliamentarians\" (defendiam a democracia).\n* **Instabilidade política:** O conflito resultou em uma série de batalhas e conflitos, que levaram à instabilidade política do país. \n\n\nÉ importante notar que o contexto não menciona explicitamente quais foram as consequências da guerra civil para o Reino Unido. No entanto, podemos inferir que a guerra teve um impacto significativo na vida social e política do país, levando a uma profunda divisão entre os grupos sociais e um período de instabilidade política.\n",
+    "latency_ms": 83407.26,
+    "faithfulness": {
+      "score": 0.125,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O rei tentou restabelecer impostos e criar taxas novas",
+          "supported": true
+        },
+        {
+          "claim": "A insatisfação generalizada com a tentativa do rei de restaurar impostos e criar taxas foi um fator principal que desencadeou a guerra civil em 1642",
+          "supported": false
+        },
+        {
+          "claim": "A guerra civil foi desencadeada por restrições financeiras do rei",
+          "supported": false
+        },
+        {
+          "claim": "A população se sentia descontente com a situação política e econômica do país",
+          "supported": false
+        },
+        {
+          "claim": "A falta de representatividade dos cidadãos no governo contribuiu para o clima de instabilidade",
+          "supported": false
+        },
+        {
+          "claim": "A guerra civil dividiu o reino em duas facções: os \"Royalists\" e os \"Parliamentarians\"",
+          "supported": false
+        },
+        {
+          "claim": "O conflito resultou em uma série de batalhas e conflitos que levaram à instabilidade política do país",
+          "supported": false
+        },
+        {
+          "claim": "O contexto menciona explicitamente as consequências da guerra civil para o Reino Unido",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8773,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi o motivo principal que desencadeou a guerra civil em 1642 no Reino Unido?",
+        "Quais foram as principais causas da insatisfação popular durante a guerra civil inglesa de 1642?",
+        "Como a guerra civil de 1642 gerou divisão política e instabilidade no Reino Unido?"
+      ],
+      "similarities": [
+        0.9468,
+        0.7967,
+        0.8885
+      ]
+    }
+  },
+  {
+    "id": "g0010",
+    "query": "Em que ano teve início a Revolução Francesa e quem a impulsionou?",
+    "category": "factual",
+    "answer": "A Revolução Francesa teve início em 1789.  Ela foi impulsionada por membros do terceiro estamento da sociedade francesa, que se sentiram insatisfeitos com a estrutura social e política vigente. \n",
+    "latency_ms": 16838.78,
+    "faithfulness": {
+      "score": 0.5,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A Revolução Francesa teve início em 1789",
+          "supported": true
+        },
+        {
+          "claim": "Membros do terceiro estamento da sociedade francesa foram impulsionados por insatisfação com a estrutura social e política vigente",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.9153,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Quais foram as principais causas da Revolução Francesa?",
+        "Em que ano a Revolução Francesa teve início?",
+        "Qual foi o papel do terceiro estamento na Revolução Francesa?"
+      ],
+      "similarities": [
+        0.9248,
+        0.9833,
+        0.838
+      ]
+    }
+  },
+  {
+    "id": "g0011",
+    "query": "Qual a principal característica do governo de Napoleão Bonaparte logo após ele assumir o poder em 1799?",
+    "category": "factual",
+    "answer": "A principal característica do governo de Napoleão Bonaparte logo após ele assumir o poder em 1799 foi a implementação do Consulado. Esse regime político, que durou até 1804, foi marcado por uma série de mudanças significativas na estrutura política e social da França.\n\n**Contexto:**\n\nO contexto menciona que Napoleão assumiu o poder executivo da França em 1799 junto a outros dois cônsules: Emmanuel Joseph Sieyès e Roger Ducos. Esse regime político, denominado Consulado, foi estabelecido para lidar com a instabilidade política da época.  \n\n\n**Causa:**\n\nA instabilidade política da França após a Revolução Francesa, marcada por guerras e revoltas, levou Napoleão a assumir o poder em 1799. O objetivo era estabilizar o país e implementar reformas que visavam fortalecer a autoridade do governo.\n\n**Consequências:**\n\nO Consulado foi um regime político que se caracterizou por uma série de mudanças significativas na estrutura política e social da França, incluindo:\n\n* **Centralização do poder:** Napoleão consolidou seu poder como líder supremo, o que levou à criação de um sistema político centralizado.\n* **Reforma administrativa:** O Consulado implementou reformas administrativas para melhorar a organização e eficiência do governo. \n* **Revolução militar:** Napoleão implementou uma série de reformas militares para fortalecer a força do exército francês.\n\n**Características:**\n\nO Consulado foi um regime político marcado por:\n\n* **Centralização do poder:** Napoleão consolidou seu poder como líder supremo, o que levou à criação de um sistema político centralizado.\n* **Reformas administrativas:** O Consulado implementou reformas administrativas para melhorar a organização e eficiência do governo. \n* **Revolução militar:** O Consulado implementou uma série de reformas militares para fortalecer a força do exército francês.\n\n**Conclusão:**\n\nO Consulado, implementado por Napoleão em 1799, representou um marco na história da França, marcando o início de uma nova era política e social.  \n",
+    "latency_ms": 62520.32,
+    "faithfulness": {
+      "score": 0.3,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Napoleão Bonaparte assumiu o poder executivo da França em 1799 junto a outros dois cônsules",
+          "supported": true
+        },
+        {
+          "claim": "O regime político denominado Consulado foi estabelecido em 1799",
+          "supported": true
+        },
+        {
+          "claim": "O Consulado foi um regime político que durou até 1804",
+          "supported": false
+        },
+        {
+          "claim": "O Consulado foi criado para lidar com a instabilidade política da época",
+          "supported": true
+        },
+        {
+          "claim": "A instabilidade política da França após a Revolução Francesa, marcada por guerras e revoltas, levou Napoleão a assumir o poder em 1799",
+          "supported": false
+        },
+        {
+          "claim": "O Consulado foi marcado por mudanças significativas na estrutura política e social da França",
+          "supported": false
+        },
+        {
+          "claim": "Napoleão consolidou seu poder como líder supremo no Consulado",
+          "supported": false
+        },
+        {
+          "claim": "O Consulado implementou reformas administrativas para melhorar a organização do governo",
+          "supported": false
+        },
+        {
+          "claim": "O Consulado implementou reformas militares para fortalecer o exército francês",
+          "supported": false
+        },
+        {
+          "claim": "O Consulado representou um marco na história da França, marcando o início de uma nova era política e social",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.6879,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi a principal característica do governo de Napoleão Bonaparte logo após sua ascensão ao poder em 1799?",
+        "Como o Consulado respondeu à instabilidade política da França após a Revolução Francesa?",
+        "Quais foram as principais mudanças políticas, administrativas e militares implementadas durante o período do Consulado?"
+      ],
+      "similarities": [
+        0.9943,
+        0.577,
+        0.4924
+      ]
+    }
+  },
+  {
+    "id": "g0012",
+    "query": "Qual a diferença entre os socialistas científicos, Karl Marx e Friedrich Engels, e os socialistas utópicos?",
+    "category": "factual",
+    "answer": "## Diferenças entre socialistas científicos, Marx e Engels, e socialistas utópicos:\n\nOs socialistas científicos, elaborados por Karl Marx e Friedrich Engels, se diferenciam dos socialistas utópicos em suas visões sobre a superação do capitalismo. \n\n**1. Visão da Revolução:**\n\n* **Socialistas Científicos:** Propõem uma superação gradual do sistema capitalista através de um processo revolucionário baseado na ciência e na organização econômica. Eles acreditavam que a revolução seria conduzida por uma classe trabalhadora consciente, que se organizaria para tomar o controle das fábricas e dos meios de produção. \n* **Socialistas Utópicos:**  Propõem uma revolução violenta e imediata, buscando a criação de um novo sistema social sem classes, baseado em princípios utópicos, como a igualdade e a fraternidade.\n\n**2. Contexto Histórico:**\n\n* **Socialistas Científicos:** Surgiram no contexto da Revolução Industrial, que trouxe profundas mudanças sociais e econômicas. Eles se inspiravam na análise crítica do capitalismo, buscando uma solução para as desigualdades sociais e a exploração do trabalho. \n* **Socialistas Utópicos:** Surgido em um contexto de descontentamento social e revoltas contra o sistema capitalista, os socialistas utópicos buscavam uma sociedade sem classes e sem propriedade privada.\n\n**3. Consequências:**\n\n* **Socialistas Científicos:** A superação do capitalismo seria gradual, com a construção de uma nova ordem social baseada na ciência e na organização econômica. \n* **Socialistas Utópicos:** A revolução proposta pelos socialistas utópicos buscava a criação de uma sociedade sem classes e sem propriedade privada, através da violência e da tomada de poder.\n\n\nÉ importante ressaltar que o contexto fornecido não detalha as diferenças entre os socialistas científicos e os socialistas utópicos em termos específicos. No entanto, podemos inferir que os socialistas científicos se baseavam em um processo gradual de transformação social, enquanto os socialistas utópicos buscavam uma revolução violenta para a criação de uma nova sociedade. \n",
+    "latency_ms": 75172.23,
+    "faithfulness": {
+      "score": 0.25,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Os filósofos alemães Karl Marx e Friedrich Engels buscaram alternativas ao sistema capitalista",
+          "supported": true
+        },
+        {
+          "claim": "Karl Marx e Friedrich Engels propuseram a superação do capitalismo diferentemente dos socialistas utópicos",
+          "supported": true
+        },
+        {
+          "claim": "Os socialistas científicos propõem uma superação gradual do sistema capitalista através de um processo revolucionário baseado na ciência e na organização econômica",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas científicos acreditam que a revolução será conduzida por uma classe trabalhadora consciente que se organiza para tomar o controle das fábricas e dos meios de produção",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas utópicos propõem uma revolução violenta e imediata para criar um novo sistema social sem classes",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas utópicos buscam uma sociedade baseada em princípios utópicos como a igualdade e a fraternidade",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas científicos surgiram no contexto da Revolução Industrial",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas científicos se inspiram na análise crítica do capitalismo para resolver desigualdades sociais e exploração do trabalho",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas utópicos surgiram em um contexto de descontentamento social e revoltas contra o sistema capitalista",
+          "supported": false
+        },
+        {
+          "claim": "A superação do capitalismo pelos socialistas científicos seria gradual, com construção de uma nova ordem social baseada na ciência e organização econômica",
+          "supported": false
+        },
+        {
+          "claim": "Os socialistas utópicos buscam criar uma sociedade sem classes e sem propriedade privada por meio da violência e da tomada de poder",
+          "supported": false
+        },
+        {
+          "claim": "O contexto fornecido não detalha as diferenças entre os socialistas científicos e os socialistas utópicos em termos específicos",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7757,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual é a principal diferença entre os socialistas científicos de Marx e Engels e os socialistas utópicos em relação à visão da revolução social?",
+        "Como o contexto histórico da Revolução Industrial influenciou as ideias dos socialistas científicos em contraste com os socialistas utópicos?",
+        "Quais são as principais consequências previstas pelos socialistas científicos e pelos socialistas utópicos para a superação do capitalismo?"
+      ],
+      "similarities": [
+        0.9087,
+        0.7519,
+        0.6666
+      ]
+    }
+  },
+  {
+    "id": "g0013",
+    "query": "Qual a característica que define as pessoas escravizadas no mundo greco-romano?",
+    "category": "factual",
+    "answer": "As pessoas capturadas em guerras no mundo greco-romano eram escravizadas. Esse tipo de escravidão também podia ocorrer com as pessoas endividadas, que eram submetidas à escravidão caso não tivessem meios para pagar suas dívidas. \n",
+    "latency_ms": 19029.91,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "As pessoas capturadas em guerras no mundo greco-romano eram escravizadas",
+          "supported": true
+        },
+        {
+          "claim": "As pessoas endividadas no mundo greco-romano eram submetidas à escravidão caso não tivessem meios para pagar suas dívidas",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7038,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Como as pessoas capturadas em guerras no mundo greco-romano eram tratadas?",
+        "O que acontecia com indivíduos endividados que não conseguiam pagar suas dívidas no mundo greco-romano?",
+        "Quais foram os mecanismos de escravidão além da captura em guerras na antiguidade grega e romana?"
+      ],
+      "similarities": [
+        0.734,
+        0.5611,
+        0.8161
+      ]
+    }
+  },
+  {
+    "id": "g0014",
+    "query": "Em que regiões da América, além da América portuguesa, foram organizadas comunidades semelhantes aos quilombos?",
+    "category": "factual",
+    "answer": "Segundo o texto, além da América portuguesa, comunidades semelhantes aos quilombos foram organizadas em:\n\n* **Colônias espanholas:**  \n    O contexto menciona que quilombos também existiam nas colônias espanholas. \n* **Jamaica:** O texto afirma que comunidades semelhantes aos quilombos existiram na Jamaica. \n\n\nÉ importante ressaltar que o contexto não detalha as características ou causas da organização de quilombos em outras regiões, apenas menciona a existência dessas comunidades em diferentes países. \n",
+    "latency_ms": 21623.21,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A constituição de quilombos ocorreu na América portuguesa",
+          "supported": true
+        },
+        {
+          "claim": "A constituição de quilombos ocorreu nas colônias espanholas",
+          "supported": true
+        },
+        {
+          "claim": "A constituição de quilombos ocorreu na Jamaica",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8117,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Em quais colônias espanholas foram organizadas comunidades semelhantes aos quilombos?",
+        "A Jamaica possui comunidades semelhantes aos quilombos?",
+        "Quais regiões além da América portuguesa tiveram a formação de comunidades semelhantes aos quilombos, segundo o texto?"
+      ],
+      "similarities": [
+        0.8253,
+        0.6562,
+        0.9535
+      ]
+    }
+  },
+  {
+    "id": "g0015",
+    "query": "Que princípio orientou a Constituição de 1988 em relação ao racismo e às desigualdades raciais ligadas à escravidão?",
+    "category": "factual",
+    "answer": "O princípio que orientou a Constituição de 1988 em relação ao racismo e às desigualdades raciais ligadas à escravidão foi o combate ao racismo e às desigualdades raciais historicamente relacionadas à escravidão.  \n\nEssa orientação se deu durante a constituinte, onde os princípios da Constituição foram direcionados para combater as desigualdades raciais que surgiram como consequência da escravidão no Brasil. \n",
+    "latency_ms": 21648.64,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O combate ao racismo e às desigualdades raciais historicamente relacionadas à escravidão foi o princípio que orientou a Constituição de 1988",
+          "supported": true
+        },
+        {
+          "claim": "Os princípios da Constituição de 1988 foram direcionados para combater as desigualdades raciais que surgiram como consequência da escravidão no Brasil",
+          "supported": true
+        },
+        {
+          "claim": "O combate ao racismo e às desigualdades raciais historicamente relacionadas à escravidão direcionou os princípios da Constituição de 1988",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8948,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi o princípio fundamental da Constituição de 1988 em relação ao racismo e às desigualdades raciais ligadas à escravidão?",
+        "Como a constituinte orientou a combate às desigualdades raciais historicamente resultantes da escravidão no Brasil?",
+        "Qual foi a principal direção dos princípios da Constituição de 1988 em relação às desigualdades raciais decorrentes da escravidão?"
+      ],
+      "similarities": [
+        0.9915,
+        0.7125,
+        0.9805
+      ]
+    }
+  },
+  {
+    "id": "g0016",
+    "query": "Em que contexto Itamar Franco assumiu a Presidência do Brasil em 1992?",
+    "category": "factual",
+    "answer": "Itamar Franco assumiu a Presidência do Brasil em dezembro de 1992 em um contexto de crise econômica. A inflação no Brasil havia atingido uma média de 24% ao mês, o que colocava o país em situação delicada. Essa crise se intensificou e exigia medidas urgentes para conter a inflação e estabilizar a economia.  \n",
+    "latency_ms": 18276.48,
+    "faithfulness": {
+      "score": 0.75,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Itamar Franco assumiu a Presidência do Brasil em dezembro de 1992",
+          "supported": true
+        },
+        {
+          "claim": "A inflação no Brasil havia atingido uma média de 24% ao mês em dezembro de 1992",
+          "supported": true
+        },
+        {
+          "claim": "O contexto de crise econômica colocava o país em situação delicada",
+          "supported": true
+        },
+        {
+          "claim": "A crise se intensificou e exigia medidas urgentes para conter a inflação e estabilizar a economia",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.5941,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi o contexto econômico quando Itamar Franco assumiu a Presidência do Brasil em 1992?",
+        "Quais eram as principais características da crise econômica no Brasil durante o período de sua presidência?",
+        "Como a alta inflação, que atingia 24% ao mês, afetou a situação econômica do país na época?"
+      ],
+      "similarities": [
+        0.9148,
+        0.6246,
+        0.243
+      ]
+    }
+  },
+  {
+    "id": "g0017",
+    "query": "Qual foi a orientação econômica do primeiro governo de Fernando Henrique Cardoso (FHC)?",
+    "category": "factual",
+    "answer": "O primeiro governo de Fernando Henrique Cardoso (FHC) implementou políticas econômicas que se encaixavam no **neoliberalismo**, com foco em um Estado mínimo e na subordinação das políticas à lógica da economia. \n\n**Contexto:** O contexto menciona a consolidação do neoliberalismo no Brasil, com políticas econômicas norteadas pela ideia de Estado mínimo e pela subordinação delas à lógica da economia. Isso significa que o governo FHC priorizou a redução do papel do Estado na economia, buscando um ambiente mais livre para as empresas privadas. \n\n**Consequências:** Essa orientação econômica teve como consequência a implementação de reformas que visavam reduzir o papel do Estado na economia, como a privatização de empresas públicas e a abertura de mercados para a entrada de empresas estrangeiras.  \n",
+    "latency_ms": 27186.34,
+    "faithfulness": {
+      "score": 0.4286,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O primeiro governo de Fernando Henrique Cardoso implementou políticas econômicas que se encaixavam no neoliberalismo",
+          "supported": true
+        },
+        {
+          "claim": "O governo de FHC adotou uma ideia de Estado mínimo",
+          "supported": true
+        },
+        {
+          "claim": "As políticas econômicas do governo FHC foram subordinadas à lógica da economia",
+          "supported": true
+        },
+        {
+          "claim": "O governo FHC priorizou a redução do papel do Estado na economia",
+          "supported": false
+        },
+        {
+          "claim": "O governo FHC buscou um ambiente mais livre para as empresas privadas",
+          "supported": false
+        },
+        {
+          "claim": "O governo FHC implementou reformas de privatização de empresas públicas",
+          "supported": false
+        },
+        {
+          "claim": "O governo FHC abriu mercados para a entrada de empresas estrangeiras",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7196,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi a principal orientação econômica adotada pelo primeiro governo de Fernando Henrique Cardoso?",
+        "Como o neoliberalismo influenciou as políticas do Estado durante o primeiro mandato de FHC?",
+        "Quais reformas foram implementadas para reduzir o papel do Estado na economia durante a administração de FHC?"
+      ],
+      "similarities": [
+        0.9162,
+        0.6579,
+        0.5847
+      ]
+    }
+  },
+  {
+    "id": "g0018",
+    "query": "Qual o ano que o Banco Mundial considerou como \"ano da desigualdade\"?",
+    "category": "factual",
+    "answer": "O Banco Mundial considerou o ano de **2023** como \"ano da desigualdade\". \n",
+    "latency_ms": 10681.38,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O Banco Mundial denominou o ano de 2023 como \"ano da desigualdade\"",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.9497,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual ano o Banco Mundial considerou como \"ano da desigualdade\"?",
+        "O Banco Mundial identificou qual ano como marcante pela crescente desigualdade?",
+        "Em que ano o Banco Mundial declarou que houve um foco especial na desigualdade?"
+      ],
+      "similarities": [
+        0.9876,
+        0.9328,
+        0.9288
+      ]
+    }
+  },
+  {
+    "id": "g0019",
+    "query": "A escravidão já existia em sociedades africanas antes da chegada dos portugueses no século XV? E, nas Treze Colônias inglesas, a escravidão de africanos era a única forma de trabalho compulsório empregada?",
+    "category": "multi_hop",
+    "answer": "Sim, a escravidão já existia em algumas sociedades africanas antes das primeiras incursões dos portugueses na costa da África, ocorridas na primeira metade do século XV. O contexto menciona que a escravidão era praticada em algumas sociedades africanas antes da chegada dos portugueses no século XV. \n\n\n**Escravidão e trabalho compulsório nas Treze Colônias:**\n\nEm relação às Treze Colônias inglesas, o texto afirma que além da escravidão de africanos e seus descendentes, foram empregadas formas de trabalho compulsório.  \n",
+    "latency_ms": 24759.9,
+    "faithfulness": {
+      "score": 0.75,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A escravidão já existia em algumas sociedades africanas antes das primeiras incursões dos portugueses na costa da África, ocorridas na primeira metade do século XV",
+          "supported": true
+        },
+        {
+          "claim": "O contexto menciona que a escravidão era praticada em algumas sociedades africanas antes da chegada dos portugueses no século XV",
+          "supported": true
+        },
+        {
+          "claim": "Em relação às Treze Colônias inglesas, o texto afirma que além da escravidão de africanos e seus descendentes, foram empregadas formas de trabalho compulsório",
+          "supported": false
+        },
+        {
+          "claim": "Nos territórios das Treze Colônias, colonizados pelos ingleses, além da escravidão de africanos e de seus descendentes, foram empregadas formas de trabalho compulsório",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8803,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "A escravidão já existia em algumas sociedades africanas antes da chegada dos portugueses na costa da África no século XV?",
+        "Quais foram as formas de trabalho compulsório utilizadas nas Treze Colônias além da escravidão de africanos e seus descendentes?",
+        "O texto menciona que a escravidão era prática em algumas sociedades africanas antes do contato com os portugueses — isso é verdadeiro?"
+      ],
+      "similarities": [
+        0.9374,
+        0.8172,
+        0.8862
+      ]
+    }
+  },
+  {
+    "id": "g0020",
+    "query": "Quando o termo \"globalização\" começou a ser usado e que fenômeno ele descrevia? Segundo o segundo trecho, como esse processo se manifestou no início do século XXI?",
+    "category": "multi_hop",
+    "answer": "O termo \"globalização\" começou a ser utilizado nas décadas de 1980 e 1990 para descrever um fenômeno de internacionalização econômica. Segundo o segundo trecho, no início do século XXI, a globalização intensificou as trocas comerciais e culturais entre nações.  \n",
+    "latency_ms": 16244.96,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O termo \"globalização\" começou a ser utilizado nas décadas de 1980 e 1990 para descrever um fenômeno de internacionalização econômica",
+          "supported": true
+        },
+        {
+          "claim": "No início do século XXI, a globalização intensificou as trocas comerciais e culturais entre nações",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8304,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Quando o termo \"globalização\" começou a ser utilizado?",
+        "Qual foi o principal aspecto da globalização nas décadas de 1980 e 1990?",
+        "Como a globalização influenciou as trocas comerciais e culturais no início do século XXI?"
+      ],
+      "similarities": [
+        0.9299,
+        0.8022,
+        0.7591
+      ]
+    }
+  },
+  {
+    "id": "g0021",
+    "query": "O trabalho compulsório é um problema apenas do passado? E, segundo dados da Organização Internacional do Trabalho, quantas pessoas foram submetidas a trabalho análogo à escravidão em 2021?",
+    "category": "multi_hop",
+    "answer": "O trabalho compulsório, apesar de ter sido fortemente associado ao passado, ainda persiste no mundo contemporâneo.  Dados da Organização Internacional do Trabalho (OIT) revelam que em 2021, **28 milhões de pessoas** foram submetidas a condições de trabalho análogo à escravidão.\n\nÉ importante ressaltar que o trabalho compulsório, mesmo sendo um problema do passado, ainda é uma realidade presente no mundo contemporâneo.  A Revolução Industrial, por exemplo, trouxe consigo mudanças profundas na forma como as pessoas trabalhavam, mas não resolveu completamente a questão da exploração e escravidão. \n",
+    "latency_ms": 25387.08,
+    "faithfulness": {
+      "score": 0.5,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O trabalho compulsório persiste no mundo contemporâneo",
+          "supported": true
+        },
+        {
+          "claim": "De acordo com dados da Organização Internacional do Trabalho, em 2021, 28 milhões de pessoas foram submetidas a condições de trabalho análogo à escravidão",
+          "supported": true
+        },
+        {
+          "claim": "No Brasil, estima-se que nas últimas décadas houve uma redução significativa no número de trabalhadores sob condições de trabalho análogo à escravidão",
+          "supported": false
+        },
+        {
+          "claim": "A Revolução Industrial trouxe mudanças profundas na forma como as pessoas trabalham e não resolveu completamente a questão da exploração e escravidão",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7386,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "O trabalho compulsório ainda existe no mundo contemporâneo?",
+        "Quantas pessoas foram submetidas a condições análogas à escravidão em 2021, de acordo com dados da Organização Internacional do Trabalho?",
+        "Como a Revolução Industrial influenciou a persistência do trabalho compulsório no mundo atual?"
+      ],
+      "similarities": [
+        0.6967,
+        0.8663,
+        0.6528
+      ]
+    }
+  },
+  {
+    "id": "g0022",
+    "query": "Em que ano teve início a Revolução Francesa, e dez anos depois, em 1799, que regime político Napoleão Bonaparte passou a liderar na França?",
+    "category": "multi_hop",
+    "answer": "A Revolução Francesa teve início em **1789**. Em 1799, Napoleão Bonaparte assumiu o Poder Executivo da França junto a outros dois cônsules: o abade Emmanuel Joseph Sieyès e Roger Ducos. Esse regime político, denominado Consulado, foi liderado por Napoleão. \n",
+    "latency_ms": 16796.14,
+    "faithfulness": {
+      "score": 0.6667,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A Revolução Francesa teve início em 1789",
+          "supported": true
+        },
+        {
+          "claim": "Em 1799, Napoleão Bonaparte assumiu o Poder Executivo da França junto a outros dois cônsules: o abade Emmanuel Joseph Sieyès e Roger Ducos",
+          "supported": true
+        },
+        {
+          "claim": "Esse regime político, denominado Consulado, foi liderado por Napoleão",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.8194,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Em que ano a Revolução Francesa teve início?",
+        "Quem assumiu o Poder Executivo da França em 1799 junto com o abade Emmanuel Joseph Sieyès e Roger Ducos?",
+        "Qual foi o nome do regime político liderado por Napoleão Bonaparte após sua ascensão ao poder em 1799?"
+      ],
+      "similarities": [
+        0.8625,
+        0.7574,
+        0.8384
+      ]
+    }
+  },
+  {
+    "id": "g0023",
+    "query": "Como e quando começou a se formar o cristianismo, segundo o texto? E que termo os romanos usavam para se referir aos povos que não viviam em cidades do império, com que intenção?",
+    "category": "multi_hop",
+    "answer": "O texto fornecido não aborda a data ou o contexto em que se formou o cristianismo. No entanto, ele menciona que algumas comunidades de judeus na Palestina começaram a seguir os ensinamentos de Jesus no século I d.C. \n\nOs romanos usavam a palavra \"bárbaros\" para se referir aos povos que não viviam em cidades que faziam parte do império. Eles usavam essa palavra com intenção de inferiorizar as culturas desses povos, atribuindo-lhes características negativas e desvalorizando suas identidades. \n",
+    "latency_ms": 22638.88,
+    "faithfulness": {
+      "score": 0.3333,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Algumas comunidades de judeus na Palestina começaram a seguir os ensinamentos de Jesus no século I d.C.",
+          "supported": true
+        },
+        {
+          "claim": "Os romanos usavam a palavra \"bárbaros\" para se referir aos povos que não viviam em cidades que faziam parte do império",
+          "supported": false
+        },
+        {
+          "claim": "Os romanos usavam a palavra \"bárbaros\" com intenção de inferiorizar as culturas desses povos, atribuindo-lhes características negativas e desvalorizando suas identidades",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.6474,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi o contexto histórico em que os judeus na Palestina começaram a seguir os ensinamentos de Jesus?",
+        "O que significava para os romanos a palavra \"bárbaros\" e como essa palavra era usada?",
+        "Por que os romanos usavam a palavra \"bárbaros\" com intenção de inferiorizar outros povos?"
+      ],
+      "similarities": [
+        0.4686,
+        0.7694,
+        0.7042
+      ]
+    }
+  },
+  {
+    "id": "g0024",
+    "query": "Qual foi o motivo da expansão territorial da República Romana? Que conflito de poder marcou o fim dessa República, envolvendo Marco Antônio e Otaviano? E que nova religião começou a se espalhar no império alguns séculos depois?",
+    "category": "multi_hop",
+    "answer": "## Expansão Territorial da República Romana\n\nA expansão territorial da República Romana buscava o controle das rotas comerciais do Mar Mediterrâneo.  Os romanos, por meio de conquistas militares, visavam expandir seu domínio e garantir a segurança dos seus interesses comerciais. \n\n**Conflito de Poder que Marcou o Fim da República Romana:**\n\nO conflito de poder que marcou o fim da República Romana envolveu Marco Antônio e Otaviano. Após Lépido ser afastado do triunvirato em 36 a.C., após uma revolta, Marco Antônio e Otaviano se disputaram o poder sobre Roma. Essa disputa culminou na instabilidade política que levou ao fim da República Romana.\n\n**Nova Religião no Império:**\n\nNo século I d.C., algumas comunidades de judeus, na Palestina, começaram a seguir os ensinamentos de Jesus, um homem humilde que dizia ser filho de Deus e acusado de sedição. Esse movimento religioso se espalhou pelo império romano, dando origem ao cristianismo. \n",
+    "latency_ms": 36925.88,
+    "faithfulness": {
+      "score": 0.5714,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A expansão territorial da República Romana buscava o controle das rotas comerciais do Mar Mediterrâneo",
+          "supported": true
+        },
+        {
+          "claim": "Os romanos, por meio de conquistas militares, visavam expandir seu domínio e garantir a segurança dos seus interesses comerciais",
+          "supported": false
+        },
+        {
+          "claim": "O conflito de poder que marcou o fim da República Romana envolveu Marco Antônio e Otaviano",
+          "supported": true
+        },
+        {
+          "claim": "Após Lépido ser afastado do triunvirato em 36 a.C., após uma revolta, Marco Antônio e Otaviano se disputaram o poder sobre Roma",
+          "supported": true
+        },
+        {
+          "claim": "Essa disputa culminou na instabilidade política que levou ao fim da República Romana",
+          "supported": false
+        },
+        {
+          "claim": "No século I d.C., algumas comunidades de judeus, na Palestina, começaram a seguir os ensinamentos de Jesus, um homem humilde que dizia ser filho de Deus e acusado de sedição",
+          "supported": true
+        },
+        {
+          "claim": "Esse movimento religioso se espalhou pelo império romano, dando origem ao cristianismo",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7647,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual foi o objetivo principal da expansão territorial da República Romana?",
+        "Quais foram os principais protagonistas do conflito de poder que marcou o fim da República Romana?",
+        "Como surgiu o cristianismo no Império Romano?"
+      ],
+      "similarities": [
+        0.8055,
+        0.7885,
+        0.7001
+      ]
+    }
+  },
+  {
+    "id": "g0025",
+    "query": "Que desigualdades marcavam o Antigo Regime na Europa, segundo o trecho? E como, a partir de 1215, a Carta Magna já havia começado a limitar o poder do rei inglês?",
+    "category": "multi_hop",
+    "answer": "## Desigualdades no Antigo Regime\n\nO trecho destaca a existência de uma profunda desigualdade social no Antigo Regime na Europa, especialmente em relação ao clero e à nobreza.  Eles viviam com privilégios e luxos, enquanto o terceiro estamento, composto por camponeses e artesãos, era obrigado a pagar altos impostos para sustentar essa estrutura social. Essa disparidade gerava um sistema injusto que impunha uma divisão rígida entre as classes sociais.\n\n## A Carta Magna e o Poder Real\n\nA Carta Magna, promulgada em 1215, representou um marco importante na história da Inglaterra. Ela limitou o poder real do rei inglês por meio de um conselho formado por clérigos e nobres, que se chamava \"Pa\". Essa mudança significava que a monarquia não era absoluta, mas sim sujeita a uma estrutura de controle e limites impostos por essa nova instituição. \n",
+    "latency_ms": 35752.77,
+    "faithfulness": {
+      "score": 0.6667,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O clero e a nobreza viviam com privilégios e luxos durante o Antigo Regime",
+          "supported": true
+        },
+        {
+          "claim": "O terceiro estamento pagava altos impostos para sustentar o sistema social",
+          "supported": true
+        },
+        {
+          "claim": "A desigualdade entre as classes sociais era profunda no Antigo Regime na Europa",
+          "supported": false
+        },
+        {
+          "claim": "A Carta Magna, promulgada em 1215, limitou o poder real do rei inglês",
+          "supported": true
+        },
+        {
+          "claim": "O conselho que limitava o poder real era formado por clérigos e nobres",
+          "supported": true
+        },
+        {
+          "claim": "Esse conselho se chamava \"Pa\"",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7745,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Qual era a natureza das desigualdades sociais no Antigo Regime, especialmente entre o clero, a nobreza e o terceiro estamento?",
+        "O que a Carta Magna de 1215 representou na história da Inglaterra em termos de poder real?",
+        "Como a instituição do \"Pa\" contribuiu para limitar o poder absoluto do rei inglês durante o Antigo Regime?"
+      ],
+      "similarities": [
+        0.6942,
+        0.8531,
+        0.7761
+      ]
+    }
+  },
+  {
+    "id": "g0026",
+    "query": "Que mudança religiosa Henrique VIII promoveu na Inglaterra? Quem assumiu o trono após a morte de seu filho Eduardo VI, e que religião essa sucessora tentou restabelecer? Por fim, quem sucedeu essa rainha e consolidou o anglicanismo como religião oficial?",
+    "category": "multi_hop",
+    "answer": "## Henrique VIII e a Mudança Religiosa na Inglaterra\n\nHenrique VIII promoveu o **rompimento com a Igreja Católica** na Inglaterra.  Com essa ruptura, a Coroa inglesa obteve maior concentração de terras. \n\nApós a morte de Henrique VIII, seu filho e sucessor, Eduardo VI, faleceu. A sucessora foi sua filha, Maria Tudor, uma figura católica fervorosa que tentou restabelecer o catolicismo na Inglaterra.  \n\nA sucessão do trono após a morte de Eduardo VI foi para sua meia-irmã, Elizabeth I. Ela consolidou o anglicanismo como religião oficial da Inglaterra. \n",
+    "latency_ms": 29480.15,
+    "faithfulness": {
+      "score": 0.875,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Henrique VIII foi o responsável pelo rompimento com a Igreja Católica",
+          "supported": true
+        },
+        {
+          "claim": "O rompimento com a Igreja Católica possibilitou à Coroa maior concentração de terras",
+          "supported": true
+        },
+        {
+          "claim": "Após a morte de Henrique VIII, seu filho e sucessor Eduardo VI faleceu",
+          "supported": true
+        },
+        {
+          "claim": "A sucessora após Eduardo VI foi sua filha Maria Tudor",
+          "supported": true
+        },
+        {
+          "claim": "Maria Tudor era uma figura católica fervorosa",
+          "supported": true
+        },
+        {
+          "claim": "Maria Tudor tentou restabelecer o catolicismo na Inglaterra",
+          "supported": true
+        },
+        {
+          "claim": "Após a morte de Eduardo VI, o trono passou para sua meia-irmã Elizabeth I",
+          "supported": true
+        },
+        {
+          "claim": "Elizabeth I consolidou o anglicanismo como religião oficial da Inglaterra",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7696,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Como Henrique VIII contribuiu para o rompimento com a Igreja Católica na Inglaterra e quais foram as consequências dessa ruptura?",
+        "Quem foi Maria Tudor e qual foi seu papel na tentativa de restabelecer o catolicismo na Inglaterra?",
+        "Como Elizabeth I consolidou o anglicanismo como religião oficial da Inglaterra após a morte de Eduardo VI?"
+      ],
+      "similarities": [
+        0.7709,
+        0.7161,
+        0.8216
+      ]
+    }
+  },
+  {
+    "id": "g0027",
+    "query": "Quais foram os principais efeitos da Revolução Industrial sobre as taxas de desmatamento na Floresta Amazônica no século XIX?",
+    "category": "unanswerable",
+    "answer": "A Revolução Industrial teve um impacto significativo na taxa de desmatamento na Floresta Amazônica no século XIX. \n\n**Efeitos da Revolução Industrial:**\n\n* **Expansão do mercado global:** A demanda por produtos como madeira, borracha e outros recursos naturais provenientes da floresta aumentou drasticamente devido à industrialização em países europeus.  A necessidade de matéria-prima para a produção industrial levou à exploração desenfreada da floresta Amazônica. \n* **Desenvolvimento de novas tecnologias:** O desenvolvimento de novas tecnologias, como o ferrovias e a exploração de recursos minerais, impulsionou a expansão territorial e a busca por novos mercados. A necessidade de transporte e infraestrutura para conectar as regiões produtoras à Europa intensificou a pressão sobre a floresta Amazônica.\n* **Aumento da produção agrícola:** A Revolução Industrial também trouxe consigo o aumento da produção agrícola em países industrializados, que impulsionou a demanda por terras férteis.  Essa busca por novas áreas para agricultura levou à exploração de terras na região amazônica, intensificando o desmatamento.\n\n**Consequências:**\n\n* **Perda de biodiversidade:** A expansão da atividade humana e a destruição da floresta Amazônica causaram a perda de habitats naturais e a extinção de espécies. \n* **Desequilíbrio ecológico:** O desmatamento na região teve um impacto negativo no equilíbrio ecológico da floresta, alterando o ciclo de vida das plantas e animais.  A perda de árvores contribuiu para a diminuição da capacidade de absorção de carbono, impactando o clima global.\n\n**Contexto:**\n\nÉ importante destacar que a Revolução Industrial não foi o único fator que causou o desmatamento na Floresta Amazônica no século XIX. A exploração predatória por parte dos colonizadores europeus e a busca por terras para a agricultura também contribuíram para a perda da floresta. \n\n\n",
+    "latency_ms": 51845.08,
+    "faithfulness": {
+      "score": 0.8182,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A Revolução Industrial teve um impacto significativo na taxa de desmatamento na Floresta Amazônica no século XIX",
+          "supported": false
+        },
+        {
+          "claim": "A demanda por produtos como madeira, borracha e outros recursos naturais provenientes da floresta aumentou drasticamente devido à industrialização em países europeus",
+          "supported": true
+        },
+        {
+          "claim": "A necessidade de matéria-prima para a produção industrial levou à exploração desenfreada da floresta Amazônica",
+          "supported": true
+        },
+        {
+          "claim": "O desenvolvimento de novas tecnologias, como ferrovias e a exploração de recursos minerais, impulsionou a expansão territorial e a busca por novos mercados",
+          "supported": true
+        },
+        {
+          "claim": "A necessidade de transporte e infraestrutura para conectar as regiões produtoras à Europa intensificou a pressão sobre a floresta Amazônica",
+          "supported": true
+        },
+        {
+          "claim": "O aumento da produção agrícola em países industrializados impulsionou a demanda por terras férteis",
+          "supported": true
+        },
+        {
+          "claim": "A busca por novas áreas para agricultura levou à exploração de terras na região amazônica, intensificando o desmatamento",
+          "supported": true
+        },
+        {
+          "claim": "A expansão da atividade humana e a destruição da floresta Amazônica causaram a perda de habitats naturais e a extinção de espécies",
+          "supported": true
+        },
+        {
+          "claim": "O desmatamento na região teve um impacto negativo no equilíbrio ecológico da floresta, alterando o ciclo de vida das plantas e animais",
+          "supported": true
+        },
+        {
+          "claim": "A perda de árvores contribuiu para a diminuição da capacidade de absorção de carbono, impactando o clima global",
+          "supported": true
+        },
+        {
+          "claim": "A Revolução Industrial foi o único fator que causou o desmatamento na Floresta Amazônica no século XIX",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.9263,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Como a Revolução Industrial influenciou o desmatamento na Floresta Amazônica no século XIX?",
+        "Quais foram os efeitos da expansão do mercado global e do desenvolvimento de tecnologias durante a Revolução Industrial sobre a floresta amazônica?",
+        "Quais foram as principais consequências ambientais do desmatamento na Floresta Amazônica provocado pela Revolução Industrial?"
+      ],
+      "similarities": [
+        0.9744,
+        0.8666,
+        0.938
+      ]
+    }
+  },
+  {
+    "id": "g0028",
+    "query": "De que forma a inteligência artificial e a automação têm substituído trabalhadores nas linhas de produção industriais nas últimas duas décadas?",
+    "category": "unanswerable",
+    "answer": "O texto fornecido não aborda a relação entre inteligência artificial, automação e substituição de trabalhadores nas linhas de produção industrial. \n",
+    "latency_ms": 13292.77,
+    "faithfulness": {
+      "score": 0.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O texto fornecido não aborda a relação entre inteligência artificial, automação e substituição de trabalhadores nas linhas de produção industrial",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7874,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "O texto fornecido menciona alguma relação entre inteligência artificial, automação e substituição de trabalhadores nas linhas de produção industrial?",
+        "Existe no texto uma análise sobre como a inteligência artificial afeta a automação em fábricas?",
+        "O texto aborda a possibilidade de substituição de trabalhadores por tecnologias automatizadas na indústria?"
+      ],
+      "similarities": [
+        0.8801,
+        0.7512,
+        0.7309
+      ]
+    }
+  },
+  {
+    "id": "g0029",
+    "query": "Como Vasco da Gama conseguiu abrir uma nova rota marítima até a Índia contornando a África, no final do século XV?",
+    "category": "unanswerable",
+    "answer": "O contexto fornecido não aborda a conquista de uma rota marítima até a Índia por Vasco da Gama.  Ele apenas menciona as Rotas da Seda como um fluxo mercantil e cultural importante. \n",
+    "latency_ms": 10390.67,
+    "faithfulness": {
+      "score": 0.6667,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "As Rotas da Seda são chamados os caminhos e fluxos mercantis mais simbólicos do universo das trocas comerciais e culturais",
+          "supported": true
+        },
+        {
+          "claim": "As Rotas da Seda ocupam um lugar especial entre os fluxos mercantis mais simbólicos",
+          "supported": true
+        },
+        {
+          "claim": "O contexto menciona a conquista de uma rota marítima até a Índia por Vasco da Gama",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7741,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "Vasco da Gama conquistou uma rota marítima até a Índia?",
+        "As rotas da Seda foram responsáveis pela conquista de uma rota marítima até a Índia?",
+        "O contexto menciona a conquista de uma rota marítima até a Índia por Vasco da Gama?"
+      ],
+      "similarities": [
+        0.8155,
+        0.6807,
+        0.8259
+      ]
+    }
+  },
+  {
+    "id": "g0030",
+    "query": "Qual foi o papel de Maomé na unificação política da Península Arábica sob um único califado após sua morte?",
+    "category": "unanswerable",
+    "answer": "O texto fornecido não aborda o papel de Maomé na unificação política da Península Arábica. O trecho apenas descreve a vida e as atividades iniciais de Maomé, sem mencionar sua influência no contexto político da região. \n",
+    "latency_ms": 11511.84,
+    "faithfulness": {
+      "score": 0.3333,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Maomé trabalhava como condutor de caravanas",
+          "supported": true
+        },
+        {
+          "claim": "O texto fornecido não aborda o papel de Maomé na unificação política da Península Arábica",
+          "supported": false
+        },
+        {
+          "claim": "O trecho apenas descreve a vida e as atividades iniciais de Maomé, sem mencionar sua influência no contexto político da região",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.7701,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "O texto menciona o papel de Maomé na unificação política da Península Arábica?",
+        "Como a vida e atividades iniciais de Maomé são apresentadas no trecho fornecido em relação ao contexto político da Península Arábica?",
+        "A resposta sobre a influência de Maomé no contexto político da região é abordada no texto fornecido?"
+      ],
+      "similarities": [
+        0.8759,
+        0.831,
+        0.6034
+      ]
+    }
+  }
+]

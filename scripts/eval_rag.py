@@ -36,10 +36,10 @@ Queries negativas e guardrail
   0 chunks para aquela query naquele K. Isso testa só o Retriever (filtros de
   score/keyword), não a cadeia completa de guardrails do RAGPipeline.
 
-Exportação automática em data/metrics/
+Exportação automática em data/metrics/retrieval/
 ────────────────────────────────────────
-  No modo 'file', a cada K avaliado o script grava em data/metrics/ (use
-  --metrics-dir para mudar, --no-metrics para desativar):
+  No modo 'file', a cada K avaliado o script grava em data/metrics/retrieval/
+  (use --metrics-dir para mudar, --no-metrics para desativar):
     details_k{K}.json    — por query: id, query, k, chunks esperados,
                             chunks retornados NA ORDEM retornada, métricas.
     guardrail_k{K}.json  — por query negativa: retrieved_count, passou ou não.
@@ -78,7 +78,6 @@ from __future__ import annotations
 import argparse
 import json
 import logging
-import re
 import sys
 import time
 from datetime import datetime, timezone
@@ -100,7 +99,10 @@ from rag.evaluation import (  # noqa: E402
 )
 from rag.retriever import Retriever  # noqa: E402
 from rag.vectorstore import VectorStore  # noqa: E402
-from scripts._eval_common import load_retriever_from_settings  # noqa: E402
+from scripts._eval_common import (  # noqa: E402
+    load_retriever_from_settings,
+    next_metrics_version,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -189,7 +191,7 @@ def _print_guardrail(result: dict) -> None:
 
 
 # ---------------------------------------------------------------------------
-# Exportação de métricas detalhadas (data/metrics/)
+# Exportação de métricas detalhadas (data/metrics/retrieval/)
 # ---------------------------------------------------------------------------
 
 _TEXT_PREVIEW_CHARS = 200
@@ -303,11 +305,10 @@ def _save_metrics_summary(
 
 
 # ---------------------------------------------------------------------------
-# Versionamento de data/metrics/ — cada execução vira uma pasta vN/ nova, para
+# Versionamento de data/metrics/retrieval/ — cada execução vira uma pasta vN/ nova, para
 # nunca sobrescrever uma rodada anterior e poder comparar mudanças de config.
+# (next_metrics_version vive em scripts/_eval_common.py)
 # ---------------------------------------------------------------------------
-
-_VERSION_DIR_RE = re.compile(r"^v(\d+)$")
 
 
 def _migrate_legacy_metrics(metrics_dir: Path) -> None:
@@ -334,19 +335,6 @@ def _migrate_legacy_metrics(metrics_dir: Path) -> None:
     for f in loose:
         f.rename(v1_dir / f.name)
     print(f"  [OK] Rodada anterior (pré-versionamento) movida para: {v1_dir}")
-
-
-def _next_metrics_version(metrics_dir: Path) -> int:
-    """Determina o próximo número de versão disponível em metrics_dir/vN/."""
-    if not metrics_dir.exists():
-        return 1
-    versions = []
-    for p in metrics_dir.iterdir():
-        if p.is_dir():
-            m = _VERSION_DIR_RE.match(p.name)
-            if m:
-                versions.append(int(m.group(1)))
-    return max(versions, default=0) + 1
 
 
 def _save_run_meta(
@@ -465,12 +453,12 @@ def mode_evaluate(args, vs: VectorStore, retriever: Retriever, settings) -> None
     if args.output_report:
         _save_report(reports, args.output_report)
 
-    # ── Exportar métricas detalhadas em data/metrics/vN/ (automático, modo file,
+    # ── Exportar métricas detalhadas em data/metrics/retrieval/vN/ (automático, modo file,
     #    nunca sobrescreve uma versão anterior) ────────────────────────────────
     if args.mode == "file" and not args.no_metrics:
         base_metrics_dir = ROOT / args.metrics_dir
         _migrate_legacy_metrics(base_metrics_dir)
-        version = _next_metrics_version(base_metrics_dir)
+        version = next_metrics_version(base_metrics_dir)
         metrics_dir = base_metrics_dir / f"v{version}"
         metrics_dir.mkdir(parents=True, exist_ok=True)
         chunk_by_id = {c["chunk_id"]: c for c in vs.metadata if c.get("chunk_id")}
@@ -584,11 +572,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--metrics-dir",
         type=str,
-        default="data/metrics",
+        default="data/metrics/retrieval",
         metavar="PATH",
         help=(
             "Diretório (relativo à raiz do projeto) onde salvar métricas "
-            "detalhadas por query no modo 'file' (padrão: data/metrics)"
+            "detalhadas por query no modo 'file' (padrão: data/metrics/retrieval)"
         ),
     )
     parser.add_argument(

@@ -246,17 +246,19 @@ def split_sentences(paragraph: str) -> list[str]:
 # ---------------------------------------------------------------------------
 
 
-def _make_chunk_id(source: str, index: int, page: Optional[int] = None) -> str:
+def _make_chunk_id(source: str, page: Optional[int], text: str) -> str:
     """SHA-1 truncado garante idempotência na re-indexação.
 
     Mesmo documento re-indexado produz os mesmos IDs se o texto não mudou.
 
-    CORREÇÃO: Inclui número da página no hash para evitar colisões de IDs
-    entre chunks de páginas diferentes com o mesmo índice.
+    Hash baseado em conteúdo (source + page + texto), não em posição:
+    um índice local a cada chamada de chunk_document() (uma por seção
+    detectada) colidia entre seções diferentes que caem na mesma página.
+    Hashear o texto alinha o chunk_id com o critério que VectorStore já
+    usa para deduplicar chunks (hash do texto).
     """
-    # Inclui página no hash para garantir unicidade
     page_str = f"::page{page}" if page is not None else ""
-    raw = f"{source}::{index}{page_str}"
+    raw = f"{source}{page_str}::{text}"
     return hashlib.sha1(raw.encode("utf-8"), usedforsecurity=False).hexdigest()[:16]
 
 
@@ -271,7 +273,6 @@ def _build_chunks_from_sentences(
     page: Optional[int],
     section: Optional[str],
     config: ChunkConfig,
-    start_index: int = 0,
 ) -> list[dict]:
     """Agrupa sentenças em chunks respeitando min/max_tokens e overlap baseado em tokens.
 
@@ -293,7 +294,6 @@ def _build_chunks_from_sentences(
         page:        Número da página (None se desconhecido).
         section:     Título de seção detectado (None se desconhecido).
         config:      Parâmetros de chunking.
-        start_index: Offset para geração de chunk_id único no documento.
 
     Returns:
         Lista de dicts com text, source, page, section, chunk_id, chapter, topic.
@@ -301,10 +301,8 @@ def _build_chunks_from_sentences(
     chunks: list[dict] = []
     buffer: list[str] = []
     buffer_tokens = 0
-    chunk_index = start_index
 
     def _emit(sents: list[str]) -> None:
-        nonlocal chunk_index
         text = " ".join(s for s in sents if s).strip()
         if not text:
             return
@@ -318,13 +316,12 @@ def _build_chunks_from_sentences(
                 "source": source,
                 "page": page,
                 "section": section,
-                "chunk_id": _make_chunk_id(source, chunk_index, page),
+                "chunk_id": _make_chunk_id(source, page, text),
                 "chapter": metadata.get("chapter"),
                 "topic": metadata.get("topic"),
                 "section_title": metadata.get("section_title"),
             }
         )
-        chunk_index += 1
 
     for sent in sentences:
         sent_tokens = count_tokens(sent)
@@ -537,7 +534,7 @@ def chunk_document(
                 "source": source,
                 "page": page,
                 "section": section,
-                "chunk_id": _make_chunk_id(source, 0, page),
+                "chunk_id": _make_chunk_id(source, page, text),
                 "chapter": metadata.get("chapter") or doc_chapter,
                 "topic": metadata.get("topic") or doc_topic,
                 "section_title": metadata.get("section_title"),
@@ -551,7 +548,6 @@ def chunk_document(
     paragraphs = [p.strip() for p in re.split(r"\n\n+", text) if p.strip()]
 
     all_chunks: list[dict] = []
-    sent_offset = 0  # contador global de chunks no documento para chunk_id único
 
     for para in paragraphs:
         para_tokens = count_tokens(para)
@@ -566,21 +562,19 @@ def chunk_document(
                     "source": source,
                     "page": page,
                     "section": section,
-                    "chunk_id": _make_chunk_id(source, sent_offset, page),
+                    "chunk_id": _make_chunk_id(source, page, para),
                     "chapter": metadata.get("chapter"),
                     "topic": metadata.get("topic"),
                     "section_title": metadata.get("section_title"),
                 }
             )
-            sent_offset += 1
         else:
             # Parágrafo grande → divide em sentenças
             sentences = split_sentences(para)
             para_chunks = _build_chunks_from_sentences(
-                sentences, source, page, section, config, start_index=sent_offset
+                sentences, source, page, section, config
             )
             all_chunks.extend(para_chunks)
-            sent_offset += len(para_chunks)
 
     # Mescla parágrafos minúsculos consecutivos (títulos soltos, listas curtas)
     all_chunks = _merge_tiny_chunks(all_chunks, config)

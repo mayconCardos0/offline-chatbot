@@ -1,0 +1,28 @@
+{
+  "version": "v3",
+  "timestamp": "2026-08-20T20:17:33+00:00",
+  "dataset": "data/eval/dataset_generation.json",
+  "n_dataset_queries": 30,
+  "limit_applied": null,
+  "shuffle_sample": false,
+  "seed": 42,
+  "judge_model": "C:\\Users\\arthu\\Documents\\offline-chatbot\\models\\judge\\Qwen3-4B-Instruct-2507-Q4_K_M.gguf",
+  "judge_config": {
+    "n_ctx": 4096,
+    "n_threads": 4,
+    "n_gpu_layers": 0,
+    "temperature_first_attempt": 0.0,
+    "temperature_retry": 0.4,
+    "max_tokens_faithfulness": 700,
+    "max_tokens_relevancy": 200
+  },
+  "candidate_models": [
+    "C:\\Users\\arthu\\Documents\\offline-chatbot\\models\\gemma-2-2b-it-q4_k_m.gguf"
+  ],
+  "candidate_config": {
+    "n_ctx": 4096,
+    "n_threads": 4,
+    "n_gpu_layers": 0
+  },
+  "n_questions": 3
+}

@@ -20,6 +20,7 @@ cross-encoder, para que os números de avaliação reflitam o sistema real.
 
 from __future__ import annotations
 
+import re
 import sys
 from pathlib import Path
 from typing import Optional
@@ -32,15 +33,36 @@ from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.retriever import Retriever  # noqa: E402
 from rag.vectorstore import VectorStore  # noqa: E402
 
-# Caminho padrão do dataset de avaliação, usado por todos os scripts de eval
-# quando --dataset/--eval-file não é passado explicitamente.
+# Caminho padrão do dataset de avaliação de RETRIEVAL, usado por eval_rag.py /
+# run_rag_experiment.py / analyze_rag_failures.py quando --dataset/--eval-file
+# não é passado explicitamente. Não tem reference_answer.
 DEFAULT_DATASET_PATH = "data/eval/dataset.json"
+
+_VERSION_DIR_RE = re.compile(r"^v(\d+)$")
 
 
 def resolve_path(path: str) -> str:
     """Resolve um caminho relativo à raiz do projeto (não ao CWD atual)."""
     p = Path(path)
     return str(p) if p.is_absolute() else str(ROOT / p)
+
+
+def next_metrics_version(metrics_dir: Path) -> int:
+    """Determina o próximo número de versão disponível em metrics_dir/vN/.
+
+    Usado pelos scripts que exportam métricas versionadas de retrieval
+    (eval_rag.py) — cada diretório de métricas tem seu próprio contador
+    independente.
+    """
+    if not metrics_dir.exists():
+        return 1
+    versions = []
+    for p in metrics_dir.iterdir():
+        if p.is_dir():
+            m = _VERSION_DIR_RE.match(p.name)
+            if m:
+                versions.append(int(m.group(1)))
+    return max(versions, default=0) + 1
 
 
 def load_retriever_from_settings(
