@@ -1,0 +1,96 @@
+/* Teclado virtual (modo kiosk) — ver keyboard.js */
+.vkbd {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 2000;
+    background: #d1d5db;
+    border-top: 1px solid #9ca3af;
+    padding: 6px 4px 8px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: none;
+}
+
+.vkbd[hidden] {
+    display: none;
+}
+
+.vkbd-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 4px;
+}
+
+.vkbd-close {
+    border: none;
+    background: transparent;
+    color: #374151;
+    font-size: 14px;
+    font-family: inherit;
+    padding: 4px 10px;
+}
+
+.vkbd-row {
+    display: flex;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+.vkbd-row:last-child {
+    margin-bottom: 0;
+}
+
+.vkbd-key {
+    flex: 1 1 0;
+    min-width: 0;
+    height: 48px;
+    padding: 0;
+    border: none;
+    border-radius: 6px;
+    background: #ffffff;
+    color: #111827;
+    font-size: 20px;
+    font-family: inherit;
+    box-shadow: 0 1px 0 #9ca3af;
+}
+
+.vkbd-key:active {
+    background: #bfdbfe;
+}
+
+.vkbd-key.fn {
+    flex-grow: 1.5;
+    background: #e5e7eb;
+    font-size: 16px;
+}
+
+.vkbd-key.fn.on {
+    background: #93c5fd;
+}
+
+.vkbd-key.space {
+    flex-grow: 5;
+    font-size: 14px;
+    color: #6b7280;
+}
+
+.vkbd-key.enter {
+    flex-grow: 2;
+    background: var(--primary, #2563eb);
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+/* Tela touch: sem ponteiro do mouse. */
+.kiosk,
+.kiosk * {
+    cursor: none !important;
+}
+
+/* Encolhe o app para o campo de texto não ficar atrás do teclado. */
+body.kbd-open .container {
+    height: calc(100vh - var(--kbd-height, 0px));
+}

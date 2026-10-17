@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Chatbot</title>
+    <!-- Gira o chat em 90/270 graus para telas montadas em retrato.
+         O iframe tem o viewport retrato (largura = altura da tela), então
+         media queries e 100vh do chat funcionam como em um celular. -->
+    <style>
+        html, body {
+            margin: 0;
+            height: 100%;
+            overflow: hidden;
+            background: #000;
+            cursor: none;
+        }
+
+        #app {
+            position: absolute;
+            top: 0;
+            left: 0;
+            border: 0;
+            width: 100vh;
+            height: 100vw;
+            transform-origin: top left;
+        }
+
+        #app.r90 {
+            transform: translateX(100vw) rotate(90deg);
+        }
+
+        #app.r270 {
+            transform: translateY(100vh) rotate(-90deg);
+        }
+    </style>
+</head>
+<body>
+    <iframe id="app" src="index.html?kiosk=1" title="Chatbot"></iframe>
+    <script>
+        const rotate = new URLSearchParams(window.location.search).get('rotate');
+        document.getElementById('app').classList.add(rotate === '270' ? 'r270' : 'r90');
+    </script>
+</body>
+</html>
