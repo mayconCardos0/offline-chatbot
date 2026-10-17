@@ -167,10 +167,38 @@ async function loadConversation(sessionId) {
     }
 }
 
+function confirmDialog(message, confirmLabel = 'Confirmar') {
+    return new Promise((resolve) => {
+        const overlay = document.createElement('div');
+        overlay.className = 'modal-overlay';
+        overlay.innerHTML = `
+            <div class="modal" role="dialog" aria-modal="true">
+                <p class="modal-text"></p>
+                <div class="modal-actions">
+                    <button type="button" class="modal-btn modal-cancel">Cancelar</button>
+                    <button type="button" class="modal-btn modal-confirm"></button>
+                </div>
+            </div>`;
+        overlay.querySelector('.modal-text').textContent = message;
+        overlay.querySelector('.modal-confirm').textContent = confirmLabel;
+
+        const close = (result) => {
+            overlay.remove();
+            resolve(result);
+        };
+        overlay.querySelector('.modal-cancel').addEventListener('click', () => close(false));
+        overlay.querySelector('.modal-confirm').addEventListener('click', () => close(true));
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) close(false);
+        });
+        document.body.appendChild(overlay);
+    });
+}
+
 async function deleteConversation(sessionId, event) {
     event.stopPropagation();
-    
-    if (!confirm('Tem certeza que deseja deletar esta conversa?')) {
+
+    if (!(await confirmDialog('Tem certeza que deseja deletar esta conversa?', 'Deletar'))) {
         return;
     }
 

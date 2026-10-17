@@ -758,3 +758,54 @@ body {
 .message.bot .message-content a:hover {
     text-decoration: underline;
 }
+
+/* ====== DIÁLOGO DE CONFIRMAÇÃO ====== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 3000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(15, 23, 42, 0.5);
+}
+
+.modal {
+    width: 100%;
+    max-width: 360px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+}
+
+.modal-text {
+    margin-bottom: 18px;
+    font-size: 16px;
+    color: var(--text-dark);
+}
+
+.modal-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.modal-btn {
+    flex: 1;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg-light);
+    color: var(--text-dark);
+    font-size: 15px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.modal-btn.modal-confirm {
+    border-color: var(--error);
+    background: var(--error);
+    color: white;
+    font-weight: 600;
+}
