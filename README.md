@@ -175,6 +175,19 @@ Send a message. The session is created automatically if it doesn't exist.
 { "session_id": "abc123", "response": "Photosynthesis is the process by which..." }
 ```
 
+### `POST /chat/stream`
+
+Same request as `POST /chat`, but the answer is streamed as it is generated (NDJSON, one JSON event per line) so the UI can show the first words in seconds instead of waiting for the whole answer. The frontend uses this endpoint.
+
+```json
+{"type": "token", "text": "A fotossíntese"}      // append to the message (repeated)
+{"type": "done", "response": "A fotossíntese…"}  // final cleaned text; replaces the streamed one
+{"type": "title", "title": "Fotossíntese"}       // first turn only, after "done"
+{"type": "error", "message": "…"}                // model failure; nothing is persisted
+```
+
+The server logs time-to-first-token and tokens/s for every streamed answer (`LLM stream: ttft=… tok/s`).
+
 ### `GET /conversations`
 
 List all conversations, sorted by most recently updated.

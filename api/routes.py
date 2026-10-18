@@ -6,14 +6,17 @@ Endpoints:
   GET    /conversations/{session_id}        — get a specific conversation
   PATCH  /conversations/{session_id}        — rename a conversation (404 if not found)
   POST   /chat                              — send a message, get a response (auto-creates session)
+  POST   /chat/stream                       — same, streamed as NDJSON events (token/done/title/error)
   DELETE /chat/{session_id}                 — delete a session (404 if not found)
   GET    /health                            — liveness check
 """
 
+import json
 import logging
-from typing import TYPE_CHECKING, List
+from typing import TYPE_CHECKING, Iterator, List
 
 from fastapi import APIRouter, HTTPException, Request
+from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 
 if TYPE_CHECKING:
@@ -133,6 +136,27 @@ async def chat(body: ChatRequest, request: Request) -> ChatResponse:
     pipeline = _get_pipeline(request)
     response_text = pipeline.chat(body.session_id, body.message)
     return ChatResponse(session_id=body.session_id, response=response_text)
+
+
+@router.post("/chat/stream")
+async def chat_stream(body: ChatRequest, request: Request) -> StreamingResponse:
+    """Run the RAG pipeline for one user turn, streaming events as NDJSON.
+
+    One JSON object per line: {"type": "token", "text"}, then {"type": "done",
+    "response"} with the final cleaned text, then (first turn only) {"type":
+    "title", "title"}. On model failure a single {"type": "error"} is sent.
+    """
+    pipeline = _get_pipeline(request)
+
+    def event_lines() -> Iterator[str]:
+        for event in pipeline.chat_stream(body.session_id, body.message):
+            yield json.dumps(event, ensure_ascii=False) + "\n"
+
+    return StreamingResponse(
+        event_lines(),
+        media_type="application/x-ndjson",
+        headers={"Cache-Control": "no-cache", "X-Accel-Buffering": "no"},
+    )
 
 
 @router.delete("/chat/{session_id}")

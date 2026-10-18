@@ -13,11 +13,14 @@ Melhorias nesta versão:
   - Contexto ampliado (3500 chars) e histórico reduzido (4 turnos).
 """
 
+import contextlib
 import logging
 import os
+import queue
 import re
+import threading
 import time
-from typing import TYPE_CHECKING
+from typing import TYPE_CHECKING, Iterator, NamedTuple, Optional
 
 from core.conversation import ConversationManager
 
@@ -179,6 +182,62 @@ _MIN_KEYWORD_OVERLAP = 0.15
 _MEDIUM_CONFIDENCE_THRESHOLD = 0.45
 _HIGH_CONFIDENCE_THRESHOLD = 0.65
 
+_THINK_OPEN = "<think>"
+_THINK_CLOSE = "</think>"
+
+
+def _partial_tag_len(text: str, tag: str) -> int:
+    """Tamanho do maior sufixo de `text` que é prefixo (incompleto) de `tag`."""
+    for k in range(min(len(tag) - 1, len(text)), 0, -1):
+        if text.endswith(tag[:k]):
+            return k
+    return 0
+
+
+class _ThinkFilter:
+    """Remove blocos <think>...</think> de um stream de tokens, de forma incremental.
+
+    Tags podem chegar partidas entre tokens (ex: "<thi" + "nk>"), então o final
+    do buffer que pode ser o começo de uma tag fica retido até haver certeza.
+    """
+
+    def __init__(self) -> None:
+        self._buf = ""
+        self._inside = False
+
+    def feed(self, token: str) -> str:
+        self._buf += token
+        out: list[str] = []
+        while True:
+            tag = _THINK_CLOSE if self._inside else _THINK_OPEN
+            idx = self._buf.find(tag)
+            if idx != -1:
+                if not self._inside:
+                    out.append(self._buf[:idx])
+                self._buf = self._buf[idx + len(tag) :]
+                self._inside = not self._inside
+                continue
+            cut = len(self._buf) - _partial_tag_len(self._buf, tag)
+            if not self._inside:
+                out.append(self._buf[:cut])
+            self._buf = self._buf[cut:]
+            return "".join(out)
+
+    def flush(self) -> str:
+        leftover = "" if self._inside else self._buf
+        self._buf = ""
+        return leftover
+
+
+class _Turn(NamedTuple):
+    """Resultado da preparação de um turno (busca + guardrails)."""
+
+    conv: dict
+    messages: Optional[list[dict]]
+    prefix: str
+    canned: Optional[str]  # resposta pronta: o LLM não deve ser chamado
+    n_chunks: int
+
 
 class RAGPipeline:
     """Combina recuperação e inferência LLM em uma interface de chat."""
@@ -196,6 +255,8 @@ class RAGPipeline:
         self._conv_manager = conv_manager
         self._max_context_chars = max_context_chars
         self._max_history_turns = max_history_turns
+        # llama.cpp não é thread-safe: serializa as chamadas ao modelo.
+        self._llm_lock = threading.Lock()
 
     # ------------------------------------------------------------------
     # API pública
@@ -203,6 +264,133 @@ class RAGPipeline:
 
     def chat(self, session_id: str, message: str) -> str:
         """Processa um turno do usuário e retorna a resposta do assistente."""
+        turn = self._prepare_turn(session_id, message)
+        if turn.canned is not None:
+            return self._persist_and_return(turn.conv, message, turn.canned)
+
+        t0 = time.perf_counter()
+        with self._llm_lock:
+            response_text = self._llm.chat(turn.messages, stream=False)
+        response_text = self._clean_model_response(response_text, message)
+        elapsed = time.perf_counter() - t0
+        logger.info(
+            "LLM respondeu em %.2fs | chunks=%d | sessão='%s'",
+            elapsed,
+            turn.n_chunks,
+            session_id,
+        )
+
+        final_response = turn.prefix + response_text if turn.prefix else response_text
+        return self._persist_and_return(turn.conv, message, final_response)
+
+    def chat_stream(self, session_id: str, message: str) -> Iterator[dict]:
+        """Como chat(), mas emite eventos conforme o modelo gera a resposta.
+
+        Eventos (dicts):
+          {"type": "token", "text": str}   — pedaço de texto a anexar na tela
+          {"type": "done", "response": str} — resposta final limpa (substitui o streamado)
+          {"type": "title", "title": str}  — só no 1º turno, depois do "done"
+          {"type": "error", "message": str} — falha do modelo; nada é persistido
+        """
+        turn = self._prepare_turn(session_id, message)
+        if turn.canned is not None:
+            yield {"type": "token", "text": turn.canned}
+            is_first_turn = self._persist_turn(turn.conv, message, turn.canned)
+            yield {"type": "done", "response": turn.canned}
+            yield from self._title_events(turn.conv, message, is_first_turn)
+            return
+
+        if turn.prefix:
+            yield {"type": "token", "text": turn.prefix}
+
+        think_filter = _ThinkFilter()
+        raw_parts: list[str] = []
+        started = False
+        n_tokens = 0
+        ttft: Optional[float] = None
+        t0 = time.perf_counter()
+        try:
+            with contextlib.closing(self._stream_llm(turn.messages)) as stream:
+                for token in stream:
+                    if ttft is None:
+                        ttft = time.perf_counter() - t0
+                    n_tokens += 1
+                    raw_parts.append(token)
+                    piece = think_filter.feed(token)
+                    if not started:
+                        piece = piece.lstrip()
+                        if not piece:
+                            continue
+                        started = True
+                    if piece:
+                        yield {"type": "token", "text": piece}
+        except Exception:
+            logger.exception("Falha ao gerar resposta em streaming")
+            yield {"type": "error", "message": "Falha ao gerar a resposta."}
+            return
+
+        tail = think_filter.flush()
+        if not started:
+            tail = tail.lstrip()
+        if tail:
+            yield {"type": "token", "text": tail}
+
+        total = time.perf_counter() - t0
+        gen_time = total - (ttft or 0.0)
+        logger.info(
+            "LLM stream: ttft=%.2fs total=%.2fs tokens=%d (%.1f tok/s) | chunks=%d | sessão='%s'",
+            ttft or 0.0,
+            total,
+            n_tokens,
+            n_tokens / gen_time if gen_time > 0 else 0.0,
+            turn.n_chunks,
+            session_id,
+        )
+
+        response_text = self._clean_model_response("".join(raw_parts), message)
+        final_response = turn.prefix + response_text if turn.prefix else response_text
+        is_first_turn = self._persist_turn(turn.conv, message, final_response)
+        yield {"type": "done", "response": final_response}
+        yield from self._title_events(turn.conv, message, is_first_turn)
+
+    def _stream_llm(self, messages: list[dict]) -> Iterator[str]:
+        """Gera tokens em uma thread própria, entregues por uma fila.
+
+        O lock do modelo fica preso só enquanto o llama.cpp gera, nunca enquanto
+        o consumidor está parado: se o cliente some no meio da resposta, fechar
+        este iterator cancela a geração e libera o lock. Mesmo que o iterator
+        nunca seja fechado, a thread termina sozinha (limitada por max_tokens).
+        """
+        tokens: "queue.Queue[object]" = queue.Queue()
+        cancelled = threading.Event()
+        end = object()
+
+        def worker() -> None:
+            try:
+                with self._llm_lock:
+                    for token in self._llm.chat(messages, stream=True):
+                        if cancelled.is_set():
+                            break
+                        tokens.put(token)
+            except Exception as exc:
+                tokens.put(exc)
+            finally:
+                tokens.put(end)
+
+        threading.Thread(target=worker, name="llm-stream", daemon=True).start()
+        try:
+            while True:
+                item = tokens.get()
+                if item is end:
+                    return
+                if isinstance(item, Exception):
+                    raise item
+                yield item  # type: ignore[misc]
+        finally:
+            cancelled.set()
+
+    def _prepare_turn(self, session_id: str, message: str) -> _Turn:
+        """Recupera o contexto e aplica os guardrails antes de chamar o LLM."""
         conv = self._conv_manager.get(session_id)
         if conv is None:
             conv = self._conv_manager.create(session_id=session_id)
@@ -237,7 +425,7 @@ class RAGPipeline:
                 session_id,
                 enriched_query[:100],
             )
-            return self._persist_and_return(conv, message, _NO_CONTEXT_RESPONSE)
+            return _Turn(conv, None, "", _NO_CONTEXT_RESPONSE, 0)
 
         # Log dos chunks recuperados
         logger.debug(
@@ -256,7 +444,7 @@ class RAGPipeline:
                 "Chunks off-topic para a query — retornando resposta padrão (sessão='%s')",
                 session_id,
             )
-            return self._persist_and_return(conv, message, _NO_CONTEXT_RESPONSE)
+            return _Turn(conv, None, "", _NO_CONTEXT_RESPONSE, len(chunks))
 
         # Prefixo de confiança baseado no score dos chunks
         confidence_prefix = self._confidence_prefix(chunks)
@@ -273,22 +461,7 @@ class RAGPipeline:
         messages.extend({"role": m["role"], "content": m["content"]} for m in history)
         messages.append({"role": "user", "content": user_message})
 
-        # Chama o LLM
-        t0 = time.perf_counter()
-        response_text = self._llm.chat(messages, stream=False)
-        response_text = self._clean_model_response(response_text, message)
-        elapsed = time.perf_counter() - t0
-        logger.info(
-            "LLM respondeu em %.2fs | chunks=%d | sessão='%s'",
-            elapsed,
-            len(chunks),
-            session_id,
-        )
-
-        final_response = (
-            confidence_prefix + response_text if confidence_prefix else response_text
-        )
-        return self._persist_and_return(conv, message, final_response)
+        return _Turn(conv, messages, confidence_prefix, None, len(chunks))
 
     # ------------------------------------------------------------------
     # Verificação de relevância temática
@@ -512,8 +685,8 @@ class RAGPipeline:
 
         return text or _NO_CONTEXT_RESPONSE
 
-    def _persist_and_return(self, conv: dict, message: str, response: str) -> str:
-        """Persiste o par user/assistant no histórico e retorna a resposta."""
+    def _persist_turn(self, conv: dict, message: str, response: str) -> bool:
+        """Persiste o par user/assistant no histórico; retorna True se era o 1º turno."""
         is_first_turn = len(conv["messages"]) == 0
 
         ts = time.time()
@@ -521,12 +694,25 @@ class RAGPipeline:
         updated.append({"role": "user", "content": message, "timestamp": ts})
         updated.append({"role": "assistant", "content": response, "timestamp": ts})
         self._conv_manager.update(conv["id"], updated)
+        return is_first_turn
 
-        if is_first_turn:
+    def _persist_and_return(self, conv: dict, message: str, response: str) -> str:
+        """Persiste o par user/assistant no histórico e retorna a resposta."""
+        if self._persist_turn(conv, message, response):
             title = self._generate_title(message)
             self._conv_manager.set_title(conv["id"], title)
 
         return response
+
+    def _title_events(
+        self, conv: dict, message: str, is_first_turn: bool
+    ) -> Iterator[dict]:
+        """Gera e persiste o título (1º turno) depois que a resposta já foi entregue."""
+        if not is_first_turn:
+            return
+        title = self._generate_title(message)
+        self._conv_manager.set_title(conv["id"], title)
+        yield {"type": "title", "title": title}
 
     def _generate_title(self, message: str) -> str:
         """Gera um título curto para a conversa a partir da primeira pergunta.
@@ -537,14 +723,15 @@ class RAGPipeline:
         """
         fallback = self._clean_title(message)
         try:
-            raw = self._llm.chat(
-                [
-                    {"role": "system", "content": _TITLE_SYSTEM_PROMPT},
-                    {"role": "user", "content": message},
-                ],
-                stream=False,
-                max_tokens=_TITLE_MAX_TOKENS,
-            )
+            with self._llm_lock:
+                raw = self._llm.chat(
+                    [
+                        {"role": "system", "content": _TITLE_SYSTEM_PROMPT},
+                        {"role": "user", "content": message},
+                    ],
+                    stream=False,
+                    max_tokens=_TITLE_MAX_TOKENS,
+                )
         except Exception as exc:
             logger.warning("Falha ao gerar título da conversa: %s", exc)
             return fallback

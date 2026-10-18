@@ -194,7 +194,10 @@ class TestTitleGeneration:
     def test_first_turn_generates_title(self):
         pipeline, retriever, llm, conv_manager = _make_pipeline()
         retriever.retrieve.return_value = [self._CHUNK]
-        llm.chat.side_effect = ["Resposta principal do LLM.", "Fotossíntese nas plantas"]
+        llm.chat.side_effect = [
+            "Resposta principal do LLM.",
+            "Fotossíntese nas plantas",
+        ]
 
         pipeline.chat("title-session", self._QUERY)
 
@@ -357,3 +360,215 @@ class TestTrimHistory:
         ]
         result = pipeline._trim_history(msgs)
         assert all(m["role"] in ("user", "assistant") for m in result)
+
+
+# ---------------------------------------------------------------------------
+# _ThinkFilter — remoção incremental de <think> em stream de tokens
+# ---------------------------------------------------------------------------
+
+
+def _filter_tokens(tokens):
+    from rag.pipeline import _ThinkFilter
+
+    f = _ThinkFilter()
+    out = "".join(f.feed(t) for t in tokens)
+    return out + f.flush()
+
+
+class TestThinkFilter:
+    def test_plain_text_passes_through(self):
+        assert _filter_tokens(["Olá", ", ", "mundo"]) == "Olá, mundo"
+
+    def test_removes_think_block(self):
+        tokens = ["<think>", "raciocínio", "</think>", "Resposta"]
+        assert _filter_tokens(tokens).strip() == "Resposta"
+
+    def test_removes_think_block_with_tags_split_across_tokens(self):
+        tokens = ["<thi", "nk>pensando", "</th", "ink>\n\nOk", "!"]
+        assert _filter_tokens(tokens).strip() == "Ok!"
+
+    def test_unclosed_think_is_discarded(self):
+        assert _filter_tokens(["Antes ", "<think>", "nunca fecha"]) == "Antes "
+
+    def test_lone_angle_bracket_is_not_lost(self):
+        assert _filter_tokens(["a ", "<", " b"]) == "a < b"
+
+    def test_partial_tag_at_end_is_flushed_as_text(self):
+        assert _filter_tokens(["fim ", "<thi"]) == "fim <thi"
+
+
+# ---------------------------------------------------------------------------
+# chat_stream — eventos de streaming
+# ---------------------------------------------------------------------------
+
+_STREAM_CHUNK = {
+    "text": "A fotossíntese ocorre nos cloroplastos das células vegetais.",
+    "source": "doc.txt",
+    "score": 0.9,
+}
+_STREAM_QUERY = "Como ocorre a fotossíntese nos cloroplastos?"
+
+
+def _stream_llm(tokens, title="Fotossíntese"):
+    llm = MagicMock()
+
+    def fake_chat(messages, stream=False, **kwargs):
+        return iter(tokens) if stream else title
+
+    llm.chat.side_effect = fake_chat
+    return llm
+
+
+def _stream_pipeline(tokens, chunk=None, title="Fotossíntese"):
+    retriever = MagicMock()
+    retriever.retrieve.return_value = [chunk or _STREAM_CHUNK]
+    return _make_pipeline(retriever=retriever, llm=_stream_llm(tokens, title))
+
+
+class TestPipelineChatStream:
+    def test_emits_tokens_then_done_with_full_response(self):
+        pipeline, *_ = _stream_pipeline(["Olá", ", ", "mundo"])
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        tokens = [e["text"] for e in events if e["type"] == "token"]
+        done = [e for e in events if e["type"] == "done"]
+        assert "".join(tokens) == "Olá, mundo"
+        assert len(done) == 1
+        assert done[0]["response"] == "Olá, mundo"
+        last_token = max(i for i, e in enumerate(events) if e["type"] == "token")
+        assert events.index(done[0]) > last_token
+
+    def test_streams_with_llm_stream_flag(self):
+        pipeline, _, llm, _ = _stream_pipeline(["x"])
+        list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        assert llm.chat.call_args_list[0].kwargs["stream"] is True
+
+    def test_persists_turn_in_history(self):
+        pipeline, _, _, conv_manager = _stream_pipeline(["Resposta", " final"])
+        list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        messages = conv_manager.get("s1")["messages"]
+        assert [m["role"] for m in messages] == ["user", "assistant"]
+        assert messages[1]["content"] == "Resposta final"
+
+    def test_think_block_hidden_from_tokens_and_response(self):
+        tokens = ["<think>", "segredo", "</think>", "\n\n", "Visível"]
+        pipeline, *_ = _stream_pipeline(tokens)
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        streamed = "".join(e["text"] for e in events if e["type"] == "token")
+        done = next(e for e in events if e["type"] == "done")
+        assert streamed == "Visível"
+        assert done["response"] == "Visível"
+
+    def test_leading_whitespace_is_not_streamed(self):
+        pipeline, *_ = _stream_pipeline(["\n", "  ", "Texto"])
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        first = next(e for e in events if e["type"] == "token")
+        assert first["text"] == "Texto"
+
+    def test_first_turn_emits_title_after_done(self):
+        pipeline, _, _, conv_manager = _stream_pipeline(["Ok"], title="Meu título")
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        types = [e["type"] for e in events]
+        assert types[-2:] == ["done", "title"]
+        assert events[-1]["title"] == "Meu título"
+        assert conv_manager.get("s1")["title"] == "Meu título"
+
+    def test_second_turn_has_no_title_event(self):
+        pipeline, *_ = _stream_pipeline(["Ok"])
+        list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        assert "title" not in [e["type"] for e in events]
+
+    def test_no_chunks_returns_canned_response_without_calling_llm(self):
+        pipeline, retriever, llm, _ = _make_pipeline()
+        retriever.retrieve.return_value = []
+        events = list(pipeline.chat_stream("s1", "Pergunta qualquer"))
+        done = next(e for e in events if e["type"] == "done")
+        assert done["response"] == _NO_CONTEXT_RESPONSE
+        # só o título (stream=False) pode chamar o LLM, nunca a resposta
+        assert all(c.kwargs.get("stream") is not True for c in llm.chat.call_args_list)
+
+    def test_medium_confidence_prefix_is_streamed_first(self):
+        chunk = dict(_STREAM_CHUNK, score=0.5)
+        pipeline, *_ = _stream_pipeline(["Resposta"], chunk=chunk)
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        first = next(e for e in events if e["type"] == "token")
+        done = next(e for e in events if e["type"] == "done")
+        assert first["text"].startswith("Com base no material disponível")
+        assert done["response"].endswith("Resposta")
+
+    def test_model_failure_emits_error_and_persists_nothing(self):
+        llm = MagicMock()
+        llm.chat.side_effect = RuntimeError("boom")
+        retriever = MagicMock()
+        retriever.retrieve.return_value = [_STREAM_CHUNK]
+        pipeline, _, _, conv_manager = _make_pipeline(retriever=retriever, llm=llm)
+        events = list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        assert events[-1]["type"] == "error"
+        assert not any(e["type"] == "done" for e in events)
+        assert conv_manager.get("s1")["messages"] == []
+
+    def test_llm_lock_released_after_stream(self):
+        pipeline, *_ = _stream_pipeline(["Ok"])
+        list(pipeline.chat_stream("s1", _STREAM_QUERY))
+        assert pipeline._llm_lock.acquire(blocking=False)
+        pipeline._llm_lock.release()
+
+
+# ---------------------------------------------------------------------------
+# chat_stream — o lock do modelo nunca pode travar a API
+# ---------------------------------------------------------------------------
+
+
+def _wait_lock_free(pipeline, timeout=2.0):
+    deadline = time.time() + timeout
+    while time.time() < deadline:
+        if pipeline._llm_lock.acquire(blocking=False):
+            pipeline._llm_lock.release()
+            return True
+        time.sleep(0.01)
+    return False
+
+
+def _endless_llm():
+    llm = MagicMock()
+
+    def endless():
+        while True:
+            time.sleep(0.01)
+            yield "x"
+
+    llm.chat.side_effect = lambda messages, stream=False, **kw: (
+        endless() if stream else "título"
+    )
+    return llm
+
+
+class TestStreamLockSafety:
+    def _pipeline(self):
+        retriever = MagicMock()
+        retriever.retrieve.return_value = [_STREAM_CHUNK]
+        return _make_pipeline(retriever=retriever, llm=_endless_llm())
+
+    def test_closing_stream_early_releases_llm_lock(self):
+        pipeline, *_ = self._pipeline()
+        events = pipeline.chat_stream("s1", _STREAM_QUERY)
+        assert next(events)["type"] == "token"
+        events.close()
+        assert _wait_lock_free(pipeline)
+
+    def test_new_stream_works_after_client_disconnect(self):
+        pipeline, _, llm, _ = self._pipeline()
+        events = pipeline.chat_stream("s1", _STREAM_QUERY)
+        next(events)
+        events.close()
+
+        llm.chat.side_effect = _stream_llm(["Ok"]).chat.side_effect
+        result = list(pipeline.chat_stream("s2", _STREAM_QUERY))
+        assert any(e["type"] == "done" for e in result)
+
+    def test_disconnected_stream_is_not_persisted(self):
+        pipeline, _, _, conv_manager = self._pipeline()
+        events = pipeline.chat_stream("s1", _STREAM_QUERY)
+        next(events)
+        events.close()
+        assert conv_manager.get("s1")["messages"] == []

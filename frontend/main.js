@@ -387,8 +387,22 @@ async function sendMessage(message) {
     // Add loading indicator
     const loadingId = addLoadingMessage();
 
+    let botMessage = null;
+    let streamedText = '';
+    let renderTimer = null;
+    let finished = false;
+
+    const showBotText = (text) => {
+        if (!botMessage) {
+            removeLoadingMessage(loadingId);
+            botMessage = addMessage('', 'bot');
+        }
+        updateBotMessage(botMessage, text);
+        scrollToBottom();
+    };
+
     try {
-        const response = await fetch(`${API_URL}/chat`, {
+        const response = await fetch(`${API_URL}/chat/stream`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -399,24 +413,42 @@ async function sendMessage(message) {
             }),
         });
 
-        if (!response.ok) {
+        if (!response.ok || !response.body) {
             throw new Error(`API error: ${response.status}`);
         }
 
-        const data = await response.json();
-        
-        // Remove loading indicator
-        removeLoadingMessage(loadingId);
-        
-        // Add bot response
-        addMessage(data.response, 'bot');
-        
-        // Recarregar conversas para atualizar sidebar
+        await readNdjsonStream(response, (event) => {
+            if (event.type === 'token') {
+                streamedText += event.text;
+                // Renderiza no maximo ~12x/s: markdown a cada token pesa na Pi.
+                if (!renderTimer) {
+                    renderTimer = setTimeout(() => {
+                        renderTimer = null;
+                        showBotText(streamedText);
+                    }, 80);
+                }
+            } else if (event.type === 'done') {
+                clearTimeout(renderTimer);
+                renderTimer = null;
+                finished = true;
+                showBotText(event.response);
+                state.isLoading = false;
+                enableInput();
+                setStatus('Pronto', true);
+            } else if (event.type === 'error') {
+                throw new Error(event.message || 'Erro ao gerar a resposta');
+            }
+        });
+
+        if (!finished) {
+            throw new Error('Resposta interrompida');
+        }
+
+        // O titulo da conversa chega depois do "done": recarrega a sidebar.
         await loadConversations();
-        
-        setStatus('Pronto', true);
     } catch (error) {
         console.error('Send message error:', error);
+        clearTimeout(renderTimer);
         removeLoadingMessage(loadingId);
         addMessage(
             'Desculpe, ocorreu um erro ao processar sua mensagem. Verifique se a API está rodando em http://localhost:8000',
@@ -429,9 +461,61 @@ async function sendMessage(message) {
     }
 }
 
+
+async function readNdjsonStream(response, onEvent) {
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder();
+    let buffer = '';
+    try {
+        while (true) {
+            const { value, done } = await reader.read();
+            if (done) break;
+            buffer += decoder.decode(value, { stream: true });
+            let newline;
+            while ((newline = buffer.indexOf('\n')) !== -1) {
+                const line = buffer.slice(0, newline).trim();
+                buffer = buffer.slice(newline + 1);
+                if (line) onEvent(JSON.parse(line));
+            }
+        }
+        const rest = (buffer + decoder.decode()).trim();
+        if (rest) onEvent(JSON.parse(rest));
+    } finally {
+        reader.cancel().catch(() => {});
+    }
+}
+
 // ============================================================================
 // UI HELPERS
 // ============================================================================
+
+function renderBotHtml(text) {
+    try {
+        if (typeof marked !== 'undefined') {
+            let htmlContent = marked.parse(text);
+            // Sanitizar HTML com DOMPurify se disponível
+            if (typeof DOMPurify !== 'undefined') {
+                htmlContent = DOMPurify.sanitize(htmlContent);
+            }
+            return htmlContent;
+        }
+        // Fallback: renderizar com quebras de linha básicas
+        const fallbackHtml = escapeHtml(text)
+            .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+            .replace(/\*(.*?)\*/g, '<em>$1</em>')
+            .replace(/\n\n/g, '</p><p>')
+            .replace(/\n/g, '<br>');
+        return '<p>' + fallbackHtml + '</p>';
+    } catch (error) {
+        console.error('Erro ao renderizar markdown:', error);
+        return '<p>' + escapeHtml(text) + '</p>';
+    }
+}
+
+function updateBotMessage(message, text) {
+    message.contentEl.innerHTML = renderBotHtml(text);
+    message.contentEl.appendChild(message.timeEl);
+}
 
 function addMessage(text, sender, timestamp = null) {
     const messageEl = document.createElement('div');
@@ -473,27 +557,7 @@ function addMessage(text, sender, timestamp = null) {
     
     // Renderizar markdown para bot, texto plano para usuário
     if (sender === 'bot') {
-        try {
-            if (typeof marked !== 'undefined') {
-                let htmlContent = marked.parse(text);
-                // Sanitizar HTML com DOMPurify se disponível
-                if (typeof DOMPurify !== 'undefined') {
-                    htmlContent = DOMPurify.sanitize(htmlContent);
-                }
-                contentEl.innerHTML = htmlContent;
-            } else {
-                // Fallback: renderizar com quebras de linha básicas
-                let fallbackHtml = escapeHtml(text)
-                    .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-                    .replace(/\*(.*?)\*/g, '<em>$1</em>')
-                    .replace(/\n\n/g, '</p><p>')
-                    .replace(/\n/g, '<br>');
-                contentEl.innerHTML = '<p>' + fallbackHtml + '</p>';
-            }
-        } catch (error) {
-            console.error('Erro ao renderizar markdown:', error);
-            contentEl.textContent = text;
-        }
+        contentEl.innerHTML = renderBotHtml(text);
     } else {
         contentEl.textContent = text;
     }
@@ -522,6 +586,7 @@ function addMessage(text, sender, timestamp = null) {
     messageEl.appendChild(contentEl);
     chatMessages.appendChild(messageEl);
     scrollToBottom();
+    return { messageEl, contentEl, timeEl };
 }
 
 function addLoadingMessage() {

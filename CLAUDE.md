@@ -65,6 +65,8 @@ POST /chat → RAGPipeline.chat()
   6. persist turn to ConversationManager (JSON file)
 ```
 
+`POST /chat/stream` runs the same steps through `RAGPipeline.chat_stream()` (steps 1-3 are shared via `_prepare_turn()`), emitting NDJSON events (`token`/`done`/`title`/`error`). The model runs in its own thread (`_stream_llm`) and the llama.cpp lock is held only while it generates — never while waiting on the HTTP client — so a client that disconnects mid-answer cannot wedge the API. Keep it that way: don't hold `_llm_lock` across a `yield`.
+
 Every setting that tunes this pipeline (score thresholds, weights, filter toggles, chunk sizes...) lives in `core/config.py::Settings`, sourced from environment variables / `.env`. `core/config.py` is the single source of truth — do not hardcode tuning constants elsewhere; when a module needs a fallback default (e.g. module-level constants in `retriever.py`), keep it in sync with the `Settings` default it mirrors.
 
 ### Structure-aware chunking (`rag/loader.py`, `rag/structure.py`)

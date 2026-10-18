@@ -221,3 +221,45 @@ class TestDeleteSessionEndpoint:
         conv_manager.delete.return_value = True
         client.delete("/chat/my-unique-id")
         conv_manager.delete.assert_called_once_with("my-unique-id")
+
+
+# ---------------------------------------------------------------------------
+# POST /chat/stream
+# ---------------------------------------------------------------------------
+
+
+class TestChatStreamEndpoint:
+    def _events(self):
+        return [
+            {"type": "token", "text": "Olá"},
+            {"type": "token", "text": " ação"},
+            {"type": "done", "response": "Olá ação"},
+            {"type": "title", "title": "Saudação"},
+        ]
+
+    def test_streams_ndjson_events_in_order(self, client_and_mocks):
+        import json
+
+        client, pipeline, _ = client_and_mocks
+        pipeline.chat_stream.return_value = iter(self._events())
+        resp = client.post("/chat/stream", json={"session_id": "s1", "message": "Oi"})
+        assert resp.status_code == 200
+        assert "application/x-ndjson" in resp.headers["content-type"]
+        lines = [ln for ln in resp.text.split("\n") if ln]
+        assert [json.loads(ln) for ln in lines] == self._events()
+
+    def test_passes_session_and_message_to_pipeline(self, client_and_mocks):
+        client, pipeline, _ = client_and_mocks
+        pipeline.chat_stream.return_value = iter([])
+        client.post("/chat/stream", json={"session_id": "abc", "message": "Pergunta"})
+        pipeline.chat_stream.assert_called_once_with("abc", "Pergunta")
+
+    def test_non_ascii_is_not_escaped(self, client_and_mocks):
+        client, pipeline, _ = client_and_mocks
+        pipeline.chat_stream.return_value = iter(self._events())
+        resp = client.post("/chat/stream", json={"session_id": "s1", "message": "Oi"})
+        assert "ação" in resp.text
+
+    def test_rejects_invalid_body(self, client):
+        resp = client.post("/chat/stream", json={"message": "sem sessão"})
+        assert resp.status_code == 422
