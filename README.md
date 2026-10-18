@@ -226,6 +226,8 @@ All settings are read from environment variables (or a `.env` file). See `.env.e
 | `EMBED_CACHE_DIR` | `models` | Local embedding model cache directory |
 | `EMBED_BATCH_SIZE` | `32` | Encoding batch size |
 | `EMBED_DISK_CACHE` | `true` | Cache embeddings to disk between restarts |
+| `EMBED_QUERY_PREFIX` | *(empty)* | Prefix added to the question before embedding (`query: ` for e5 models) |
+| `EMBED_PASSAGE_PREFIX` | *(empty)* | Prefix added to each chunk when indexing (`passage: ` for e5 models) |
 | `DOCS_DIR` | `data/documents` | Source documents directory |
 | `INDEX_DIR` | `data/index` | FAISS index output directory |
 | `TOP_K` | `4` | Chunks retrieved per query |

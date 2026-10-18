@@ -69,6 +69,28 @@ class Settings:
         default_factory=lambda: os.environ.get("EMBED_DISK_CACHE", "true").lower()
         == "true"
     )
+    # Modelos treinados para busca (ex: multilingual-e5) exigem prefixos
+    # diferentes para a pergunta e para os trechos ("query: " / "passage: ").
+    # Vazio (padrão) para modelos simétricos como o MiniLM.
+    embed_query_prefix: str = field(
+        default_factory=lambda: os.environ.get("EMBED_QUERY_PREFIX", "")
+    )
+    embed_passage_prefix: str = field(
+        default_factory=lambda: os.environ.get("EMBED_PASSAGE_PREFIX", "")
+    )
+
+    @property
+    def embed_signature(self) -> str:
+        """Identifica como os vetores do índice foram gerados (modelo + prefixos).
+
+        Gravada junto do índice para recusar um índice feito com outro modelo:
+        vetores de modelos diferentes podem ter a mesma dimensão e misturá-los
+        não dá erro, só resultados ruins.
+        """
+        return (
+            f"{self.embed_model_name}"
+            f"|query={self.embed_query_prefix}|passage={self.embed_passage_prefix}"
+        )
 
     # --- RAG ---
     docs_dir: str = field(

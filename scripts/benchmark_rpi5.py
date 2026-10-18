@@ -192,6 +192,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
         hnsw_m=settings.hnsw_m,
         hnsw_ef_construction=settings.hnsw_ef_construction,
         hnsw_ef_search=settings.hnsw_ef_search,
+        embed_signature=settings.embed_signature,
     )
     faiss_load_time = time.perf_counter() - t0
     results["load_times"]["faiss_index_s"] = round(faiss_load_time, 2)
@@ -237,6 +238,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
         gap_filter_enabled=False,
         keyword_filter_enabled=True,
         cross_encoder=cross_encoder,
+        query_prefix=settings.embed_query_prefix,
     )
 
     # ── Configuration snapshot ─────────────────────────────────────────────

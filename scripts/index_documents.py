@@ -163,6 +163,7 @@ def _run_evaluation(
         candidate_multiplier=getattr(settings, "candidate_multiplier", 4),
         min_score=getattr(settings, "min_score", 0.25),
         lexical_weight=getattr(settings, "lexical_weight", 0.30),
+        query_prefix=getattr(settings, "embed_query_prefix", ""),
     )
 
     # Carrega ou gera dataset
@@ -387,7 +388,8 @@ def main() -> None:
         use_disk_cache=settings.embed_disk_cache,
     )
 
-    texts = [c["text"] for c in all_chunks]
+    # Modelos de busca (ex: e5) exigem um prefixo nos trechos; vazio para o MiniLM.
+    texts = [settings.embed_passage_prefix + c["text"] for c in all_chunks]
     print(f"Gerando embeddings para {len(texts)} chunks…")
     embeddings = embed_model.embed(texts)
 
@@ -398,6 +400,7 @@ def main() -> None:
         hnsw_m=settings.hnsw_m,
         hnsw_ef_construction=settings.hnsw_ef_construction,
         hnsw_ef_search=settings.hnsw_ef_search,
+        embed_signature=settings.embed_signature,
     )
     store.add(all_chunks, embeddings)
     store.save()

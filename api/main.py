@@ -70,6 +70,7 @@ async def lifespan(app: FastAPI):
         hnsw_m=settings.hnsw_m,
         hnsw_ef_construction=settings.hnsw_ef_construction,
         hnsw_ef_search=settings.hnsw_ef_search,
+        embed_signature=settings.embed_signature,
     )
 
     # --- Retriever ---
@@ -106,6 +107,7 @@ async def lifespan(app: FastAPI):
         high_confidence_score=settings.high_confidence_score,
         low_confidence_score=settings.low_confidence_score,
         cross_encoder=cross_encoder,
+        query_prefix=settings.embed_query_prefix,
     )
 
     # --- Conversation Manager ---

@@ -90,6 +90,7 @@ def load_retriever_from_settings(
         hnsw_m=settings.hnsw_m,
         hnsw_ef_construction=settings.hnsw_ef_construction,
         hnsw_ef_search=settings.hnsw_ef_search,
+        embed_signature=settings.embed_signature,
     )
     if vs.size == 0:
         print("\n[ERRO] VectorStore vazio — nenhum chunk indexado.\n")
@@ -159,6 +160,7 @@ def load_retriever_from_settings(
         high_confidence_score=settings.high_confidence_score,
         low_confidence_score=settings.low_confidence_score,
         cross_encoder=cross_encoder,
+        query_prefix=settings.embed_query_prefix,
     )
     return vs, embed_model, retriever
 
