@@ -218,6 +218,16 @@ Return a conversation with its full message history. Returns `404` if not found.
 
 Delete a session. Returns `404` if it doesn't exist.
 
+### `GET /battery`
+
+Battery of the UPS HAT (DFRobot FIT0992 / Suptronics X120x), shown as an icon in the status bar. Without the hardware it answers `{ "available": false }` and the icon stays hidden.
+
+```json
+{ "available": true, "percent": 73.5, "voltage": 3.91, "ac_power": true, "charging": true }
+```
+
+Reads the fuel gauge over I2C bus 1, address `0x36` (needs I2C enabled and `smbus2`), and mains loss from GPIO 6. Set `BATTERY_ENABLED=false` to turn it off. For the HAT to cut its output after a shutdown (so the display goes dark too), the Pi 5 EEPROM needs `POWER_OFF_ON_HALT=1` and `PSU_MAX_CURRENT=5000` (`sudo rpi-eeprom-config -e`), per the manufacturer's wiki.
+
 ### `GET /health`
 
 Liveness check. Returns `{ "status": "ok" }`.
@@ -237,6 +247,7 @@ All settings are read from environment variables (or a `.env` file). See `.env.e
 | `EMBED_CACHE_DIR` | `models` | Local embedding model cache directory |
 | `EMBED_BATCH_SIZE` | `32` | Encoding batch size |
 | `EMBED_DISK_CACHE` | `true` | Cache embeddings to disk between restarts |
+| `BATTERY_ENABLED` | `true` | Read the UPS HAT battery for the status-bar icon (hidden when the UPS doesn't answer) |
 | `OFFLINE_MODE` | `true` | Never hit the network to load models; they must already be in the local cache (see "Running offline") |
 | `EMBED_QUERY_PREFIX` | *(empty)* | Prefix added to the question before embedding (`query: ` for e5 models) |
 | `EMBED_PASSAGE_PREFIX` | *(empty)* | Prefix added to each chunk when indexing (`passage: ` for e5 models) |

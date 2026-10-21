@@ -37,7 +37,7 @@
     </style>
 </head>
 <body>
-    <iframe id="app" src="index.html?kiosk=1" title="Chatbot"></iframe>
+    <iframe id="app" src="loading.html?kiosk=1" title="Chatbot"></iframe>
     <script>
         const rotate = new URLSearchParams(window.location.search).get('rotate');
         document.getElementById('app').classList.add(rotate === '270' ? 'r270' : 'r90');

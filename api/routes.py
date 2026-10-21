@@ -8,12 +8,13 @@ Endpoints:
   POST   /chat                              — send a message, get a response (auto-creates session)
   POST   /chat/stream                       — same, streamed as NDJSON events (token/done/title/error)
   DELETE /chat/{session_id}                 — delete a session (404 if not found)
+  GET    /battery                           — UPS HAT battery status (available=false without the hardware)
   GET    /health                            — liveness check
 """
 
 import json
 import logging
-from typing import TYPE_CHECKING, Iterator, List
+from typing import TYPE_CHECKING, Iterator, List, Optional
 
 from fastapi import APIRouter, HTTPException, Request
 from fastapi.responses import StreamingResponse
@@ -57,6 +58,14 @@ class ConversationDetail(BaseModel):
 
 class RenameRequest(BaseModel):
     title: str
+
+
+class BatteryResponse(BaseModel):
+    available: bool
+    percent: Optional[float] = None
+    voltage: Optional[float] = None
+    ac_power: Optional[bool] = None
+    charging: Optional[bool] = None
 
 
 # ---------------------------------------------------------------------------
@@ -170,6 +179,26 @@ async def delete_session(session_id: str, request: Request) -> dict:
     if not deleted:
         raise HTTPException(status_code=404, detail="session not found")
     return {"status": "deleted"}
+
+
+@router.get("/battery", response_model=BatteryResponse)
+def battery(request: Request) -> BatteryResponse:
+    """Battery status of the UPS HAT.
+
+    Sync on purpose: the read blocks on I2C / a subprocess, so FastAPI runs it
+    in a worker thread. Without the hardware it answers available=false.
+    """
+    monitor = getattr(request.app.state, "battery", None)
+    status = monitor.read() if monitor is not None else None
+    if status is None:
+        return BatteryResponse(available=False)
+    return BatteryResponse(
+        available=True,
+        percent=status.percent,
+        voltage=status.voltage,
+        ac_power=status.ac_power,
+        charging=status.charging,
+    )
 
 
 @router.get("/health")

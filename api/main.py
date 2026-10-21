@@ -21,6 +21,7 @@ from fastapi.middleware.cors import CORSMiddleware  # noqa: E402
 from fastapi.responses import JSONResponse  # noqa: E402
 from routes import router  # noqa: E402
 
+from core.battery import BatteryMonitor  # noqa: E402
 from core.config import get_settings, setup_logging  # noqa: E402
 from core.conversation import ConversationManager  # noqa: E402
 from core.offline import apply_offline_env  # noqa: E402
@@ -134,6 +135,7 @@ async def lifespan(app: FastAPI):
 
     app.state.pipeline = pipeline
     app.state.conv_manager = conv_manager
+    app.state.battery = BatteryMonitor() if settings.battery_enabled else None
 
     logger.info("Todos os componentes carregados. API pronta.")
     yield

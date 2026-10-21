@@ -52,6 +52,14 @@ class Settings:
         default_factory=lambda: int(os.environ.get("N_GPU_LAYERS", "0"))
     )
 
+    # --- UPS HAT ---
+    # Mostra a bateria na tela quando o UPS responde no I2C (ver core/battery.py);
+    # sem o hardware o ícone simplesmente não aparece.
+    battery_enabled: bool = field(
+        default_factory=lambda: os.environ.get("BATTERY_ENABLED", "true").lower()
+        not in ("false", "0", "no")
+    )
+
     # --- Offline ---
     # True (padrão): nunca consulta a internet para carregar modelos; eles precisam
     # estar no cache local (veja scripts/download_models.py). False só para baixar.

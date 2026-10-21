@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR" translate="no">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google" content="notranslate">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Offline Chatbot</title>
+    <!-- Tela de espera do boot: o chat só existe quando a API termina de carregar
+         os modelos (cerca de 1 minuto na Pi). Consulta /health e, quando responde,
+         troca sozinha pelo chat, mantendo a query string (?kiosk=1). -->
+    <style>
+        :root {
+            --primary: #2563eb;
+            --bg: #f8fafc;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --track: #e2e8f0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background: var(--bg);
+            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        main {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 24px;
+            text-align: center;
+        }
+
+        .mark {
+            font-size: 64px;
+            line-height: 1;
+            animation: float 2.4s ease-in-out infinite;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        #message {
+            min-height: 1.5em;
+            font-size: 16px;
+            color: var(--text-light);
+            transition: opacity 0.3s;
+        }
+
+        .bar {
+            width: min(260px, 70%);
+            height: 6px;
+            overflow: hidden;
+            border-radius: 3px;
+            background: var(--track);
+        }
+
+        .bar span {
+            display: block;
+            width: 40%;
+            height: 100%;
+            border-radius: 3px;
+            background: var(--primary);
+            animation: slide 1.4s ease-in-out infinite;
+        }
+
+        .hint {
+            font-size: 13px;
+            color: var(--text-light);
+        }
+
+        body.ready .bar span {
+            width: 100%;
+            animation: none;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(-120%); }
+            100% { transform: translateX(300%); }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .mark, .bar span { animation: none; }
+        }
+    </style>
+</head>
+<body>
+    <main role="status" aria-live="polite">
+        <div class="mark" aria-hidden="true">💬</div>
+        <h1>Chatbot de estudos</h1>
+        <p id="message">Ligando o assistente…</p>
+        <div class="bar" aria-hidden="true"><span></span></div>
+        <p class="hint">Isso leva cerca de um minuto quando o aparelho acabou de ligar.</p>
+    </main>
+
+    <script>
+        const API_URL = 'http://localhost:8000';
+        const POLL_MS = 1500;
+        const messageEl = document.getElementById('message');
+        const startedAt = Date.now();
+
+        // Mensagens por tempo decorrido (segundos): é só um acompanhamento,
+        // quem decide quando abrir o chat é a resposta do /health.
+        const PHASES = [
+            [0, 'Ligando o assistente…'],
+            [8, 'Carregando o modelo de linguagem…'],
+            [25, 'Preparando o material de estudo…'],
+            [60, 'Quase pronto…'],
+            [180, 'Está demorando mais que o normal. Continuo tentando…'],
+        ];
+
+        if (new URLSearchParams(window.location.search).has('kiosk')) {
+            document.documentElement.style.cursor = 'none';
+        }
+
+        function updateMessage() {
+            const elapsed = (Date.now() - startedAt) / 1000;
+            const phase = PHASES.filter(([from]) => elapsed >= from).pop();
+            if (messageEl.textContent !== phase[1]) messageEl.textContent = phase[1];
+        }
+
+        async function apiIsUp() {
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 2000);
+            try {
+                const response = await fetch(`${API_URL}/health`, {
+                    cache: 'no-store',
+                    signal: controller.signal,
+                });
+                return response.ok;
+            } catch (error) {
+                return false;
+            } finally {
+                clearTimeout(timeout);
+            }
+        }
+
+        async function waitForApi() {
+            while (!(await apiIsUp())) {
+                updateMessage();
+                await new Promise((resolve) => setTimeout(resolve, POLL_MS));
+            }
+            document.body.classList.add('ready');
+            messageEl.textContent = 'Pronto!';
+            setTimeout(() => {
+                window.location.replace('index.html' + window.location.search);
+            }, 700);
+        }
+
+        updateMessage();
+        setInterval(updateMessage, 1000);
+        waitForApi();
+    </script>
+</body>
+</html>

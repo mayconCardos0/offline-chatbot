@@ -24,6 +24,12 @@ const btnToggleSidebar = document.getElementById('btnToggleSidebar');
 const sessionIdEl = document.getElementById('sessionId');
 const statusText = document.getElementById('statusText');
 const messageForm = document.getElementById('messageForm');
+const batteryEl = document.getElementById('battery');
+const batteryLevelEl = document.getElementById('batteryLevel');
+const batteryTextEl = document.getElementById('batteryText');
+const batteryBoltEl = document.getElementById('batteryBolt');
+
+const BATTERY_POLL_MS = 20000;
 
 // ============================================================================
 // INITIALIZATION
@@ -44,6 +50,8 @@ function init() {
     enableInput();
     checkHealth();
     loadConversations();
+    updateBattery();
+    setInterval(updateBattery, BATTERY_POLL_MS);
     
     // Event listeners
     btnNewChat.addEventListener('click', startNewChat);
@@ -367,6 +375,35 @@ async function checkHealth() {
         setStatus('Desconectado', false);
         disableInput();
     }
+}
+
+async function updateBattery() {
+    try {
+        const response = await fetch(`${API_URL}/battery`);
+        if (!response.ok) throw new Error(`API error: ${response.status}`);
+        renderBattery(await response.json());
+    } catch (error) {
+        batteryEl.hidden = true;
+    }
+}
+
+function renderBattery(data) {
+    if (!data.available) {
+        batteryEl.hidden = true;
+        return;
+    }
+    const percent = Math.max(0, Math.min(100, Math.round(data.percent)));
+    batteryLevelEl.style.width = `${percent}%`;
+    batteryTextEl.textContent = `${percent}%`;
+    batteryBoltEl.hidden = !data.charging;
+    batteryEl.classList.toggle('low', percent <= 20);
+    batteryEl.classList.toggle('medium', percent > 20 && percent <= 40);
+    batteryEl.classList.toggle('charging', Boolean(data.charging));
+    batteryEl.setAttribute(
+        'aria-label',
+        `Bateria ${percent}%${data.charging ? ', carregando' : ''}`
+    );
+    batteryEl.hidden = false;
 }
 
 async function sendMessage(message) {

@@ -322,6 +322,65 @@ body {
     50% { opacity: 0.5; }
 }
 
+/* ====== BATERIA (UPS HAT) — só aparece quando o UPS responde ====== */
+.battery {
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--text-dark);
+}
+
+.battery[hidden],
+.battery-bolt[hidden] {
+    display: none;
+}
+
+.battery-icon {
+    position: relative;
+    width: 26px;
+    height: 13px;
+    padding: 1px;
+    border: 2px solid currentColor;
+    border-radius: 3px;
+}
+
+.battery-icon::after {
+    content: '';
+    position: absolute;
+    top: 2px;
+    right: -5px;
+    width: 3px;
+    height: 5px;
+    border-radius: 0 2px 2px 0;
+    background: currentColor;
+}
+
+.battery-level {
+    display: block;
+    width: 0;
+    height: 100%;
+    border-radius: 1px;
+    background: var(--success);
+    transition: width 0.4s, background 0.4s;
+}
+
+.battery.medium .battery-level {
+    background: #f59e0b;
+}
+
+.battery.low {
+    color: var(--error);
+}
+
+.battery.low .battery-level {
+    background: var(--error);
+}
+
+.battery.low:not(.charging) .battery-icon {
+    animation: pulse 1.5s infinite;
+}
+
 /* ====== CHAT AREA ====== */
 .chat-container {
     flex: 1;
