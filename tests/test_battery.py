@@ -182,6 +182,22 @@ class TestReadAcPower:
         self._run(monkeypatch, "6: ip    pu | lo // GPIO6 = input\n")
         assert read_ac_power_with_pinctrl() is False
 
+    def test_pin_is_configured_as_input_before_it_is_read(self, monkeypatch):
+        # Sem isso o GPIO 6 aparece como "none" e a leitura volta "--" para sempre.
+        calls = []
+
+        def fake_run(args, **kwargs):
+            calls.append(args)
+            return SimpleNamespace(stdout="6: ip    pu | hi // GPIO6 = input\n")
+
+        monkeypatch.setattr(subprocess, "run", fake_run)
+        assert read_ac_power_with_pinctrl() is True
+        assert calls == [["pinctrl", "set", "6", "ip"], ["pinctrl", "get", "6"]]
+
+    def test_unconfigured_pin_output_is_unknown(self, monkeypatch):
+        self._run(monkeypatch, " 6: no    pu | -- // GPIO6 = none\n")
+        assert read_ac_power_with_pinctrl() is None
+
     def test_unparseable_output_is_unknown(self, monkeypatch):
         self._run(monkeypatch, "erro inesperado")
         assert read_ac_power_with_pinctrl() is None

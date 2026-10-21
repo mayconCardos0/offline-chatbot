@@ -62,6 +62,14 @@ def decode_percent(word: int) -> float:
 def read_ac_power_with_pinctrl(gpio: int = AC_GPIO) -> Optional[bool]:
     """True se o adaptador está ligado (GPIO em nível alto); None se não deu para ler."""
     try:
+        # Depois do boot o pino fica sem função e o `get` mostra "--": é preciso
+        # configurá-lo como entrada antes (idempotente, não muda o pull).
+        subprocess.run(
+            ["pinctrl", "set", str(gpio), "ip"],
+            capture_output=True,
+            timeout=2,
+            check=False,
+        )
         out = subprocess.run(
             ["pinctrl", "get", str(gpio)],
             capture_output=True,
