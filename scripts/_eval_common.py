@@ -28,6 +28,7 @@ ROOT = Path(__file__).parent.parent
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
+from core.offline import apply_offline_env  # noqa: E402
 from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.retriever import Retriever  # noqa: E402
 from rag.vectorstore import VectorStore  # noqa: E402
@@ -68,12 +69,14 @@ def load_retriever_from_settings(
     Sai do processo com um erro claro se o índice não existir ou estiver
     vazio, já que todo script de avaliação precisa de um índice pronto.
     """
+    apply_offline_env(settings.offline_mode)
     print(f"  Carregando modelo de embeddings: {settings.embed_model_name}")
     embed_model = EmbeddingModel(
         model_name=settings.embed_model_name,
         cache_dir=resolve_path(settings.embed_cache_dir),
         batch_size=settings.embed_batch_size,
         use_disk_cache=settings.embed_disk_cache,
+        offline=settings.offline_mode,
     )
 
     index_dir = resolve_path(settings.index_dir)
@@ -127,6 +130,8 @@ def load_retriever_from_settings(
             hybrid_weight=ce_hybrid_weight,
             ce_top_k=ce_top_k,
             min_score=ce_min_score,
+            cache_dir=resolve_path(settings.embed_cache_dir),
+            offline=settings.offline_mode,
         )
 
     retriever = Retriever(

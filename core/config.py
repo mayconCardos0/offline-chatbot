@@ -52,6 +52,14 @@ class Settings:
         default_factory=lambda: int(os.environ.get("N_GPU_LAYERS", "0"))
     )
 
+    # --- Offline ---
+    # True (padrão): nunca consulta a internet para carregar modelos; eles precisam
+    # estar no cache local (veja scripts/download_models.py). False só para baixar.
+    offline_mode: bool = field(
+        default_factory=lambda: os.environ.get("OFFLINE_MODE", "true").lower()
+        not in ("false", "0", "no")
+    )
+
     # --- Embeddings ---
     # Padrão: modelo multilíngue leve, bom para PT-BR (~120 MB)
     embed_model_name: str = field(

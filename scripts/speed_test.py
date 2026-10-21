@@ -1112,6 +1112,7 @@ def benchmark_real_rag(
             cache_dir=settings.embed_cache_dir,
             batch_size=settings.embed_batch_size,
             use_disk_cache=settings.embed_disk_cache,
+            offline=settings.offline_mode,
         )
         vs = VectorStore(
             index_dir=settings.index_dir,
@@ -1599,6 +1600,7 @@ def main() -> None:
                     cache_dir=settings.embed_cache_dir,
                     batch_size=settings.embed_batch_size,
                     use_disk_cache=settings.embed_disk_cache,
+                    offline=settings.offline_mode,
                 )
                 embed_fn = em.embed
                 print(f"  Using project embeddings: {settings.embed_model_name}")

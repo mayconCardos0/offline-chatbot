@@ -20,6 +20,9 @@ Usage:
 """
 
 import logging
+from typing import Optional
+
+from core.offline import default_hub_cache, resolve_model_path
 
 logger = logging.getLogger(__name__)
 
@@ -64,8 +67,12 @@ class CrossEncoderReranker:
         hybrid_weight: float = 0.3,
         ce_top_k: int = 20,
         min_score: float = float("-inf"),
+        cache_dir: Optional[str] = None,
+        offline: bool = True,
     ) -> None:
         self._model_name = model_name
+        self._cache_dir = cache_dir
+        self._offline = offline
         self._hybrid_weight = hybrid_weight
         self._ce_weight = 1.0 - hybrid_weight
         self._ce_top_k = ce_top_k
@@ -81,6 +88,10 @@ class CrossEncoderReranker:
             min_score,
         )
 
+    def warm_up(self) -> None:
+        """Carrega o modelo agora, para falhar no boot (e não na 1ª pergunta)."""
+        self._load_model()
+
     def _load_model(self) -> None:
         """Lazy-load the cross-encoder model on first use."""
         if self._model is not None:
@@ -93,8 +104,14 @@ class CrossEncoderReranker:
                 "Install: pip install sentence-transformers"
             ) from exc
 
-        logger.info("Loading cross-encoder model: %s", self._model_name)
-        self._model = CrossEncoder(self._model_name)
+        # Carregar de um caminho local não consulta o Hugging Face (ver core.offline).
+        load_path = resolve_model_path(
+            self._model_name,
+            cache_dirs=[self._cache_dir, default_hub_cache()],
+            offline=self._offline,
+        )
+        logger.info("Loading cross-encoder model: %s (%s)", self._model_name, load_path)
+        self._model = CrossEncoder(load_path)
         logger.info("Cross-encoder model loaded successfully.")
 
     def rerank(

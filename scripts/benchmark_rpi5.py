@@ -170,6 +170,7 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
         ),
         batch_size=settings.embed_batch_size,
         use_disk_cache=settings.embed_disk_cache,
+        offline=settings.offline_mode,
     )
     embed_load_time = time.perf_counter() - t0
     results["load_times"] = {"embedding_model_s": round(embed_load_time, 2)}
@@ -214,6 +215,8 @@ def run_benchmark(mode: str, dataset: list[dict], quick: bool = False):
             hybrid_weight=settings.cross_encoder_hybrid_weight,
             ce_top_k=settings.cross_encoder_top_k,
             min_score=settings.cross_encoder_min_score,
+            cache_dir=settings.embed_cache_dir,
+            offline=settings.offline_mode,
         )
         # Force load (lazy load triggers on first rerank, but we want to measure)
         cross_encoder._load_model()

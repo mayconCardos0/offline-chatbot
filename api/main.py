@@ -23,6 +23,7 @@ from routes import router  # noqa: E402
 
 from core.config import get_settings, setup_logging  # noqa: E402
 from core.conversation import ConversationManager  # noqa: E402
+from core.offline import apply_offline_env  # noqa: E402
 from llm.local_model import LocalModel  # noqa: E402
 from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.pipeline import RAGPipeline  # noqa: E402
@@ -36,6 +37,7 @@ logger = logging.getLogger(__name__)
 async def lifespan(app: FastAPI):
     settings = get_settings()
     setup_logging(settings.log_level)
+    apply_offline_env(settings.offline_mode)
     logger.info("Iniciando Offline Chatbot API…")
 
     base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -61,6 +63,7 @@ async def lifespan(app: FastAPI):
         cache_dir=resolve(settings.embed_cache_dir),
         batch_size=settings.embed_batch_size,
         use_disk_cache=settings.embed_disk_cache,
+        offline=settings.offline_mode,
     )
 
     # --- Vector Store (usa dimensão real do modelo) ---
@@ -83,7 +86,12 @@ async def lifespan(app: FastAPI):
             hybrid_weight=settings.cross_encoder_hybrid_weight,
             ce_top_k=settings.cross_encoder_top_k,
             min_score=settings.cross_encoder_min_score,
+            cache_dir=resolve(settings.embed_cache_dir),
+            offline=settings.offline_mode,
         )
+        # Carrega já no boot: se faltar o modelo, falha aqui com mensagem clara
+        # em vez de na primeira pergunta do aluno.
+        cross_encoder.warm_up()
         logger.info(
             "Cross-encoder enabled: model=%s hw=%.2f ce_top_k=%d min_score=%.2f",
             settings.cross_encoder_model,

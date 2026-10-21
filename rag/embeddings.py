@@ -11,6 +11,8 @@ import json
 import logging
 from pathlib import Path
 
+from core.offline import default_hub_cache, resolve_model_path
+
 logger = logging.getLogger(__name__)
 
 # Modelo padrão: multilíngue, leve (~120 MB), bom para PT-BR
@@ -29,6 +31,7 @@ class EmbeddingModel:
         cache_dir: str,
         batch_size: int = DEFAULT_BATCH_SIZE,
         use_disk_cache: bool = True,
+        offline: bool = True,
     ) -> None:
         """
         Args:
@@ -36,10 +39,13 @@ class EmbeddingModel:
             cache_dir:      Diretório local onde o modelo está armazenado.
             batch_size:     Tamanho do lote para encoding (controla uso de RAM).
             use_disk_cache: Se True, cacheia embeddings já computados em disco.
+            offline:        Se True, nunca acessa a rede: o modelo precisa estar
+                            completo no cache local.
 
         Raises:
-            FileNotFoundError: Se cache_dir não existir.
-            ImportError:       Se sentence-transformers não estiver instalado.
+            FileNotFoundError:        Se cache_dir não existir.
+            ImportError:              Se sentence-transformers não estiver instalado.
+            ModelNotAvailableOffline: Se offline e o modelo não estiver no cache.
         """
         cache_path = Path(cache_dir)
         if not cache_path.exists():
@@ -55,19 +61,13 @@ class EmbeddingModel:
                 "sentence-transformers não está instalado. Execute: pip install sentence-transformers"
             ) from exc
 
-        # Resolve caminho local do modelo (offline-first)
-        local_model_dir = cache_path / f"models--sentence-transformers--{model_name}"
-        if local_model_dir.exists():
-            snapshots_dir = local_model_dir / "snapshots"
-            snapshots = list(snapshots_dir.glob("*")) if snapshots_dir.exists() else []
-            load_path = str(snapshots[0]) if snapshots else str(local_model_dir)
-        else:
-            logger.warning(
-                "Modelo '%s' não encontrado localmente em '%s'. Tentando download…",
-                model_name,
-                cache_dir,
-            )
-            load_path = model_name
+        # Resolve o modelo para uma pasta local: carregar de um caminho não faz
+        # nenhuma requisição ao Hugging Face (que trava sem internet).
+        load_path = resolve_model_path(
+            model_name,
+            cache_dirs=[cache_path, default_hub_cache()],
+            offline=offline,
+        )
 
         logger.info(
             "Carregando modelo de embedding '%s' de '%s'", model_name, load_path

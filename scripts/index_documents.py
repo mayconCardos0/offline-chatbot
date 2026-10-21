@@ -53,6 +53,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from core.config import get_settings, setup_logging  # noqa: E402
+from core.offline import apply_offline_env  # noqa: E402
 from rag.chunking import ChunkConfig, chunk_document, count_tokens  # noqa: E402
 from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.evaluation import (  # noqa: E402
@@ -380,12 +381,14 @@ def main() -> None:
     _print_chunk_stats(all_chunks)
 
     # --- 4. Embeddings ---
+    apply_offline_env(settings.offline_mode)
     print(f"\nCarregando modelo: {settings.embed_model_name}")
     embed_model = EmbeddingModel(
         model_name=settings.embed_model_name,
         cache_dir=settings.embed_cache_dir,
         batch_size=settings.embed_batch_size,
         use_disk_cache=settings.embed_disk_cache,
+        offline=settings.offline_mode,
     )
 
     # Modelos de busca (ex: e5) exigem um prefixo nos trechos; vazio para o MiniLM.
