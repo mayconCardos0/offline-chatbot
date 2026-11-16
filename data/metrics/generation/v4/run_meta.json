@@ -1,0 +1,30 @@
+{
+  "version": "v4",
+  "timestamp": "2026-08-24T08:22:54+00:00",
+  "dataset": "data/eval/dataset_generation.json",
+  "n_dataset_queries": 26,
+  "limit_applied": null,
+  "shuffle_sample": false,
+  "seed": 42,
+  "judge_model": "C:\\fontes\\offline-chatbot\\models\\judge\\Qwen3-4B-Q4_K_M.gguf",
+  "judge_config": {
+    "n_ctx": 4096,
+    "n_threads": 4,
+    "n_gpu_layers": 0,
+    "temperature_first_attempt": 0.0,
+    "temperature_retry": 0.4,
+    "max_tokens_faithfulness": 700,
+    "max_tokens_relevancy": 200
+  },
+  "candidate_models": [
+    "C:\\fontes\\offline-chatbot\\models\\gemma-2-2b-it-q4_k_m.gguf",
+    "C:\\fontes\\offline-chatbot\\models\\Qwen3-1.7B-Q4_K_M.gguf",
+    "C:\\fontes\\offline-chatbot\\models\\Qwen3-4B-Q4_K_M.gguf"
+  ],
+  "candidate_config": {
+    "n_ctx": 4096,
+    "n_threads": 4,
+    "n_gpu_layers": 0
+  },
+  "n_questions": 3
+}

@@ -1,0 +1,53 @@
+{
+  "version": "v4",
+  "timestamp": "2026-08-24T08:22:54+00:00",
+  "dataset": "data/eval/dataset_generation.json",
+  "n_queries": 26,
+  "models": {
+    "gemma-2-2b-it-q4_k_m": {
+      "model_path": "C:\\fontes\\offline-chatbot\\models\\gemma-2-2b-it-q4_k_m.gguf",
+      "n_queries": 26,
+      "faithfulness": {
+        "mean": 0.7438,
+        "n_scored": 26,
+        "n_parse_failures": 0
+      },
+      "answer_relevancy": {
+        "mean": 0.3223,
+        "n_scored": 26,
+        "n_parse_failures": 0
+      },
+      "mean_latency_ms": 27399.31
+    },
+    "Qwen3-1.7B-Q4_K_M": {
+      "model_path": "C:\\fontes\\offline-chatbot\\models\\Qwen3-1.7B-Q4_K_M.gguf",
+      "n_queries": 26,
+      "faithfulness": {
+        "mean": 0.606,
+        "n_scored": 25,
+        "n_parse_failures": 1
+      },
+      "answer_relevancy": {
+        "mean": 0.4306,
+        "n_scored": 26,
+        "n_parse_failures": 0
+      },
+      "mean_latency_ms": 68568.52
+    },
+    "Qwen3-4B-Q4_K_M": {
+      "model_path": "C:\\fontes\\offline-chatbot\\models\\Qwen3-4B-Q4_K_M.gguf",
+      "n_queries": 26,
+      "faithfulness": {
+        "mean": 0.6756,
+        "n_scored": 24,
+        "n_parse_failures": 2
+      },
+      "answer_relevancy": {
+        "mean": 0.3976,
+        "n_scored": 26,
+        "n_parse_failures": 0
+      },
+      "mean_latency_ms": 147453.99
+    }
+  }
+}

@@ -1,0 +1,1130 @@
+[
+  {
+    "id": "g0001",
+    "query": "Qual a principal razão para o Mar Mediterrâneo ser considerado um espaço privilegiado para o transporte e a troca de mercadorias?",
+    "category": "",
+    "answer": "O Mar Mediterrâneo é considerado um espaço privilegiado para o transporte e a troca de mercadorias devido à sua localização geográfica que o conecta aos três continentes: africano, asiático e europeu. \n\n**Contexto:**\n\n* **Localização estratégica:** O Mar Mediterrâneo banha três continentes, tornando-o um ponto estratégico para o comércio entre diferentes regiões do mundo.\n* **Transporte de mercadorias:**  A localização geográfica do Mar Mediterrâneo facilita a navegação e o transporte de mercadorias entre os continentes.\n\n**Consequências:**\n\n* **Integração cultural e econômica:** A proximidade entre os povos que habitavam os continentes banhados pelo Mar Mediterrâneo, como os fenícios, gregos e romanos, levou à troca de mercadorias, tecnologias, ideias e culturas. \n* **Influência mútua:** As diferentes civilizações que se desenvolveram na região do Mar Mediterrâneo influenciaram um ao outro, o que contribuiu para a evolução das sociedades e da economia da região.\n\n**Em resumo:** O Mar Mediterrâneo é considerado um espaço privilegiado para o transporte e a troca de mercadorias devido à sua localização geográfica estratégica, que conecta três continentes e facilita a navegação e o comércio entre eles. \n",
+    "latency_ms": 48077.46,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "First atomic statement: \"O Mar Mediterrâneo é considerado um espaço privilegiado para o transporte e a troca de mercadorias devido à sua localização geográfica que o conecta aos três continentes: africano, asiático e europeu.\" The CONTEXT mentions that the Mediterranean connects three continents (African, Asian, European) and is important for transport and trade. So this statement is directly supported by the context. Therefore,",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3625,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer thoroughly.",
+        "The answer talks about the Mediterranean Sea being a privileged space for transport and trade due to its geographical location connecting three continents: African, Asian, and European. It also mentions the strategic location, facilitation of navigation, integration of cultures and economies, and mutual influence among civilizations like Phoenicians, Greeks, and Romans."
+      ],
+      "similarities": [
+        0.0674,
+        0.1663,
+        0.8536
+      ]
+    }
+  },
+  {
+    "id": "g0002",
+    "query": "Qual o motivo principal da expansão territorial da República Romana?",
+    "category": "",
+    "answer": "## Motivos da Expansão Territorial Romana\n\nA expansão territorial da República Romana se deu principalmente por dois motivos: **controle das rotas comerciais do Mar Mediterrâneo e a busca por poder militar**. \n\n**Controle das Rotas Comerciais:** A localização geográfica privilegiada da Itália, junto ao Mediterrâneo, permitiu aos romanos controlar as rotas comerciais que atravessavam o mar. Essa posição estratégica era fundamental para o comércio de produtos como vinho, azeite, seda e outros recursos. A expansão territorial romana visava garantir a manutenção e o aumento dessa influência comercial.\n\n**Busca por Poder Militar:** Os conflitos entre os romanos e povos como os cartagineses eram parte da estratégia militar da República Romana. A conquista de novos territórios e a captura de povos derrotados permitiam aos romanos expandir seu poder militar, fortalecer sua posição na região e garantir recursos para o desenvolvimento do império. \n\n**Consequências:** A expansão territorial romana teve consequências significativas:\n\n* **Dominio sobre o Mediterrâneo:** Roma se tornou um potência dominante no Mediterrâneo, com a conquista de territórios como Cartago.\n* **Destruição da Cartago:** A vitória romana na Guerra Púnica resultou na destruição completa da cidade de Cartago e na escravização de sua população. \n* **\"Mare Nostrum\":**  A expansão territorial romana levou à atribuição do nome \"Mare Nostrum\" (Nosso Mar) ao Mediterrâneo, demonstrando o domínio romano sobre a região.\n\nÉ importante destacar que a expansão territorial romana não se limitava apenas à conquista de territórios. A República Romana também buscava a integração cultural e política dos povos conquistados, buscando assim controlar seus recursos e expandir seu poder. \n",
+    "latency_ms": 41135.29,
+    "faithfulness": {
+      "score": 0.75,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "The last part of the answer mentions cultural integration, which isn't mentioned in the context. The context doesn't talk about integrating cultures, so that would be",
+          "supported": false
+        },
+        {
+          "claim": "1. \"A expansão territorial da República Romana se deu principalmente por controle das rotas comerciais do Mar Mediterrâneo\" –  (context says they sought control of Mediterranean routes)",
+          "supported": true
+        },
+        {
+          "claim": "2. \"a expansão territorial da República Romana se deu principalmente por busca por poder militar\" –  (context mentions wars for military power and capturing people)",
+          "supported": true
+        },
+        {
+          "claim": "3. \"A expansão territorial romana visava garantir a manutenção e o aumento dessa influência comercial.\" –  (context says control of routes was for commercial influence)",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3056,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer thoroughly.",
+        "The answer explains the reasons for the Roman expansion: controlling Mediterranean trade routes and seeking military power. It also mentions consequences like dominance over the Mediterranean, destruction of Carthage, and the term \"Mare Nostrum.\" Additionally, it notes that Rome integrated cultures politically to control resources and expand power."
+      ],
+      "similarities": [
+        -0.0535,
+        0.1317,
+        0.8387
+      ]
+    }
+  },
+  {
+    "id": "g0003",
+    "query": "Como e quando começou a se formar o cristianismo?",
+    "category": "",
+    "answer": "## A Expansão do Cristianismo\n\nO cristianismo se formou no século I d.C., na Palestina, com a ascensão de Jesus, um homem humilde que afirmava ser filho de Deus. Ele foi acusado de sedição e heresia e crucificado pelos romanos. \n\n**Contexto:**\n\n* **Aspectos iniciais:** A religião cristã surgiu em comunidades judaicas na Palestina, inicialmente perseguidas por não aderir aos deuses romanos ou reconhecer a autoridade do imperador.\n* **Expansão:** Apesar da perseguição inicial, o cristianismo se espalhou rapidamente pelo Império Romano, construindo uma rede de comunidades e distribuição de alimentos. \n\n**Causa e Consequência:**\n\n* **A causa da expansão do cristianismo foi a sua mensagem de esperança e amor universal, que atraiu pessoas de diversas classes sociais e origens.** A fé cristã se baseava em valores como o perdão, a compaixão e a justiça social.\n* **As consequências foram a construção de uma vasta rede de comunidades e distribuição de alimentos no Império Romano, adaptando-se às culturas locais.**  A adaptação da religião à cultura local foi crucial para sua expansão e consolidação.\n\n**Características:**\n\n* **Adaptabilidade:** A religião se adaptou às diferentes culturas do Império Romano, utilizando a língua grega para registrar os primeiros registros do Evangelho. \n* **Comunidades:** A organização em comunidades ajudou a espalhar o cristianismo por todo o império.\n\n\nÉ importante destacar que o contexto fornecido não detalha a data exata de início da expansão do cristianismo, mas indica que ocorreu no século I d.C., com a ascensão de Jesus e sua comunidade. \n",
+    "latency_ms": 47313.88,
+    "faithfulness": {
+      "score": 0.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "* **Aspectos iniciais:** A religião cristã surgiu em comunidades judaicas na Palestina, inicialmente perseguidas por  aderir aos deuses romanos ou reconhecer a autoridade do imperador",
+          "supported": false
+        },
+        {
+          "claim": "This is one statement: \"A religião cristã surgiu em comunidades judaicas na Palestina, inicialmente perseguidas por  aderir aos deuses romanos ou reconhecer a autoridade do imperador.\" The context says that followers of Jesus were persecuted for not worshiping Roman gods or recognizing the emperor's authority. So this is supported",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2078,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the provided response. Let me read through the answer again to understand the key points.",
+        "The answer talks about the origins of Christianity in the first century AD in Palestine, Jesus's crucifixion, the initial persecution, and how Christianity spread despite that. It also mentions the message of hope and love attracting people from different backgrounds, the adaptation to local cultures, and the establishment of communities."
+      ],
+      "similarities": [
+        0.0302,
+        -0.0772,
+        0.6703
+      ]
+    }
+  },
+  {
+    "id": "g0004",
+    "query": "Qual foi a principal razão para os romanos denominarem povos não-greco-romanos como \"bárbaros\"?",
+    "category": "",
+    "answer": "O contexto fornecido afirma que os romanos chamavam de \"bárbaros\" todos aqueles que não viviam em cidades que faziam parte do império. Eles usavam essa palavra para inferiorizar as culturas diferentes da greco-romana. \n",
+    "latency_ms": 11523.65,
+    "faithfulness": {
+      "score": 0.5,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Os romanos chamavam de \"bárbaros\" todos aqueles que não viviam em cidades que faziam parte do império",
+          "supported": false
+        },
+        {
+          "claim": "Eles usavam essa palavra para inferiorizar as culturas diferentes da greco-romana",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.292,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me start by understanding the answer provided.",
+        "The answer explains that the Romans referred to people not living in cities part of their empire as \"barbaros\" to look down on different cultures outside the Greek-Roman world. So, the key points here are: 1) the term \"barbaros\" was used by Romans, 2) it applied to those not in imperial cities, and 3) the purpose was to devalue other cultures."
+      ],
+      "similarities": [
+        0.0172,
+        0.0577,
+        0.8012
+      ]
+    }
+  },
+  {
+    "id": "g0005",
+    "query": "Quais povos e impérios controlaram as Rotas da Seda ao longo dos séculos?",
+    "category": "",
+    "answer": "As Rotas da Seda foram controladas por diversos povos e impérios ao longo dos séculos, incluindo:\n\n**1. Chineses:** As rotas foram inicialmente criadas pelos esforços da China imperial para controlar as confederações nômades vizinhas a seu território. \n**2. Kushanas (da Ásia Central):**  Foram um grupo de povos que controlavam as rotas durante o período do Império Kushano.\n**3. Persas:** Os persas também tiveram influência na região das Rotas da Seda, controlando partes da rota. \n**4. Sogdianos (da região correspondente a do atual território do Uzbequistão):**  Foram um grupo de povos que controlavam as rotas durante o período do Império Sogdiano.\n**5. Califados Islâmicos:** Os califados islâmicos também tiveram influência na região das Rotas da Seda, controlando partes da rota. \n**6. Conféderações Nômades da Ásia Central:**  Foram grupos nômades que controlavam as rotas durante o período do Império Mongol.\n**7. Império Mongol:** O Império Mongol também teve influência na região das Rotas da Seda, controlando partes da rota.\n\nEssa complexa dinâmica de poder e controle das rotas foi influenciada por diversos fatores, como a necessidade de controlar os mercados e as rotas comerciais, a busca por expansão territorial e a disputa por recursos. \n",
+    "latency_ms": 42154.54,
+    "faithfulness": {
+      "score": 0.6,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Starting with the first point: \"As Rotas da Seda foram controladas por diversos povos e impérios ao longo dos séculos, incluindo...\" This is a general statement about the routes being controlled by various peoples and empires over centuries. The context mentions that these routes were controlled by different peoples and empires, so this seems to be directly supported. So, this would be \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Next, point 1: \"Chineses: As rotas foram inicialmente criadas pelos esforços da China imperial para controlar as confederações nómades vizinhas a seu território.\" The context states that the routes originated from the Chinese efforts to control neighboring nomadic confederations. So this is directly supported by the context, hence \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Point 2: \"Kushanas (da Ásia Central): Foram um grupo de povos que controlavam as rotas durante o período do Império Kushano.\" The context mentions the Kushans (from Central Asia) as one of the peoples controlling the routes. However, the context doesn't specify that they controlled the routes during the Kushan Empire period. It just says \"os kushanas (da Ásia Central), os persas...\" So this might be an assumption beyond the context. Wait, the original context says \"controladas por diversos povos e impérios... como os chineses, os kushanas...\", so it's stated that they were controlled by them. But does the context say that the Kushans controlled during their empire? The context doesn't mention the Kushan Empire specifically, just that they were one of the groups. So this might be an assumption. Therefore, \"\" because the context doesn't specify the period",
+          "supported": false
+        },
+        {
+          "claim": "Point 3: \"Persas: Os persas também tiveram influência na região das Rotas da Seda, controlando partes da rota.\" The context mentions the Persians as one of the groups controlling the routes. So this is directly supported by the context. Hence \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Point 4: \"Sogdianos (da região correspondente a do atual território do Uzbequistão): Foram um grupo de povos que controlavam as rotas durante o período do Império Sogdiano.\" The context mentions the Sogdians (from the region corresponding to modern Uzbekistan) as one of the groups. However, the context doesn't mention the Sogdian Empire specifically. It just says \"os sogdianos (da região correspondente a do atual território do Uzbequistão)\". So this is an assumption about their empire period. Therefore, \"\"",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2812,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me look at the answer again.",
+        "The answer lists several empires and peoples that controlled the Silk Roads over time: Chinese, Kushanas, Persians, Sogdianos, Islamic Caliphates, nomadic confederations, and the Mongols. It also mentions factors like controlling markets, territorial expansion, and resource competition."
+      ],
+      "similarities": [
+        0.0665,
+        0.0271,
+        0.7502
+      ]
+    }
+  },
+  {
+    "id": "g0006",
+    "query": "Qual a principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna?",
+    "category": "",
+    "answer": "A principal mudança na estrutura do poder real na Inglaterra após a promulgação da Carta Magna foi a limitação do poder real por um conselho formado por clérigos e nobres, que posteriormente se chamava Parlamento. \n\n**Contexto:** A Carta Magna, em 1215, estabeleceu esse novo modelo de governo, onde o poder real passou a ser limitado por um conselho formado por clérigos e nobres. Esse conselho foi posteriormente chamado de Parlamento. Essa mudança significou uma diminuição do poder absoluto do rei e a criação de mecanismos para a participação da nobreza e da população na tomada de decisões políticas. \n",
+    "latency_ms": 18801.75,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Therefore, the first three statements are supported (), and the fourth is not (NAO). The answer",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3165,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me read through the answer again to make sure I understand it.",
+        "The answer talks about the main change in the structure of real power in England after the Magna Carta was enacted. It mentions the limitation of royal power by a council composed of clergymen and nobles, which later became the Parliament. The context explains that this model established in 1215 reduced the king's absolute power and allowed participation of nobility and the population in political decisions."
+      ],
+      "similarities": [
+        -0.01,
+        0.0608,
+        0.8989
+      ]
+    }
+  },
+  {
+    "id": "g0007",
+    "query": "Qual foi a principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII?",
+    "category": "",
+    "answer": "## A principal consequência do rompimento com a Igreja Católica por parte de Henrique VIII foi a concentração de terras na Coroa. \n\nO contexto informa que, após o rompimento, Henrique VIII se autoproclamou líder religioso e fundou a Igreja Anglicana. Essa mudança gerou uma maior concentração de terras na Coroa, pois a Igreja Católica, antes detentora dessas terras, perdeu sua influência e poder político. Esse evento foi crucial para a consolidação da monarquia inglesa e para o desenvolvimento do sistema político e social que se formaria posteriormente. \n",
+    "latency_ms": 19391.75,
+    "faithfulness": {
+      "score": 0.5,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "So the first three statements are supported (), and the fourth is not (NAO). Wait, but let me check again. The third part: \"Essa mudança gerou uma maior concentração de terras na Coroa...\" – the context says that the breakup led to confiscation of lands, which allowed the Crown to have more concentration. So the statement here is directly supported by the context. Therefore, the first three are SIM, and the fourth is NAO",
+          "supported": true
+        },
+        {
+          "claim": "Wait, but in the original answer, the third part is \"Essa mudança gerou uma maior concentração de terras na Coroa...\" which is a direct consequence of the breakup and confiscation as per the context. So that's supported. The fourth part about the consolidation of monarchy and political systems isn't mentioned in the context, so that's",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2843,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me read through the answer again to understand the key points.",
+        "The answer talks about the main consequence of Henry VIII breaking away from the Catholic Church being the concentration of lands in the Crown. It also mentions that Henry became the head of the Church and founded the Anglican Church, leading to the loss of influence and political power by the Catholic Church. This event was crucial for consolidating the English monarchy and developing the future political and social system."
+      ],
+      "similarities": [
+        -0.0062,
+        -0.0102,
+        0.8694
+      ]
+    }
+  },
+  {
+    "id": "g0008",
+    "query": "Qual a principal consequência da ascensão de Elizabeth I ao trono?",
+    "category": "",
+    "answer": "## A ascensão de Elizabeth I ao trono teve como principal consequência a consolidação do anglicanismo como religião oficial da Inglaterra. \n\n**Contexto:** O contexto informa que Elizabeth I consolidou o anglicanismo como religião oficial da Inglaterra após a morte de seu pai, Henrique VIII.  A partir daí, ela se envolveu em conflitos religiosos, perseguindo e ordenando a execução de católicos, o que a fez ser excomungada pelo papa Pio V em 1570.\n\n**Causa:** A ascensão de Elizabeth I ao trono foi causada pela morte de seu pai, Henrique VIII.  Elizabeth I herdou o trono após a morte de seu pai e se tornou a rainha da Inglaterra. \n\n**Consequência:** A consolidação do anglicanismo como religião oficial da Inglaterra teve consequências significativas para a sociedade inglesa. Elizabeth I, por exemplo, foi excomungada pelo papa Pio V em 1570 por suas ações religiosas.  \n",
+    "latency_ms": 24246.85,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Starting with the first part of the response: \"A ascensão de Elizabeth I ao trono teve como principal consequência a consolidação do anglicanismo como religião oficial da Inglaterra.\" This seems to be a single statement. The context mentions that Elizabeth I consolidated Anglicanism as the official religion after her father's death. So this is directly supported by the context. That should be",
+          "supported": true
+        },
+        {
+          "claim": "Next, the \"Contexto\" part: \"O contexto informa que Elizabeth I consolidou o anglicanismo como religião oficial da Inglaterra após a morte de seu pai, Henrique VIII.\" This is another atomic statement. The context does state that she consolidated Anglicanism after her father's death, so this is also",
+          "supported": true
+        },
+        {
+          "claim": "Then the \"Causa\" part: \"A ascensão de Elizabeth I ao trono foi causada pela morte de seu pai, Henrique VIII.\" The context says she inherited the throne after her father's death. So this is directly stated, hence",
+          "supported": true
+        },
+        {
+          "claim": "The next statement: \"Elizabeth I herdou o trono após a morte de seu pai e se tornou a rainha da Inglaterra.\" The context mentions that she succeeded her father, so this is also supported",
+          "supported": true
+        },
+        {
+          "claim": "Finally, the \"Consequência\" part: \"A consolidação do anglicanismo como religião oficial da Inglaterra teve consequências significativas para a sociedade inglesa. Elizabeth I, por exemplo, foi excomungada pelo papa Pio V em 1570 por suas ações religiosas.\" The context does mention that she was excommunicated by Pope Pius V in 1570 due to her religious actions. So this is also supported",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3091,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions based on the provided answer. Let me read through the answer again to make sure I understand it properly.",
+        "The answer talks about Elizabeth I's ascension to the throne and its consequences. The main points are that her rise led to the consolidation of Anglicanism as the official religion in England, the conflict with Catholics, and her excommunication by Pope Pius V in 1570. Also, the cause was Henry VIII's death."
+      ],
+      "similarities": [
+        0.0404,
+        0.054,
+        0.8328
+      ]
+    }
+  },
+  {
+    "id": "g0009",
+    "query": "O que motivou o início da guerra civil que dividiu o reino inglês em 1642?",
+    "category": "",
+    "answer": "A guerra civil inglesa de 1642 foi desencadeada por uma série de fatores que culminaram na insatisfação generalizada com a monarquia e o rei.  \n\n**Causas:**\n\n* **Restauração de impostos:** O rei, em busca de recursos para financiar suas atividades, tentou reintroduzir impostos e criar novas taxas, o que gerou grande descontentamento entre a população.\n* **Insatisfação com a monarquia:** A população, principalmente os puritanos, se sentia desrespeitada pela monarquia e por sua falta de representatividade. \n\n**Contexto:**\n\nA guerra civil dividiu o reino inglês em dois grupos: os apoiadores da monarquia (cavaleiros) e os defensores do Parlamento (cabeças redondas). A divisão se deu em torno dos valores políticos, sociais e religiosos que cada grupo defendia. Os cavaleiros eram membros da alta nobreza e do clero anglicano, enquanto as cabeças redondas eram composta por puritanos, burgueses, integrantes da gentry e da população em geral.\n\n**Consequências:**\n\nA guerra civil resultou na divisão do reino inglês em duas facções: os apoiadores da monarquia e os defensores do Parlamento. A guerra foi travada entre esses dois grupos, com consequências significativas para a história do Reino Unido. \n",
+    "latency_ms": 32468.68,
+    "faithfulness": {
+      "score": 0.75,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Next: \"**Restauração de impostos:** O rei, em busca de recursos para financiar suas atividades, tentou reintroduzir impostos e criar novas taxas, o que gerou grande descontentamento entre a população.\" This is one atomic statement. The context does mention the king trying to restore taxes and create new rates, which caused dissatisfaction. So this should be \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Then: \"**Insatisfação com a monarquia:** A população, principalmente os puritanos, se sentia desrespeitada pela monarquia e por sua falta de representatividade.\" The context says that the population was generally dissatisfied, and the puritans were part of the group opposing the monarchy. However, the context doesn't explicitly mention \"desrespeitada\" or \"falta de representatividade\". It does say there was general dissatisfaction, but the specific reasons like being disrespectful or lack of representation aren't in the context. So this might be a",
+          "supported": false
+        },
+        {
+          "claim": "Next part: \"**Contexto:** A guerra civil dividiu o reino inglês em dois grupos: os apoiadores da monarquia (cavaleiros) e os defensores do Parlamento (cabeças redondas). A divisão se deu em torno dos valores políticos, sociais e religiosos que cada grupo defendia. Os cavaleiros eram membros da alta nobreza e do clero anglicano, enquanto as cabeças redondas eram composta por puritanos, burgueses, integrantes da gentry e da população em geral.\" This is a single statement about the division into two groups. The context does mention that the kingdom was divided between supporters of monarchy (cavaliers) and defenders of Parliament (roundheads), so this should be \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Then: \"**Consequências:** A guerra civil resultou na divisão do reino inglês em duas facções: os apoiadores da monarquia e os defensores do Parlamento. A guerra foi travada entre esses dois grupos, com consequências significativas para a história do Reino Unido.\" The context mentions that the kingdom was divided into two groups, so this is \"\"",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3053,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese based on the provided answer about the English Civil War. Let me start by understanding the answer thoroughly.",
+        "The answer outlines the causes, context, and consequences of the war. The main points are the restoration of taxes leading to discontent, the dissatisfaction with the monarchy, the division into Cavaliers and Roundheads, and the significant historical impact."
+      ],
+      "similarities": [
+        -0.0194,
+        0.3553,
+        0.5801
+      ]
+    }
+  },
+  {
+    "id": "g0010",
+    "query": "Em que ano teve início a Revolução Francesa e quem a impulsionou?",
+    "category": "",
+    "answer": "A Revolução Francesa teve início em **1789**. A Revolução foi impulsionada por membros do terceiro estado francês, que se opunham aos privilégios da nobreza e do clero. Essa contestação se deu em resposta à desigualdade social e política existente no Antigo Regime, inspirados pelos ideais iluministas e liberais. \n",
+    "latency_ms": 10226.39,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "1. \"A Revolução Francesa teve início em 1789.\" →  (context says 1789)",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2843,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me look at the answer again.",
+        "The answer mentions that the French Revolution started in 1789, was driven by members of the Third Estate opposing the privileges of the nobility and clergy, and was a reaction to social and political inequality under the Ancien Régime, inspired by Enlightenment and liberal ideals."
+      ],
+      "similarities": [
+        -0.0266,
+        0.1125,
+        0.7672
+      ]
+    }
+  },
+  {
+    "id": "g0011",
+    "query": "Qual a principal característica do governo de Napoleão Bonaparte logo após ele assumir o poder em 1799?",
+    "category": "",
+    "answer": "## A principal característica do governo de Napoleão Bonaparte logo após ele assumir o poder em 1799 foi a concentração de poder na figura de Napoleão.\n\n**Contexto:** O texto informa que, após assumi-lo o poder em 1799, Napoleão \"tomava quase todas as decisões, controlava o exército e a política externa\".  Essa concentração de poder era um fator central no Consulado, um regime político que Napoleão liderou junto a outros dois cônsules.\n\n**Causa:** A ascensão de Napoleão ao poder em 1799 foi acompanhada por uma série de eventos que culminaram na consolidação do seu domínio. O contexto histórico da França, marcado pela instabilidade política e social após a Revolução Francesa, favoreceu o surgimento de um líder forte como Napoleão.\n\n**Consequências:** A concentração de poder em Napoleão resultou em uma série de consequências positivas para a França, como a estabilidade política e econômica do país, a criação do Banco da França e a expansão da industrialização. \n",
+    "latency_ms": 26076.86,
+    "faithfulness": {
+      "score": 0.75,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "1. \"A principal característica...\" - The context says he took almost all decisions, controlled army and foreign policy. This supports that concentration of power was a main characteristic. So",
+          "supported": true
+        },
+        {
+          "claim": "2. \"O texto informa que... controlava o exército e a política externa.\" - Directly from the context",
+          "supported": true
+        },
+        {
+          "claim": "3. \"A ascensão de Napoleão...\" - The context doesn't discuss causes or events leading to his rise, only the effects after he took power. So",
+          "supported": false
+        },
+        {
+          "claim": "4. \"A concentração de poder... expansão da industrialização.\" - The context mentions stability, Bank of France, and industrialization. So",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3517,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer thoroughly.",
+        "The answer talks about Napoleon's government after 1799, focusing on the concentration of power in his figure. It mentions the Consulate, his control over military and foreign policy, historical context of post-Revolution France, and consequences like stability, the Bank of France, and industrialization."
+      ],
+      "similarities": [
+        -0.0113,
+        0.2079,
+        0.8583
+      ]
+    }
+  },
+  {
+    "id": "g0012",
+    "query": "Qual a diferença entre os socialistas científicos, Karl Marx e Friedrich Engels, e os socialistas utópicos?",
+    "category": "",
+    "answer": "## Diferenças entre socialistas científicos, Karl Marx e Friedrich Engels, e os socialistas utópicos:\n\nOs socialistas científicos, como Karl Marx e Friedrich Engels, propuseram a superação do capitalismo, em contraste com os socialistas utópicos que buscavam uma reforma do sistema. \n\n**A principal diferença reside na proposta de ação:**\n\n* **Socialistas Científicos:** Propõem a superação do capitalismo, analisando seus mecanismos para gerar lucro e exploração dos trabalhadores.\n* **Socialistas Utópicos:** Buscam uma reforma do sistema capitalista, buscando uma mudança gradual dentro da estrutura existente. \n\n**Contexto:**\n\nA análise meticulosa de Marx e Engels sobre o funcionamento do capitalismo, que visava a superação do sistema, é o que os diferencia dos socialistas utópicos.  \n\n**Consequências:**\n\nEssa diferença na proposta de ação levou a diferentes abordagens para a superação do capitalismo:\n\n* **Socialistas Científicos:** Propõem uma mudança radical, buscando a superação do sistema capitalista.\n* **Socialistas Utópicos:** Buscam uma reforma gradual dentro da estrutura existente. \n\n\n**Em resumo:**\n\nOs socialistas científicos, em contraste com os socialistas utópicos, propõem a superação do capitalismo, baseando-se na análise crítica do funcionamento do sistema e buscando uma mudança radical para a construção de uma nova sociedade. \n",
+    "latency_ms": 32387.03,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Os socialistas científicos propuseram a superação do capitalismo",
+          "supported": true
+        },
+        {
+          "claim": "Os socialistas utópicos buscavam uma reforma do sistema",
+          "supported": true
+        },
+        {
+          "claim": "Os socialistas científicos analisaram os mecanismos que geravam o lucro dos empresários",
+          "supported": true
+        },
+        {
+          "claim": "Os socialistas utópicos buscam uma mudança gradual dentro da estrutura existente",
+          "supported": true
+        },
+        {
+          "claim": "A análise meticulosa de Marx e Engels sobre o capitalismo é o que os diferencia dos socialistas utópicos",
+          "supported": true
+        },
+        {
+          "claim": "Os socialistas científicos propõem uma mudança radical para a construção de uma nova sociedade",
+          "supported": true
+        },
+        {
+          "claim": "Os socialistas científicos baseiam-se na análise crítica do funcionamento do sistema",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3251,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer provided.",
+        "The answer is about the differences between scientific socialists (Marx and Engels) and utopian socialists. The key points are: scientific socialists aim to overthrow capitalism through analysis, while utopians seek gradual reforms within the existing system. The answer also mentions their approaches and consequences."
+      ],
+      "similarities": [
+        0.1029,
+        0.0626,
+        0.8097
+      ]
+    }
+  },
+  {
+    "id": "g0013",
+    "query": "Qual a característica que define as pessoas escravizadas no mundo greco-romano?",
+    "category": "",
+    "answer": "As pessoas capturadas em guerras no mundo greco-romano eram consideradas mercadorias e, juridicamente, reconhecidas como propriedades de outras.  Essa característica era fundamental para a estruturação da sociedade e da economia na época. \n\nA escravidão era uma forma de exploração que se baseava na submissão e no trabalho forçado. As pessoas endividadas também eram submetidas à escravidão caso não tivessem meios de pagar suas dívidas, tornando-se propriedade de outra pessoa.  Essa prática era comum em diversas sociedades e economias da época. \n",
+    "latency_ms": 15473.93,
+    "faithfulness": {
+      "score": 0.5,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "4. \"As pessoas endividadas também eram submetidas à escravidão caso  tivessem meios de pagar suas dívidas, tornando-se propriedade de outra pessoa.\" The context does say that indebted people could be enslaved if they couldn't pay debts. So this is directly supported",
+          "supported": false
+        },
+        {
+          "claim": "1. First statement: Directly from the context",
+          "supported": true
+        },
+        {
+          "claim": "2. Second statement: The context doesn't explicitly say \"fundamental\" for society and economy structure. The original says \"muitas sociedades e economias foram estruturadas segundo esse modo de exploração,\" which is about many societies, not necessarily that this characteristic was fundamental. So maybe",
+          "supported": false
+        },
+        {
+          "claim": "3. Third statement: The context mentions exploitation of labor as part of globalization, but doesn't explicitly state it's based on submission and forced labor. However, the original says \"exploração do trabalho de escravizados\" which implies forced labor. But the exact phrase in the response is about submission and forced labor. The context doesn't use those exact terms, so maybe",
+          "supported": false
+        },
+        {
+          "claim": "4. Fourth statement: Directly from the context",
+          "supported": true
+        },
+        {
+          "claim": "5. Fifth statement: The context says \"muitas sociedades e economias foram estruturadas segundo esse modo de exploração,\" which supports that this practice was common. So",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3476,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me read through the answer again to make sure I understand it.",
+        "The answer talks about people captured in Greek-Roman wars being considered goods and properties. It mentions that this was fundamental for society and economy. Also, slavery as a form of exploitation based on submission and forced labor. People in debt could become slaves if they couldn't pay, making them someone else's property. This practice was common in various societies and economies."
+      ],
+      "similarities": [
+        0.1008,
+        0.15,
+        0.792
+      ]
+    }
+  },
+  {
+    "id": "g0014",
+    "query": "Em que regiões da América, além da América portuguesa, foram organizadas comunidades semelhantes aos quilombos?",
+    "category": "",
+    "answer": "Além da América portuguesa, comunidades semelhantes aos quilombos foram organizadas em:\n\n* **Colônias espanholas:**  Foram formadas em regiões onde a população indígena e os africanos escravizados se encontravam.\n* **Jamaica:**  As comunidades cimarronajes, como as conhecidas na Jamaica, eram formadas por pessoas que fugiam da escravidão. \n* **Outras partes do Caribe e da América dominadas pelos britânicos, franceses e holandeses:**  Essas regiões também viram a organização de comunidades semelhantes aos quilombos, com foco em resistência à escravidão.\n\nÉ importante ressaltar que essas comunidades se organizavam em torno de práticas ancestrais para resistir ao sistema escravista, buscando autonomia e liberdade. \n",
+    "latency_ms": 19295.58,
+    "faithfulness": {
+      "score": 0.6,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "1. \"Colônias espanholas:** Foram formadas em regiões onde a população indígena e os africanos escravizados se encontravam.\" The context mentions that in Spanish colonies, communities like cimarronajes were formed. But does it say they were formed where indigenous and African slaves coexisted? The context says \"em outras partes da América dominadas pelos britânicos, franceses e holandeses\", but for the Spanish colonies, it's not explicitly stated that indigenous and African slaves were in the same regions. Wait, the original context says \"nas colônias espanholas, na Jamaica e em outras partes do Caribe e da América dominadas pelos britânicos, franceses e holandeses, foram organizadas comunidades semelhantes...\" So the Spanish colonies are mentioned as part of where these communities were formed. But does it say that in those regions, indigenous and African slaves coexisted? The context doesn't mention that specifically. It just says that in those areas, similar communities (cimarronajes, etc.) existed. So maybe this statement is not directly supported because the context doesn't specify the presence of both indigenous and African slaves in the same regions. Therefore, this might be a",
+          "supported": false
+        },
+        {
+          "claim": "2. \"Jamaica:** As comunidades cimarronajes, como as conhecidas na Jamaica, eram formadas por pessoas que fugiam da escravidão.\" The context does mention that in Jamaica (and other places), communities like cimarronajes were formed by people fleeing slavery. So this is directly supported",
+          "supported": true
+        },
+        {
+          "claim": "3. \"Outras partes do Caribe e da América dominadas pelos britânicos, franceses e holandeses:** Essas regiões também viram a organização de comunidades semelhantes aos quilombos, com foco em resistência à escravidão.\" The context says that in those regions (British, French, Dutch), similar communities were organized. So this is directly supported",
+          "supported": true
+        },
+        {
+          "claim": "4. \"É importante ressaltar que essas comunidades se organizavam em torno de práticas ancestrais para resistir ao sistema escravista, buscando autonomia e liberdade.\" The context mentions that these communities based their work on ancestral traditions to resist the slave system. So this is directly supported",
+          "supported": true
+        },
+        {
+          "claim": "First bullet point: \"Colônias espanholas:** Foram formadas em regiões onde a população indígena e os africanos escravizados se encontravam.\" The context doesn't mention that indigenous and African slaves coexisted in the Spanish colonies. It just says that similar communities were formed there, but not specifically about the presence of both groups. So this might be",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.367,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer provided.",
+        "The answer talks about communities similar to quilombos beyond Portuguese America, specifically mentioning Spanish colonies, Jamaica, and other British, French, and Dutch-controlled areas in the Caribbean and Americas. It also mentions that these communities were organized around ancestral practices to resist slavery and seek autonomy."
+      ],
+      "similarities": [
+        0.0761,
+        0.2594,
+        0.7653
+      ]
+    }
+  },
+  {
+    "id": "g0015",
+    "query": "Que princípio orientou a Constituição de 1988 em relação ao racismo e às desigualdades raciais ligadas à escravidão?",
+    "category": "",
+    "answer": "A Constituição de 1988 foi orientada pelo princípio de **combater o racismo e as desigualdades raciais ligadas à escravidão**, especialmente em relação às comunidades quilombolas.  \n\nEsse princípio se baseou na luta histórica por direitos dessas comunidades, que foram remanescentes da escravidão. Durante a constituinte, grupos como comunidades quilombolas, o movimento negro e alguns acadêmicos se mobilizaram para garantir que os direitos dessas comunidades fossem reconhecidos e incluídos na Constituição. \n\nA Constituição de 1988 foi promulgada no centenário da abolição da escravidão, o que motivou ainda mais debates sobre as memórias negras, a história da resistência à escravidão, as lutas contra a discriminação racial e os legados do escravismo na sociedade.  \n\nA Constituição de 1988 garantiu às comunidades remanescentes de quilombos o direito às terras que herdaram de seus antepassados. Essa garantia se baseia no reconhecimento da história e da luta das comunidades quilombolas contra a opressão e a discriminação racial. \n",
+    "latency_ms": 27065.47,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A Constituição de 1988 foi orientada pelo princípio de combater o racismo e as desigualdades raciais ligadas à escravidão",
+          "supported": true
+        },
+        {
+          "claim": "O princípio da Constituição de 1988 se baseou na luta histórica por direitos das comunidades quilombolas",
+          "supported": true
+        },
+        {
+          "claim": "Durante a constituinte, comunidades quilombolas, o movimento negro e acadêmicos se mobilizaram para garantir direitos das comunidades",
+          "supported": true
+        },
+        {
+          "claim": "A Constituição de 1988 foi promulgada no centenário da abolição da escravidão",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2884,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me read through the answer again to understand what it's about.",
+        "The answer talks about the 1988 Constitution and its focus on combating racism and racial inequalities linked to slavery, especially for quilombola communities. It mentions the historical struggle for rights, the involvement of groups like quilombolas, the black movement, and academics during the constitution-making process. Also, the Constitution was promulgated on the 100th anniversary of the abolition of slavery, which influenced discussions about black history and resistance. The Constitution also guaranteed land rights to quilombola communities."
+      ],
+      "similarities": [
+        0.0303,
+        0.0047,
+        0.8302
+      ]
+    }
+  },
+  {
+    "id": "g0016",
+    "query": "Em que contexto Itamar Franco assumiu a Presidência do Brasil em 1992?",
+    "category": "",
+    "answer": "Itamar Franco assumiu a Presidência do Brasil em 1992 em um contexto de crise. A inflação no Brasil havia atingido uma média de 24% ao mês, impactando principalmente as classes mais pobres. O poder de compra dos salários estava diminuindo rapidamente, enquanto os preços aumentavam de forma acelerada.  Essa situação colocava a população em uma posição vulnerável, pois era cada vez mais difícil adquirir os mesmos produtos com o mesmo valor monetário. \n \nA privatização da CSN em 1993 marcou um ponto crucial no contexto econômico do Brasil. Esse evento, que ocorreu em meio à crise inflacionária, representava o fim de um modelo de desenvolvimento que havia sido dominante nas décadas anteriores.  \n",
+    "latency_ms": 19339.94,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Itamar Franco assumiu a Presidência do Brasil em 1992 em um contexto de crise.",
+          "supported": true
+        },
+        {
+          "claim": "A inflação no Brasil havia atingido uma média de 24% ao mês...",
+          "supported": true
+        },
+        {
+          "claim": "Impactando principalmente as classes mais pobres.",
+          "supported": true
+        },
+        {
+          "claim": "O poder de compra dos salários estava diminuindo rapidamente...",
+          "supported": true
+        },
+        {
+          "claim": "Enquanto os preços aumentavam de forma acelerada.",
+          "supported": true
+        },
+        {
+          "claim": "A privatização da CSN em 1993 marcou um ponto crucial...",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3252,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me read through the answer again to understand the key points.",
+        "The answer talks about Itamar Franco becoming president in 1992 during a crisis, high inflation (24% monthly), impact on poor classes, decreasing purchasing power of wages, and rapid price increases making it hard for people to buy same products. Then it mentions the privatization of CSN in 1993 as a crucial economic event marking the end of a previous development model."
+      ],
+      "similarities": [
+        0.0522,
+        0.2576,
+        0.6656
+      ]
+    }
+  },
+  {
+    "id": "g0017",
+    "query": "Qual foi a orientação econômica do primeiro governo de Fernando Henrique Cardoso (FHC)?",
+    "category": "",
+    "answer": "## Orientação Econômica do Primeiro Governo de FHC\n\nO primeiro governo de Fernando Henrique Cardoso (FHC) implementou um modelo econômico conhecido como **neoliberalismo**, que se baseava na ideia de Estado mínimo e na subordinação das políticas públicas à lógica da economia de mercado. O objetivo principal era atrair investimentos estrangeiros, principalmente dos Estados Unidos, da Europa e da Ásia.\n\n**Contexto:**\n\nA privatização de empresas estratégicas como a Vale do Rio Doce e a Telebras foi um marco nesse contexto. A política de privatizações, iniciada no governo Collor-Itamar Franco, teve continuidade durante o governo FHC. \n\n**Causa e Consequências:**\n\n* **Causa:** O objetivo principal era atrair investimentos estrangeiros para o país.\n* **Consequência:** A abertura do mercado brasileiro aos investimentos estrangeiros foi aprofundada, como parte de um esforço para integrar o Brasil à economia globalizada.\n\n\n**Características:**\n\n* **Estado mínimo:** O governo FHC priorizou a redução do papel do Estado na economia, permitindo que empresas privadas se tornassem protagonistas no mercado.\n* **Economia de mercado:** A lógica da economia de mercado era fundamental para o desenvolvimento econômico, com foco em competitividade e rentabilidade. \n* **Privatizações:** A privatização de empresas estratégicas como a Vale do Rio Doce e a Telebras foi um dos pilares dessa política econômica.\n\n\n**Analogia:**\n\nA orientação econômica do FHC pode ser comparada à abertura de uma loja para o público, onde o objetivo é atrair compradores externos (investimentos estrangeiros) e aumentar as vendas. \n",
+    "latency_ms": 38288.31,
+    "faithfulness": {
+      "score": 0.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Now, I need to list each atomic statement and check if it's supported. The analogy part isn't factual based on the context, so that should be marked as . All other statements are directly from the context",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3184,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese based on the provided answer about FHC's economic orientation. Let me start by understanding the answer thoroughly.",
+        "The answer talks about the neoliberal model implemented by FHC, the privatization of companies like Vale do Rio Doce and Telebras, the cause and consequences (attracting foreign investments), characteristics like minimal state and market economy, and an analogy comparing it to opening a store to attract external buyers."
+      ],
+      "similarities": [
+        0.0816,
+        0.365,
+        0.5087
+      ]
+    }
+  },
+  {
+    "id": "g0018",
+    "query": "Qual o ano que o Banco Mundial considerou como \"ano da desigualdade\"?",
+    "category": "",
+    "answer": "O Banco Mundial considerou o ano de **2023** como \"ano da desigualdade\". \n",
+    "latency_ms": 5699.35,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O Banco Mundial considerou o ano de 2023 como \"ano da desigualdade\"",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3865,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. The response is about the World Bank considering 2023 as the \"Year of Inequality.\" Let me think.",
+        "First, I need to make sure each question is a complete sentence ending with a question mark. They should be distinct and not repeat the same idea. The answer provided mentions that 2023 was designated as the Year of Inequality by the World Bank. So possible questions could be about what year this was, which organization designated it, and what the significance of the designation is."
+      ],
+      "similarities": [
+        0.0515,
+        0.4897,
+        0.6183
+      ]
+    }
+  },
+  {
+    "id": "g0019",
+    "query": "A escravidão já existia em sociedades africanas antes da chegada dos portugueses no século XV? E, nas Treze Colônias inglesas, a escravidão de africanos era a única forma de trabalho compulsório empregada?",
+    "category": "",
+    "answer": "## A escravidão na África\n\nSim, a escravidão já existia em sociedades africanas antes da chegada dos portugueses no século XV. O contexto menciona que \"A escravidão já era praticada em algumas sociedades africanas e em outras partes do mundo\".  É importante destacar que o trabalho escravizado não era tão comum em toda a África Central, mas sim predominava nas regiões norte da África, do Saara e da região Sahel. \n\n## Trabalho escravo na África\n\nAs sociedades africanas praticavam a escravidão para diversos fins, como:\n\n* **Serviços domésticos e produção de gêneros agrícolas:**  O trabalho escravizado era utilizado principalmente para tarefas domésticas e produção de alimentos para consumo interno. Essa prática era mais comum em regiões menos densamente povoadas da África Central. \n* **Exércitos, produção de alimentos, atividades administrativas e extração mineral:**  Nas regiões do norte da África, do Saara e do Sahel, a escravidão era mais presente e se estendia para áreas como exércitos, produção de alimentos, atividades administrativas e extração mineral. \n\n\n## Escravidão e trabalho compulsório na América inglesa\n\nO contexto menciona que as Treze Colônias inglesas utilizavam a escravidão de africanos e seus descendentes como forma de trabalho compulsório.  A servidão por contrato era utilizada principalmente entre os séculos XVII e XVIII, e envolvia indivíduos que deixavam a Inglaterra por motivos religiosos, políticos ou econômicos. \n\n**Importante:** O contexto não menciona se a escravidão era a única forma de trabalho compulsório nas Treze Colônias inglesas.  \n",
+    "latency_ms": 41711.41,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A escravidão já existia em sociedades africanas antes da chegada dos portugueses no século XV",
+          "supported": true
+        },
+        {
+          "claim": "O contexto menciona que \"A escravidão já era praticada em algumas sociedades africanas e em outras partes do mundo\"",
+          "supported": true
+        },
+        {
+          "claim": "O trabalho escravizado não era tão comum em toda a África Central, mas sim predominava nas regiões norte da África, do Saara e da região Sahel",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3375,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer thoroughly.",
+        "The answer has three main sections: slavery in Africa before Europeans, slave labor in Africa for different purposes, and slavery in the English colonies. The key points are that slavery existed in some African societies before the arrival of Portuguese, it was more common in certain regions like the north, and in the Americas, it was used as forced labor."
+      ],
+      "similarities": [
+        -0.0555,
+        0.2107,
+        0.8572
+      ]
+    }
+  },
+  {
+    "id": "g0020",
+    "query": "Quando o termo \"globalização\" começou a ser usado e que fenômeno ele descrevia? E como esse processo se manifestou no início do século XXI?",
+    "category": "",
+    "answer": "O termo \"globalização\" começou a ser utilizado nas décadas de 1980 e 1990 para descrever um fenômeno de internacionalização econômica que envolveu aspectos como o desenvolvimento de novas tecnologias de transporte e de comunicação e de informação que transformaram as décadas seguintes. Esse processo se manifestou no início do século XXI com uma intensificação das trocas comerciais e culturais entre nações, além da ampliação das desigualdades econômicas, tecnológicas e sociais. \n\nA globalização se caracteriza por um aumento da interconexão entre diferentes países, impulsionado por avanços tecnológicos como a internet e os meios de transporte modernos. Esse processo resultou em uma maior circulação de produtos, serviços, ideias e informações entre diferentes regiões do mundo. No entanto, essa intensificação das trocas também levou à concentração de riqueza e aumento da pobreza, além de impactos negativos como a propagação de doenças como a COVID-19. \n",
+    "latency_ms": 25360.92,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "1. \"O termo 'globalização' começou a ser utilizado nas décadas de 1980 e 1990...\" – This is directly stated in the CONTEXT. So",
+          "supported": true
+        },
+        {
+          "claim": "2. \"Esse processo se manifestou no início do século XXI com uma intensificação das trocas comerciais e culturais entre nações, além da ampliação das desigualdades econômicas, tecnológicas e sociais.\" – The CONTEXT says that the 21st century was characterized by intensified trade and cultural exchanges and increased inequalities. So",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2901,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer provided.",
+        "The answer talks about the origin of the term \"globalização\" in the 1980s and 1990s, its description as an economic internationalization phenomenon involving technology developments like transportation and communication. It also mentions the intensification of trade and cultural exchanges in the early 21st century, increased inequalities, and negative impacts like the spread of diseases such as COVID-19."
+      ],
+      "similarities": [
+        0.0536,
+        0.0241,
+        0.7925
+      ]
+    }
+  },
+  {
+    "id": "g0021",
+    "query": "O trabalho compulsório é um problema apenas do passado? E, segundo dados da Organização Internacional do Trabalho, quantas pessoas foram submetidas a trabalho análogo à escravidão em 2021?",
+    "category": "",
+    "answer": "O trabalho compulsório, apesar de ter sofrido transformações com a Revolução Industrial, continua sendo um problema presente no mundo contemporâneo. Segundo dados da Organização Internacional do Trabalho, em 2021, **28 milhões de pessoas** foram submetidas a condições de trabalho análogo à escravidão.\n\nÉ importante destacar que esse tipo de trabalho é considerado uma grave violação de direitos humanos, pois retira a liberdade individual e compromete sua dignidade.  O problema se manifesta em diversas partes do mundo, incluindo o Brasil, onde foi identificado em todos os estados brasileiros nas últimas décadas. \n\nA Organização Internacional do Trabalho (OIT) destaca que esse tipo de trabalho é especialmente preocupante nas áreas rurais, com dados mostrando que **1.016 crianças e adolescentes** foram encontrados e resgatados em condições de trabalho degradantes entre 1995 e 2023.  Além disso, o nível de escolaridade e a raça também são fatores importantes nesse cenário.\n",
+    "latency_ms": 27555.56,
+    "faithfulness": {
+      "score": 0.8333,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "O trabalho compulsório continua sendo um problema presente no mundo contemporâneo",
+          "supported": true
+        },
+        {
+          "claim": "A Revolução Industrial causou transformações no trabalho compulsório",
+          "supported": false
+        },
+        {
+          "claim": "Segundo dados da OIT, em 2021, 28 milhões de pessoas foram submetidas a condições de trabalho análogo à escravidão",
+          "supported": true
+        },
+        {
+          "claim": "Esse tipo de trabalho é considerado uma grave violação de direitos humanos",
+          "supported": true
+        },
+        {
+          "claim": "O problema se manifesta no Brasil, identificado em todos os estados brasileiros nas últimas décadas",
+          "supported": true
+        },
+        {
+          "claim": "As áreas rurais são especialmente preocupantes para esse tipo de trabalho",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2651,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions based on the provided answer. Let me read through the answer carefully first.",
+        "The answer talks about forced labor, mentions the International Labour Organization (ILO) data from 2021 where 28 million people were in conditions similar to slavery. It also notes that this is a human rights violation, affecting places like Brazil, and specifically highlights rural areas with 1,016 children found between 1995-2023. Also mentions factors like education level and race."
+      ],
+      "similarities": [
+        -0.0172,
+        0.0638,
+        0.7485
+      ]
+    }
+  },
+  {
+    "id": "g0022",
+    "query": "Em que ano teve início a Revolução Francesa, e dez anos depois, em 1799, que regime político Napoleão Bonaparte passou a liderar na França?",
+    "category": "",
+    "answer": "A Revolução Francesa teve início em **1789**. Em 1799, Napoleão Bonaparte assumiu o poder executivo da França junto a outros dois cônsules: o abade Emmanuel Joseph Sieyès e Roger Ducos. Esse regime político, denominado Consulado, foi liderado por Napoleão Bonaparte. \n",
+    "latency_ms": 13303.21,
+    "faithfulness": {
+      "score": 0.6667,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "The first sentence: \"A Revolução Francesa teve início em 1789.\" That's straightforward. The context mentions that the French Revolution began in 1789, so this is directly supported. So that's a \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Next part: \"Em 1799, Napoleão Bonaparte assumiu o poder executivo da França junto a outros dois cônsules: o abade Emmanuel Joseph Sieyès e Roger Ducos.\" The context says in 1799, Napoleon assumed the executive power along with two consuls. So this is also directly stated, so \"\"",
+          "supported": true
+        },
+        {
+          "claim": "Third sentence: \"Esse regime político, denominado Consulado, foi liderado por Napoleão Bonaparte.\" The context mentions that the Consulado was a regime where Napoleon took most decisions. However, the original statement says it was \"liderado\" (led by) him. The context states he controlled the army and foreign policy, but does it say he led the regime? The context says \"O período do Consulado foi de estabilidade...\" which is about the period, not explicitly that he led it. Wait, the original answer says \"regime político denominado Consulado, foi liderado por Napoleão\". But in the context, it's stated that Napoleon was one of the consuls but took most decisions. The term \"liderado\" might be stretching it. However, the context does say he controlled the army and foreign policy, which implies leadership. But is that directly supported? The original answer says \"foi liderado por Napoleão\", but the context doesn't explicitly state that. It just says he took most decisions. So maybe this is not directly supported. Wait, the context says \"O período do Consulado foi de estabilidade política e econômica para os franceses.\" But does that mean that Napoleon led it? The original answer's third statement is about the regime being led by him. However, in the context, the Consulado was a regime where he was one of three consuls but took most power. So \"liderado por Napoleão\" might be an overstatement. Therefore, this might not be directly supported. Wait, but the original answer says \"Esse regime político, denominado Consulado, foi liderado por Napoleão Bonaparte.\" The context says that in 1799, he assumed the executive power along with two others, and the Consulado was a period where he controlled much. But does it say that he led the regime? The term \"liderado\" might not be directly stated. So maybe this is",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3215,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me look at the answer again.",
+        "The answer mentions that the French Revolution started in 1789 and that Napoleon Bonaparte took power in 1799 along with two other consuls. The regime was called the Consulado, led by Napoleon."
+      ],
+      "similarities": [
+        -0.0703,
+        0.1802,
+        0.8547
+      ]
+    }
+  },
+  {
+    "id": "g0023",
+    "query": "Como e quando começou a se formar o cristianismo? E que termo os romanos usavam para se referir aos povos que não viviam em cidades do império, com que intenção?",
+    "category": "",
+    "answer": "O cristianismo se formou no século I d.C., na Palestina, com a propagação dos ensinamentos de Jesus.  Os seguidores de Jesus eram inicialmente perseguidos pelos romanos, pois não reconheciam a autoridade do imperador e não cultuavam os deuses romanos. \n\nOs romanos chamavam de \"bárbaros\" todos aqueles que não viviam em cidades que faziam parte do império. Eles usavam essa palavra para inferiorizar as culturas diferentes da greco-romana. Essa prática era utilizada para justificar a dominação e o controle sobre os povos considerados \"bárbaros\". \n",
+    "latency_ms": 19307.25,
+    "faithfulness": {
+      "score": 0.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "2. \"Os seguidores de Jesus eram inicialmente perseguidos pelos romanos, pois  reconheciam a autoridade do imperador e não cultuavam os deuses romanos.\" – This statement is about followers of Jesus being persecuted by Romans because they didn't recognize the emperor's authority and didn't worship Roman gods. The context mentions that followers were persecuted because they didn't worship Roman gods or recognize the emperor's divinity. So this is supported",
+          "supported": false
+        },
+        {
+          "claim": "3. \"Os romanos chamavam de 'bárbaros' todos aqueles que  viviam em cidades que faziam parte do império.\" – This is a single statement. The context says Romans called people who didn't live in cities part of the empire as \"barbarians\". So this is directly supported",
+          "supported": false
+        },
+        {
+          "claim": "5. \"Essa prática era utilizada para justificar a dominação e o controle sobre os povos considerados 'bárbaros'.\" – This claims that the practice was used to justify domination and control over barbarians. The context mentions that the term was used to look down on non-Greek-Roman cultures, but does it explicitly say it was for justification of domination? The original text says \"para inferiorizar as culturas diferentes da greco-romana\" which is about looking down, not necessarily justifying domination. However, the context might imply that this practice was part of the Romans' control. But the exact phrase in the context is \"usavam essa palavra para inferiorizar as culturas diferentes da greco-romana.\" The answer's statement adds \"para justificar a dominação e o controle\", which isn't explicitly stated. So maybe this is an extrapolation. Wait, but the original context says that when Christianity became official, non-Christian peoples were considered barbarians. But the part about using the term to justify domination isn't directly mentioned. The answer's statement might be adding something not in the context. Therefore, this might be",
+          "supported": false
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2843,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that would be answered by the given response. Let me read through the answer again to make sure I understand it.",
+        "The answer talks about the formation of Christianity in the 1st century in Palestine, spreading Jesus's teachings. It mentions that followers were persecuted by Romans because they didn't recognize imperial authority or worship Roman gods. Also, Romans used \"barbarians\" to refer to non-citizens, a term used for domination."
+      ],
+      "similarities": [
+        0.0142,
+        0.0735,
+        0.7652
+      ]
+    }
+  },
+  {
+    "id": "g0024",
+    "query": "Qual foi o motivo da expansão territorial da República Romana? Que conflito de poder marcou o fim dessa República, envolvendo Marco Antônio e Otaviano? E que nova religião começou a se espalhar no império alguns séculos depois?",
+    "category": "",
+    "answer": "## Expansão Territorial da República Romana\n\nA expansão territorial da República Romana buscava o controle das rotas comerciais do Mar Mediterrâneo. Os romanos entraram em conflito com diversos Estados e povos, como os cartagineses, que habitavam a cidade de Cartago no norte da África. Essa expansão era motivada por interesses comerciais e militares, visando expandir o domínio romano e fortalecer sua influência na região.\n\n## Conflito de Poder e Fim da República Romana\n\nO conflito de poder que marcou o fim da República Romana envolveu Marco Antônio e Otaviano. Após Lépido ser afastado do triunvirato em 36 a.C., Marco Antônio e Otaviano se disputaram o poder sobre Roma. Marco Antônio buscou apoio de Cleópatra no Egito, enquanto Otaviano invadiu o Egito e derrotou seus exércitos. Em seguida, Marco Antônio e Cleópatra se suicidaram, e o Egito se tornou uma província romana. Otaviano assumiu o poder, adotando o sobrenome de César para honrar seu tio-avô e afirmar sua herança política. Em 27 a.C., ele se tornou o primeiro imperador de Roma, assumindo o título de Augustus (\"sagrado\").\n\n## A Nova Religião no Império Romano\n\nO cristianismo começou a se espalhar pelo império romano nos séculos I d.C. Inicialmente, os seguidores de Jesus eram perseguidos por não cultuarem os deuses romanos nem reconhecerem a autoridade divina do imperador. No entanto, o cristianismo se espalhou por diversas partes do império, construindo uma vasta rede de comunidades e distribuição de alimentos. Os primeiros registros do Evangelho foram feitos na língua grega. \n",
+    "latency_ms": 46849.16,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "A expansão territorial da República Romana buscava o controle das rotas comerciais do Mar Mediterrâneo",
+          "supported": true
+        },
+        {
+          "claim": "Os romanos entraram em conflito com diversos Estados e povos, como os cartagineses, que habitavam a cidade de Cartago no norte da África",
+          "supported": true
+        },
+        {
+          "claim": "A expansão era motivada por interesses comerciais e militares, visando expandir o domínio romano e fortalecer sua influência na região",
+          "supported": true
+        },
+        {
+          "claim": "O domínio de Roma sobre o Mediterrâneo cresceu tanto que os romanos passaram a se referir a esse mar como Mare Nostrum",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.3028,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer provided.",
+        "The answer has three main sections: Expansion of the Roman Republic, Power Struggle and End of the Republic, and the New Religion in the Roman Empire. Each section covers different historical events and facts."
+      ],
+      "similarities": [
+        -0.0199,
+        0.1916,
+        0.7367
+      ]
+    }
+  },
+  {
+    "id": "g0025",
+    "query": "Que desigualdades marcavam o Antigo Regime na Europa? E como, a partir de 1215, a Carta Magna já havia começado a limitar o poder do rei inglês?",
+    "category": "",
+    "answer": "O Antigo Regime na Europa era marcado por profundas desigualdades sociais. O clero e a nobreza viviam com privilégios e luxos, sustentados pelo trabalho e altos impostos pagos pelo terceiro estamento. Essa disparidade gerava descontentamento e revoltas.\n\nA Carta Magna, promulgada em 1215, representou um marco importante na história da Inglaterra. Ela limitou o poder real do rei inglês, estabelecendo um sistema de governo baseado no Parlamento.  Inicialmente, o poder era exercido por um conselho formado por clérigos e nobres, que se chamava \"Parlamento\". \n\nA Carta Magna estabeleceu a limitação do poder real da monarquia inglesa, pois a partir dela, o Parlamento passou a ter papel fundamental na tomada de decisões políticas. Essa mudança significava que o rei não era absoluto em sua autoridade, mas sim sujeita à decisão do Parlamento.  \n",
+    "latency_ms": 24761.13,
+    "faithfulness": {
+      "score": 0.8889,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Starting with the first sentence of the response: \"O Antigo Regime na Europa era marcado por profundas desigualdades sociais.\" The context mentions that during the Ancien Régime, the clergy and nobility had privileges supported by the Third Estate's labor and taxes. So this statement is about the Old Regime in Europe having deep social inequalities. The context does mention that inequality caused revolts, so this seems to be a fact from the context. So this should be",
+          "supported": true
+        },
+        {
+          "claim": "Next: \"O clero e a nobreza viviam com privilégios e luxos, sustentados pelo trabalho e altos impostos pagos pelo terceiro estamento.\" The context explicitly states that the clergy and nobility lived with privileges supported by the Third Estate's labor and high taxes. So this is directly stated, so",
+          "supported": true
+        },
+        {
+          "claim": "Third sentence: \"Essa disparidade gerava descontentamento e revoltas.\" The context says that inequality caused various revolts in Europe. So this is also a direct statement from the context",
+          "supported": true
+        },
+        {
+          "claim": "Next part: \"A Carta Magna, promulgada em 1215, representou um marco importante na história da Inglaterra.\" The context mentions the Magna Carta was promulgated in 1215. So this is a fact directly stated",
+          "supported": true
+        },
+        {
+          "claim": "\"Ela limitou o poder real do rei inglês, estabelecendo um sistema de governo baseado no Parlamento.\" The context says that after the Magna Carta, the king's power was limited by a council (Parliament). So this is accurate",
+          "supported": true
+        },
+        {
+          "claim": "\"Inicialmente, o poder era exercido por um conselho formado por clérigos e nobres, que se chamava 'Parlamento'.\" The context states that the council was formed by clergy and nobles and later called Parliament. So this is correct",
+          "supported": true
+        },
+        {
+          "claim": "Next: \"A Carta Magna estabeleceu a limitação do poder real da monarquia inglesa, pois a partir dela, o Parlamento passou a ter papel fundamental na tomada de decisões políticas.\" The context says the Magna Carta limited royal power and established Parliament's role. So this is directly supported",
+          "supported": true
+        },
+        {
+          "claim": "\"Essa mudança significava que o rei  era absoluto em sua autoridade, mas sim sujeita à decisão do Parlamento.\" The context mentions that the king's power was limited by Parliament. This is a direct statement. SIM",
+          "supported": false
+        },
+        {
+          "claim": "1. \"O Antigo Regime na Europa era marcado por profundas desigualdades sociais.\" –",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.2902,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "<think>",
+        "Okay, the user wants me to generate three questions in Portuguese that the given answer would fully and directly answer. Let me start by understanding the answer thoroughly.",
+        "The answer talks about the Ancien Régime in Europe, highlighting social inequalities where the clergy and nobility had privileges supported by taxes from the third estate. It also mentions the Magna Carta of 1215 as a turning point in England, limiting the king's power and establishing Parliament's role in political decisions."
+      ],
+      "similarities": [
+        -0.0514,
+        0.1188,
+        0.8032
+      ]
+    }
+  },
+  {
+    "id": "g0026",
+    "query": "Que mudança religiosa Henrique VIII promoveu na Inglaterra? Quem assumiu o trono após a morte de seu filho Eduardo VI, e que religião essa sucessora tentou restabelecer? Por fim, quem sucedeu essa rainha e consolidou o anglicanismo como religião oficial?",
+    "category": "",
+    "answer": "## Henrique VIII e a Mudança Religiosa na Inglaterra\n\nHenrique VIII promoveu o **rompimento com a Igreja Católica** na Inglaterra. Esse rompimento, que culminou na fundação da Igreja Anglicana, possibilitou à Coroa maior concentração de terras. \n\nApós a morte de Henrique VIII e seu filho Eduardo VI, sua filha, Maria Tudor, assumiu o trono. Ela tentou restabelecer o catolicismo na Inglaterra, perseguindo violentamente os protestantes, sendo conhecida como \"a sanguinária\".  Maria Tudor faleceu em 1558 sem deixar herdeiros. O trono passou para sua meia-irmã, Elizabeth I, que consolidou o anglicanismo como religião oficial da Inglaterra.\n\nElizabeth I se envolveu em conflitos religiosos, perseguindo e ordenando a execução de católicos, o que a fez ser excomungada pelo papa Pio V em 1570. Elizabeth I faleceu em 1603, também sem deixar herdeiros. O trono foi ocupado por uma nova dinastia: a dos Stuart, que eram primos dos Tudor.\n",
+    "latency_ms": 34566.67,
+    "faithfulness": {
+      "score": 1.0,
+      "is_refusal": false,
+      "parse_error": false,
+      "claims": [
+        {
+          "claim": "Henrique VIII promoveu o rompimento com a Igreja Católica na Inglaterra",
+          "supported": true
+        },
+        {
+          "claim": "Esse rompimento, que culminou na fundação da Igreja Anglicana, possibilitou à Coroa maior concentração de terras",
+          "supported": true
+        },
+        {
+          "claim": "Após a morte de Henrique VIII e seu filho Eduardo VI, sua filha, Maria Tudor, assumiu o trono",
+          "supported": true
+        }
+      ]
+    },
+    "answer_relevancy": {
+      "score": 0.6305,
+      "is_noncommittal": false,
+      "parse_error": false,
+      "generated_questions": [
+        "What was the main consequence of Henry VIII's break from the Catholic Church?",
+        "How did Mary Tudor's"
+      ],
+      "similarities": [
+        0.6727,
+        0.5882
+      ]
+    }
+  }
+]
