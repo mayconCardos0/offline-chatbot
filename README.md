@@ -97,24 +97,35 @@ pip install -r requirements.txt
 cp .env.example .env
 # Edit .env — at minimum set MODEL_PATH to your GGUF file
 
-# 4. Add your documents
+# 4. Download the search models into the local cache (needs internet, ONCE)
+python scripts/download_models.py
+
+# 5. Add your documents
 cp your-docs/*.pdf data/documents/
 
-# 5. Index the documents
+# 6. Index the documents
 python scripts/index_documents.py
 
-# 6. Start the server
+# 7. Start the server
 uvicorn api.main:app --port 8000
 
-# 7. Gerar o dataset para avaliação
+# 8. Gerar o dataset para avaliação
 python scripts/generate_eval_dataset.py
 
-# 8. Analisar metricas
+# 9. Analisar metricas
 python scripts/eval_rag.py --mode file --dataset data/eval/dataset.json
 
 ```
 
 Open the frontend by serving `frontend/` with any static file server, or open `frontend/index.html` directly in your browser.
+
+## Running offline
+
+After step 4 nothing at runtime touches the internet: the embedding model and the cross-encoder are loaded straight from the local cache folder (`EMBED_CACHE_DIR`, default `models/`), the frontend ships its own copies of `marked` and `DOMPurify` (`frontend/vendor/`), and the LLM is a local GGUF file.
+
+`OFFLINE_MODE=true` (the default) enforces this: if a model is missing or was only partially downloaded, the API fails at startup with a message saying so, instead of waiting on a network that isn't there. Set `OFFLINE_MODE=false` only if you want a missing model to be downloaded automatically.
+
+To prepare a device without internet access, run `scripts/download_models.py` on a machine that has it and copy the `models--*` folders it creates in `models/` to the device.
 
 ## Indexing documents
 
@@ -175,6 +186,19 @@ Send a message. The session is created automatically if it doesn't exist.
 { "session_id": "abc123", "response": "Photosynthesis is the process by which..." }
 ```
 
+### `POST /chat/stream`
+
+Same request as `POST /chat`, but the answer is streamed as it is generated (NDJSON, one JSON event per line) so the UI can show the first words in seconds instead of waiting for the whole answer. The frontend uses this endpoint.
+
+```json
+{"type": "token", "text": "A fotossíntese"}      // append to the message (repeated)
+{"type": "done", "response": "A fotossíntese…"}  // final cleaned text; replaces the streamed one
+{"type": "title", "title": "Fotossíntese"}       // first turn only, after "done"
+{"type": "error", "message": "…"}                // model failure; nothing is persisted
+```
+
+The server logs time-to-first-token and tokens/s for every streamed answer (`LLM stream: ttft=… tok/s`).
+
 ### `GET /conversations`
 
 List all conversations, sorted by most recently updated.
@@ -193,6 +217,16 @@ Return a conversation with its full message history. Returns `404` if not found.
 ### `DELETE /chat/{session_id}`
 
 Delete a session. Returns `404` if it doesn't exist.
+
+### `GET /battery`
+
+Battery of the UPS HAT (DFRobot FIT0992 / Suptronics X120x), shown as an icon in the status bar. Without the hardware it answers `{ "available": false }` and the icon stays hidden.
+
+```json
+{ "available": true, "percent": 73.5, "voltage": 3.91, "ac_power": true, "charging": true }
+```
+
+Reads the fuel gauge over I2C bus 1, address `0x36` (needs I2C enabled and `smbus2`), and mains loss from GPIO 6. Set `BATTERY_ENABLED=false` to turn it off. For the HAT to cut its output after a shutdown (so the display goes dark too), the Pi 5 EEPROM needs `POWER_OFF_ON_HALT=1` and `PSU_MAX_CURRENT=5000` (`sudo rpi-eeprom-config -e`), per the manufacturer's wiki.
 
 ### `GET /health`
 
@@ -213,6 +247,10 @@ All settings are read from environment variables (or a `.env` file). See `.env.e
 | `EMBED_CACHE_DIR` | `models` | Local embedding model cache directory |
 | `EMBED_BATCH_SIZE` | `32` | Encoding batch size |
 | `EMBED_DISK_CACHE` | `true` | Cache embeddings to disk between restarts |
+| `BATTERY_ENABLED` | `true` | Read the UPS HAT battery for the status-bar icon (hidden when the UPS doesn't answer) |
+| `OFFLINE_MODE` | `true` | Never hit the network to load models; they must already be in the local cache (see "Running offline") |
+| `EMBED_QUERY_PREFIX` | *(empty)* | Prefix added to the question before embedding (`query: ` for e5 models) |
+| `EMBED_PASSAGE_PREFIX` | *(empty)* | Prefix added to each chunk when indexing (`passage: ` for e5 models) |
 | `DOCS_DIR` | `data/documents` | Source documents directory |
 | `INDEX_DIR` | `data/index` | FAISS index output directory |
 | `TOP_K` | `4` | Chunks retrieved per query |

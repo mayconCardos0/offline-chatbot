@@ -23,11 +23,16 @@ logger = logging.getLogger(__name__)
 _INDEX_FILE = "index.faiss"
 _META_FILE = "metadata.json"
 _HASH_FILE = "hashes.json"
+_SIGNATURE_FILE = "embed_signature.txt"
 
 # Parâmetros HNSW
 _HNSW_M = 32  # Conexões por nó — mais = melhor recall, mais RAM
 _HNSW_EF_CONSTRUCTION = 200  # Qualidade da construção
 _HNSW_EF_SEARCH = 64  # Qualidade da busca (pode ajustar em runtime)
+
+
+class EmbeddingMismatchError(RuntimeError):
+    """O índice em disco foi gerado com outro modelo/prefixos de embedding."""
 
 
 class VectorStore:
@@ -40,6 +45,7 @@ class VectorStore:
         hnsw_m: int = _HNSW_M,
         hnsw_ef_construction: int = _HNSW_EF_CONSTRUCTION,
         hnsw_ef_search: int = _HNSW_EF_SEARCH,
+        embed_signature: str | None = None,
     ) -> None:
         try:
             import faiss
@@ -54,6 +60,7 @@ class VectorStore:
         self._hnsw_m = hnsw_m
         self._hnsw_ef_construction = hnsw_ef_construction
         self._hnsw_ef_search = hnsw_ef_search
+        self._embed_signature = embed_signature
         self._metadata: list[dict] = []
         self._hashes: set[str] = set()
         self._index = self._build_empty_index()
@@ -128,6 +135,10 @@ class VectorStore:
         (self._index_dir / _HASH_FILE).write_text(
             json.dumps(list(self._hashes)), encoding="utf-8"
         )
+        if self._embed_signature is not None:
+            (self._index_dir / _SIGNATURE_FILE).write_text(
+                self._embed_signature, encoding="utf-8"
+            )
         logger.info(
             "VectorStore salvo em '%s' (%d chunks).",
             self._index_dir,
@@ -142,6 +153,8 @@ class VectorStore:
 
         if not (index_path.exists() and meta_path.exists()):
             return False
+
+        self._check_signature()
 
         try:
             self._index = self._faiss.read_index(str(index_path))
@@ -200,6 +213,29 @@ class VectorStore:
     # ------------------------------------------------------------------
     # Helpers
     # ------------------------------------------------------------------
+
+    def _check_signature(self) -> None:
+        """Recusa um índice gerado com outro modelo de embedding.
+
+        Índices antigos, sem o arquivo de assinatura, continuam sendo aceitos.
+        """
+        if self._embed_signature is None:
+            return
+        signature_path = self._index_dir / _SIGNATURE_FILE
+        if not signature_path.exists():
+            logger.warning(
+                "Índice em '%s' não registra o modelo de embedding; assumindo '%s'.",
+                self._index_dir,
+                self._embed_signature,
+            )
+            return
+        stored = signature_path.read_text(encoding="utf-8")
+        if stored != self._embed_signature:
+            raise EmbeddingMismatchError(
+                f"O índice em '{self._index_dir}' foi gerado com '{stored}', mas a "
+                f"configuração atual é '{self._embed_signature}'. Reindexe do zero: "
+                "mova ou apague a pasta do índice e rode scripts/index_documents.py."
+            )
 
     def _build_empty_index(self):
         """Cria um índice HNSW-IP vazio."""

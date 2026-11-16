@@ -274,3 +274,26 @@ class TestRetrieverPeriodBoost:
         )
 
         assert "1951-1954" in result[0]["text"]
+
+
+class TestRetrieverQueryPrefix:
+    def _retriever(self, **kwargs):
+        vectorstore = MagicMock()
+        vectorstore.size = 5
+        vectorstore.search.return_value = []
+        embed_model = MagicMock()
+        embed_model.embed.return_value = [np.random.randn(64).tolist()]
+        retriever = Retriever(
+            vectorstore=vectorstore, embed_model=embed_model, top_k=3, **kwargs
+        )
+        return retriever, embed_model
+
+    def test_prefix_is_prepended_to_the_query(self):
+        retriever, embed_model = self._retriever(query_prefix="query: ")
+        retriever.retrieve("Quando começou a guerra?")
+        embed_model.embed.assert_called_once_with(["query: Quando começou a guerra?"])
+
+    def test_no_prefix_by_default(self):
+        retriever, embed_model = self._retriever()
+        retriever.retrieve("Quando começou a guerra?")
+        embed_model.embed.assert_called_once_with(["Quando começou a guerra?"])

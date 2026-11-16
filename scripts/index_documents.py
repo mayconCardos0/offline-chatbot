@@ -53,6 +53,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 from core.config import get_settings, setup_logging  # noqa: E402
+from core.offline import apply_offline_env  # noqa: E402
 from rag.chunking import ChunkConfig, chunk_document, count_tokens  # noqa: E402
 from rag.embeddings import EmbeddingModel  # noqa: E402
 from rag.evaluation import (  # noqa: E402
@@ -163,6 +164,7 @@ def _run_evaluation(
         candidate_multiplier=getattr(settings, "candidate_multiplier", 4),
         min_score=getattr(settings, "min_score", 0.25),
         lexical_weight=getattr(settings, "lexical_weight", 0.30),
+        query_prefix=getattr(settings, "embed_query_prefix", ""),
     )
 
     # Carrega ou gera dataset
@@ -379,15 +381,18 @@ def main() -> None:
     _print_chunk_stats(all_chunks)
 
     # --- 4. Embeddings ---
+    apply_offline_env(settings.offline_mode)
     print(f"\nCarregando modelo: {settings.embed_model_name}")
     embed_model = EmbeddingModel(
         model_name=settings.embed_model_name,
         cache_dir=settings.embed_cache_dir,
         batch_size=settings.embed_batch_size,
         use_disk_cache=settings.embed_disk_cache,
+        offline=settings.offline_mode,
     )
 
-    texts = [c["text"] for c in all_chunks]
+    # Modelos de busca (ex: e5) exigem um prefixo nos trechos; vazio para o MiniLM.
+    texts = [settings.embed_passage_prefix + c["text"] for c in all_chunks]
     print(f"Gerando embeddings para {len(texts)} chunks…")
     embeddings = embed_model.embed(texts)
 
@@ -398,6 +403,7 @@ def main() -> None:
         hnsw_m=settings.hnsw_m,
         hnsw_ef_construction=settings.hnsw_ef_construction,
         hnsw_ef_search=settings.hnsw_ef_search,
+        embed_signature=settings.embed_signature,
     )
     store.add(all_chunks, embeddings)
     store.save()

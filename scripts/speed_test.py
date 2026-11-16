@@ -358,7 +358,9 @@ CONTEXTO:
 {context}
 """
 
-_NO_CONTEXT_MARKER = "não está no material"
+# "não está no material" cobre a recusa do prompt de benchmark acima; a segunda
+# frase é a resposta padrão atual do pipeline (_NO_CONTEXT_RESPONSE).
+_NO_CONTEXT_MARKERS = ("não está no material", "não consigo te ajudar com isso")
 
 
 # ===========================================================================
@@ -773,7 +775,8 @@ def is_no_context_response(response: str) -> bool:
     critical safety feature. We track its precision (did it fire on
     no-context items?) and recall (did it suppress it on valid items?).
     """
-    return _NO_CONTEXT_MARKER in response.lower()
+    text = response.lower()
+    return any(marker in text for marker in _NO_CONTEXT_MARKERS)
 
 
 # ── 2.7  Peak RSS memory ────────────────────────────────────────────────────
@@ -1112,8 +1115,13 @@ def benchmark_real_rag(
             cache_dir=settings.embed_cache_dir,
             batch_size=settings.embed_batch_size,
             use_disk_cache=settings.embed_disk_cache,
+            offline=settings.offline_mode,
         )
-        vs = VectorStore(index_dir=settings.index_dir, embedding_dim=em.dimension)
+        vs = VectorStore(
+            index_dir=settings.index_dir,
+            embedding_dim=em.dimension,
+            embed_signature=settings.embed_signature,
+        )
         retriever = Retriever(
             vectorstore=vs,
             embed_model=em,
@@ -1121,6 +1129,7 @@ def benchmark_real_rag(
             candidate_multiplier=settings.candidate_multiplier,
             min_score=settings.min_score,
             lexical_weight=settings.lexical_weight,
+            query_prefix=settings.embed_query_prefix,
         )
         t_load = time.perf_counter()
         base_llm = LocalModel(
@@ -1594,6 +1603,7 @@ def main() -> None:
                     cache_dir=settings.embed_cache_dir,
                     batch_size=settings.embed_batch_size,
                     use_disk_cache=settings.embed_disk_cache,
+                    offline=settings.offline_mode,
                 )
                 embed_fn = em.embed
                 print(f"  Using project embeddings: {settings.embed_model_name}")

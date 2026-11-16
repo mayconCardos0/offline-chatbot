@@ -476,6 +476,7 @@ def main() -> None:
         cache_dir=resolve_path(settings.embed_cache_dir),
         batch_size=settings.embed_batch_size,
         use_disk_cache=settings.embed_disk_cache,
+        offline=settings.offline_mode,
     )
     vs = VectorStore(
         index_dir=index_dir,

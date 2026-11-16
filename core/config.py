@@ -52,6 +52,22 @@ class Settings:
         default_factory=lambda: int(os.environ.get("N_GPU_LAYERS", "0"))
     )
 
+    # --- UPS HAT ---
+    # Mostra a bateria na tela quando o UPS responde no I2C (ver core/battery.py);
+    # sem o hardware o ícone simplesmente não aparece.
+    battery_enabled: bool = field(
+        default_factory=lambda: os.environ.get("BATTERY_ENABLED", "true").lower()
+        not in ("false", "0", "no")
+    )
+
+    # --- Offline ---
+    # True (padrão): nunca consulta a internet para carregar modelos; eles precisam
+    # estar no cache local (veja scripts/download_models.py). False só para baixar.
+    offline_mode: bool = field(
+        default_factory=lambda: os.environ.get("OFFLINE_MODE", "true").lower()
+        not in ("false", "0", "no")
+    )
+
     # --- Embeddings ---
     # Padrão: modelo multilíngue leve, bom para PT-BR (~120 MB)
     embed_model_name: str = field(
@@ -69,6 +85,28 @@ class Settings:
         default_factory=lambda: os.environ.get("EMBED_DISK_CACHE", "true").lower()
         == "true"
     )
+    # Modelos treinados para busca (ex: multilingual-e5) exigem prefixos
+    # diferentes para a pergunta e para os trechos ("query: " / "passage: ").
+    # Vazio (padrão) para modelos simétricos como o MiniLM.
+    embed_query_prefix: str = field(
+        default_factory=lambda: os.environ.get("EMBED_QUERY_PREFIX", "")
+    )
+    embed_passage_prefix: str = field(
+        default_factory=lambda: os.environ.get("EMBED_PASSAGE_PREFIX", "")
+    )
+
+    @property
+    def embed_signature(self) -> str:
+        """Identifica como os vetores do índice foram gerados (modelo + prefixos).
+
+        Gravada junto do índice para recusar um índice feito com outro modelo:
+        vetores de modelos diferentes podem ter a mesma dimensão e misturá-los
+        não dá erro, só resultados ruins.
+        """
+        return (
+            f"{self.embed_model_name}"
+            f"|query={self.embed_query_prefix}|passage={self.embed_passage_prefix}"
+        )
 
     # --- RAG ---
     docs_dir: str = field(

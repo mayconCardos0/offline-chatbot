@@ -7,8 +7,9 @@
     <title>Offline Chatbot</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="keyboard.css">
-    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/dompurify/dist/purify.min.js"></script>
+    <!-- Cópias locais (marked 15.0.12, DOMPurify 3.4.17): o app roda sem internet. -->
+    <script src="vendor/marked.min.js"></script>
+    <script src="vendor/purify.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -48,6 +49,11 @@
             <div class="status" id="status">
                 <span class="status-indicator">●</span>
                 <span id="statusText">Pronto</span>
+                <span class="battery" id="battery" role="img" aria-label="Bateria" hidden>
+                    <span class="battery-icon"><span class="battery-level" id="batteryLevel"></span></span>
+                    <span id="batteryText"></span>
+                    <span class="battery-bolt" id="batteryBolt" hidden>⚡</span>
+                </span>
             </div>
 
             <!-- Chat Area -->

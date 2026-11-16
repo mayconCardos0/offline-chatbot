@@ -312,9 +312,11 @@ class Retriever:
         high_confidence_score: float = _HIGH_CONFIDENCE_SCORE,
         low_confidence_score: float = _LOW_CONFIDENCE_SCORE,
         cross_encoder=None,
+        query_prefix: str = "",
     ) -> None:
         self._vectorstore = vectorstore
         self._embed_model = embed_model
+        self._query_prefix = query_prefix
         self._top_k = top_k
         self._base_top_k = top_k
         self._candidate_multiplier = candidate_multiplier
@@ -404,7 +406,7 @@ class Retriever:
             candidates_count = max(candidates_count, min_pool)
 
         # Stage: FAISS semantic retrieval
-        query_vec = self._embed_model.embed([query])[0]
+        query_vec = self._embed_model.embed([self._query_prefix + query])[0]
         candidates = self._vectorstore.search(query_vec, candidates_count)
         if trace and tr:
             tr.stages.append(StageSnapshot("FAISS_SEMANTIC", list(candidates)))

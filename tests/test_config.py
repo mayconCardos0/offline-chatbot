@@ -249,3 +249,33 @@ class TestSettingsPhase2FromEnv:
     def test_low_confidence_score_from_env(self, monkeypatch):
         monkeypatch.setenv("LOW_CONFIDENCE_SCORE", "0.35")
         assert Settings().low_confidence_score == pytest.approx(0.35)
+
+
+class TestEmbedPrefixes:
+    def test_prefixes_default_to_empty(self, monkeypatch):
+        monkeypatch.delenv("EMBED_QUERY_PREFIX", raising=False)
+        monkeypatch.delenv("EMBED_PASSAGE_PREFIX", raising=False)
+        settings = Settings()
+        assert settings.embed_query_prefix == ""
+        assert settings.embed_passage_prefix == ""
+
+    def test_prefixes_from_env(self, monkeypatch):
+        monkeypatch.setenv("EMBED_QUERY_PREFIX", "query: ")
+        monkeypatch.setenv("EMBED_PASSAGE_PREFIX", "passage: ")
+        settings = Settings()
+        assert settings.embed_query_prefix == "query: "
+        assert settings.embed_passage_prefix == "passage: "
+
+    def test_signature_identifies_model_and_prefixes(self, monkeypatch):
+        monkeypatch.setenv("EMBED_MODEL_NAME", "intfloat/multilingual-e5-small")
+        monkeypatch.setenv("EMBED_QUERY_PREFIX", "query: ")
+        monkeypatch.setenv("EMBED_PASSAGE_PREFIX", "passage: ")
+        assert Settings().embed_signature == (
+            "intfloat/multilingual-e5-small|query=query: |passage=passage: "
+        )
+
+    def test_signature_changes_when_model_changes(self, monkeypatch):
+        monkeypatch.setenv("EMBED_MODEL_NAME", "model-a")
+        first = Settings().embed_signature
+        monkeypatch.setenv("EMBED_MODEL_NAME", "model-b")
+        assert Settings().embed_signature != first
