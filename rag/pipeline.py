@@ -112,7 +112,7 @@ REGRAS:
 Responda SEMPRE em português brasileiro correto.
 Use EXCLUSIVAMENTE as informações do CONTEXTO fornecido.
 VERIFICAÇÃO OBRIGATÓRIA: Antes de mencionar QUALQUER data, nome ou evento, verifique se está EXPLICITAMENTE no contexto.
-Se o contexto não contiver a informação, diga: "Esse conteúdo não está no material disponível."
+Se o contexto não contiver a informação, responda exatamente: "Não consigo te ajudar com isso. Se quiser ajuda nos estudos é só chamar!"
 Seja completo: cubra todos os pontos importantes da pergunta, sem deixar lacunas — prefira sempre uma resposta mais longa e completa a uma resposta breve e incompleta.
 "Objetivo" aqui significa não repetir a mesma ideia com palavras diferentes só para parecer mais completo — NÃO significa dar respostas curtas.
 Se a pergunta tiver mais de uma parte (ex: causa e consequência, comparação entre dois temas), responda cada parte explicitamente, sem pular nenhuma.
@@ -135,15 +135,23 @@ CONTEXTO:
 # que tendem a ignorar instruções somente no system prompt (ex: Gemma).
 _USER_SUFFIX = (
     "\n\n[INSTRUÇÃO IMPORTANTE: responda APENAS com base no contexto fornecido "
-    "no system prompt. Se a resposta não estiver lá, diga que não está no material. "
+    "no system prompt. Se a resposta não estiver lá, responda exatamente: "
+    '"Não consigo te ajudar com isso. Se quiser ajuda nos estudos é só chamar!" '
     "Dê uma resposta completa e aprofundada, cobrindo causas, contexto e consequências "
     "quando o material trouxer essa informação — não dê uma resposta curta.]"
 )
 
+# Resposta padrão quando não há resposta no material. A mesma frase é pedida ao
+# modelo em _SYSTEM_WITH_CONTEXT e _USER_SUFFIX — mantenha as três em sincronia.
 _NO_CONTEXT_RESPONSE = (
-    "Esse conteúdo não está no material disponível para consulta. "
-    "Anote sua dúvida e pergunte ao seu professor(a) — assim você garante "
-    "uma explicação completa e precisa!"
+    "Não consigo te ajudar com isso. Se quiser ajuda nos estudos é só chamar!"
+)
+
+# Recusas já gravadas em conversas antigas (frase anterior) também ficam fora
+# do histórico usado para enriquecer perguntas de acompanhamento.
+_NO_CONTEXT_PREFIXES = (
+    _NO_CONTEXT_RESPONSE,
+    "Esse conteúdo não está no material",
 )
 
 _LOW_CONFIDENCE_PREFIX = (
@@ -527,7 +535,7 @@ class RAGPipeline:
             msg["content"]
             for msg in history[-4:]
             if msg["role"] == "assistant"
-            and "Esse conteúdo não está no material" not in msg["content"]
+            and not any(p in msg["content"] for p in _NO_CONTEXT_PREFIXES)
         ][-2:]
 
         if not recent_responses:

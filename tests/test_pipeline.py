@@ -16,7 +16,10 @@ from core.conversation import ConversationManager  # noqa: E402
 from rag.pipeline import (  # noqa: E402
     _MAX_CONTEXT_CHARS,
     _MAX_HISTORY_TURNS,
+    _NO_CONTEXT_PREFIXES,
     _NO_CONTEXT_RESPONSE,
+    _SYSTEM_WITH_CONTEXT,
+    _USER_SUFFIX,
     RAGPipeline,
 )
 
@@ -572,3 +575,24 @@ class TestStreamLockSafety:
         next(events)
         events.close()
         assert conv_manager.get("s1")["messages"] == []
+
+
+# ---------------------------------------------------------------------------
+# Resposta padrão quando não há resposta no material
+# ---------------------------------------------------------------------------
+
+
+class TestNoContextResponse:
+    def test_default_phrase(self):
+        assert _NO_CONTEXT_RESPONSE == (
+            "Não consigo te ajudar com isso. Se quiser ajuda nos estudos é só chamar!"
+        )
+
+    def test_model_is_told_to_use_the_same_phrase(self):
+        assert _NO_CONTEXT_RESPONSE in _SYSTEM_WITH_CONTEXT
+        assert _NO_CONTEXT_RESPONSE in _USER_SUFFIX
+
+    def test_old_and_new_refusals_are_both_filtered_from_history(self):
+        assert any(p in _NO_CONTEXT_RESPONSE for p in _NO_CONTEXT_PREFIXES)
+        old = "Esse conteúdo não está no material disponível para consulta."
+        assert any(p in old for p in _NO_CONTEXT_PREFIXES)

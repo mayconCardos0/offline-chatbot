@@ -358,7 +358,9 @@ CONTEXTO:
 {context}
 """
 
-_NO_CONTEXT_MARKER = "não está no material"
+# "não está no material" cobre a recusa do prompt de benchmark acima; a segunda
+# frase é a resposta padrão atual do pipeline (_NO_CONTEXT_RESPONSE).
+_NO_CONTEXT_MARKERS = ("não está no material", "não consigo te ajudar com isso")
 
 
 # ===========================================================================
@@ -773,7 +775,8 @@ def is_no_context_response(response: str) -> bool:
     critical safety feature. We track its precision (did it fire on
     no-context items?) and recall (did it suppress it on valid items?).
     """
-    return _NO_CONTEXT_MARKER in response.lower()
+    text = response.lower()
+    return any(marker in text for marker in _NO_CONTEXT_MARKERS)
 
 
 # ── 2.7  Peak RSS memory ────────────────────────────────────────────────────
